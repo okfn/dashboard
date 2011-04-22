@@ -1,0 +1,8 @@
+syntax: glob
+*.pyc
+*.swp
+*.swo
+.DS_Store
+# data cache
+cache/*
+
