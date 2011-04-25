@@ -72,7 +72,7 @@
 	map.addLayers([vectors]);
 	selectControl = new OpenLayers.Control.SelectFeature(
 	[vectors],{clickout: true, toggle: false, 
-				multiple: false, hover: false, }
+				multiple: false, hover: false }
 	);
 	map.addControl(selectControl);
 	selectControl.activate();

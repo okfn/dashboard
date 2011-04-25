@@ -3,7 +3,7 @@ A Community Dashboard for the Open Knowledge Foundation.
 Features
 ========
 
-* Member Map - map of members with links to pages on Google Map
+* Member Map - map of members with links to pages on OpenStreetMap
 
 Planned
 =======
@@ -38,7 +38,15 @@ TODO
 2011-04-22 p:members Conversion from csv dump of members to json is not
 handling wrapped lines (in descriptions) correctly.
 
-2011-04-22 p:members cannot see more than one marker if 2 markers in exact
-same long/lat (as happens frequently because we have imprecise initial
-locations). Can fix this by using a random small offset to markers or
-rotation.
+2011-04-22 p:members cannot see more than one marker if 2 or more markers
+in exact same long/lat (as happens frequently because we have imprecise 
+initial locations).
+
+2011-04-25 p:members 
+Replaced Google Maps with OpenStreetMap by using OpenLayers.
+OKFN logo used as a marker for the members positions.
+Problem of overlapping data with the same coordinates solved 
+by using the clustering function of OpenLayers:
+click on the icon and this show the list of 
+members in that place (this depends on the zoom level).
+Possible fix: change the icon size in relation to the number of users
