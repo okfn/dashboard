@@ -19,9 +19,33 @@ See this original idea to suggest more and comment:
 For Developers
 ==============
 
+Philosophy
+----------
+
+The dashboard application itself should be as simple as possible. Preferably,
+little more than an `index.html` file and associated resources. The data 
+should come from stand alone scripts that can be run periodically.
+
+Example: Map
+````````````
+
 We get source data directly via an export from wordpress db using sql in
 export.sql. This is then transformed to json file named members.json using the
 scripts in data.py.
+
+Directory Structure
+-------------------
+
+The repository has this layout::
+
+    -- okfn-dashboard
+     `-- app: webapp
+       `-- js: JavaScript files, often exported by scripts
+       `-- css: style sheets
+       `-- img: image files
+     `-- scripts: scripts to extract data from various sources
+     `-- data: houses (bulk) data for processing by scripts
+     
 
 Running App Locally
 -------------------
@@ -31,6 +55,18 @@ local (json) files. This is fine by default in FF and IE but in Chrome you
 need to pass the following option::
 
   --allow-file-access-from-files
+
+Conventions
+-----------
+
+Scripts should
+
+ - Declare `__update_freqency__` as `'m'`, `'h'`, `'d'`, `'w'` to indicate
+   that their script should be run every minute, hour, day or week 
+   respectively. 
+ - use the Python standard library
+
+Scripts will be run daily by default.
 
 TODO
 ----
