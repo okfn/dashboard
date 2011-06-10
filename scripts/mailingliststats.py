@@ -47,9 +47,17 @@ def list_name_to_archive_index(name, domain=DOMAIN):
     return 'http://{domain}/pipermail/{list_name}/'.format(domain=domain, list_name=name)
 
 def main():
+    times = []
     for list_name in iter_list_urls():
         for post in posts(list_name):
-            print post, list_name, 1
-
+            # crafting everything as a string to avoid using a custom sort 
+            # function later on
+            datum = '{post_time},{mlist},1'.format(post_time=post, mlist=list_name)
+            print datum
+            times.append(datum)
+    times = sorted(times)
+    with open('/home/tim/OKFN/okfn-dashboard/data/mailinglist_activity.csv', 'w') as f:
+        print 'Writing to disk'
+        f.write('\n'.join(times))
 if __name__ == "__main__":
     main()
