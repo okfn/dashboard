@@ -385,7 +385,7 @@ def get_pkg_data(package_name, ckan_client=CKAN, base_url=GEONAMES_URL,error_cou
                 return get_pkg_data(package_name, error_count=1)
             else:
                 raise
-        yield pkg, location
+        return pkg, location
 
 def to_geojson(pkg, geocode_response, mode='geonames'):
     """
@@ -396,10 +396,10 @@ def to_geojson(pkg, geocode_response, mode='geonames'):
     for http://code.google.com/p/timemap/
     """
     item = {"type":"Feature"}
-    item['properties'] = dict(title=pkg['title']
-                             created_at= pkg['metadata_created']
+    item['properties'] = dict(title=pkg['title'],
+                             created_at= pkg['metadata_created'],
                              description=ckan_pkg_to_desc(pkg))
-    if mode == 'geonames'
+    if mode == 'geonames':
         coords = (geocode_response['geonames'][0]['lat'],
                   geocode_response['geonames'][0]['lng'])
     elif mode == 'google':
@@ -435,7 +435,7 @@ def main():
             yield res
 
 if __name__ == "__main__":
-    with open(hack_file_location('/data/ckan_packages.geojson', 'w') as f:
+    with open(hack_file_location('/data/ckan_packages.geojson'), 'w') as f:
         f.write('var ckan = ')
         fcollection = { "type": "FeatureCollection" }
         fcollection['features'] = [f for f in main()]
