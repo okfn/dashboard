@@ -35,6 +35,7 @@ def get_messages(url):
     for anchor in index.findall('//a'):
         ref = anchor.get('href')
         if ref.endswith('.gz'):
+            log.info('Archive: %s' % ref.split('.')[0])
             ref = urljoin(url, ref)
             filename, headers = urlretrieve(ref)
             gzfh = gzip.open(filename, 'r')

@@ -16,6 +16,6 @@ def gather(database, name=None):
     data = json.load(urlfh)
     urlfh.close()
     for repo in data['repositories']:
-        furl = FEED % (account, repo['name'])
+        furl = FEED % (name, repo['name'])
         feed.gather(database, url=furl)
 
