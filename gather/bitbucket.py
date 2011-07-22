@@ -17,5 +17,5 @@ def gather(database, name=None):
     urlfh.close()
     for repo in data['repositories']:
         furl = FEED % (name, repo['name'])
-        feed.gather(database, url=furl)
+        feed.gather(database, url=furl, type='bitbucket')
 

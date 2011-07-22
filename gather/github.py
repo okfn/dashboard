@@ -17,7 +17,7 @@ def gather(database, name=None, account=None):
     urlfh.close()
     for repo in data:
         furl = FEED % (name, repo['name'])
-        feed.gather(database, url=furl)
+        feed.gather(database, url=furl, type='github')
 
 
 

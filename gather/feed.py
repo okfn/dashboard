@@ -6,7 +6,7 @@ import feedparser
 
 log = logging.getLogger(__name__)
 
-def gather(database, url=None):
+def gather(database, url=None, type='blog'):
     feed = feedparser.parse(url)
     try:
         log.info(feed.feed.title)
@@ -17,13 +17,25 @@ def gather(database, url=None):
         try:
             author = e.author_detail.name
         except AttributeError:
-            author = e.author
+            try:
+                author = e.author
+            except AttributeError:
+                print "NO AUTHOR", e
+                author = ''
+        try:
+            description = e.summary
+        except AttributeError: 
+            try:
+                description = e.content
+            except AttributeError:
+                description = ''
+
         date = datetime.fromtimestamp(mktime(e.updated_parsed))
         table.writerow({
             'author': author,
             'title': e.title,
             'source_url': e.link,
-            'description': e.summary or e.content,
-            'type': 'blog',
+            'description': description,
+            'type': type,
             'datetime': date.isoformat()
         }, unique_columns=['author', 'title', 'source_url'])
