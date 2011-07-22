@@ -12,8 +12,11 @@ def normalize(database, config):
                         config.get('db', 'google.password'))
     table = database['activity']
     for author in table.distinct('author'):
-        data = normalizer.get(author.get('author'))
-        login = data.get('login') or author.get('author')
-        row = {'author': author.get('author'), 'login': login}
+        name = author.get('author').strip()
+        if not len(name):
+            continue
+        data = normalizer.get(name)
+        login = data.get('login') or name
+        row = {'author': name, 'login': login}
         pprint(row)
         table.writerow(row, unique_columns=['author'])
