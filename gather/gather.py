@@ -3,6 +3,8 @@ import ConfigParser
 
 from webstore.client import Database
 
+from normalize import normalize
+
 import mailman
 import feed
 import bitbucket
@@ -14,7 +16,8 @@ logging.basicConfig(level=logging.NOTSET)
 log = logging.getLogger(__name__)
 
 TYPES = {
-    'mailman': mailman.gather,
+    'pipermail': mailman.gather_pipermail,
+    'mailman': mailman.gather_listinfo,
     'feed': feed.gather,
     'bitbucket': bitbucket.gather,
     'github': github.gather
@@ -43,7 +46,8 @@ def run(config_file):
             func(database, **cfg)
         except Exception, e:
             log.exception(e)
-
+    
+    normalize(database, config)
 
 
 if __name__ == '__main__':

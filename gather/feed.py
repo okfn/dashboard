@@ -1,4 +1,6 @@
 import logging
+from time import mktime
+from datetime import datetime
 
 import feedparser
 
@@ -16,11 +18,12 @@ def gather(database, url=None):
             author = e.author_detail.name
         except AttributeError:
             author = e.author
+        date = datetime.fromtimestamp(mktime(e.updated_parsed))
         table.writerow({
             'author': author,
             'title': e.title,
             'source_url': e.link,
             'description': e.summary or e.content,
             'type': 'blog',
-            'datetime': e.updated
+            'datetime': date.isoformat()
         }, unique_columns=['author', 'title', 'source_url'])

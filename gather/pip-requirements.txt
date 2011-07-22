@@ -3,3 +3,4 @@ ipdb
 lxml
 webstore-client
 feedparser
+datautil
