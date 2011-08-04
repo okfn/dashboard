@@ -1,5 +1,3 @@
-ipython 
-ipdb
 lxml
 webstore-client
 feedparser
