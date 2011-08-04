@@ -1,2 +1,4 @@
 *.pyc
 gather/*.cfg
+cache/
+.*.swp
