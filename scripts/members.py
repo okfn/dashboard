@@ -8,21 +8,9 @@ import json
 import urllib
 import subprocess
 from collections import defaultdict
-FN = '/app/js/members.js'
 
-def hack_file_location(f):
-    """ 
-    Turns a file name into a absolute path name for storage.
-    Useful for storing in ../data/ or ../app/js/. Remember to
-    use a prepending slash.
-
-    >>> hack_file_location('/app/js/members.js') #doctest: +SKIP
-    '/path/to/okfn-dashboard/app/js/members.js'
-    """
-    return __file__.replace('/scripts/data.py', f)
-
-def convert_from_csv_to_json(csv_location='/tmp/okfn_members.csv',
-                             output_file='/data/members.json'):
+def convert_from_csv_to_json(csv_location='cache/members.csv',
+                             output_file='cache/members.raw.json'):
     fo = open(csv_location, 'rU')
     reader = csv.reader(fo)
     out = defaultdict(dict)
@@ -65,25 +53,23 @@ def geocode_data():
             else:
                 print 'Failed to match: %s' % loc
             time.sleep(0.5) 
-    fileobj = open(FN, 'w')
+    fileobj = open('cache/members.geo.json', 'w')
     json.dump(data, fileobj, indent=2, sort_keys=True)
 
-def make_it_js():
-    fo = open(hack_file_location('/data/members.json'))
-    out = fo.read()
-    fo.close()
-    out = 'var members = ' + out
-    out += ';'
-    fo_out = open(hack_file_location('/app/js/members.js'), 'w')
-    fo_out.write(out)
-    fo_out.close()
 
-def export_members_from_db():
-    subprocess.Popen(['bash', hack_file_location('/scripts/export.sql')], stdout=subprocess.PIPE)
+from common import database
+def upload_to_webstore():
+    table = database['person']
+    fileobj = open('cache/members.geo.json')
+    out = json.load(fileobj)
+    for username, info in out.items():
+        data = dict(info)
+        data['username'] = username
+        table.writerow(data, unique_columns=['username'])
+        break
+
+from datautil.clitools import _main
 
 if __name__ == '__main__':
-    # export_members_from_db()
-    # convert_from_csv_to_json()
-    # geocode_data()
-    # make_it_js()
-    pass
+    _main(locals())
+

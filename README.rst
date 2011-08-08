@@ -1,40 +1,9 @@
-A Community Dashboard for the Open Knowledge Foundation.
+A Community Dashboard for the Open Knowledge Foundation. See wiki for details of project:
+http://wiki.okfn.org/Community_Dashboard.
 
-Features
-========
-
-* Member Map - map of members with links to pages on OpenStreetMap
-
-Planned
-=======
-
-* Working Group Activity
-* Summary of Change Activity on Wikis and Related Projects
-
-See this original idea to suggest more and comment:
-
-<http://ideas.okfn.org/ideas/100/a-community-dashboard-for-the-open-knowledge-foundation-okfn>
-
-
-For Developers
-==============
-
-Philosophy
-----------
-
-The dashboard application itself should be as simple as possible. Preferably,
-little more than an `index.html` file and associated resources. The data 
-should come from stand alone scripts that can be run periodically.
-
-Example: Map
-````````````
-
-We get source data directly via an export from wordpress db using sql in
-export.sql. This is then transformed to json file named members.json using the
-scripts in data.py.
 
 Directory Structure
--------------------
+===================
 
 The repository has this layout::
 
@@ -44,11 +13,31 @@ The repository has this layout::
        `-- css: style sheets
        `-- img: image files
      `-- scripts: scripts to extract data from various sources
-     `-- data: houses (bulk) data for processing by scripts
+     `-- cache: cache directory for data during processing
+     `-- data: houses permanent stored (bulk) data
      
 
-Running App Locally
--------------------
+For Developers
+==============
+
+Backend and Data Harvesting
+---------------------------
+
+If you intend to run python scripts for storing and harvesting data you will
+need to:
+
+1. Install python, plus setuptools, pip and virtualenv
+2. Install other requirements::
+
+    virtualenv {path-to-your-virtualenv}
+    pip -E {your-virtualenv} install pip-requirements.txt
+
+3. Copy and paste dashboard.cfg.tmpl to dashboard.cfg and set relevant config
+   variables
+
+
+Frontend App
+------------
 
 To test e.g. the members map locally you need to allow the browser access to
 local (json) files. This is fine by default in FF and IE but in Chrome you
@@ -56,17 +45,6 @@ need to pass the following option::
 
   --allow-file-access-from-files
 
-Conventions
------------
-
-Scripts should
-
- - Declare `__update_freqency__` as `'m'`, `'h'`, `'d'`, `'w'` to indicate
-   that their script should be run every minute, hour, day or week 
-   respectively. 
- - use the Python standard library
-
-Scripts will be run daily by default.
 
 TODO
 ----
@@ -86,3 +64,4 @@ by using the clustering function of OpenLayers:
 click on the icon and this show the list of 
 members in that place (this depends on the zoom level).
 Possible fix: change the icon size in relation to the number of users
+
