@@ -16,5 +16,5 @@ webstore_password = config.get('db', 'webstore.password')
 webstore_db = config.get('db', 'webstore.db')
 
 database = Database(webstore_host, webstore_user, webstore_db,
-        http_user=webstore_user, http_password=webstore_password)
+       webstore_user, webstore_password)
 
