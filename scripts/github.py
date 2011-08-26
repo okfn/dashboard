@@ -2,12 +2,14 @@ import logging
 import urllib
 import json 
 
+import feed
+
+
 URL = 'https://api.github.com/%ss/%s/repos'
 FEED = 'https://github.com/%s/%s/commits.atom'
 
-import feed
-
 log = logging.getLogger(__name__)
+
 
 def gather(database, name=None, account=None):
     url = URL % (account, name)
@@ -18,6 +20,4 @@ def gather(database, name=None, account=None):
     for repo in data:
         furl = FEED % (name, repo['name'])
         feed.gather(database, url=furl, type='github')
-
-
 

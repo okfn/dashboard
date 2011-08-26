@@ -1,13 +1,19 @@
-#!/usr/env/bin python
+#!/usr/bin/env python
+
 '''Parse members csv dump exported from mysql into json format.
 
 '''
+
 import csv
 import time
 import json
 import urllib
 import subprocess
 from collections import defaultdict
+
+from common import database
+from datautil.clitools import _main
+
 
 def convert_from_csv_to_json(csv_location='cache/members.csv',
                              output_file='cache/members.raw.json'):
@@ -35,6 +41,7 @@ def convert_from_csv_to_json(csv_location='cache/members.csv',
     outfo = open(hack_file_location(output_file), 'w')
     json.dump(out, outfo, indent=2, sort_keys=True)
 
+
 def normalize(datadict_):
     out = dict(datadict_)
     for key,val in out.items():
@@ -45,6 +52,7 @@ def normalize(datadict_):
         out['description'] = out[desc]
         del out[desc]
     return out
+
 
 def geocode_data():
     '''Geocode the string locations using geonames.'''
@@ -70,7 +78,6 @@ def geocode_data():
     json.dump(data, fileobj, indent=2, sort_keys=True)
 
 
-from common import database
 def upload_to_webstore():
     table = database['person']
     fileobj = open('cache/members.geo.json')
@@ -86,8 +93,6 @@ def upload_to_webstore():
         table.writerow(data, unique_columns=['username'])
         print 'Processed: %s (of %s)' % (count, len(out))
 
-from datautil.clitools import _main
 
 if __name__ == '__main__':
     _main(locals())
-

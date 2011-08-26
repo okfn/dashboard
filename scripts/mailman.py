@@ -7,7 +7,9 @@ from tempfile import mkstemp
 from mailbox import mbox
 import gzip
 
+
 log = logging.getLogger(__name__)
+
 
 def gather_listinfo(database, url=None):
     fh = urllib2.urlopen(url)
@@ -23,6 +25,7 @@ def gather_listinfo(database, url=None):
             gather_pipermail(database, url=url)
         except IOError, io:
             log.exception(io)
+
 
 def gather_pipermail(database, url=None):
     log.info(url)
@@ -44,6 +47,7 @@ def gather_pipermail(database, url=None):
             'source_url': url,
             'datetime': date.isoformat()
             }, unique_columns=['author', 'title', 'datetime'])
+
 
 def get_messages(url):
     try:

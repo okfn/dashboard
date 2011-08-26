@@ -2,12 +2,14 @@ import urllib
 import logging
 import json 
 
+import feed
+
+
 URL = 'https://api.bitbucket.org/1.0/users/%s/'
 FEED = 'https://bitbucket.org/%s/%s/rss'
 
-import feed
-
 log = logging.getLogger(__name__)
+
 
 def gather(database, name=None):
     url = URL % name
@@ -18,4 +20,3 @@ def gather(database, name=None):
     for repo in data['repositories']:
         furl = FEED % (name, repo['name'])
         feed.gather(database, url=furl, type='bitbucket')
-

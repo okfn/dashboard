@@ -4,7 +4,9 @@ from datetime import datetime
 
 import feedparser
 
+
 log = logging.getLogger(__name__)
+
 
 def gather(database, url=None, type='blog'):
     feed = feedparser.parse(url)

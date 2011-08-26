@@ -1,6 +1,7 @@
+from pprint import pprint
+
 from datautil.normalization.table_based import Normalizer
 
-from pprint import pprint
 
 def People(username, password):
     doc_id = '0AplklDf0nYxWdDdvcm9HUTNhNTNnaFNpR0J4OXZzT1E'

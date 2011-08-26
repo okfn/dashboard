@@ -1,16 +1,17 @@
+#!/usr/bin/env python
+
 import sys
 import ConfigParser
+import logging
 
 from webstore.client import Database
-
-from normalize import normalize
 
 import mailman
 import feed
 import bitbucket
 import github
+from normalize import normalize
 
-import logging
 
 logging.basicConfig(level=logging.NOTSET)
 log = logging.getLogger(__name__)
@@ -21,7 +22,8 @@ TYPES = {
     'feed': feed.gather,
     'bitbucket': bitbucket.gather,
     'github': github.gather
-        }
+}
+
 
 def run(config_file):
     config = ConfigParser.SafeConfigParser()
@@ -54,4 +56,3 @@ if __name__ == '__main__':
     if not len(sys.argv) > 1:
         print "Usage: %s gather.cfg" % sys.argv[0]
     run(sys.argv[1])
-

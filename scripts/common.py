@@ -3,6 +3,7 @@ import os
 
 from webstore.client import Database
 
+
 config_file = os.path.join(
         os.path.dirname(os.path.dirname(__file__)),
         'dashboard.cfg')
