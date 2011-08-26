@@ -3,3 +3,4 @@ gather/*.cfg
 *.cfg
 cache/
 .*.swp
+.DS_Store
