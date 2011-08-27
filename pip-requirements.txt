@@ -1,4 +1,4 @@
 lxml
 webstore-client
 feedparser
-datautil
+-e git+https://github.com/okfn/datautil#egg=datautil
