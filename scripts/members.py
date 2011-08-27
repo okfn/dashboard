@@ -15,7 +15,7 @@ from common import database
 from datautil.clitools import _main
 
 
-def convert_from_csv_to_json(csv_location='cache/members.csv',
+def convert_from_csv_to_json(csv_location='data/members.csv',
                              output_file='cache/members.raw.json'):
     fo = open(csv_location, 'rU')
     reader = csv.reader(fo)
