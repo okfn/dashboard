@@ -4,8 +4,10 @@ import sys
 import ConfigParser
 import logging
 
+from datautil.clitools import _main
 from webstore.client import Database
 
+from common import database
 import mailman
 import feed
 import bitbucket
@@ -25,18 +27,11 @@ TYPES = {
 }
 
 
-def run(config_file):
+def run(config_file='dashboard.cfg'):
+    '''Run a gather of stats using config_file (defaults to dashboard.cfg).
+    '''
     config = ConfigParser.SafeConfigParser()
     config.read([config_file])
-
-    webstore_host = config.get('db', 'webstore.host')
-    webstore_user = config.get('db', 'webstore.user')
-    webstore_password = config.get('db', 'webstore.password')
-    webstore_db = config.get('db', 'webstore.db')
-    
-
-    database = Database(webstore_host, webstore_user, webstore_db,
-            http_user=webstore_user, http_password=webstore_password)
 
     for section in config.sections():
         if ':' not in section:
@@ -44,6 +39,7 @@ def run(config_file):
         type_, name = section.split(':', 1)
         cfg = dict(config.items(section))
         try:
+            print 'Processing: %s' % cfg
             func = TYPES.get(type_)
             func(database, **cfg)
         except Exception, e:
@@ -53,6 +49,5 @@ def run(config_file):
 
 
 if __name__ == '__main__':
-    if not len(sys.argv) > 1:
-        print "Usage: %s gather.cfg" % sys.argv[0]
-    run(sys.argv[1])
+    _main(locals())
+
