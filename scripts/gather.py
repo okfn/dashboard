@@ -10,6 +10,7 @@ from webstore.client import Database
 from common import database
 import mailman
 import feed
+import twitter
 import bitbucket
 import github
 from normalize import normalize
@@ -22,6 +23,7 @@ TYPES = {
     'pipermail': mailman.gather_pipermail,
     'mailman': mailman.gather_listinfo,
     'feed': feed.gather,
+    'twitter': twitter.gather,
     'bitbucket': bitbucket.gather,
     'github': github.gather
 }
