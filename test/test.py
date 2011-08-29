@@ -4,6 +4,8 @@
 import os
 import sys
 import ConfigParser
+import urllib
+import json
 import unittest
 
 # Add 'scripts' folder to module search path allowing to execute 
@@ -18,6 +20,13 @@ from common import database
 from normalize import normalize
 
 
+config = ConfigParser.SafeConfigParser()
+config_file = os.path.join('..', 'dashboard.cfg')
+config.read([config_file])
+host, user, db = [config.get("db", "webstore.%s" % val) 
+    for val in "host user db".split()]
+
+
 class DashboardTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -30,21 +39,19 @@ class DashboardTestCase(unittest.TestCase):
         url = "http://blog.okfn.org/feed/"
         feed.gather(database, url=url)
         
-        config = ConfigParser.SafeConfigParser()
-        config.read(["../dashboard.cfg"])
-        # normalize(database, config)
-
         # Todo: now do the real testing...
 
     def test_twitter(self):
+        url0 = "http://%s/%s/%s/activity.json" % (host, user, db)
+        print "Checking database:", url0
+        j = urllib.urlopen(url0).read()
+        rows0 = json.loads(j)
         url = "http://twitter.com/okfn"
         twitter.gather(database, url=url)
-        
-        config = ConfigParser.SafeConfigParser()
-        config.read(["../dashboard.cfg"])
-        # normalize(database, config)
-
-        # Todo: now do the real testing...
+        j = urllib.urlopen(url0).read()
+        rows1 = json.loads(j)
+        # quite unimpressive test, but a start
+        self.assert_(len(rows0) <= len(rows1))
 
 
 if __name__ == '__main__':
