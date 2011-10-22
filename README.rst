@@ -23,6 +23,9 @@ For Developers
 Backend and Data Harvesting
 ---------------------------
 
+Setup
+~~~~~
+
 If you intend to run python scripts for storing and harvesting data you will
 need to:
 
@@ -34,6 +37,17 @@ need to:
 
 3. Copy and paste dashboard.cfg.tmpl to dashboard.cfg and set relevant config
    variables
+
+Harvesting
+~~~~~~~~~~
+
+Harvesting script is::
+
+  scripts/gather.py
+
+To see command options do::
+
+  python scripts/gather.py -h
 
 
 Frontend App
