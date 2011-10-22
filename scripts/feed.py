@@ -38,5 +38,8 @@ def gather(database, url=None, type='blog'):
             'source_url': e.link,
             'description': description,
             'type': type,
-            'datetime': date.isoformat()
+            'datetime': date.isoformat(),
+            'date_year_month_day': date.isoformat()[:10],
+    	    'date_year_month': date.isoformat()[:7],
+            'date_year': date[:4]
         }, unique_columns=['author', 'title', 'source_url'])
