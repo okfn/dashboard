@@ -13,7 +13,7 @@ import feed
 import twitter
 import bitbucket
 import github
-from normalize import normalize
+#from normalize import normalize
 
 
 logging.basicConfig(level=logging.NOTSET)
@@ -47,7 +47,7 @@ def run(config_file='dashboard.cfg'):
         except Exception, e:
             log.exception(e)
     
-    normalize(database, config)
+    #normalize(database, config)
 
 
 if __name__ == '__main__':

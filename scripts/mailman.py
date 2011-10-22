@@ -46,6 +46,9 @@ def gather_pipermail(database, url=None):
             'type': 'mailinglist',
             'source_url': url,
             'datetime': date.isoformat()
+            'date_year_month_day': date.isoformat()[:10],
+    	    'date_year_month': date.isoformat()[:7],
+            'date_year': date[:4]
             }, unique_columns=['author', 'title', 'datetime'])
 
 
