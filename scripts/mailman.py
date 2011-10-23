@@ -45,10 +45,10 @@ def gather_pipermail(database, url=None):
             'description': message.get_payload(),
             'type': 'mailinglist',
             'source_url': url,
-            'datetime': date.isoformat()
+            'datetime': date.isoformat(),
             'date_year_month_day': date.isoformat()[:10],
     	    'date_year_month': date.isoformat()[:7],
-            'date_year': date[:4]
+            'date_year': date.isoformat()[:4]
             }, unique_columns=['author', 'title', 'datetime'])
 
 

@@ -43,7 +43,7 @@ def gather(database, url=None, type='twitter'):
             'source_url': url,
             'description': text,
             'type': type,
-            'datetime': dt
+            'datetime': dt,
             'date_year_month_day': dt[:10],
     	    'date_year_month': dt[:7],
             'date_year': dt[:4]

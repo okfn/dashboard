@@ -1,0 +1,40 @@
+[db]
+webstore.host = webstore.thedatahub.org
+webstore.apikey = 884761d6-96f1-462c-9145-3a372e865818
+webstore.user = markun
+webstore.password = klakinun
+webstore.db = dashboarddev
+
+google.user = okfn.admin
+google.password = 
+
+
+#[mailman:okfn]
+#url = http://lists.okfn.org/mailman/listinfo
+
+#[feed:trac.ckan.org]
+#url = http://trac.ckan.org/timeline?ticket=on&milestone=on&wiki=on&max=500&author=&daysback=365&format=rss
+
+#[feed:blog.okfn.org]
+#url = http://blog.okfn.org/feed/
+
+#[twitter:twitter.com]
+#url = http://twitter.com/okfn
+
+#[bitbucket:okfn]
+#name = okfn
+
+#[bitbucket:rgrp]
+#name = rgrp
+
+#[bitbucket:pudo]
+#name = pudo
+
+#[github:pudo]
+#name = pudo
+#account = user
+
+[github:okfn]
+name = okfn
+account = org
+
