@@ -22,7 +22,7 @@ $(function() {
   var url = 'http://webstore.thedatahub.org/markun/dashboarddev/activity/distinct/date_year_month.json?_sort=asc:date_year_month';
   $.getJSON(url, function(data) {
     var d = [];
-    $.each(data, function(idx, item) {
+    $.each(data.data, function(idx, item) {
       var _out = [
           Date.parse(item.date_year_month)
         , item._count
