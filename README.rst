@@ -35,8 +35,14 @@ need to:
     virtualenv {path-to-your-virtualenv}
     pip -E {your-virtualenv} install --requirement=pip-requirements.txt
 
-3. Copy and paste dashboard.cfg.tmpl to dashboard.cfg and set relevant config
-   variables
+3. Install and run a local copy of webstore::
+
+    git clone git@github.com:okfn/webstore
+    [follow the instructions inside webstore/README.rst]
+
+4. Copy and paste dashboard.cfg.tmpl to dashboard.cfg and set relevant config
+   variables. If you have not modified the webstore configuration, it should 
+   work out-of-the-box.
 
 Harvesting
 ~~~~~~~~~~
