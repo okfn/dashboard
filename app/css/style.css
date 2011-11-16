@@ -6,6 +6,10 @@ body {
   margin-top: 20px;
 }
 
+.content h2 {
+ text-align: center
+}
+
 #map {
 	width:100%;
 	height:100%;
