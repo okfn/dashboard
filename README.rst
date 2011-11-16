@@ -33,7 +33,7 @@ need to:
 2. Install other requirements::
 
     virtualenv {path-to-your-virtualenv}
-    pip -E {your-virtualenv} install pip-requirements.txt
+    pip -E {your-virtualenv} install --requirement=pip-requirements.txt
 
 3. Copy and paste dashboard.cfg.tmpl to dashboard.cfg and set relevant config
    variables
