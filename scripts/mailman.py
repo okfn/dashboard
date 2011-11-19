@@ -28,13 +28,18 @@ def gather_listinfo(database, url=None):
             log.exception(io)
 
 
-def gather_pipermail(database, source, config):
+def gather_pipermail(database, source, config, how_many_months=1):
+    '''Gather mailman archives info.
+
+    :param how_many_months: how many months back to go in the archives. Set to
+        <= 0 for unlimited.
+    '''
     url = source.url
     log.info(url)
     if 'mailman/listinfo' in url:
         url = url.replace('mailman/listinfo', 'pipermail')
     table = database['activity']
-    for message in get_messages(url):
+    for message in get_messages(url, how_many_months):
         subjects = message.get_all('Subject')
         subject = subjects[-1] if subjects else '(No Subject)'
         
@@ -55,15 +60,19 @@ def gather_pipermail(database, source, config):
         table.writerow(data, unique_columns=['author', 'title', 'datetime'])
 
 
-def get_messages(url):
+def get_messages(url, how_many_months=1):
     try:
         index = html.parse(url)
     except IOError, io:
         return
+    count = 0
     for anchor in index.findall('//a'):
+        if how_many_months > 0 and count >= how_many_months:
+            break
         try:
             ref = anchor.get('href')
             if ref.endswith('.gz'):
+                count += 1
                 log.info('Archive: %s' % ref.split('.')[0])
                 ref = url + '/' + ref
                 filename, headers = urlretrieve(ref)
