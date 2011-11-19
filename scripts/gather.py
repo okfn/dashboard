@@ -25,7 +25,8 @@ TYPES = {
     'wordpress': feed.gather,
     'twitter': twitter.gather,
     'bitbucket': feed.gather,
-    'github': feed.gather
+    'github': feed.gather,
+    'mediawiki': feed.gather
 }
 
 

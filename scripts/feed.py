@@ -30,6 +30,9 @@ def gather(database, source, config):
                 description = e.content[0].value
             except AttributeError:
                 description = ''
+        # HACKy
+        if source.type == 'mediawiki':
+            description = description.split('\n')[0]
 
         date = datetime.fromtimestamp(mktime(e.updated_parsed))
         data = {
