@@ -1,1291 +1,3060 @@
 {
   "acka47": {
-    "location": "Cologne, Germany", 
-    "name": "Adrian Pohl", 
-    "username": "acka47"
+    "Location": "Cologne, Germany", 
+    "Name": "Adrian Pohl", 
+    "geolocation": {
+      "adminCode1": "07", 
+      "adminName1": "North Rhine-Westphalia", 
+      "countryCode": "DE", 
+      "countryName": "Germany", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2886242, 
+      "lat": 50.933333300000001, 
+      "lng": 6.9500000000000002, 
+      "name": "Cologne", 
+      "population": 963395, 
+      "toponymName": "K\u00f6ln"
+    }
   }, 
   "aculich": {
-    "location": "San Francisco, CA", 
-    "name": "Aaron Culich", 
-    "username": "aculich"
+    "Location": "San Francisco, CA", 
+    "Name": "Aaron Culich", 
+    "geolocation": {
+      "adminCode1": "CA", 
+      "adminName1": "California", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 5391959, 
+      "lat": 37.774929499999999, 
+      "lng": -122.4194155, 
+      "name": "San Francisco", 
+      "population": 732072, 
+      "toponymName": "San Francisco"
+    }
   }, 
   "adam": {
-    "name": "adam", 
-    "username": "adam"
+    "Name": "adam"
   }, 
   "admin": {
-    "name": "admin", 
-    "username": "admin"
+    "Name": "admin"
   }, 
   "agatalotauro": {
-    "description": "R\u00e9sum\u00e9 \n\\\n\n\\\n\tThis  resum\u00e8 is intended to introduce myself and explore your potential need for someone with my unusual blend of qualifications (collaborations).\n\\\n \n\\\n\tBeginning my academic career at the University of Palermo, School of Architecture, I graduated in 1993 (gaining the highest distinction) and was able to gain valuable cultural experience under the Erasmus Exchange Programme 1992-93 (coordinated by Full. Prof. R. La Franca and tutored by Full Prof. N. Teymur and Jhon Archer).  The result of my final theses was published in Progetto di Laurea 1993.\n\\\nAfter moving to England I held several positions with the Simpson Associates Architects and The Pickard Filanson Partnership, BBC Project Office (New Broad casting House, Manchester) under the COMET Programme.  In these positions I had the indispensable advantage of gaining valuable computer experiences, professional skills, and management knowledge. \n\\\n\n\\\n\tBeing employed as Research Assistance by the University of Manchester, School of Architecture and Town Planning (under the MPhil Course), I was able to refine my human relations, leadership and cultural expertise.  Responsible for the International Post Graduate Group, providing supply and academic supports for cultural exchange programme, I was required to utilise all my previous expertise and knowledge. I also attended two Master Courses (II level) at the \u201cScuola Superiore\u201d, Catania University (coordinated by Full Prof. Giarrizzo, Aymard, De Carlo and I. Rizzo). Part of her research was also conducted at the Innovation Relay Centre (http://www.innovationrelay.net/, Catania University) API Industrie and Consorzio Catania Ricerche. I worked for the ESE (European School of Economics - Communication &amp; Media Studies) as a Visual Communication &amp; Computer graphics lecturer (a.a. 2001-2). I participated in several European Research and Educational Programmes providing supply and academic supports for cultural exchange programmes. I attended the Ph.D Course in \u201cGeomatics and Territorial Information Systems\u201d (supervisor and coordinator Full Prof. G. Manzoni, Trieste University) from 2004 to 2007. \n\\\n\n\\\nI successfully completed the Teaching with WebTycho Training Session \\\\\\CTLA201\\\\\\\" - UMUC\\\\'s Center for Teaching and Learning - University of Maryland University College \u2013 Instructor Prof. Deb Hullet", 
-    "location": "Catania", 
-    "name": "Agata Lo Tauro", 
-    "username": "agatalotauro", 
-    "website": "www.miur.it"
+    "Description/ About me": "R\u00e9sum\u00e9 \n\\\n\n\\\n\tThis  resum\u00e8 is intended to introduce myself and explore your potential need for someone with my unusual blend of qualifications (collaborations).\n\\\n \n\\\n\tBeginning my academic career at the University of Palermo, School of Architecture, I graduated in 1993 (gaining the highest distinction) and was able to gain valuable cultural experience under the Erasmus Exchange Programme 1992-93 (coordinated by Full. Prof. R. La Franca and tutored by Full Prof. N. Teymur and Jhon Archer).  The result of my final theses was published in Progetto di Laurea 1993.\n\\\nAfter moving to England I held several positions with the Simpson Associates Architects and The Pickard Filanson Partnership, BBC Project Office (New Broad casting House, Manchester) under the COMET Programme.  In these positions I had the indispensable advantage of gaining valuable computer experiences, professional skills, and management knowledge. \n\\\n\n\\\n\tBeing employed as Research Assistance by the University of Manchester, School of Architecture and Town Planning (under the MPhil Course), I was able to refine my human relations, leadership and cultural expertise.  Responsible for the International Post Graduate Group, providing supply and academic supports for cultural exchange programme, I was required to utilise all my previous expertise and knowledge. I also attended two Master Courses (II level) at the \u201cScuola Superiore\u201d, Catania University (coordinated by Full Prof. Giarrizzo, Aymard, De Carlo and I. Rizzo). Part of her research was also conducted at the Innovation Relay Centre (http://www.innovationrelay.net/, Catania University) API Industrie and Consorzio Catania Ricerche. I worked for the ESE (European School of Economics - Communication &amp; Media Studies) as a Visual Communication &amp; Computer graphics lecturer (a.a. 2001-2). I participated in several European Research and Educational Programmes providing supply and academic supports for cultural exchange programmes. I attended the Ph.D Course in \u201cGeomatics and Territorial Information Systems\u201d (supervisor and coordinator Full Prof. G. Manzoni, Trieste University) from 2004 to 2007. \n\\\n\n\\\nI successfully completed the Teaching with WebTycho Training Session \\\\\\CTLA201\\\\\\\" - UMUC\\\\'s Center for Teaching and Learning - University of Maryland University College \u2013 Instructor Prof. Deb Hullet", 
+    "Location": "Catania", 
+    "Name": "Agata Lo Tauro", 
+    "Website": "www.miur.it", 
+    "geolocation": {
+      "adminCode1": "15", 
+      "adminName1": "Sicily", 
+      "countryCode": "IT", 
+      "countryName": "Italy", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2525068, 
+      "lat": 37.502133957882101, 
+      "lng": 15.087189674377401, 
+      "name": "Catania", 
+      "population": 313110, 
+      "toponymName": "Catania"
+    }
   }, 
   "alesarrett": {
-    "location": "Italy, Rubano (PD)", 
-    "name": "Alessandro", 
-    "username": "alesarrett"
+    "Location": "Italy, Rubano (PD)", 
+    "Name": "Alessandro", 
+    "geolocation": {
+      "adminCode1": "20", 
+      "adminName1": "Veneto", 
+      "countryCode": "IT", 
+      "countryName": "Italy", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 3168827, 
+      "lat": 45.420893, 
+      "lng": 11.807207, 
+      "name": "Rubano", 
+      "population": 13671, 
+      "toponymName": "Rubano"
+    }
   }, 
   "alexrollin": {
-    "description": "Practitioner of mutual forms of ownership.  Staunch supporter of Open Data standards and formalization of various other standards that can provide aid, guidance and support for mutual efforts.", 
-    "location": "1", 
-    "name": "Alex Rollin", 
-    "username": "alexrollin"
+    "Description/ About me": "Practitioner of mutual forms of ownership.  Staunch supporter of Open Data standards and formalization of various other standards that can provide aid, guidance and support for mutual efforts.", 
+    "Location": "1", 
+    "Name": "Alex Rollin", 
+    "geolocation": {
+      "adminCode1": "NE", 
+      "adminName1": "Nebraska", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "ADMD", 
+      "fcodeName": "administrative division", 
+      "geonameId": 5075781, 
+      "lat": 40.041111200000003, 
+      "lng": -96.186674499999995, 
+      "name": "Election Precinct 1, Pawnee Number 1", 
+      "population": 0, 
+      "toponymName": "Election Precinct 1, Pawnee Number 1"
+    }
   }, 
   "amrapali": {
-    "description": "PhD Student at the University of Leipzig.", 
-    "location": "Leipzig, Germany", 
-    "name": "Amrapali", 
-    "username": "amrapali", 
-    "website": "http://aksw.org/AmrapaliZaveri"
+    "Description/ About me": "PhD Student at the University of Leipzig.", 
+    "Location": "Leipzig, Germany", 
+    "Name": "Amrapali", 
+    "Website": "http://aksw.org/AmrapaliZaveri", 
+    "geolocation": {
+      "adminCode1": "13", 
+      "adminName1": "Saxony", 
+      "countryCode": "DE", 
+      "countryName": "Germany", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2879139, 
+      "lat": 51.339619999999996, 
+      "lng": 12.371292, 
+      "name": "Leipzig", 
+      "population": 504971, 
+      "toponymName": "Leipzig"
+    }
   }, 
   "andychuzley": {
-    "location": "Tucson", 
-    "name": "andy chuzley", 
-    "username": "andychuzley"
+    "Location": "Tucson", 
+    "Name": "andy chuzley", 
+    "geolocation": {
+      "adminCode1": "AZ", 
+      "adminName1": "Arizona", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 5318313, 
+      "lat": 32.221742900000002, 
+      "lng": -110.926479, 
+      "name": "Tucson", 
+      "population": 518907, 
+      "toponymName": "Tucson"
+    }
   }, 
   "apletters": {
-    "description": "Hi friends, \n\\\n\n\\\nI support Open Educational Resources movement. I firmly believe that Open Distance Learning (ODL) supported by Open Educational Resources (OER) would build the Inclusive Mainstream Education System in the immediate future.\n\\\n\n\\\nWarm regards\n\\\nAnil\n\\\nhttp://apletters.blogspot.com", 
-    "location": "India,   Kerala", 
-    "name": "Anil Prasad", 
-    "username": "apletters"
+    "Description/ About me": "Hi friends, \n\\\n\n\\\nI support Open Educational Resources movement. I firmly believe that Open Distance Learning (ODL) supported by Open Educational Resources (OER) would build the Inclusive Mainstream Education System in the immediate future.\n\\\n\n\\\nWarm regards\n\\\nAnil\n\\\nhttp://apletters.blogspot.com", 
+    "Location": "India,   Kerala", 
+    "Name": "Anil Prasad", 
+    "geolocation": {
+      "adminCode1": "13", 
+      "adminName1": "Kerala", 
+      "countryCode": "IN", 
+      "countryName": "India", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "ADM1", 
+      "fcodeName": "first-order administrative division", 
+      "geonameId": 1267254, 
+      "lat": 10, 
+      "lng": 76.5, 
+      "name": "Kerala", 
+      "population": 31838619, 
+      "toponymName": "State of Kerala"
+    }
   }, 
   "apoikola": {
-    "name": "apoikola", 
-    "username": "apoikola"
+    "Name": "apoikola"
   }, 
   "archerseo": {
-    "description": "fsdfdsfds", 
-    "identica": "fdsfsd", 
-    "location": "fdsfdsfd", 
-    "name": "fsdfdsfs", 
-    "twitter": "fsdfsd", 
-    "username": "archerseo", 
-    "website": "www.hao123.com"
+    "Description/ About me": "fsdfdsfds", 
+    "Identica": "fdsfsd", 
+    "Location": "fdsfdsfd", 
+    "Name": "fsdfdsfs", 
+    "Twitter": "fsdfsd", 
+    "Website": "www.hao123.com"
   }, 
   "aron": {
-    "location": "Brighton, UK", 
-    "name": "Aron Carroll", 
-    "username": "aron", 
-    "website": "http://aroncarroll.com"
+    "Location": "Brighton, UK", 
+    "Name": "Aron Carroll", 
+    "Website": "http://aroncarroll.com", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 2654710, 
+      "lat": 50.828384947249504, 
+      "lng": -0.13947486877441401, 
+      "name": "Brighton", 
+      "population": 139001, 
+      "toponymName": "Brighton"
+    }
   }, 
   "ashkotin": {
-    "description": "We develope ontologies at www.sgm.ru.\n\\\nDomain: petrology.", 
-    "location": "Moscow", 
-    "name": "Alex Shkotin", 
-    "username": "ashkotin"
+    "Description/ About me": "We develope ontologies at www.sgm.ru.\n\\\nDomain: petrology.", 
+    "Location": "Moscow", 
+    "Name": "Alex Shkotin", 
+    "geolocation": {
+      "adminCode1": "48", 
+      "adminName1": "Moscow", 
+      "countryCode": "RU", 
+      "countryName": "Russia", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 524901, 
+      "lat": 55.752222199999999, 
+      "lng": 37.6155556, 
+      "name": "Moscow", 
+      "population": 10381222, 
+      "toponymName": "Moscow"
+    }
   }, 
   "awarelisa": {
-    "description": "Oracle DBA from California and sometimes Canada.", 
-    "location": "USA", 
-    "name": "Lisa Tansey", 
-    "username": "awarelisa"
+    "Description/ About me": "Oracle DBA from California and sometimes Canada.", 
+    "Location": "USA", 
+    "Name": "Lisa Tansey", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 6252001, 
+      "lat": 39.759999999999998, 
+      "lng": -98.5, 
+      "name": "United States", 
+      "population": 310232863, 
+      "toponymName": "United States"
+    }
   }, 
   "ayadox": {
-    "location": "toronto", 
-    "name": "jeronimo m.m.", 
-    "username": "ayadox"
+    "Location": "toronto", 
+    "Name": "jeronimo m.m.", 
+    "geolocation": {
+      "adminCode1": "08", 
+      "adminName1": "Ontario", 
+      "countryCode": "CA", 
+      "countryName": "Canada", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 6167865, 
+      "lat": 43.700113788000003, 
+      "lng": -79.416304194000006, 
+      "name": "Toronto", 
+      "population": 4612191, 
+      "toponymName": "Toronto"
+    }
   }, 
   "b2bspecialist": {
-    "description": "Co-founder of Silicon Halton a supporter of Open Data initiatives. Also, founder of Mi6 a b2b marketing and business development agency located in Oakville, Ontario, Canada.", 
-    "location": "Canada", 
-    "name": "Chris Herbert", 
-    "twitter": "b2bspecialist", 
-    "username": "b2bspecialist", 
-    "website": "www.mi6agency.com"
+    "Description/ About me": "Co-founder of Silicon Halton a supporter of Open Data initiatives. Also, founder of Mi6 a b2b marketing and business development agency located in Oakville, Ontario, Canada.", 
+    "Location": "Canada", 
+    "Name": "Chris Herbert", 
+    "Twitter": "b2bspecialist", 
+    "Website": "www.mi6agency.com", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "CA", 
+      "countryName": "Canada", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 6251999, 
+      "lat": 60, 
+      "lng": -96, 
+      "name": "Canada", 
+      "population": 33679000, 
+      "toponymName": "Canada"
+    }
   }, 
   "babablue": {
-    "location": "Australia", 
-    "name": "Dewi", 
-    "username": "babablue"
+    "Location": "Australia", 
+    "Name": "Dewi", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "AU", 
+      "countryName": "Australia", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 2077456, 
+      "lat": -25, 
+      "lng": 135, 
+      "name": "Australia", 
+      "population": 21515754, 
+      "toponymName": "Commonwealth of Australia"
+    }
   }, 
   "babolattennis": {
-    "description": "<a href=\\\\\\http://www.tennis-wilson.com/\\\\\\\">tennis rackets</a>\"", 
-    "location": "New York", 
-    "name": "babolattennis", 
-    "username": "babolattennis"
+    "Description/ About me": "<a href=\\\\\\http://www.tennis-wilson.com/\\\\\\\">tennis rackets</a>\"", 
+    "Location": "New York", 
+    "Name": "babolattennis", 
+    "geolocation": {
+      "adminCode1": "NY", 
+      "adminName1": "New York", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 5128581, 
+      "lat": 40.714269100000003, 
+      "lng": -74.005972900000003, 
+      "name": "New York", 
+      "population": 8008278, 
+      "toponymName": "New York City"
+    }
   }, 
   "band": {
-    "description": "Socio-technical systems developer, science journal editor, and open access advocate.", 
-    "identica": "band", 
-    "location": "Austin, TX, USA", 
-    "name": "William L. Anderson", 
-    "twitter": "band", 
-    "username": "band"
+    "Description/ About me": "Socio-technical systems developer, science journal editor, and open access advocate.", 
+    "Identica": "band", 
+    "Location": "Austin, TX, USA", 
+    "Name": "William L. Anderson", 
+    "Twitter": "band", 
+    "geolocation": {
+      "adminCode1": "TX", 
+      "adminName1": "Texas", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 4671654, 
+      "lat": 30.267153, 
+      "lng": -97.743060799999995, 
+      "name": "Austin", 
+      "population": 786382, 
+      "toponymName": "Austin"
+    }
   }, 
   "becky": {
-    "name": "Becky", 
-    "username": "becky"
+    "Name": "Becky"
   }, 
   "beckyhogge": {
-    "name": "beckyhogge", 
-    "username": "beckyhogge"
+    "Name": "beckyhogge"
   }, 
   "began1218": {
-    "description": "began1218", 
-    "location": "began1218", 
-    "name": "widow1218", 
-    "username": "began1218"
+    "Description/ About me": "began1218", 
+    "Location": "began1218", 
+    "Name": "widow1218"
   }, 
   "benosteen": {
-    "name": "benosteen", 
-    "username": "benosteen"
+    "Name": "benosteen"
   }, 
   "bettingbet2010": {
-    "location": "CA", 
-    "name": "bettingbet2010", 
-    "username": "bettingbet2010"
+    "Location": "CA", 
+    "Name": "bettingbet2010", 
+    "geolocation": {
+      "adminCode1": "77", 
+      "adminName1": "C\u00e0 Mau", 
+      "countryCode": "VN", 
+      "countryName": "Vietnam", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 1586443, 
+      "lat": 9.1769444, 
+      "lng": 105.15000000000001, 
+      "name": "C\u00e0 Mau", 
+      "population": 111894, 
+      "toponymName": "C\u00e0 Mau"
+    }
   }, 
   "bmwelby": {
-    "location": "Yorok, UK", 
-    "name": "Benjamin Welby", 
-    "twitter": "http://twitter.com/bmwelby", 
-    "username": "bmwelby", 
-    "website": "http://bm.wel.by"
+    "Location": "Yorok, UK", 
+    "Name": "Benjamin Welby", 
+    "Twitter": "http://twitter.com/bmwelby", 
+    "Website": "http://bm.wel.by"
   }, 
   "bniemann": {
-    "description": "Director and Senior Data Scientist, Semantic Community, http://semanticommunity.info/", 
-    "location": "USA, Fairfax, VA", 
-    "name": "Brand Niemann", 
-    "twitter": "bniemannsr", 
-    "username": "bniemann", 
-    "website": "http://semanticommunity.info/"
+    "Description/ About me": "Director and Senior Data Scientist, Semantic Community, http://semanticommunity.info/", 
+    "Location": "USA, Fairfax, VA", 
+    "Name": "Brand Niemann", 
+    "Twitter": "bniemannsr", 
+    "Website": "http://semanticommunity.info/", 
+    "geolocation": {
+      "adminCode1": "VA", 
+      "adminName1": "Virginia", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "ADMD", 
+      "fcodeName": "administrative division", 
+      "geonameId": 4756920, 
+      "lat": 38.462982199999999, 
+      "lng": -77.994724000000005, 
+      "name": "East Fairfax District", 
+      "population": 0, 
+      "toponymName": "East Fairfax District"
+    }
   }, 
   "brianglanz": {
-    "description": "Open Knowledge enthusiast -- especially science and government -- with a background in open source software and web sites.\n\\\n\n\\\nBy day, Creative Technologies Manager at the Northwest Association for Biomedical Research. By night, have cooked up or contributed to a handful of sites using the same tech as okfn.org -- in open science like http://opensciencefederation.com or http://www.science3point0.com and open government and journalism, like http://journalismthatmatters.org or http://wanewscouncil.org or the upcoming http://publiceyenorthwest.org", 
-    "location": "Seattle", 
-    "name": "Brian Glanz", 
-    "username": "brianglanz"
+    "Description/ About me": "Open Knowledge enthusiast -- especially science and government -- with a background in open source software and web sites.\n\\\n\n\\\nBy day, Creative Technologies Manager at the Northwest Association for Biomedical Research. By night, have cooked up or contributed to a handful of sites using the same tech as okfn.org -- in open science like http://opensciencefederation.com or http://www.science3point0.com and open government and journalism, like http://journalismthatmatters.org or http://wanewscouncil.org or the upcoming http://publiceyenorthwest.org", 
+    "Location": "Seattle", 
+    "Name": "Brian Glanz", 
+    "geolocation": {
+      "adminCode1": "WA", 
+      "adminName1": "Washington", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 5809844, 
+      "lat": 47.606209499999999, 
+      "lng": -122.3320708, 
+      "name": "Seattle", 
+      "population": 569369, 
+      "toponymName": "Seattle"
+    }
   }, 
   "chad-nelson": {
-    "name": "Chad Nelson", 
-    "username": "chad-nelson"
+    "Name": "Chad Nelson"
   }, 
   "chasttown": {
-    "description": "Uggs on sale,ugg cardy boots,Women\\\\'s ugg boots classic short,tall,ugg slippers, cheap Ugg australia discount and wholesale", 
-    "location": "london", 
-    "name": "chasttown", 
-    "username": "chasttown"
+    "Description/ About me": "Uggs on sale,ugg cardy boots,Women\\\\'s ugg boots classic short,tall,ugg slippers, cheap Ugg australia discount and wholesale", 
+    "Location": "london", 
+    "Name": "chasttown", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2643743, 
+      "lat": 51.508528775862885, 
+      "lng": -0.12574195861816406, 
+      "name": "London", 
+      "population": 7556900, 
+      "toponymName": "London"
+    }
   }, 
   "chengzi": {
-    "description": "\n\\\n\n\\\n\n\\\nPrivileges HaoDuan\n\\\nBeijing <a href=\\\\\\http://www.softsonlinessite.us/\\\\\\\">buy Office 2010</a> governance traffic congestion and comprehensive measures clearly stated that \\\\\\\"Beijing at all levels 1025\\\\\\\" period", 
-    "location": "fgjh", 
-    "name": "chengzi", 
-    "username": "chengzi"
+    "Description/ About me": "\n\\\n\n\\\n\n\\\nPrivileges HaoDuan\n\\\nBeijing <a href=\\\\\\http://www.softsonlinessite.us/\\\\\\\">buy Office 2010</a> governance traffic congestion and comprehensive measures clearly stated that \\\\\\\"Beijing at all levels 1025\\\\\\\" period", 
+    "Location": "fgjh", 
+    "Name": "chengzi"
   }, 
   "chiarcos": {
-    "name": "Christian Chiarcos", 
-    "username": "chiarcos", 
-    "website": "http://www.sfb632.uni-potsdam.de/~chiarcos"
+    "Name": "Christian Chiarcos", 
+    "Website": "http://www.sfb632.uni-potsdam.de/~chiarcos"
   }, 
   "chris-taggart": {
-    "name": "chris-taggart", 
-    "username": "chris-taggart"
+    "Name": "chris-taggart"
   }, 
   "christianlaux": {
-    "description": "Contributing to opendata.ch and otherwise teaming up with opdendata.ch folks in Switzerland.  Otherwise working as an attorney in Zurich in the field of IT law, data distribution matters and open source software.", 
-    "location": "Zurich / Switzerland", 
-    "name": "Christian Laux", 
-    "twitter": "laux_and_law", 
-    "username": "christianlaux", 
-    "website": "http://www.opendata.ch; http://www.bratschi-law.ch/en/attorneys/result-detail.cfm?aid=281"
+    "Description/ About me": "Contributing to opendata.ch and otherwise teaming up with opdendata.ch folks in Switzerland.  Otherwise working as an attorney in Zurich in the field of IT law, data distribution matters and open source software.", 
+    "Location": "Zurich / Switzerland", 
+    "Name": "Christian Laux", 
+    "Twitter": "laux_and_law", 
+    "Website": "http://www.opendata.ch; http://www.bratschi-law.ch/en/attorneys/result-detail.cfm?aid=281", 
+    "geolocation": {
+      "adminCode1": "ZH", 
+      "adminName1": "Z\u00fcrich", 
+      "countryCode": "CH", 
+      "countryName": "Switzerland", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 2657896, 
+      "lat": 47.366666700000003, 
+      "lng": 8.5500000000000007, 
+      "name": "Zurich", 
+      "population": 341730, 
+      "toponymName": "Z\u00fcrich"
+    }
   }, 
   "combobart": {
-    "description": "Civil Servant in Gent, Belgium. Egov, Social Media, smart engagement and strategic planning.", 
-    "location": "Ghent, Belgium", 
-    "name": "Bart Rosseau", 
-    "twitter": "bartrosseau", 
-    "username": "combobart", 
-    "website": "www.gent.be"
+    "Description/ About me": "Civil Servant in Gent, Belgium. Egov, Social Media, smart engagement and strategic planning.", 
+    "Location": "Ghent, Belgium", 
+    "Name": "Bart Rosseau", 
+    "Twitter": "bartrosseau", 
+    "Website": "www.gent.be", 
+    "geolocation": {
+      "adminCode1": "VLG", 
+      "adminName1": "Flanders", 
+      "countryCode": "BE", 
+      "countryName": "Belgium", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 2797656, 
+      "lat": 51.049999999999997, 
+      "lng": 3.7166667000000002, 
+      "name": "Ghent", 
+      "population": 231493, 
+      "toponymName": "Gent"
+    }
   }, 
   "connectcase": {
-    "description": "Webdeveloper with an obsessive liking to API\\\\'s, mash-ups, open source stuff and combining all these elements.....", 
-    "location": "Zaandam, the Netherlands", 
-    "name": "Cees Rijken", 
-    "username": "connectcase"
+    "Description/ About me": "Webdeveloper with an obsessive liking to API\\\\'s, mash-ups, open source stuff and combining all these elements.....", 
+    "Location": "Zaandam, the Netherlands", 
+    "Name": "Cees Rijken"
   }, 
   "cornelius-puschmann": {
-    "name": "Cornelius Puschmann", 
-    "username": "cornelius-puschmann"
+    "Name": "Cornelius Puschmann"
   }, 
   "countculture": {
-    "name": "countculture", 
-    "username": "countculture"
+    "Name": "countculture"
   }, 
   "cretep": {
-    "name": "Pete C", 
-    "username": "cretep"
+    "Name": "Pete C"
   }, 
   "csnyder244": {
-    "description": "Im a medical doctor", 
-    "location": "Tustin", 
-    "name": "Chris", 
-    "username": "csnyder244"
+    "Description/ About me": "Im a medical doctor", 
+    "Location": "Tustin", 
+    "Name": "Chris", 
+    "geolocation": {
+      "adminCode1": "CA", 
+      "adminName1": "California", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 5404119, 
+      "lat": 33.745851100000003, 
+      "lng": -117.826166, 
+      "name": "Tustin", 
+      "population": 68728, 
+      "toponymName": "Tustin"
+    }
   }, 
   "danielabsilva": {
-    "description": "Co-founder and director at Esfera, coordinator at Transpar\u00eancia Hacker community", 
-    "location": "S\u00e3o Paulo, Brazil", 
-    "name": "Daniela B. Silva", 
-    "username": "danielabsilva"
+    "Description/ About me": "Co-founder and director at Esfera, coordinator at Transpar\u00eancia Hacker community", 
+    "Location": "S\u00e3o Paulo, Brazil", 
+    "Name": "Daniela B. Silva", 
+    "geolocation": {
+      "adminCode1": "27", 
+      "adminName1": "S\u00e3o Paulo", 
+      "countryCode": "BR", 
+      "countryName": "Brazil", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 3448439, 
+      "lat": -23.547499999999999, 
+      "lng": -46.636111110000002, 
+      "name": "S\u00e3o Paulo", 
+      "population": 10021295, 
+      "toponymName": "S\u00e3o Paulo"
+    }
   }, 
   "darrendraper": {
-    "description": "I teach, I learn.", 
-    "location": "United States", 
-    "name": "Darren Draper", 
-    "twitter": "ddraper", 
-    "username": "darrendraper", 
-    "website": "http://drapestakes.blogspot.com/"
+    "Description/ About me": "I teach, I learn.", 
+    "Location": "United States", 
+    "Name": "Darren Draper", 
+    "Twitter": "ddraper", 
+    "Website": "http://drapestakes.blogspot.com/", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 6252001, 
+      "lat": 39.759999999999998, 
+      "lng": -98.5, 
+      "name": "United States", 
+      "population": 310232863, 
+      "toponymName": "United States"
+    }
   }, 
   "davidjones": {
-    "name": "davidjones", 
-    "username": "davidjones"
+    "Name": "davidjones"
   }, 
   "davidpidsley": {
-    "description": "I\u2019m a young social entrepreneur &amp; open data developer. I collaborate with the *superheroes* of open civil society on projects for a post-bureaucratic UK.", 
-    "identica": "http://identi.ca/davidpidsley", 
-    "location": "Lymington, New Forest, Hampshire, England, United Kingdom", 
-    "name": "David Pidsley", 
-    "twitter": "http://twitter.com/davidpidsley", 
-    "username": "davidpidsley", 
-    "website": "http://davidpidsley.com"
+    "Description/ About me": "I\u2019m a young social entrepreneur &amp; open data developer. I collaborate with the *superheroes* of open civil society on projects for a post-bureaucratic UK.", 
+    "Identica": "http://identi.ca/davidpidsley", 
+    "Location": "Lymington, New Forest, Hampshire, England, United Kingdom", 
+    "Name": "David Pidsley", 
+    "Twitter": "http://twitter.com/davidpidsley", 
+    "Website": "http://davidpidsley.com", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 2643312, 
+      "lat": 50.757665233726676, 
+      "lng": -1.544296732019081, 
+      "name": "Lymington", 
+      "population": 14544, 
+      "toponymName": "Lymington"
+    }
   }, 
   "davidpidsley3ff6df": {
-    "name": "davidpidsley", 
-    "username": "davidpidsley3ff6df"
+    "Name": "davidpidsley"
   }, 
   "ddie": {
-    "description": "Daniel Dietrich is a researcher at Technical University Berlin, department for informatics and society. He is the official representative for the Open Knowledge Foundation (OKFN) for Germany and project coordinator of the OKFNs working groups on EU Open Data and Open Government Data. He is also co-founder and chairman of the german based non-profit Open Data Network. He is an advocate for freedom of speech, freedom of information, transparency and an enthusiast for all concepts of \u201copenness\u201d such as the idea of the commons, open government, open data, open access, open knowledge and open source.", 
-    "location": "Berlin", 
-    "name": "Daniel Dietrich", 
-    "username": "ddie"
+    "Description/ About me": "Daniel Dietrich is a researcher at Technical University Berlin, department for informatics and society. He is the official representative for the Open Knowledge Foundation (OKFN) for Germany and project coordinator of the OKFNs working groups on EU Open Data and Open Government Data. He is also co-founder and chairman of the german based non-profit Open Data Network. He is an advocate for freedom of speech, freedom of information, transparency and an enthusiast for all concepts of \u201copenness\u201d such as the idea of the commons, open government, open data, open access, open knowledge and open source.", 
+    "Location": "Berlin", 
+    "Name": "Daniel Dietrich", 
+    "geolocation": {
+      "adminCode1": "16", 
+      "adminName1": "Berlin", 
+      "countryCode": "DE", 
+      "countryName": "Germany", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2950159, 
+      "lat": 52.524368165134284, 
+      "lng": 13.410530090332031, 
+      "name": "Berlin", 
+      "population": 3426354, 
+      "toponymName": "Berlin"
+    }
   }, 
   "dianemercier": {
-    "description": "Ph.D in Information Sciences (iSchool)\n\\\nOpen Data Project Manager at Ville de Montr\u00e9al\n\\\n", 
-    "location": "Montr\u00e9al, Qu\u00e9bec CANADA", 
-    "name": "Diane Mercier", 
-    "twitter": "carnetsDM", 
-    "username": "dianemercier", 
-    "website": "http://dianemercier.com"
+    "Description/ About me": "Ph.D in Information Sciences (iSchool)\n\\\nOpen Data Project Manager at Ville de Montr\u00e9al\n\\\n", 
+    "Location": "Montr\u00e9al, Qu\u00e9bec CANADA", 
+    "Name": "Diane Mercier", 
+    "Twitter": "carnetsDM", 
+    "Website": "http://dianemercier.com", 
+    "geolocation": {
+      "adminCode1": "10", 
+      "adminName1": "Quebec", 
+      "countryCode": "CA", 
+      "countryName": "Canada", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 6077243, 
+      "lat": 45.508837499999998, 
+      "lng": -73.587808999999993, 
+      "name": "Montreal", 
+      "population": 3268513, 
+      "toponymName": "Montr\u00e9al"
+    }
   }, 
   "dirkheine": {
-    "description": "Member of Yourtopia, which trials one possible solution to the problem of arbitrary indicator-weighting and proxy-choice in non-GDP measures of social progress. See Yourtopia.net and join us! \n\\\n\n\\\nTeam member of OpenEnergy, which hosts http://energy.publicdata.eu - for easy multidimensional analysis of energy policy. \n\\\n\n\\\nOriginally studied at United World College in Hong Kong, then Economics at Cambridge and now reading the European Master of Law and Economics. Experience on energy and environment from economic perspectives but also from good bit of work with environmental organisations since 1999, in China, Germany and UK.\n\\\nParticular interest in economically feasible approaches to Eco-Social Market Economy.  Very much believing in the necessity of much more active academic North-South collaboration; therefore coordinator of Common Future e.V., a network which organised parallel video-conferences in 10 cities across traditional North South divide to jointly launch journal with climate-policy solutions, presented at UNFCCC COP15. \n\\\n\n\\\nExperience with open collaboration has hence been more in the traditional movements but currently trying to catch up on Open Data. Still much to learn but hopefully also bringing in new perspectives. \n\\\n", 
-    "location": "Ghent, Belgium", 
-    "name": "Dirk", 
-    "username": "dirkheine"
+    "Description/ About me": "Member of Yourtopia, which trials one possible solution to the problem of arbitrary indicator-weighting and proxy-choice in non-GDP measures of social progress. See Yourtopia.net and join us! \n\\\n\n\\\nTeam member of OpenEnergy, which hosts http://energy.publicdata.eu - for easy multidimensional analysis of energy policy. \n\\\n\n\\\nOriginally studied at United World College in Hong Kong, then Economics at Cambridge and now reading the European Master of Law and Economics. Experience on energy and environment from economic perspectives but also from good bit of work with environmental organisations since 1999, in China, Germany and UK.\n\\\nParticular interest in economically feasible approaches to Eco-Social Market Economy.  Very much believing in the necessity of much more active academic North-South collaboration; therefore coordinator of Common Future e.V., a network which organised parallel video-conferences in 10 cities across traditional North South divide to jointly launch journal with climate-policy solutions, presented at UNFCCC COP15. \n\\\n\n\\\nExperience with open collaboration has hence been more in the traditional movements but currently trying to catch up on Open Data. Still much to learn but hopefully also bringing in new perspectives. \n\\\n", 
+    "Location": "Ghent, Belgium", 
+    "Name": "Dirk", 
+    "geolocation": {
+      "adminCode1": "VLG", 
+      "adminName1": "Flanders", 
+      "countryCode": "BE", 
+      "countryName": "Belgium", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 2797656, 
+      "lat": 51.049999999999997, 
+      "lng": 3.7166667000000002, 
+      "name": "Ghent", 
+      "population": 231493, 
+      "toponymName": "Gent"
+    }
   }, 
   "dkastl": {
-    "location": "Osaka & Munich", 
-    "name": "Daniel Kastl", 
-    "username": "dkastl"
+    "Location": "Osaka & Munich", 
+    "Name": "Daniel Kastl"
   }, 
   "dread": {
-    "description": "CKAN developer", 
-    "location": "London", 
-    "name": "David Read", 
-    "username": "dread"
+    "Description/ About me": "CKAN developer", 
+    "Location": "London", 
+    "Name": "David Read", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2643743, 
+      "lat": 51.508528775862885, 
+      "lng": -0.12574195861816406, 
+      "name": "London", 
+      "population": 7556900, 
+      "toponymName": "London"
+    }
   }, 
   "drkbyr": {
-    "location": "Istanbul", 
-    "name": "Doruk Bayer", 
-    "twitter": "http://www.twitter.com/dorukbayer", 
-    "username": "drkbyr"
+    "Location": "Istanbul", 
+    "Name": "Doruk Bayer", 
+    "Twitter": "http://www.twitter.com/dorukbayer", 
+    "geolocation": {
+      "adminCode1": "34", 
+      "adminName1": "Istanbul", 
+      "countryCode": "TR", 
+      "countryName": "Turkey", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 745044, 
+      "lat": 41.013842955224703, 
+      "lng": 28.949661254882798, 
+      "name": "Istanbul", 
+      "population": 11174257, 
+      "toponymName": "\u0130stanbul"
+    }
   }, 
   "egon-willighagen": {
-    "name": "egon-willighagen", 
-    "username": "egon-willighagen"
+    "Name": "egon-willighagen"
   }, 
   "eiturbur": {
-    "location": "Spain", 
-    "name": "Esteban", 
-    "username": "eiturbur"
+    "Location": "Spain", 
+    "Name": "Esteban", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "ES", 
+      "countryName": "Spain", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 2510769, 
+      "lat": 40, 
+      "lng": -4, 
+      "name": "Spain", 
+      "population": 46505963, 
+      "toponymName": "Kingdom of Spain"
+    }
   }, 
   "elainevrs": {
-    "description": "business blog", 
-    "location": "nanjing", 
-    "name": "elainevrs", 
-    "username": "elainevrs"
+    "Description/ About me": "business blog", 
+    "Location": "nanjing", 
+    "Name": "elainevrs", 
+    "geolocation": {
+      "adminCode1": "04", 
+      "adminName1": "Jiangsu Sheng", 
+      "countryCode": "CN", 
+      "countryName": "China", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 1799962, 
+      "lat": 32.061666700000004, 
+      "lng": 118.7777778, 
+      "name": "Nanjing", 
+      "population": 3087010, 
+      "toponymName": "Nanjing"
+    }
   }, 
   "ericgyoung": {
-    "location": "San Francisco, CA", 
-    "name": "EricGYoungEsq", 
-    "username": "ericgyoung"
+    "Location": "San Francisco, CA", 
+    "Name": "EricGYoungEsq", 
+    "geolocation": {
+      "adminCode1": "CA", 
+      "adminName1": "California", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 5391959, 
+      "lat": 37.774929499999999, 
+      "lng": -122.4194155, 
+      "name": "San Francisco", 
+      "population": 732072, 
+      "toponymName": "San Francisco"
+    }
   }, 
   "euronganggep": {
-    "description": "KwyhtAUf", 
-    "location": "d3f4WXj5U9K4", 
-    "name": "Jeff Wagner", 
-    "username": "euronganggep"
+    "Description/ About me": "KwyhtAUf", 
+    "Location": "d3f4WXj5U9K4", 
+    "Name": "Jeff Wagner"
   }, 
   "everton137": {
-    "description": "A poor, boring and ugly physicist.", 
-    "identica": "everton137", 
-    "location": "Sao Paulo,  Brazil", 
-    "name": "Everton Zanella Alvarenga", 
-    "twitter": "everton137", 
-    "username": "everton137", 
-    "website": "http://blogdotom.wordpress.com"
+    "Description/ About me": "A poor, boring and ugly physicist.", 
+    "Identica": "everton137", 
+    "Location": "Sao Paulo,  Brazil", 
+    "Name": "Everton Zanella Alvarenga", 
+    "Twitter": "everton137", 
+    "Website": "http://blogdotom.wordpress.com", 
+    "geolocation": {
+      "adminCode1": "27", 
+      "adminName1": "S\u00e3o Paulo", 
+      "countryCode": "BR", 
+      "countryName": "Brazil", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 3448439, 
+      "lat": -23.547499999999999, 
+      "lng": -46.636111110000002, 
+      "name": "S\u00e3o Paulo", 
+      "population": 10021295, 
+      "toponymName": "S\u00e3o Paulo"
+    }
   }, 
   "fbennett": {
-    "name": "fbennett", 
-    "username": "fbennett"
+    "Name": "fbennett"
   }, 
   "fccoelho": {
-    "identica": "fccoelho", 
-    "location": "Rio de Janeiro", 
-    "name": "Fl\u00e1vio C. Coelho", 
-    "twitter": "fccoelho", 
-    "username": "fccoelho"
+    "Identica": "fccoelho", 
+    "Location": "Rio de Janeiro", 
+    "Name": "Fl\u00e1vio C. Coelho", 
+    "Twitter": "fccoelho", 
+    "geolocation": {
+      "adminCode1": "21", 
+      "adminName1": "Rio de Janeiro", 
+      "countryCode": "BR", 
+      "countryName": "Brazil", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 3451190, 
+      "lat": -22.902777780000001, 
+      "lng": -43.207500000000003, 
+      "name": "Rio de Janeiro", 
+      "population": 6023699, 
+      "toponymName": "Rio de Janeiro"
+    }
   }, 
   "francis": {
-    "name": "francis", 
-    "username": "francis"
+    "Name": "francis"
   }, 
   "francis-irving": {
-    "name": "Francis Irving", 
-    "username": "francis-irving"
+    "Name": "Francis Irving"
   }, 
   "franck": {
-    "description": "Hi, \n\\\n\n\\\nI am Franck, interested in OpenData projects.", 
-    "location": "France Paris", 
-    "name": "Dumond", 
-    "username": "franck"
+    "Description/ About me": "Hi, \n\\\n\n\\\nI am Franck, interested in OpenData projects.", 
+    "Location": "France Paris", 
+    "Name": "Dumond", 
+    "geolocation": {
+      "adminCode1": "A8", 
+      "adminName1": "\u00cele-de-France", 
+      "countryCode": "FR", 
+      "countryName": "France", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2988507, 
+      "lat": 48.853409999999997, 
+      "lng": 2.3488000000000002, 
+      "name": "Paris", 
+      "population": 2138551, 
+      "toponymName": "Paris"
+    }
   }, 
   "geirmund": {
-    "description": "Dionysian technophilic wordsmith with MA European Thought &amp; MSci Mathematics ", 
-    "location": "london, uk", 
-    "name": "geirmund knutsen", 
-    "username": "geirmund"
+    "Description/ About me": "Dionysian technophilic wordsmith with MA European Thought &amp; MSci Mathematics ", 
+    "Location": "london, uk", 
+    "Name": "geirmund knutsen", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2643743, 
+      "lat": 51.508528775862885, 
+      "lng": -0.12574195861816406, 
+      "name": "London", 
+      "population": 7556900, 
+      "toponymName": "London"
+    }
   }, 
   "gexuemei": {
-    "name": "gexuemei", 
-    "username": "gexuemei"
+    "Name": "gexuemei"
   }, 
   "gltpei": {
-    "location": "china", 
-    "name": "blog", 
-    "username": "gltpei"
+    "Location": "china", 
+    "Name": "blog", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "CN", 
+      "countryName": "China", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 1814991, 
+      "lat": 35, 
+      "lng": 105, 
+      "name": "China", 
+      "population": 1330044000, 
+      "toponymName": "People\u2019s Republic of China"
+    }
   }, 
   "golliez": {
-    "description": "IT conusltant for government agencies with special interest in open government data and longterm digital archiving. I guide actually a swiss open open government data working group as a part of the parliamentarian group for digital sustainability.", 
-    "location": "Zurich, Switzerland", 
-    "name": "Golliez", 
-    "username": "golliez"
+    "Description/ About me": "IT conusltant for government agencies with special interest in open government data and longterm digital archiving. I guide actually a swiss open open government data working group as a part of the parliamentarian group for digital sustainability.", 
+    "Location": "Zurich, Switzerland", 
+    "Name": "Golliez", 
+    "geolocation": {
+      "adminCode1": "ZH", 
+      "adminName1": "Z\u00fcrich", 
+      "countryCode": "CH", 
+      "countryName": "Switzerland", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 2657896, 
+      "lat": 47.366666700000003, 
+      "lng": 8.5500000000000007, 
+      "name": "Zurich", 
+      "population": 341730, 
+      "toponymName": "Z\u00fcrich"
+    }
   }, 
   "goodluck1a": {
-    "identica": "http://www.truereligionsjeansoutlet.com/", 
-    "location": "fdjslfj", 
-    "name": "truereligion", 
-    "twitter": "fdsfdsf", 
-    "username": "goodluck1a", 
-    "website": "http://www.truereligionsjeansoutlet.com/"
+    "Identica": "http://www.truereligionsjeansoutlet.com/", 
+    "Location": "fdjslfj", 
+    "Name": "truereligion", 
+    "Twitter": "fdsfdsf", 
+    "Website": "http://www.truereligionsjeansoutlet.com/"
   }, 
   "greggrossmeier": {
-    "name": "greggrossmeier", 
-    "username": "greggrossmeier"
+    "Name": "greggrossmeier"
   }, 
   "guoxu": {
-    "description": "Graduated in BSc Economics (Humboldt-Universitaet) and MSc Development Studies (LSE). Currently works as research associate at the German Institute for Economic Research (DIW Berlin). \n\\\n\n\\\nFor more information see: www.guoxu.org", 
-    "location": "Berlin", 
-    "name": "Guo", 
-    "username": "guoxu"
+    "Description/ About me": "Graduated in BSc Economics (Humboldt-Universitaet) and MSc Development Studies (LSE). Currently works as research associate at the German Institute for Economic Research (DIW Berlin). \n\\\n\n\\\nFor more information see: www.guoxu.org", 
+    "Location": "Berlin", 
+    "Name": "Guo", 
+    "geolocation": {
+      "adminCode1": "16", 
+      "adminName1": "Berlin", 
+      "countryCode": "DE", 
+      "countryName": "Germany", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2950159, 
+      "lat": 52.524368165134284, 
+      "lng": 13.410530090332031, 
+      "name": "Berlin", 
+      "population": 3426354, 
+      "toponymName": "Berlin"
+    }
   }, 
   "guoxue3af06": {
-    "name": "guoxue3af06", 
-    "username": "guoxue3af06"
+    "Name": "guoxue3af06"
   }, 
   "h2cm": {
-    "description": "Community Mental Health Nurse NHS plus Independent Scholar &amp; Informatics Specialist\n\\\nRMN, RGN, CPN(Cert.), PGCE, BA(Hons) Comp/Phil, PG(Dip)COPE.\n\\\nBlog: Welcome to the QUAD:\n\\\nhttp://hodges-model.blogspot.com/\n\\\nHodges Health Career - Care Domains - Model\n\\\nhttp://www.p-jones.demon.co.uk/\n\\\nh2cm: help 2C more - help 2 listen - help 2 care\n\\\nhttp://twitter.com/h2cm", 
-    "location": "NW England, UK", 
-    "name": "Peter Jones", 
-    "twitter": "http://twitter.com/#!/h2cm", 
-    "username": "h2cm", 
-    "website": "http://hodges-model.blogspot.com/"
+    "Description/ About me": "Community Mental Health Nurse NHS plus Independent Scholar &amp; Informatics Specialist\n\\\nRMN, RGN, CPN(Cert.), PGCE, BA(Hons) Comp/Phil, PG(Dip)COPE.\n\\\nBlog: Welcome to the QUAD:\n\\\nhttp://hodges-model.blogspot.com/\n\\\nHodges Health Career - Care Domains - Model\n\\\nhttp://www.p-jones.demon.co.uk/\n\\\nh2cm: help 2C more - help 2 listen - help 2 care\n\\\nhttp://twitter.com/h2cm", 
+    "Location": "NW England, UK", 
+    "Name": "Peter Jones", 
+    "Twitter": "http://twitter.com/#!/h2cm", 
+    "Website": "http://hodges-model.blogspot.com/"
   }, 
   "hartspring": {
-    "description": "Novelist, visual artist.", 
-    "location": "Worthington, Ohio", 
-    "name": "Ernest Lockridge", 
-    "username": "hartspring"
+    "Description/ About me": "Novelist, visual artist.", 
+    "Location": "Worthington, Ohio", 
+    "Name": "Ernest Lockridge", 
+    "geolocation": {
+      "adminCode1": "OH", 
+      "adminName1": "Ohio", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "ADMD", 
+      "fcodeName": "administrative division", 
+      "geonameId": 7317450, 
+      "lat": 40.095032799999998, 
+      "lng": -83.020615000000006, 
+      "name": "City of Worthington", 
+      "population": 0, 
+      "toponymName": "City of Worthington"
+    }
   }, 
   "healthyandbeautytips": {
-    "name": "healthyandbeautytips", 
-    "username": "healthyandbeautytips"
+    "Name": "healthyandbeautytips"
   }, 
   "hejkai": {
-    "description": "power system automation and control engineer\n\\\n\n\\\nenergy planning and educational games", 
-    "location": "copenhagen", 
-    "name": "KAi", 
-    "username": "hejkai", 
-    "website": "www.changing-the-game.org"
+    "Description/ About me": "power system automation and control engineer\n\\\n\n\\\nenergy planning and educational games", 
+    "Location": "copenhagen", 
+    "Name": "KAi", 
+    "Website": "www.changing-the-game.org", 
+    "geolocation": {
+      "adminCode1": "17", 
+      "adminName1": "Capital Region", 
+      "countryCode": "DK", 
+      "countryName": "Denmark", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2618425, 
+      "lat": 55.675938927280072, 
+      "lng": 12.565526962280273, 
+      "name": "Copenhagen", 
+      "population": 1153615, 
+      "toponymName": "Copenhagen"
+    }
   }, 
   "hfxy2011": {
-    "name": "JackmanHugh", 
-    "username": "hfxy2011", 
-    "website": "http://www.nikeairmax-sale.com/"
+    "Name": "JackmanHugh", 
+    "Website": "http://www.nikeairmax-sale.com/"
   }, 
   "hirstys": {
-    "location": "london", 
-    "name": "james", 
-    "username": "hirstys"
+    "Location": "london", 
+    "Name": "james", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2643743, 
+      "lat": 51.508528775862885, 
+      "lng": -0.12574195861816406, 
+      "name": "London", 
+      "population": 7556900, 
+      "toponymName": "London"
+    }
   }, 
   "hockendougal": {
-    "description": "Matthew is a technologist and scholar studying material culture. His work focuses on understanding web media, the history of logistics and modern environmental ideologies. He is the Cofounder and Director of Sourcemap, a collaborative platform for sharing \\\\\\where things come from.\\\\\\\" Matthew is currently at New York University", 
-    "location": "New York, NY", 
-    "name": "Matthew Hockenberry", 
-    "twitter": "hockendougal", 
-    "username": "hockendougal", 
-    "website": "www.smugculture.com"
+    "Description/ About me": "Matthew is a technologist and scholar studying material culture. His work focuses on understanding web media, the history of logistics and modern environmental ideologies. He is the Cofounder and Director of Sourcemap, a collaborative platform for sharing \\\\\\where things come from.\\\\\\\" Matthew is currently at New York University", 
+    "Location": "New York, NY", 
+    "Name": "Matthew Hockenberry", 
+    "Twitter": "hockendougal", 
+    "Website": "www.smugculture.com", 
+    "geolocation": {
+      "adminCode1": "NY", 
+      "adminName1": "New York", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "L", 
+      "fclName": "parks,area, ...", 
+      "fcode": "RGNE", 
+      "fcodeName": "economic region", 
+      "geonameId": 6955102, 
+      "lat": 40.757660149970299, 
+      "lng": -73.91326904296875, 
+      "name": "New York-Northern New Jersey-Long Island", 
+      "population": 19006798, 
+      "toponymName": "New York-Northern New Jersey-Long Island"
+    }
   }, 
   "hostingweb": {
-    "description": "After doing lots of research, there is only one <a href=\\\\\\http://www.01hosting.com/\\\\\\\"><b>top hosting</b></a> you\u2019ll ever need and only one domain registrar because this host and registrar will take care of all your online business needs 365x24x7\"", 
-    "location": "Albany, CA", 
-    "name": "Hosting Online", 
-    "username": "hostingweb"
+    "Description/ About me": "After doing lots of research, there is only one <a href=\\\\\\http://www.01hosting.com/\\\\\\\"><b>top hosting</b></a> you\u2019ll ever need and only one domain registrar because this host and registrar will take care of all your online business needs 365x24x7\"", 
+    "Location": "Albany, CA", 
+    "Name": "Hosting Online", 
+    "geolocation": {
+      "adminCode1": "10", 
+      "adminName1": "Quebec", 
+      "countryCode": "CA", 
+      "countryName": "Canada", 
+      "fcl": "H", 
+      "fclName": "stream, lake, ...", 
+      "fcode": "LK", 
+      "fcodeName": "lake", 
+      "geonameId": 5996224, 
+      "lat": 46.886178825999998, 
+      "lng": -73.795875115000001, 
+      "name": "Lac Albany", 
+      "population": 0, 
+      "toponymName": "Lac Albany"
+    }
   }, 
   "hpiwowar": {
-    "name": "Heather Piwowar", 
-    "username": "hpiwowar"
+    "Name": "Heather Piwowar"
   }, 
   "iainemsley": {
-    "description": "Developer and occasional literary critic. Currently contributing to the Open Literature list and a member of the Open Humanities Working Group. My main project is opencorrespondence.org", 
-    "location": "UK", 
-    "name": "Iain Emsley", 
-    "twitter": "iainemsley", 
-    "username": "iainemsley", 
-    "website": "www.austgate.co.uk"
+    "Description/ About me": "Developer and occasional literary critic. Currently contributing to the Open Literature list and a member of the Open Humanities Working Group. My main project is opencorrespondence.org", 
+    "Location": "UK", 
+    "Name": "Iain Emsley", 
+    "Twitter": "iainemsley", 
+    "Website": "www.austgate.co.uk", 
+    "geolocation": {
+      "adminCode1": "20", 
+      "adminName1": "Irkutsk", 
+      "countryCode": "RU", 
+      "countryName": "Russia", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 1488616, 
+      "lat": 55.076944400000002, 
+      "lng": 98.853888900000001, 
+      "name": "Uk", 
+      "population": 2342, 
+      "toponymName": "Uk"
+    }
   }, 
   "ianibbo": {
-    "name": "ianibbo", 
-    "username": "ianibbo"
+    "Name": "ianibbo"
   }, 
   "ideas": {
-    "name": "ideas", 
-    "username": "ideas"
+    "Name": "ideas"
   }, 
   "iiajoan": {
-    "description": "I\\\\'m the CEO of the Irish Internet Association and we need to represent our developer community better and support them in their delivering on their christmas wish for data sets and truly open gov.  ", 
-    "location": "Dublin, Ireland", 
-    "name": "Joan Mulvihill", 
-    "twitter": "@joanmulvihill", 
-    "username": "iiajoan", 
-    "website": "www.iia.ie"
+    "Description/ About me": "I\\\\'m the CEO of the Irish Internet Association and we need to represent our developer community better and support them in their delivering on their christmas wish for data sets and truly open gov.  ", 
+    "Location": "Dublin, Ireland", 
+    "Name": "Joan Mulvihill", 
+    "Twitter": "@joanmulvihill", 
+    "Website": "www.iia.ie", 
+    "geolocation": {
+      "adminCode1": "L", 
+      "adminName1": "Leinster", 
+      "countryCode": "IE", 
+      "countryName": "Ireland", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2964574, 
+      "lat": 53.343992882234197, 
+      "lng": -6.2671852111816397, 
+      "name": "Dublin", 
+      "population": 1024027, 
+      "toponymName": "Dublin"
+    }
   }, 
   "ivanko": {
-    "location": "\u041c\u043e\u0441\u043a\u0432\u0430", 
-    "name": "Ivan Kovalenko", 
-    "username": "ivanko"
+    "Location": "\u041c\u043e\u0441\u043a\u0432\u0430", 
+    "Name": "Ivan Kovalenko", 
+    "geolocation": {
+      "adminCode1": "48", 
+      "adminName1": "Moscow", 
+      "countryCode": "RU", 
+      "countryName": "Russia", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 524901, 
+      "lat": 55.752222199999999, 
+      "lng": 37.6155556, 
+      "name": "Moscow", 
+      "population": 10381222, 
+      "toponymName": "Moscow"
+    }
   }, 
   "ivbeg": {
-    "description": "I am founder of OpenGovData.ru ", 
-    "location": "Russia, Moscow", 
-    "name": "Ivan Begtin", 
-    "twitter": "ibegtin", 
-    "username": "ivbeg", 
-    "website": "http://www.opengovdata.ru"
+    "Description/ About me": "I am founder of OpenGovData.ru ", 
+    "Location": "Russia, Moscow", 
+    "Name": "Ivan Begtin", 
+    "Twitter": "ibegtin", 
+    "Website": "http://www.opengovdata.ru", 
+    "geolocation": {
+      "adminCode1": "48", 
+      "adminName1": "Moscow", 
+      "countryCode": "RU", 
+      "countryName": "Russia", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 524901, 
+      "lat": 55.752222199999999, 
+      "lng": 37.6155556, 
+      "name": "Moscow", 
+      "population": 10381222, 
+      "toponymName": "Moscow"
+    }
   }, 
   "iwojcik": {
-    "description": "Einstein University is a free online university/academic social network where students and professors from around the world can share ideas, read each others papers and collaborate on research. You can upload your photo, curriculum vitae and up to four research papers. Instead of charging students tuition the university funds itself through ad revenue and uses volunteer professors. ", 
-    "location": "Los Angeles", 
-    "name": "Isaac Wojcik", 
-    "twitter": "EinsteinU", 
-    "username": "iwojcik", 
-    "website": "www.einstein-university.org"
+    "Description/ About me": "Einstein University is a free online university/academic social network where students and professors from around the world can share ideas, read each others papers and collaborate on research. You can upload your photo, curriculum vitae and up to four research papers. Instead of charging students tuition the university funds itself through ad revenue and uses volunteer professors. ", 
+    "Location": "Los Angeles", 
+    "Name": "Isaac Wojcik", 
+    "Twitter": "EinsteinU", 
+    "Website": "www.einstein-university.org", 
+    "geolocation": {
+      "adminCode1": "CA", 
+      "adminName1": "California", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 5368361, 
+      "lat": 34.052234200000001, 
+      "lng": -118.24368490000001, 
+      "name": "Los Angeles", 
+      "population": 3694820, 
+      "toponymName": "Los Angeles"
+    }
   }, 
   "iwojcik0217c6": {
-    "name": "iwojcik", 
-    "username": "iwojcik0217c6"
+    "Name": "iwojcik"
   }, 
   "jagalaso": {
-    "location": "Spain", 
-    "name": "Jos\u00e9 A. Galaso", 
-    "twitter": "sinoficina", 
-    "username": "jagalaso"
+    "Location": "Spain", 
+    "Name": "Jos\u00e9 A. Galaso", 
+    "Twitter": "sinoficina", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "ES", 
+      "countryName": "Spain", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 2510769, 
+      "lat": 40, 
+      "lng": -4, 
+      "name": "Spain", 
+      "population": 46505963, 
+      "toponymName": "Kingdom of Spain"
+    }
   }, 
   "jalbertbowdenii": {
-    "description": "Standardista, Fronteer, pottymouth, lame.oh, Net Neutrality defender. \n\\\nOpen Source or Die. ", 
-    "location": "USA Virginia Beach", 
-    "name": "J. Albert Bowden II", 
-    "username": "jalbertbowdenii"
+    "Description/ About me": "Standardista, Fronteer, pottymouth, lame.oh, Net Neutrality defender. \n\\\nOpen Source or Die. ", 
+    "Location": "USA Virginia Beach", 
+    "Name": "J. Albert Bowden II", 
+    "geolocation": {
+      "adminCode1": "VA", 
+      "adminName1": "Virginia", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 4791259, 
+      "lat": 36.8529263, 
+      "lng": -75.977985000000004, 
+      "name": "Virginia Beach", 
+      "population": 425257, 
+      "toponymName": "Virginia Beach"
+    }
   }, 
   "janneke": {
-    "name": "janneke", 
-    "username": "janneke"
+    "Name": "janneke"
   }, 
   "jasonkitcat": {
-    "description": "Project Coordinator at the Open Knowledge Foundation.", 
-    "location": "Brighton &amp; Hove", 
-    "name": "Jason Kitcat", 
-    "twitter": "http://twitter.com/jasonkitcat", 
-    "username": "jasonkitcat", 
-    "website": "http://www.jasonkitcat.com"
+    "Description/ About me": "Project Coordinator at the Open Knowledge Foundation.", 
+    "Location": "Brighton &amp; Hove", 
+    "Name": "Jason Kitcat", 
+    "Twitter": "http://twitter.com/jasonkitcat", 
+    "Website": "http://www.jasonkitcat.com"
   }, 
   "jasonkitcat93bc2e": {
-    "name": "jasonkitcat", 
-    "username": "jasonkitcat93bc2e"
+    "Name": "jasonkitcat"
   }, 
   "jaume": {
-    "identica": "jaumetet", 
-    "name": "Jaume Nualart", 
-    "twitter": "jaumetet", 
-    "username": "jaume", 
-    "website": "nualart.cat"
+    "Identica": "jaumetet", 
+    "Name": "Jaume Nualart", 
+    "Twitter": "jaumetet", 
+    "Website": "nualart.cat"
   }, 
   "jaxster": {
-    "name": "Jacqueline Tomlinson", 
-    "username": "jaxster"
+    "Name": "Jacqueline Tomlinson"
   }, 
   "jessogden": {
-    "description": "Digital Specialist in Archaeology, loves to dabble in geophysics, multi-media, prehistory and anything remotely cultural.", 
-    "location": "London, UK", 
-    "name": "jogden", 
-    "username": "jessogden"
+    "Description/ About me": "Digital Specialist in Archaeology, loves to dabble in geophysics, multi-media, prehistory and anything remotely cultural.", 
+    "Location": "London, UK", 
+    "Name": "jogden", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2643743, 
+      "lat": 51.508528775862885, 
+      "lng": -0.12574195861816406, 
+      "name": "London", 
+      "population": 7556900, 
+      "toponymName": "London"
+    }
   }, 
   "jessy.cowansharp": {
-    "name": "jessy.cowansharp", 
-    "username": "jessy.cowansharp"
+    "Name": "jessy.cowansharp"
   }, 
   "jewelleryzw2": {
-    "description": "I love shopping so much,and buy  jewelry!", 
-    "name": "jewelleryzw2", 
-    "username": "jewelleryzw2"
+    "Description/ About me": "I love shopping so much,and buy  jewelry!", 
+    "Name": "jewelleryzw2"
   }, 
   "jimregan": {
-    "location": "Ireland", 
-    "name": "Jim Regan", 
-    "twitter": "jimregan", 
-    "username": "jimregan"
+    "Location": "Ireland", 
+    "Name": "Jim Regan", 
+    "Twitter": "jimregan", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "IE", 
+      "countryName": "Ireland", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 2963597, 
+      "lat": 53, 
+      "lng": -8, 
+      "name": "Ireland", 
+      "population": 4622917, 
+      "toponymName": "Ireland"
+    }
   }, 
   "jindrichmynarz": {
-    "description": "Member of the Czech OpenData.cz initiative, student of New Media at the Charles University in Prague, part-time employed as a librarian at the National Technical Library, and working on deployment of linked data with the Knowledge Engineering Group at the University of Economics, Prague.", 
-    "location": "Czech Republic", 
-    "name": "Jind\u0159ich Mynarz", 
-    "twitter": "http://twitter.com/jindrichmynarz", 
-    "username": "jindrichmynarz"
+    "Description/ About me": "Member of the Czech OpenData.cz initiative, student of New Media at the Charles University in Prague, part-time employed as a librarian at the National Technical Library, and working on deployment of linked data with the Knowledge Engineering Group at the University of Economics, Prague.", 
+    "Location": "Czech Republic", 
+    "Name": "Jind\u0159ich Mynarz", 
+    "Twitter": "http://twitter.com/jindrichmynarz", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "CZ", 
+      "countryName": "Czech Republic", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 3077311, 
+      "lat": 49.75, 
+      "lng": 15, 
+      "name": "Czech Republic", 
+      "population": 10476000, 
+      "toponymName": "Czech Republic"
+    }
   }, 
   "jminfante": {
-    "location": "Spain/Seville", 
-    "name": "Juan M. Infante", 
-    "username": "jminfante"
+    "Location": "Spain/Seville", 
+    "Name": "Juan M. Infante"
   }, 
   "jmmarquez": {
-    "location": "Spain", 
-    "name": "Juan Miguel Marquez Fernandez", 
-    "twitter": "jmmarquez", 
-    "username": "jmmarquez"
+    "Location": "Spain", 
+    "Name": "Juan Miguel Marquez Fernandez", 
+    "Twitter": "jmmarquez", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "ES", 
+      "countryName": "Spain", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 2510769, 
+      "lat": 40, 
+      "lng": -4, 
+      "name": "Spain", 
+      "population": 46505963, 
+      "toponymName": "Kingdom of Spain"
+    }
   }, 
   "jmolloy": {
-    "description": "Co-coordinator of Open Data in Science Group", 
-    "location": "Oxford, UK", 
-    "name": "Jenny Molloy", 
-    "username": "jmolloy"
+    "Description/ About me": "Co-coordinator of Open Data in Science Group", 
+    "Location": "Oxford, UK", 
+    "Name": "Jenny Molloy", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2640729, 
+      "lat": 51.752221002579603, 
+      "lng": -1.25596046447754, 
+      "name": "Oxford", 
+      "population": 154566, 
+      "toponymName": "Oxford"
+    }
   }, 
   "johannes": {
-    "description": "inventor of \\\\\\myNeat\\\\\\\" a handy tool to maintain and share knowledge", 
-    "location": "Berlin", 
-    "name": "Johannes Rasche", 
-    "twitter": "JohannesMarat", 
-    "username": "johannes", 
-    "website": "http://myNeat.org"
+    "Description/ About me": "inventor of \\\\\\myNeat\\\\\\\" a handy tool to maintain and share knowledge", 
+    "Location": "Berlin", 
+    "Name": "Johannes Rasche", 
+    "Twitter": "JohannesMarat", 
+    "Website": "http://myNeat.org", 
+    "geolocation": {
+      "adminCode1": "16", 
+      "adminName1": "Berlin", 
+      "countryCode": "DE", 
+      "countryName": "Germany", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2950159, 
+      "lat": 52.524368165134284, 
+      "lng": 13.410530090332031, 
+      "name": "Berlin", 
+      "population": 3426354, 
+      "toponymName": "Berlin"
+    }
   }, 
   "johannes-hercher": {
-    "name": "Johannes Hercher", 
-    "username": "johannes-hercher"
+    "Name": "Johannes Hercher"
   }, 
   "johnlawrenceaspden": {
-    "location": "Cambridge, UK", 
-    "name": "John Lawrence Aspden", 
-    "username": "johnlawrenceaspden", 
-    "website": "http://www.aspden.com"
+    "Location": "Cambridge, UK", 
+    "Name": "John Lawrence Aspden", 
+    "Website": "http://www.aspden.com", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2653941, 
+      "lat": 52.200000000000003, 
+      "lng": 0.1166667, 
+      "name": "Cambridge", 
+      "population": 128488, 
+      "toponymName": "Cambridge"
+    }
   }, 
   "jojo2011031706": {
-    "name": "jojo chen", 
-    "username": "jojo2011031706"
+    "Name": "jojo chen"
   }, 
   "jordanhatcher": {
-    "name": "jordanhatcher", 
-    "username": "jordanhatcher"
+    "Name": "jordanhatcher"
   }, 
   "joy1709": {
-    "description": "sexy girl.", 
-    "identica": "usa", 
-    "location": "usa", 
-    "name": "qu small fish", 
-    "twitter": "yoyo", 
-    "username": "joy1709", 
-    "website": "http://www.jordanshoes8.com/"
+    "Description/ About me": "sexy girl.", 
+    "Identica": "usa", 
+    "Location": "usa", 
+    "Name": "qu small fish", 
+    "Twitter": "yoyo", 
+    "Website": "http://www.jordanshoes8.com/", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 6252001, 
+      "lat": 39.759999999999998, 
+      "lng": -98.5, 
+      "name": "United States", 
+      "population": 310232863, 
+      "toponymName": "United States"
+    }
   }, 
   "jrgriffiniii": {
-    "name": "jrgriffiniii", 
-    "username": "jrgriffiniii"
+    "Name": "jrgriffiniii"
   }, 
   "jstebe": {
-    "description": "Social science data archives in Slovenia", 
-    "name": "Janez \u0160tebe", 
-    "username": "jstebe"
+    "Description/ About me": "Social science data archives in Slovenia", 
+    "Name": "Janez \u0160tebe"
   }, 
   "juankipe": {
-    "description": "IT manager of Spanish Government", 
-    "location": "Madrid", 
-    "name": "Juanki", 
-    "username": "juankipe"
+    "Description/ About me": "IT manager of Spanish Government", 
+    "Location": "Madrid", 
+    "Name": "Juanki", 
+    "geolocation": {
+      "adminCode1": "29", 
+      "adminName1": "Madrid", 
+      "countryCode": "ES", 
+      "countryName": "Spain", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 3117735, 
+      "lat": 40.416502094150196, 
+      "lng": -3.70256423950195, 
+      "name": "Madrid", 
+      "population": 3255944, 
+      "toponymName": "Madrid"
+    }
   }, 
   "juliantait": {
-    "description": "Involved with Open Data Cities and DataGM", 
-    "location": "gb", 
-    "name": "Julian Tait", 
-    "username": "juliantait"
+    "Description/ About me": "Involved with Open Data Cities and DataGM", 
+    "Location": "gb", 
+    "Name": "Julian Tait", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2633691, 
+      "lat": 52.585466273105169, 
+      "lng": -2.1229617404915948, 
+      "name": "Wolverhampton", 
+      "population": 252791, 
+      "toponymName": "Wolverhampton"
+    }
   }, 
   "jwalsh": {
-    "name": "jwalsh", 
-    "username": "jwalsh"
+    "Name": "jwalsh"
   }, 
   "jwyg": {
-    "description": "Jonathan Gray is Community Coordinator at the Open Knowledge Foundation, which means he spends much of his time talking to people, and encouraging them to talk to each other, and thinking about how the Foundation can continue to support communities of people interested in creating or working with open knowledge in different areas -- from scientists and civil servants to hackers and historians.\n\\\n\n\\\nHe <a href=\\\\\\http://www.showusabetterway.co.uk/call/2008/07/where-does-my-2.html\\\\\\\">founded</a> the <a href=\\\\\\\"http://www.wheredoesmymoneygo.org/\\\\\\\">Where Does My Money Go?</a> project", 
-    "location": "London / Berlin", 
-    "name": "Jonathan Gray", 
-    "username": "jwyg"
+    "Description/ About me": "Jonathan Gray is Community Coordinator at the Open Knowledge Foundation, which means he spends much of his time talking to people, and encouraging them to talk to each other, and thinking about how the Foundation can continue to support communities of people interested in creating or working with open knowledge in different areas -- from scientists and civil servants to hackers and historians.\n\\\n\n\\\nHe <a href=\\\\\\http://www.showusabetterway.co.uk/call/2008/07/where-does-my-2.html\\\\\\\">founded</a> the <a href=\\\\\\\"http://www.wheredoesmymoneygo.org/\\\\\\\">Where Does My Money Go?</a> project", 
+    "Location": "London / Berlin", 
+    "Name": "Jonathan Gray"
   }, 
   "jwygbce307": {
-    "name": "jwygbce307", 
-    "username": "jwygbce307"
+    "Name": "jwygbce307"
   }, 
   "kanen": {
-    "description": "Carbon and energy trading consultant, author and freedom fighter (also of information)", 
-    "location": "Netherlands", 
-    "name": "Joost Kanen", 
-    "username": "kanen"
+    "Description/ About me": "Carbon and energy trading consultant, author and freedom fighter (also of information)", 
+    "Location": "Netherlands", 
+    "Name": "Joost Kanen", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "NL", 
+      "countryName": "Netherlands", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 2750405, 
+      "lat": 52.5, 
+      "lng": 5.75, 
+      "name": "Netherlands", 
+      "population": 16645000, 
+      "toponymName": "Kingdom of the Netherlands"
+    }
   }, 
   "kathryncorrick": {
-    "name": "kathryncorrick", 
-    "username": "kathryncorrick"
+    "Name": "kathryncorrick"
   }, 
   "katiehawks": {
-    "name": "Katie Hawks", 
-    "username": "katiehawks"
+    "Name": "Katie Hawks"
   }, 
   "kevinsmith": {
-    "description": "PhD Researcher, HighWire DTC, Lancaster University", 
-    "location": "GB/ Manchester", 
-    "name": "Kevin Smith", 
-    "username": "kevinsmith"
+    "Description/ About me": "PhD Researcher, HighWire DTC, Lancaster University", 
+    "Location": "GB/ Manchester", 
+    "Name": "Kevin Smith", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2643123, 
+      "lat": 53.480946428361484, 
+      "lng": -2.2374343872070312, 
+      "name": "Manchester", 
+      "population": 395515, 
+      "toponymName": "Manchester"
+    }
   }, 
   "kfasimpaur": {
-    "name": "Karen Fasimpaur", 
-    "twitter": "kfasimpaur", 
-    "username": "kfasimpaur", 
-    "website": "www.k12opened.com/blog"
+    "Name": "Karen Fasimpaur", 
+    "Twitter": "kfasimpaur", 
+    "Website": "www.k12opened.com/blog"
   }, 
   "konrad": {
-    "location": "Germany", 
-    "name": "Konrad F\u00f6rstner", 
-    "username": "konrad"
+    "Location": "Germany", 
+    "Name": "Konrad F\u00f6rstner", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "DE", 
+      "countryName": "Germany", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 2921044, 
+      "lat": 51.5, 
+      "lng": 10.5, 
+      "name": "Germany", 
+      "population": 81802257, 
+      "toponymName": "Federal Republic of Germany"
+    }
   }, 
   "korel": {
-    "name": "Jan Posp\u00ed\u0161il", 
-    "twitter": "@korel_cz", 
-    "username": "korel"
+    "Name": "Jan Posp\u00ed\u0161il", 
+    "Twitter": "@korel_cz"
   }, 
   "kpc": {
-    "name": "KPC", 
-    "username": "kpc"
+    "Name": "KPC"
   }, 
   "ktaylor": {
-    "description": "Communications Manager at GuideStar International, a partner of TechSoup Global. Studying ICT Policy and Internet Governance with the DiploFoundation. Working on research paper about IGOs use of open and linked data for development.", 
-    "location": "London", 
-    "name": "Keisha Taylor", 
-    "username": "ktaylor"
+    "Description/ About me": "Communications Manager at GuideStar International, a partner of TechSoup Global. Studying ICT Policy and Internet Governance with the DiploFoundation. Working on research paper about IGOs use of open and linked data for development.", 
+    "Location": "London", 
+    "Name": "Keisha Taylor", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2643743, 
+      "lat": 51.508528775862885, 
+      "lng": -0.12574195861816406, 
+      "name": "London", 
+      "population": 7556900, 
+      "toponymName": "London"
+    }
   }, 
   "kurzum": {
-    "description": "http://bis.informatik.uni-leipzig.de/SebastianHellmann", 
-    "name": "Sebastian Hellmann", 
-    "username": "kurzum"
+    "Description/ About me": "http://bis.informatik.uni-leipzig.de/SebastianHellmann", 
+    "Name": "Sebastian Hellmann"
   }, 
   "kwoot": {
-    "location": "Culemborg", 
-    "name": "Jeroen Baten", 
-    "username": "kwoot"
+    "Location": "Culemborg", 
+    "Name": "Jeroen Baten", 
+    "geolocation": {
+      "adminCode1": "03", 
+      "adminName1": "Gelderland", 
+      "countryCode": "NL", 
+      "countryName": "Netherlands", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 2757872, 
+      "lat": 51.954999999999998, 
+      "lng": 5.2277779999999998, 
+      "name": "Culemborg", 
+      "population": 26826, 
+      "toponymName": "Culemborg"
+    }
   }, 
   "lisa": {
-    "name": "lisa", 
-    "username": "lisa"
+    "Name": "lisa"
   }, 
   "liveknows2011": {
-    "description": "jtgxvhaogxnejdmqelvgoqiu", 
-    "location": "vfmpbu", 
-    "name": "spojom", 
-    "username": "liveknows2011", 
-    "website": "otgfvp"
+    "Description/ About me": "jtgxvhaogxnejdmqelvgoqiu", 
+    "Location": "vfmpbu", 
+    "Name": "spojom", 
+    "Website": "otgfvp"
   }, 
   "ljbnj89": {
-    "location": "USA", 
-    "name": "Lawrence", 
-    "username": "ljbnj89"
+    "Location": "USA", 
+    "Name": "Lawrence", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 6252001, 
+      "lat": 39.759999999999998, 
+      "lng": -98.5, 
+      "name": "United States", 
+      "population": 310232863, 
+      "toponymName": "United States"
+    }
   }, 
   "lod2": {
-    "name": "lod2", 
-    "username": "lod2"
+    "Name": "lod2"
   }, 
   "lorry": {
-    "description": "I am small and I don\\\\'t eat much...", 
-    "location": "Hobo", 
-    "name": "Michael Lawrie", 
-    "twitter": "lorry", 
-    "username": "lorry", 
-    "website": "http://lawrie.net"
+    "Description/ About me": "I am small and I don\\\\'t eat much...", 
+    "Location": "Hobo", 
+    "Name": "Michael Lawrie", 
+    "Twitter": "lorry", 
+    "Website": "http://lawrie.net", 
+    "geolocation": {
+      "adminCode1": "06", 
+      "adminName1": "East Aimak", 
+      "countryCode": "MN", 
+      "countryName": "Mongolia", 
+      "fcl": "H", 
+      "fclName": "stream, lake, ...", 
+      "fcode": "LK", 
+      "fcodeName": "lake", 
+      "geonameId": 2030730, 
+      "lat": 46.883333299999997, 
+      "lng": 116.2166667, 
+      "name": "Hob\u014d", 
+      "population": 0, 
+      "toponymName": "Hob\u014d"
+    }
   }, 
   "lottie": {
-    "name": "lottie.fenby", 
-    "username": "lottie"
+    "Name": "lottie.fenby"
   }, 
   "luckysemiosis": {
-    "name": "luckysemiosis", 
-    "username": "luckysemiosis"
+    "Name": "luckysemiosis"
   }, 
   "lucychambers": {
-    "description": "Community Coordinator ", 
-    "location": "Cambridge, UK", 
-    "name": "Lucy Chambers", 
-    "username": "lucychambers"
+    "Description/ About me": "Community Coordinator ", 
+    "Location": "Cambridge, UK", 
+    "Name": "Lucy Chambers", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2653941, 
+      "lat": 52.200000000000003, 
+      "lng": 0.1166667, 
+      "name": "Cambridge", 
+      "population": 128488, 
+      "toponymName": "Cambridge"
+    }
   }, 
   "malcolm": {
-    "name": "malcolm", 
-    "username": "malcolm"
+    "Name": "malcolm"
   }, 
   "maliaga": {
-    "location": "CL", 
-    "name": "Marcelo Aliaga", 
-    "username": "maliaga"
+    "Location": "CL", 
+    "Name": "Marcelo Aliaga", 
+    "geolocation": {
+      "adminCode1": "11", 
+      "adminName1": "Maule", 
+      "countryCode": "CL", 
+      "countryName": "Chile", 
+      "fcl": "H", 
+      "fclName": "stream, lake, ...", 
+      "fcode": "LK", 
+      "fcodeName": "lake", 
+      "geonameId": 3869613, 
+      "lat": -34.766666700000002, 
+      "lng": -72.049999999999997, 
+      "name": "Laguna Torca", 
+      "population": 0, 
+      "toponymName": "Laguna Torca"
+    }
   }, 
   "markmacgillivray": {
-    "name": "markmacgillivray", 
-    "username": "markmacgillivray"
+    "Name": "markmacgillivray"
   }, 
   "mary.hutchinson": {
-    "name": "mary.hutchinson", 
-    "username": "mary.hutchinson"
+    "Name": "mary.hutchinson"
   }, 
   "mdaquin": {
-    "name": "mdaquin", 
-    "username": "mdaquin"
+    "Name": "mdaquin"
   }, 
   "metazool": {
-    "description": "OKF Board member, open geodata geek.", 
-    "location": "Edinburgh", 
-    "name": "Jo Walsh", 
-    "username": "metazool"
+    "Description/ About me": "OKF Board member, open geodata geek.", 
+    "Location": "Edinburgh", 
+    "Name": "Jo Walsh", 
+    "geolocation": {
+      "adminCode1": "SCT", 
+      "adminName1": "Scotland", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 2650225, 
+      "lat": 55.952059886493693, 
+      "lng": -3.1964811872790313, 
+      "name": "Edinburgh", 
+      "population": 435791, 
+      "toponymName": "Edinburgh"
+    }
   }, 
   "metazool10b60c": {
-    "name": "metazool10b60c", 
-    "username": "metazool10b60c"
+    "Name": "metazool10b60c"
   }, 
   "mhholloway": {
-    "name": "mhholloway", 
-    "username": "mhholloway"
+    "Name": "mhholloway"
   }, 
   "mickmorrison": {
-    "description": "Archaeologist at Flinders University (Australia) working primarily on Aboriginal history and cultural heritage projects. ", 
-    "location": "Adelaide, Australia", 
-    "name": "Mick Morrison", 
-    "twitter": "@mickmorrison", 
-    "username": "mickmorrison", 
-    "website": "http://mickmorrison.com"
+    "Description/ About me": "Archaeologist at Flinders University (Australia) working primarily on Aboriginal history and cultural heritage projects. ", 
+    "Location": "Adelaide, Australia", 
+    "Name": "Mick Morrison", 
+    "Twitter": "@mickmorrison", 
+    "Website": "http://mickmorrison.com", 
+    "geolocation": {
+      "adminCode1": "05", 
+      "adminName1": "South Australia", 
+      "countryCode": "AU", 
+      "countryName": "Australia", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 2078025, 
+      "lat": -34.933333300000001, 
+      "lng": 138.59999999999999, 
+      "name": "Adelaide", 
+      "population": 1074159, 
+      "toponymName": "Adelaide"
+    }
   }, 
   "mikechelen": {
-    "identica": "MikeChelen", 
-    "location": "Washington, DC", 
-    "name": "Mike Chelen", 
-    "twitter": "MikeChelen", 
-    "username": "mikechelen"
+    "Identica": "MikeChelen", 
+    "Location": "Washington, DC", 
+    "Name": "Mike Chelen", 
+    "Twitter": "MikeChelen", 
+    "geolocation": {
+      "adminCode1": "DC", 
+      "adminName1": "Washington, D.C.", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 4140963, 
+      "lat": 38.895111800000002, 
+      "lng": -77.036365799999999, 
+      "name": "Washington", 
+      "population": 552433, 
+      "toponymName": "Washington, D. C."
+    }
   }, 
   "miljanamaksimovic": {
-    "name": "Miljana Maksimovic", 
-    "username": "miljanamaksimovic"
+    "Name": "Miljana Maksimovic"
   }, 
   "mspratt": {
-    "description": "I am an American and have been working in France as an international information consultant for the past 20 years (plus 10 years of experience in California). I am specialized in environmental, biological and nutritional applications.", 
-    "location": "France", 
-    "name": "Michael Spratt", 
-    "username": "mspratt", 
-    "website": "michael-spratt.com"
+    "Description/ About me": "I am an American and have been working in France as an international information consultant for the past 20 years (plus 10 years of experience in California). I am specialized in environmental, biological and nutritional applications.", 
+    "Location": "France", 
+    "Name": "Michael Spratt", 
+    "Website": "michael-spratt.com", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "FR", 
+      "countryName": "France", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 3017382, 
+      "lat": 46, 
+      "lng": 2, 
+      "name": "France", 
+      "population": 64768389, 
+      "toponymName": "Republic of France"
+    }
   }, 
   "nadoelo": {
-    "name": "nadoelo", 
-    "username": "nadoelo"
+    "Name": "nadoelo"
   }, 
   "napo": {
-    "description": "I work at the FBK Fondazione Bruno Kessler in Trento - the research institute of the Autonomous Province of Trento, Italy, at the research center in information technology.\n\\\nTrentino, through the status of autonomous province, presents himself in the Italian reality, as one of the provinces of most interest to the research and innovation.\n\\\nFBK is among the actors driving this process.\n\\\nIn FBK I deal with issues related to sharing of knowledge (eg Wikipedia), social media, free software and geographic information systems.\n\\\nThe concept of open data is essential in each of these contexts (and beyond).\n\\\nI hope I can contribute by working in the area where I live.\n\\\n\n\\\nFBK http://www.fbk.eu\n\\\nFBK - Information Tecnology Center: http://cit.fbk.eu\n\\\nSoNEt - my working group: http://sonet.fbk.eu\n\\\nMy personal blog: http://de.straba.us\n\\\n", 
-    "location": "Trento, Italy", 
-    "name": "Maurizio Napolitano", 
-    "username": "napo"
+    "Description/ About me": "I work at the FBK Fondazione Bruno Kessler in Trento - the research institute of the Autonomous Province of Trento, Italy, at the research center in information technology.\n\\\nTrentino, through the status of autonomous province, presents himself in the Italian reality, as one of the provinces of most interest to the research and innovation.\n\\\nFBK is among the actors driving this process.\n\\\nIn FBK I deal with issues related to sharing of knowledge (eg Wikipedia), social media, free software and geographic information systems.\n\\\nThe concept of open data is essential in each of these contexts (and beyond).\n\\\nI hope I can contribute by working in the area where I live.\n\\\n\n\\\nFBK http://www.fbk.eu\n\\\nFBK - Information Tecnology Center: http://cit.fbk.eu\n\\\nSoNEt - my working group: http://sonet.fbk.eu\n\\\nMy personal blog: http://de.straba.us\n\\\n", 
+    "Location": "Trento, Italy", 
+    "Name": "Maurizio Napolitano", 
+    "geolocation": {
+      "adminCode1": "17", 
+      "adminName1": "Trentino-Alto Adige", 
+      "countryCode": "IT", 
+      "countryName": "Italy", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 3165243, 
+      "lat": 46.067871401187404, 
+      "lng": 11.1210823059082, 
+      "name": "Trento", 
+      "population": 104946, 
+      "toponymName": "Trento"
+    }
   }, 
   "nickstenning": {
-    "location": "Cambridge, UK", 
-    "name": "Nick Stenning", 
-    "username": "nickstenning"
+    "Location": "Cambridge, UK", 
+    "Name": "Nick Stenning", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2653941, 
+      "lat": 52.200000000000003, 
+      "lng": 0.1166667, 
+      "name": "Cambridge", 
+      "population": 128488, 
+      "toponymName": "Cambridge"
+    }
   }, 
   "nicoleesmith": {
-    "description": "Web Science PhD student at the Univeristy of Southampton, UK. Background in cultural heritage sector.  In particular, eLearning, education, access and interpretation.  Use of emerging technollogies and the web for this sector.  ", 
-    "location": "Southampton, UK", 
-    "name": "Nicole Smith", 
-    "twitter": "nicoleesmith", 
-    "username": "nicoleesmith"
+    "Description/ About me": "Web Science PhD student at the Univeristy of Southampton, UK. Background in cultural heritage sector.  In particular, eLearning, education, access and interpretation.  Use of emerging technollogies and the web for this sector.  ", 
+    "Location": "Southampton, UK", 
+    "Name": "Nicole Smith", 
+    "Twitter": "nicoleesmith", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2637487, 
+      "lat": 50.903946490364341, 
+      "lng": -1.4042820553079378, 
+      "name": "Southampton", 
+      "population": 246201, 
+      "toponymName": "Southampton"
+    }
   }, 
   "nilstoedtmann": {
-    "name": "Nils Toedtmann", 
-    "username": "nilstoedtmann"
+    "Name": "Nils Toedtmann"
   }, 
   "nucleomancer": {
-    "location": "Enschede, Netherlands", 
-    "name": "Frederik Bonte", 
-    "username": "nucleomancer"
+    "Location": "Enschede, Netherlands", 
+    "Name": "Frederik Bonte", 
+    "geolocation": {
+      "adminCode1": "15", 
+      "adminName1": "Overijssel", 
+      "countryCode": "NL", 
+      "countryName": "Netherlands", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 2756071, 
+      "lat": 52.218333000000001, 
+      "lng": 6.8958329999999997, 
+      "name": "Enschede", 
+      "population": 153655, 
+      "toponymName": "Enschede"
+    }
   }, 
   "odaesa": {
-    "location": "Edinburgh", 
-    "name": "Mark MacGillivray", 
-    "username": "odaesa"
+    "Location": "Edinburgh", 
+    "Name": "Mark MacGillivray", 
+    "geolocation": {
+      "adminCode1": "SCT", 
+      "adminName1": "Scotland", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 2650225, 
+      "lat": 55.952059886493693, 
+      "lng": -3.1964811872790313, 
+      "name": "Edinburgh", 
+      "population": 435791, 
+      "toponymName": "Edinburgh"
+    }
   }, 
   "odaesa57143d": {
-    "name": "odaesa", 
-    "username": "odaesa57143d"
+    "Name": "odaesa"
   }, 
   "omega": {
-    "name": "Timothy Kross", 
-    "username": "omega"
+    "Name": "Timothy Kross"
   }, 
   "oovrebo": {
-    "name": "oovrebo", 
-    "username": "oovrebo"
+    "Name": "oovrebo"
   }, 
   "pallih": {
-    "description": "Designer at the Reykjav\u00edk Grapevine", 
-    "location": "Iceland, Reykjav\u00edk", 
-    "name": "P\u00e1ll Hilmarsson", 
-    "twitter": "pallih", 
-    "username": "pallih", 
-    "website": "http://kaninka.net/pallih"
+    "Description/ About me": "Designer at the Reykjav\u00edk Grapevine", 
+    "Location": "Iceland, Reykjav\u00edk", 
+    "Name": "P\u00e1ll Hilmarsson", 
+    "Twitter": "pallih", 
+    "Website": "http://kaninka.net/pallih", 
+    "geolocation": {
+      "adminCode1": "39", 
+      "adminName1": "Capital Region", 
+      "countryCode": "IS", 
+      "countryName": "Iceland", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 3413829, 
+      "lat": 64.135475623693097, 
+      "lng": -21.895408630371101, 
+      "name": "Reykjavik", 
+      "population": 113906, 
+      "toponymName": "Reykjav\u00edk"
+    }
   }, 
   "patricia": {
-    "name": "Patricia", 
-    "username": "patricia"
+    "Name": "Patricia"
   }, 
   "paul-miller": {
-    "name": "paul-miller", 
-    "username": "paul-miller"
+    "Name": "paul-miller"
   }, 
   "pclaro": {
-    "location": "Portugal", 
-    "name": "Pedro Claro", 
-    "username": "pclaro"
+    "Location": "Portugal", 
+    "Name": "Pedro Claro", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "PT", 
+      "countryName": "Portugal", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 2264397, 
+      "lat": 39.5, 
+      "lng": -8, 
+      "name": "Portugal", 
+      "population": 10676000, 
+      "toponymName": "Portuguese Republic"
+    }
   }, 
   "pepej": {
-    "location": "Prague", 
-    "name": "Josef Jerabek", 
-    "twitter": "josefjer", 
-    "username": "pepej", 
-    "website": "http://pepej.com"
+    "Location": "Prague", 
+    "Name": "Josef Jerabek", 
+    "Twitter": "josefjer", 
+    "Website": "http://pepej.com", 
+    "geolocation": {
+      "adminCode1": "52", 
+      "adminName1": "Hlavn\u00ed Mesto Praha", 
+      "countryCode": "CZ", 
+      "countryName": "Czech Republic", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 3067696, 
+      "lat": 50.088042893890901, 
+      "lng": 14.4207572937012, 
+      "name": "Prague", 
+      "population": 1165581, 
+      "toponymName": "Praha"
+    }
   }, 
   "petermr": {
-    "description": "On OKFN Advisory Board. See also http://wwmm.ch.cam.ac.uk/blogs/murrayrust/?p=2785", 
-    "location": "Cambridge", 
-    "name": "Peter Murray-Rust", 
-    "username": "petermr"
+    "Description/ About me": "On OKFN Advisory Board. See also http://wwmm.ch.cam.ac.uk/blogs/murrayrust/?p=2785", 
+    "Location": "Cambridge", 
+    "Name": "Peter Murray-Rust", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2653941, 
+      "lat": 52.200000000000003, 
+      "lng": 0.1166667, 
+      "name": "Cambridge", 
+      "population": 128488, 
+      "toponymName": "Cambridge"
+    }
   }, 
   "plan9plan": {
-    "location": "Greece", 
-    "name": "Antonis", 
-    "username": "plan9plan"
+    "Location": "Greece", 
+    "Name": "Antonis", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "GR", 
+      "countryName": "Greece", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 390903, 
+      "lat": 39, 
+      "lng": 22, 
+      "name": "Greece", 
+      "population": 11000000, 
+      "toponymName": "Hellenic Republic"
+    }
   }, 
   "prbass": {
-    "description": "Freelance researcher working on projects in the voluntary and public sector.", 
-    "location": "London", 
-    "name": "Pete Bass", 
-    "username": "prbass"
+    "Description/ About me": "Freelance researcher working on projects in the voluntary and public sector.", 
+    "Location": "London", 
+    "Name": "Pete Bass", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2643743, 
+      "lat": 51.508528775862885, 
+      "lng": -0.12574195861816406, 
+      "name": "London", 
+      "population": 7556900, 
+      "toponymName": "London"
+    }
   }, 
   "primavera": {
-    "description": "Coordinator of the Public Domain Working Group", 
-    "name": "Primavera De Filippi", 
-    "username": "primavera"
+    "Description/ About me": "Coordinator of the Public Domain Working Group", 
+    "Name": "Primavera De Filippi"
   }, 
   "psychemedia": {
-    "name": "psychemedia", 
-    "username": "psychemedia"
+    "Name": "psychemedia"
   }, 
   "publicdomainreview": {
-    "name": "publicdomainreview", 
-    "username": "publicdomainreview"
+    "Name": "publicdomainreview"
   }, 
   "pudo": {
-    "location": "Berlin", 
-    "name": "Friedrich Lindenberg", 
-    "username": "pudo"
+    "Location": "Berlin", 
+    "Name": "Friedrich Lindenberg", 
+    "geolocation": {
+      "adminCode1": "16", 
+      "adminName1": "Berlin", 
+      "countryCode": "DE", 
+      "countryName": "Germany", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2950159, 
+      "lat": 52.524368165134284, 
+      "lng": 13.410530090332031, 
+      "name": "Berlin", 
+      "population": 3426354, 
+      "toponymName": "Berlin"
+    }
   }, 
   "pudo6f7413": {
-    "name": "pudo", 
-    "username": "pudo6f7413"
+    "Name": "pudo"
   }, 
   "raimondo": {
-    "location": "Torino", 
-    "name": "Raimondo Iemma", 
-    "username": "raimondo"
+    "Location": "Torino", 
+    "Name": "Raimondo Iemma", 
+    "geolocation": {
+      "adminCode1": "12", 
+      "adminName1": "Piedmont", 
+      "countryCode": "IT", 
+      "countryName": "Italy", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 3165524, 
+      "lat": 45.070489849647238, 
+      "lng": 7.6868247985839844, 
+      "name": "Turin", 
+      "population": 865263, 
+      "toponymName": "Torino"
+    }
   }, 
   "reescardo": {
-    "description": "seasoned engineer,  bipolar datadict/intuitive, pretends to belong to the thiird culture.", 
-    "location": "Argentina, live in Buenos Aires", 
-    "name": "Roberto E Escardo", 
-    "username": "reescardo"
+    "Description/ About me": "seasoned engineer,  bipolar datadict/intuitive, pretends to belong to the thiird culture.", 
+    "Location": "Argentina, live in Buenos Aires", 
+    "Name": "Roberto E Escardo"
   }, 
   "regardscitoyens": {
-    "identica": "regardscitoyens", 
-    "location": "France", 
-    "name": "Regards Citoyens", 
-    "twitter": "RegardsCitoyens", 
-    "username": "regardscitoyens", 
-    "website": "http://www.regardscitoyens.org"
+    "Identica": "regardscitoyens", 
+    "Location": "France", 
+    "Name": "Regards Citoyens", 
+    "Twitter": "RegardsCitoyens", 
+    "Website": "http://www.regardscitoyens.org", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "FR", 
+      "countryName": "France", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 3017382, 
+      "lat": 46, 
+      "lng": 2, 
+      "name": "France", 
+      "population": 64768389, 
+      "toponymName": "Republic of France"
+    }
   }, 
   "reszketo": {
-    "description": "Co-Director of the Budapest-based think-thank\n\\\nProfessional interests: political economy, public policy analysis, government efficiency, business environment, freedom of information\n\\\nWork experience: both academia and civil service", 
-    "location": "Budapest, Hungary", 
-    "name": "Petra Edina Reszketo", 
-    "username": "reszketo", 
-    "website": "http://www.budapestinstitute.eu/index.php?page=84&amp;lang=_en&amp;action=SHOW&amp;id=3"
+    "Description/ About me": "Co-Director of the Budapest-based think-thank\n\\\nProfessional interests: political economy, public policy analysis, government efficiency, business environment, freedom of information\n\\\nWork experience: both academia and civil service", 
+    "Location": "Budapest, Hungary", 
+    "Name": "Petra Edina Reszketo", 
+    "Website": "http://www.budapestinstitute.eu/index.php?page=84&amp;lang=_en&amp;action=SHOW&amp;id=3", 
+    "geolocation": {
+      "adminCode1": "05", 
+      "adminName1": "Budapest", 
+      "countryCode": "HU", 
+      "countryName": "Hungary", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 3054643, 
+      "lat": 47.498009989304101, 
+      "lng": 19.0399074554443, 
+      "name": "Budapest", 
+      "population": 1696128, 
+      "toponymName": "Budapest"
+    }
   }, 
   "rgrp": {
-    "description": "Co-founder of the Open Knowledge Foundation and involved with many of its projects.", 
-    "location": "UK", 
-    "name": "Rufus Pollock", 
-    "username": "rgrp"
+    "Description/ About me": "Co-founder of the Open Knowledge Foundation and involved with many of its projects.", 
+    "Location": "Cambridge, UK", 
+    "Name": "Rufus Pollock", 
+    "Twitter": "rufuspollock",
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2653941, 
+      "lat": 52.200000000000003, 
+      "lng": 0.1166667, 
+      "name": "Cambridge", 
+      "population": 128488, 
+      "toponymName": "Cambridge"
+    }
   }, 
   "rgrp717f5c": {
-    "name": "rgrp717f5c", 
-    "username": "rgrp717f5c"
+    "Name": "rgrp717f5c"
   }, 
   "rjw1": {
-    "description": "Technology Evangelist\n\\\nTalis", 
-    "location": "Birmingham, UK", 
-    "name": "Richard Wallis", 
-    "twitter": "RJW", 
-    "username": "rjw1"
+    "Description/ About me": "Technology Evangelist\n\\\nTalis", 
+    "Location": "Birmingham, UK", 
+    "Name": "Richard Wallis", 
+    "Twitter": "RJW", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2655603, 
+      "lat": 52.481421393171019, 
+      "lng": -1.8998291106072789, 
+      "name": "Birmingham", 
+      "population": 984333, 
+      "toponymName": "Birmingham"
+    }
   }, 
   "rnc000": {
-    "description": "Author of http://open.mflask.com/", 
-    "location": "Rio de Janeiro - Brazil", 
-    "name": "Ricardo Niederberger Cabral", 
-    "twitter": "metaflask", 
-    "username": "rnc000", 
-    "website": "http://open.mflask.com/"
+    "Description/ About me": "Author of http://open.mflask.com/", 
+    "Location": "Rio de Janeiro - Brazil", 
+    "Name": "Ricardo Niederberger Cabral", 
+    "Twitter": "metaflask", 
+    "Website": "http://open.mflask.com/", 
+    "geolocation": {
+      "adminCode1": "21", 
+      "adminName1": "Rio de Janeiro", 
+      "countryCode": "BR", 
+      "countryName": "Brazil", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 3451190, 
+      "lat": -22.902777780000001, 
+      "lng": -43.207500000000003, 
+      "name": "Rio de Janeiro", 
+      "population": 6023699, 
+      "toponymName": "Rio de Janeiro"
+    }
   }, 
   "robertm": {
-    "description": "I\\\\'m interested in:\n\\\n- the methodology of ecological and environmental modelling;\n\\\n- the computer-based representation of research knowledge;\n\\\n- moving environmental science into a Web 2.0 world.", 
-    "location": "Edinburgh", 
-    "name": "Robert Muetzelfeldt", 
-    "username": "robertm"
+    "Description/ About me": "I\\\\'m interested in:\n\\\n- the methodology of ecological and environmental modelling;\n\\\n- the computer-based representation of research knowledge;\n\\\n- moving environmental science into a Web 2.0 world.", 
+    "Location": "Edinburgh", 
+    "Name": "Robert Muetzelfeldt", 
+    "geolocation": {
+      "adminCode1": "SCT", 
+      "adminName1": "Scotland", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 2650225, 
+      "lat": 55.952059886493693, 
+      "lng": -3.1964811872790313, 
+      "name": "Edinburgh", 
+      "population": 435791, 
+      "toponymName": "Edinburgh"
+    }
   }, 
   "robmyers": {
-    "description": "Artist, hacker, writer.\n\\\n\n\\\nLet\\\\'s make historical and contemporary data and materials about art and its institutions free so that students and practitioners of art, criticism and curation can find new ways of learning, production and presentation.", 
-    "location": "Peterborough, UK", 
-    "name": "Rob Myers", 
-    "username": "robmyers"
+    "Description/ About me": "Artist, hacker, writer.\n\\\n\n\\\nLet\\\\'s make historical and contemporary data and materials about art and its institutions free so that students and practitioners of art, criticism and curation can find new ways of learning, production and presentation.", 
+    "Location": "Peterborough, UK", 
+    "Name": "Rob Myers", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2640354, 
+      "lat": 52.573639344068795, 
+      "lng": -0.24776506578795077, 
+      "name": "Peterborough", 
+      "population": 140141, 
+      "toponymName": "Peterborough"
+    }
   }, 
   "rufustest": {
-    "name": "Rufus Pollock", 
-    "username": "rufustest"
+    "Name": "Rufus Pollock"
   }, 
   "s73ph4n": {
-    "name": "St\u00e9phan Pissot", 
-    "username": "s73ph4n"
+    "Name": "St\u00e9phan Pissot"
   }, 
   "sadads": {
-    "description": "I am a Wikipedian from the United States interested in developing free culture resources which incorporate the Academic and GLAM (Gallery, Library, Archive, and Museum) communities into their processes. My primary focus has been on GLAM -Wiki and Wikipedia Ambassador programs in the United States and helping the UK chapter figure out how to build an Ambassador program.", 
-    "location": "Washington, DC (Temporarily in Oxford, England)", 
-    "name": "Alex Stinson", 
-    "username": "sadads", 
-    "website": "http://en.wikipedia.org/wiki/User:Sadads"
+    "Description/ About me": "I am a Wikipedian from the United States interested in developing free culture resources which incorporate the Academic and GLAM (Gallery, Library, Archive, and Museum) communities into their processes. My primary focus has been on GLAM -Wiki and Wikipedia Ambassador programs in the United States and helping the UK chapter figure out how to build an Ambassador program.", 
+    "Location": "Washington, DC (Temporarily in Oxford, England)", 
+    "Name": "Alex Stinson", 
+    "Website": "http://en.wikipedia.org/wiki/User:Sadads"
   }, 
   "saibhaskar": {
-    "description": " I am involved in Environment and Development work. Contributing to Climate Change Mitigation, Environmental sustainability, Rural Energy - good stoves biochar, Water resources and Agriculture. Research-Goodstoves and Biochar\n\\\n", 
-    "location": "Hyderabad", 
-    "name": "SAI BHASKAR REDDY NAKKA", 
-    "twitter": "http://twitter.com/#!/saibhaskar", 
-    "username": "saibhaskar", 
-    "website": "http://e-geo.org"
+    "Description/ About me": " I am involved in Environment and Development work. Contributing to Climate Change Mitigation, Environmental sustainability, Rural Energy - good stoves biochar, Water resources and Agriculture. Research-Goodstoves and Biochar\n\\\n", 
+    "Location": "Hyderabad", 
+    "Name": "SAI BHASKAR REDDY NAKKA", 
+    "Twitter": "http://twitter.com/#!/saibhaskar", 
+    "Website": "http://e-geo.org", 
+    "geolocation": {
+      "adminCode1": "02", 
+      "adminName1": "Andhra Pradesh", 
+      "countryCode": "IN", 
+      "countryName": "India", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 1269843, 
+      "lat": 17.375277799999999, 
+      "lng": 78.474444399999996, 
+      "name": "Hyderabad", 
+      "population": 3597816, 
+      "toponymName": "Hyder\u0101b\u0101d"
+    }
   }, 
   "sandage": {
-    "description": "I am a relatively love RPGMMO person, hope to meet more here the same hobbies. (recently in playing world of warcraft)", 
-    "location": "USA", 
-    "name": "Rae Sandage", 
-    "username": "sandage", 
-    "website": "http://www.goldswow.com"
+    "Description/ About me": "I am a relatively love RPGMMO person, hope to meet more here the same hobbies. (recently in playing world of warcraft)", 
+    "Location": "USA", 
+    "Name": "Rae Sandage", 
+    "Website": "http://www.goldswow.com", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 6252001, 
+      "lat": 39.759999999999998, 
+      "lng": -98.5, 
+      "name": "United States", 
+      "population": 310232863, 
+      "toponymName": "United States"
+    }
   }, 
   "sarawingategray": {
-    "name": "sarawingategray", 
-    "username": "sarawingategray"
+    "Name": "sarawingategray"
   }, 
   "saul": {
-    "name": "saul", 
-    "username": "saul"
+    "Name": "saul"
   }, 
   "scottainslie": {
-    "name": "Scott Ainslie", 
-    "username": "scottainslie"
+    "Name": "Scott Ainslie"
   }, 
   "scrollif": {
-    "location": "London", 
-    "name": "Fabrizio Scrollini", 
-    "twitter": "fscrollini", 
-    "username": "scrollif"
+    "Location": "London", 
+    "Name": "Fabrizio Scrollini", 
+    "Twitter": "fscrollini", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2643743, 
+      "lat": 51.508528775862885, 
+      "lng": -0.12574195861816406, 
+      "name": "London", 
+      "population": 7556900, 
+      "toponymName": "London"
+    }
   }, 
   "sebbacon": {
-    "location": "UK", 
-    "name": "Seb Bacon", 
-    "twitter": "sebbacon", 
-    "username": "sebbacon", 
-    "website": "baconconsulting.co.uk"
+    "Location": "UK", 
+    "Name": "Seb Bacon", 
+    "Twitter": "sebbacon", 
+    "Website": "baconconsulting.co.uk", 
+    "geolocation": {
+      "adminCode1": "20", 
+      "adminName1": "Irkutsk", 
+      "countryCode": "RU", 
+      "countryName": "Russia", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 1488616, 
+      "lat": 55.076944400000002, 
+      "lng": 98.853888900000001, 
+      "name": "Uk", 
+      "population": 2342, 
+      "toponymName": "Uk"
+    }
   }, 
   "sergioduretti": {
-    "description": "I\\\\'m the general manager at CSP, a research organization located in Turin (Italy) and involved in a several rresearch projects at regional, national and international level.\n\\\nWe are taking part to an Open Data Interest Group worked for Piedmont Region with CSI Piemonte, Top-ix and Centro Nexa", 
-    "location": "Turin", 
-    "name": "Sergio Duretti", 
-    "username": "sergioduretti", 
-    "website": "www.csp.it"
+    "Description/ About me": "I\\\\'m the general manager at CSP, a research organization located in Turin (Italy) and involved in a several rresearch projects at regional, national and international level.\n\\\nWe are taking part to an Open Data Interest Group worked for Piedmont Region with CSI Piemonte, Top-ix and Centro Nexa", 
+    "Location": "Turin", 
+    "Name": "Sergio Duretti", 
+    "Website": "www.csp.it", 
+    "geolocation": {
+      "adminCode1": "12", 
+      "adminName1": "Piedmont", 
+      "countryCode": "IT", 
+      "countryName": "Italy", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 3165524, 
+      "lat": 45.070489849647238, 
+      "lng": 7.6868247985839844, 
+      "name": "Turin", 
+      "population": 865263, 
+      "toponymName": "Torino"
+    }
   }, 
   "sfield996": {
-    "name": "Sandra Oldfield", 
-    "username": "sfield996"
+    "Name": "Sandra Oldfield"
   }, 
   "shrix": {
-    "name": "Shrix", 
-    "username": "shrix"
+    "Name": "Shrix"
   }, 
   "sigwart": {
-    "description": "Hello, I\u2019m Sigwart. I live in the bosky Northeast Corridor shuttling between brownstones, but grew up chasing tumbleweeds and hornytoads in New Mexico.<a href=\\\\\\http://www.replicachanelbag.com\\\\\\\">chanel handbags</a>  <a href=\\\\\\\"http://www.louisvuittonreplicashop.com\\\\\\\">louis vuitton handbags</a>  <a href=\\\\\\\"http://www.eapparelstore.com/juicy-couture-c-74.html\\\\\\\">juicy couture</a>\"", 
-    "location": "Beijing", 
-    "name": "sigwart alexia", 
-    "username": "sigwart"
+    "Description/ About me": "Hello, I\u2019m Sigwart. I live in the bosky Northeast Corridor shuttling between brownstones, but grew up chasing tumbleweeds and hornytoads in New Mexico.<a href=\\\\\\http://www.replicachanelbag.com\\\\\\\">chanel handbags</a>  <a href=\\\\\\\"http://www.louisvuittonreplicashop.com\\\\\\\">louis vuitton handbags</a>  <a href=\\\\\\\"http://www.eapparelstore.com/juicy-couture-c-74.html\\\\\\\">juicy couture</a>\"", 
+    "Location": "Beijing", 
+    "Name": "sigwart alexia", 
+    "geolocation": {
+      "adminCode1": "22", 
+      "adminName1": "Beijing", 
+      "countryCode": "CN", 
+      "countryName": "China", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 1816670, 
+      "lat": 39.907497741440501, 
+      "lng": 116.397228240967, 
+      "name": "Beijing", 
+      "population": 7480601, 
+      "toponymName": "Beijing"
+    }
   }, 
   "soeren": {
-    "location": "Leipzig, Germany", 
-    "name": "S\u00f6ren Auer", 
-    "username": "soeren", 
-    "website": "http://www.informatik.uni-leipzig.de/~auer/"
+    "Location": "Leipzig, Germany", 
+    "Name": "S\u00f6ren Auer", 
+    "Website": "http://www.informatik.uni-leipzig.de/~auer/", 
+    "geolocation": {
+      "adminCode1": "13", 
+      "adminName1": "Saxony", 
+      "countryCode": "DE", 
+      "countryName": "Germany", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2879139, 
+      "lat": 51.339619999999996, 
+      "lng": 12.371292, 
+      "name": "Leipzig", 
+      "population": 504971, 
+      "toponymName": "Leipzig"
+    }
   }, 
   "steelgraham": {
-    "name": "Graham Steel", 
-    "username": "steelgraham"
+    "Name": "Graham Steel"
   }, 
   "stefanw": {
-    "location": "Berlin, Germany", 
-    "name": "Stefan Wehrmeyer", 
-    "twitter": "@stefanwehrmeyer", 
-    "username": "stefanw", 
-    "website": "http://stefanwehrmeyer.com"
+    "Location": "Berlin, Germany", 
+    "Name": "Stefan Wehrmeyer", 
+    "Twitter": "@stefanwehrmeyer", 
+    "Website": "http://stefanwehrmeyer.com", 
+    "geolocation": {
+      "adminCode1": "16", 
+      "adminName1": "Berlin", 
+      "countryCode": "DE", 
+      "countryName": "Germany", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2950159, 
+      "lat": 52.524368165134284, 
+      "lng": 13.410530090332031, 
+      "name": "Berlin", 
+      "population": 3426354, 
+      "toponymName": "Berlin"
+    }
   }, 
   "stefie": {
-    "location": "Berlin", 
-    "name": "Stefanie Doll", 
-    "username": "stefie"
+    "Location": "Berlin", 
+    "Name": "Stefanie Doll", 
+    "geolocation": {
+      "adminCode1": "16", 
+      "adminName1": "Berlin", 
+      "countryCode": "DE", 
+      "countryName": "Germany", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2950159, 
+      "lat": 52.524368165134284, 
+      "lng": 13.410530090332031, 
+      "name": "Berlin", 
+      "population": 3426354, 
+      "toponymName": "Berlin"
+    }
   }, 
   "steko": {
-    "description": "Archaeologist. Coordinator of Working Group on Open Data in Archaeology. ", 
-    "location": "Italy", 
-    "name": "Stefano Costa", 
-    "username": "steko"
+    "Description/ About me": "Archaeologist. Coordinator of Working Group on Open Data in Archaeology. ", 
+    "Location": "Italy", 
+    "Name": "Stefano Costa", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "IT", 
+      "countryName": "Italy", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 3175395, 
+      "lat": 42.8333333, 
+      "lng": 12.8333333, 
+      "name": "Italy", 
+      "population": 60340328, 
+      "toponymName": "Italian Republic"
+    }
   }, 
   "stephendale": {
-    "description": "A passionate community and collaboration ecologist, creating off-line and on-line environments that foster conversations and engagement. My background as an information and knowledge management professional has enabled me to blend technology solutions with an in-depth understanding of behavioural characteristics that encourage people to self-organize, collaborate and co-create. ", 
-    "location": "UK", 
-    "name": "Stephen Dale", 
-    "username": "stephendale"
+    "Description/ About me": "A passionate community and collaboration ecologist, creating off-line and on-line environments that foster conversations and engagement. My background as an information and knowledge management professional has enabled me to blend technology solutions with an in-depth understanding of behavioural characteristics that encourage people to self-organize, collaborate and co-create. ", 
+    "Location": "UK", 
+    "Name": "Stephen Dale", 
+    "geolocation": {
+      "adminCode1": "20", 
+      "adminName1": "Irkutsk", 
+      "countryCode": "RU", 
+      "countryName": "Russia", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 1488616, 
+      "lat": 55.076944400000002, 
+      "lng": 98.853888900000001, 
+      "name": "Uk", 
+      "population": 2342, 
+      "toponymName": "Uk"
+    }
   }, 
   "stiivi": {
-    "name": "Stefan Urbanek", 
-    "username": "stiivi"
+    "Name": "Stefan Urbanek"
   }, 
   "sun159159": {
-    "name": "sun159159", 
-    "username": "sun159159"
+    "Name": "sun159159"
   }, 
   "svenmw": {
-    "name": "Sven Welters", 
-    "twitter": "svenmw", 
-    "username": "svenmw", 
-    "website": "www.svenwelters.de"
+    "Name": "Sven Welters", 
+    "Twitter": "svenmw", 
+    "Website": "www.svenwelters.de"
   }, 
   "taipovm": {
-    "name": "Marsel Taipov", 
-    "twitter": "mapcuk", 
-    "username": "taipovm", 
-    "website": "mapcuk.ru"
+    "Name": "Marsel Taipov", 
+    "Twitter": "mapcuk", 
+    "Website": "mapcuk.ru"
   }, 
   "tanziro": {
-    "location": "belgium", 
-    "name": "tanzilli rocco", 
-    "username": "tanziro", 
-    "website": "http://tanziro.wordpress.com/"
+    "Location": "belgium", 
+    "Name": "tanzilli rocco", 
+    "Website": "http://tanziro.wordpress.com/", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "BE", 
+      "countryName": "Belgium", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 2802361, 
+      "lat": 50.8333333, 
+      "lng": 4, 
+      "name": "Belgium", 
+      "population": 10403000, 
+      "toponymName": "Kingdom of Belgium"
+    }
   }, 
   "tatiana": {
-    "name": "tatiana", 
-    "username": "tatiana"
+    "Name": "tatiana"
   }, 
   "tatianao": {
-    "identica": "acracia", 
-    "location": "Amsterdam/Netherlands", 
-    "name": "tatianao", 
-    "twitter": "acracia", 
-    "username": "tatianao", 
-    "website": "htto://abbadingo.cryptodrunks.net"
+    "Identica": "acracia", 
+    "Location": "Amsterdam/Netherlands", 
+    "Name": "tatianao", 
+    "Twitter": "acracia", 
+    "Website": "htto://abbadingo.cryptodrunks.net"
   }, 
   "tdempsey": {
-    "location": "Florida (FL)", 
-    "name": "Tom Dempsey", 
-    "twitter": "tomdemp", 
-    "username": "tdempsey", 
-    "website": "www.tomdempsey.com"
+    "Location": "Florida (FL)", 
+    "Name": "Tom Dempsey", 
+    "Twitter": "tomdemp", 
+    "Website": "www.tomdempsey.com", 
+    "geolocation": {
+      "adminCode1": "FL", 
+      "adminName1": "Florida", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "ADM1", 
+      "fcodeName": "first-order administrative division", 
+      "geonameId": 4155751, 
+      "lat": 28.7505408, 
+      "lng": -82.500097600000004, 
+      "name": "Florida", 
+      "population": 17671452, 
+      "toponymName": "Florida"
+    }
   }, 
   "tdmoritz": {
-    "location": "Los Angeles, CA", 
-    "name": "Tom Moritz", 
-    "twitter": "tommoritz", 
-    "username": "tdmoritz", 
-    "website": "http://www.linkedin.com/in/tmoritz "
+    "Location": "Los Angeles, CA", 
+    "Name": "Tom Moritz", 
+    "Twitter": "tommoritz", 
+    "Website": "http://www.linkedin.com/in/tmoritz ", 
+    "geolocation": {
+      "adminCode1": "CA", 
+      "adminName1": "California", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 5368361, 
+      "lat": 34.052234200000001, 
+      "lng": -118.24368490000001, 
+      "name": "Los Angeles", 
+      "population": 3694820, 
+      "toponymName": "Los Angeles"
+    }
   }, 
   "thaiwatchshop": {
-    "description": "\u0e40\u0e2a\u0e37\u0e49\u0e2d\u0e1c\u0e49\u0e32\u0e41\u0e1f\u0e0a\u0e31\u0e48\u0e19 \u0e2a\u0e27\u0e22\u0e46 \u0e07\u0e32\u0e21\u0e46 \u0e40\u0e01\u0e4b\u0e41\u0e25\u0e30\u0e2d\u0e34\u0e19\u0e40\u0e17\u0e23\u0e19\u0e14\u0e4c \u0e41\u0e25\u0e30\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e17\u0e33\u0e01\u0e32\u0e23\u0e42\u0e1b\u0e23\u0e42\u0e21\u0e17\u0e2a\u0e34\u0e19\u0e04\u0e49\u0e32\u0e41\u0e1f\u0e0a\u0e31\u0e48\u0e19", 
-    "location": "Thailand", 
-    "name": "\u0e40\u0e2a\u0e37\u0e49\u0e2d\u0e1c\u0e49\u0e32\u0e41\u0e1f\u0e0a\u0e31\u0e48\u0e19", 
-    "username": "thaiwatchshop"
+    "Description/ About me": "\u0e40\u0e2a\u0e37\u0e49\u0e2d\u0e1c\u0e49\u0e32\u0e41\u0e1f\u0e0a\u0e31\u0e48\u0e19 \u0e2a\u0e27\u0e22\u0e46 \u0e07\u0e32\u0e21\u0e46 \u0e40\u0e01\u0e4b\u0e41\u0e25\u0e30\u0e2d\u0e34\u0e19\u0e40\u0e17\u0e23\u0e19\u0e14\u0e4c \u0e41\u0e25\u0e30\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e17\u0e33\u0e01\u0e32\u0e23\u0e42\u0e1b\u0e23\u0e42\u0e21\u0e17\u0e2a\u0e34\u0e19\u0e04\u0e49\u0e32\u0e41\u0e1f\u0e0a\u0e31\u0e48\u0e19", 
+    "Location": "Thailand", 
+    "Name": "\u0e40\u0e2a\u0e37\u0e49\u0e2d\u0e1c\u0e49\u0e32\u0e41\u0e1f\u0e0a\u0e31\u0e48\u0e19", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "TH", 
+      "countryName": "Thailand", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 1605651, 
+      "lat": 15, 
+      "lng": 100, 
+      "name": "Thailand", 
+      "population": 67089500, 
+      "toponymName": "Kingdom of Thailand"
+    }
   }, 
   "thejimmyg": {
-    "name": "thejimmyg", 
-    "username": "thejimmyg"
+    "Name": "thejimmyg"
   }, 
   "theodora": {
-    "name": "theodora", 
-    "username": "theodora"
+    "Name": "theodora"
   }, 
   "thomas-krichel": {
-    "name": "Thomas Krichel", 
-    "username": "thomas-krichel"
+    "Name": "Thomas Krichel"
   }, 
   "timbizarch": {
-    "description": "Independent Business Architect.  Former Design Lead on UK Location Programme, responsible for the implementation of the UK Location Strategy and EC INSPIRE Directive.\n\\\n\n\\\nwww.linkedin.com/in/timmanning", 
-    "location": "UK", 
-    "name": "Tim Manning", 
-    "username": "timbizarch"
+    "Description/ About me": "Independent Business Architect.  Former Design Lead on UK Location Programme, responsible for the implementation of the UK Location Strategy and EC INSPIRE Directive.\n\\\n\n\\\nwww.linkedin.com/in/timmanning", 
+    "Location": "UK", 
+    "Name": "Tim Manning", 
+    "geolocation": {
+      "adminCode1": "20", 
+      "adminName1": "Irkutsk", 
+      "countryCode": "RU", 
+      "countryName": "Russia", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 1488616, 
+      "lat": 55.076944400000002, 
+      "lng": 98.853888900000001, 
+      "name": "Uk", 
+      "population": 2342, 
+      "toponymName": "Uk"
+    }
   }, 
   "timcowlishaw": {
-    "name": "timcowlishaw", 
-    "username": "timcowlishaw"
+    "Name": "timcowlishaw"
   }, 
   "timdavies": {
-    "description": "See blog.", 
-    "location": "Oxford, UK", 
-    "name": "Tim Davies", 
-    "twitter": "timdavies", 
-    "username": "timdavies", 
-    "website": "http://www.timdavies.org.uk"
+    "Description/ About me": "See blog.", 
+    "Location": "Oxford, UK", 
+    "Name": "Tim Davies", 
+    "Twitter": "timdavies", 
+    "Website": "http://www.timdavies.org.uk", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2640729, 
+      "lat": 51.752221002579603, 
+      "lng": -1.25596046447754, 
+      "name": "Oxford", 
+      "population": 154566, 
+      "toponymName": "Oxford"
+    }
   }, 
   "timjph": {
-    "description": "Custodian of the set of human genes; PI of the Ensembl genome browser; advocate of open research data, open access publications and data federation (e.g. DAS); economic models that better support both sustainable healthcare innovation and access for all", 
-    "location": "Cambridge, UK", 
-    "name": "Tim Hubbard", 
-    "twitter": "timjph", 
-    "username": "timjph", 
-    "website": "http://okfn.org/about/people/#dr-tim-hubbard"
+    "Description/ About me": "Custodian of the set of human genes; PI of the Ensembl genome browser; advocate of open research data, open access publications and data federation (e.g. DAS); economic models that better support both sustainable healthcare innovation and access for all", 
+    "Location": "Cambridge, UK", 
+    "Name": "Tim Hubbard", 
+    "Twitter": "timjph", 
+    "Website": "http://okfn.org/about/people/#dr-tim-hubbard", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2653941, 
+      "lat": 52.200000000000003, 
+      "lng": 0.1166667, 
+      "name": "Cambridge", 
+      "population": 128488, 
+      "toponymName": "Cambridge"
+    }
   }, 
   "timjph1d1d67": {
-    "name": "timjph", 
-    "username": "timjph1d1d67"
+    "Name": "timjph"
   }, 
   "timmcnamara": {
-    "identica": "timclicks", 
-    "location": "Wellington, New Zealand", 
-    "name": "Tim McNamara", 
-    "twitter": "timClicks", 
-    "username": "timmcnamara", 
-    "website": "http://timmcnamara.co.nz"
+    "Identica": "timclicks", 
+    "Location": "Wellington, New Zealand", 
+    "Name": "Tim McNamara", 
+    "Twitter": "timClicks", 
+    "Website": "http://timmcnamara.co.nz", 
+    "geolocation": {
+      "adminCode1": "G2", 
+      "adminName1": "Wellington", 
+      "countryCode": "NZ", 
+      "countryName": "New Zealand", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2179537, 
+      "lat": -41.286642842580697, 
+      "lng": 174.77557182312, 
+      "name": "Wellington", 
+      "population": 381900, 
+      "toponymName": "Wellington"
+    }
   }, 
   "tobeto1987007": {
-    "description": "svroecxdyoka", 
-    "location": "rskesd", 
-    "name": "otsrxw", 
-    "username": "tobeto1987007"
+    "Description/ About me": "svroecxdyoka", 
+    "Location": "rskesd", 
+    "Name": "otsrxw"
   }, 
   "todrobbins": {
-    "description": "MLIS candidate at the University of Washington\\\\'s Information School, lover of dogs and other beautiful things", 
-    "location": "USA", 
-    "name": "Todd Robbins", 
-    "username": "todrobbins"
+    "Description/ About me": "MLIS candidate at the University of Washington\\\\'s Information School, lover of dogs and other beautiful things", 
+    "Location": "USA", 
+    "Name": "Todd Robbins", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 6252001, 
+      "lat": 39.759999999999998, 
+      "lng": -98.5, 
+      "name": "United States", 
+      "population": 310232863, 
+      "toponymName": "United States"
+    }
   }, 
   "tommycat44": {
-    "location": "London", 
-    "name": "chris widgery", 
-    "username": "tommycat44"
+    "Location": "London", 
+    "Name": "chris widgery", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2643743, 
+      "lat": 51.508528775862885, 
+      "lng": -0.12574195861816406, 
+      "name": "London", 
+      "population": 7556900, 
+      "toponymName": "London"
+    }
   }, 
   "valerio": {
-    "name": "valerio", 
-    "username": "valerio"
+    "Name": "valerio"
   }, 
   "vavoida": {
-    "location": "vienna", 
-    "name": "walter palmetshofer", 
-    "username": "vavoida"
+    "Location": "vienna", 
+    "Name": "walter palmetshofer", 
+    "geolocation": {
+      "adminCode1": "09", 
+      "adminName1": "Vienna", 
+      "countryCode": "AT", 
+      "countryName": "Austria", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2761369, 
+      "lat": 48.208487760165298, 
+      "lng": 16.3720750808716, 
+      "name": "Vienna", 
+      "population": 1691468, 
+      "toponymName": "Vienna"
+    }
   }, 
   "webmole": {
-    "location": "Prague", 
-    "name": "David Koznar", 
-    "username": "webmole", 
-    "website": "www.koznar.cz"
+    "Location": "Prague", 
+    "Name": "David Koznar", 
+    "Website": "www.koznar.cz", 
+    "geolocation": {
+      "adminCode1": "52", 
+      "adminName1": "Hlavn\u00ed Mesto Praha", 
+      "countryCode": "CZ", 
+      "countryName": "Czech Republic", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 3067696, 
+      "lat": 50.088042893890901, 
+      "lng": 14.4207572937012, 
+      "name": "Prague", 
+      "population": 1165581, 
+      "toponymName": "Praha"
+    }
   }, 
   "whisky": {
-    "description": "CTO in Youth Synergy Taiwan Foundation", 
-    "location": "Taiwan", 
-    "name": "Weitze CHANG", 
-    "username": "whisky"
+    "Description/ About me": "CTO in Youth Synergy Taiwan Foundation", 
+    "Location": "Taiwan", 
+    "Name": "Weitze CHANG", 
+    "geolocation": {
+      "adminCode1": "00", 
+      "adminName1": "", 
+      "countryCode": "TW", 
+      "countryName": "Taiwan", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "PCLI", 
+      "fcodeName": "independent political entity", 
+      "geonameId": 1668284, 
+      "lat": 24, 
+      "lng": 121, 
+      "name": "Taiwan", 
+      "population": 22894384, 
+      "toponymName": "Taiwan"
+    }
   }, 
   "ww": {
-    "description": "see http://eris.okfn.org/ww", 
-    "location": "Edinburgh", 
-    "name": "ww", 
-    "username": "ww"
+    "Description/ About me": "see http://eris.okfn.org/ww", 
+    "Location": "Edinburgh", 
+    "Name": "ww", 
+    "geolocation": {
+      "adminCode1": "SCT", 
+      "adminName1": "Scotland", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA", 
+      "fcodeName": "seat of a first-order administrative division", 
+      "geonameId": 2650225, 
+      "lat": 55.952059886493693, 
+      "lng": -3.1964811872790313, 
+      "name": "Edinburgh", 
+      "population": 435791, 
+      "toponymName": "Edinburgh"
+    }
   }, 
   "wwitzel3": {
-    "description": "Python developer, consultant", 
-    "location": "Florida, USA", 
-    "name": "Wayne Witzel III", 
-    "twitter": "wwitzel3", 
-    "username": "wwitzel3", 
-    "website": "http://pieceofpy.com"
+    "Description/ About me": "Python developer, consultant", 
+    "Location": "Florida, USA", 
+    "Name": "Wayne Witzel III", 
+    "Twitter": "wwitzel3", 
+    "Website": "http://pieceofpy.com", 
+    "geolocation": {
+      "adminCode1": "FL", 
+      "adminName1": "Florida", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "A", 
+      "fclName": "country, state, region,...", 
+      "fcode": "ADM1", 
+      "fcodeName": "first-order administrative division", 
+      "geonameId": 4155751, 
+      "lat": 28.7505408, 
+      "lng": -82.500097600000004, 
+      "name": "Florida", 
+      "population": 17671452, 
+      "toponymName": "Florida"
+    }
   }, 
   "xfangandxin": {
-    "name": "xfangandxin", 
-    "username": "xfangandxin"
+    "Name": "xfangandxin"
   }, 
   "yedpodtrzitko": {
-    "location": "Prague", 
-    "name": "Jiri Suchan", 
-    "twitter": "yedpodtrzitko", 
-    "username": "yedpodtrzitko", 
-    "website": "http://vanyli.net"
+    "Location": "Prague", 
+    "Name": "Jiri Suchan", 
+    "Twitter": "yedpodtrzitko", 
+    "Website": "http://vanyli.net", 
+    "geolocation": {
+      "adminCode1": "52", 
+      "adminName1": "Hlavn\u00ed Mesto Praha", 
+      "countryCode": "CZ", 
+      "countryName": "Czech Republic", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 3067696, 
+      "lat": 50.088042893890901, 
+      "lng": 14.4207572937012, 
+      "name": "Prague", 
+      "population": 1165581, 
+      "toponymName": "Praha"
+    }
   }, 
   "zhukwang": {
-    "name": "hlelowang", 
-    "username": "zhukwang"
+    "Name": "hlelowang"
   }, 
   "zoemilne": {
-    "description": "Qualified Lawyer and History graduate.  Currently unemployed and bored so looking for interesting projects in these areas!", 
-    "location": "London", 
-    "name": "Zoe Milne", 
-    "username": "zoemilne"
+    "Description/ About me": "Qualified Lawyer and History graduate.  Currently unemployed and bored so looking for interesting projects in these areas!", 
+    "Location": "London", 
+    "Name": "Zoe Milne", 
+    "geolocation": {
+      "adminCode1": "ENG", 
+      "adminName1": "England", 
+      "countryCode": "GB", 
+      "countryName": "United Kingdom", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLC", 
+      "fcodeName": "capital of a political entity", 
+      "geonameId": 2643743, 
+      "lat": 51.508528775862885, 
+      "lng": -0.12574195861816406, 
+      "name": "London", 
+      "population": 7556900, 
+      "toponymName": "London"
+    }
   }, 
   "zoltanvarju": {
-    "description": "I\\\\'m a (computational) linguist/logician combo, working in the field of semantic search. ", 
-    "location": "Hungary, Sziksz\u00f3", 
-    "name": "Zoltan Varju", 
-    "twitter": "@zoltanvarju", 
-    "username": "zoltanvarju", 
-    "website": "http://zolizoli.webs.com/"
+    "Description/ About me": "I\\\\'m a (computational) linguist/logician combo, working in the field of semantic search. ", 
+    "Location": "Hungary, Sziksz\u00f3", 
+    "Name": "Zoltan Varju", 
+    "Twitter": "@zoltanvarju", 
+    "Website": "http://zolizoli.webs.com/", 
+    "geolocation": {
+      "adminCode1": "04", 
+      "adminName1": "Borsod-Aba\u00faj-Zempl\u00e9n", 
+      "countryCode": "HU", 
+      "countryName": "Hungary", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPL", 
+      "fcodeName": "populated place", 
+      "geonameId": 715259, 
+      "lat": 48.200000000000003, 
+      "lng": 20.933333300000001, 
+      "name": "Sziksz\u00f3", 
+      "population": 5963, 
+      "toponymName": "Sziksz\u00f3"
+    }
   }
 }
