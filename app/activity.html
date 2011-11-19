@@ -19,12 +19,12 @@
     <script type="text/javascript" src="js/vendor/flot/0.7/jquery.flot.js"></script>
     <script type="text/javascript">
 $(function() {
-  var url = 'http://webstore.thedatahub.org/markun/dashboarddev/activity/distinct/date_year_month.json?_sort=asc:date_year_month';
+  var url = 'http://webstore.thedatahub.org/okfn/dashboard-dev/activity/distinct/datetime_year_month.json?_sort=asc:datetime_year_month';
   $.getJSON(url, function(data) {
     var d = [];
     $.each(data.data, function(idx, item) {
       var _out = [
-          Date.parse(item.date_year_month)
+          Date.parse(item.datetime_year_month)
         , item._count
       ];
       d.push(_out);
@@ -32,7 +32,13 @@ $(function() {
     var options = {
         xaxis: { mode: "time" }
     };
-    var plot = $.plot($("#placeholder"), [d], options);
+    var plot = $.plot($("#placeholder"), [
+        {
+          data: d,
+          bars: { show: true, barWidth:  15 * 24 * 60 * 60 * 1000, fillColor: '#404040', lineWidth: 0 }
+        }
+      ],
+      options);
   });
 });
     </script>
