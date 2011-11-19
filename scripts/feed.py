@@ -3,17 +3,17 @@ from time import mktime
 from datetime import datetime
 
 import feedparser
-
+from common import make_activity
 
 log = logging.getLogger(__name__)
 
 
-def gather(database, url=None, type='blog'):
-    feed = feedparser.parse(url)
+def gather(database, source, config):
+    feed = feedparser.parse(source.feed_url)
     try:
-        log.info("%s: %s" % (type, feed.feed.title))
+        log.info("%s: %s" % (source.type, feed.feed.title))
     except AttributeError:
-        log.info(url)
+        log.error('Failed to retrieve: %s' % source.feed_url)
     table = database['activity']
     for e in feed.entries:
         try:
@@ -27,19 +27,20 @@ def gather(database, url=None, type='blog'):
             description = e.summary
         except AttributeError: 
             try:
-                description = e.content
+                description = e.content[0].value
             except AttributeError:
                 description = ''
 
         date = datetime.fromtimestamp(mktime(e.updated_parsed))
-        table.writerow({
+        data = {
             'author': author,
             'title': e.title,
             'source_url': e.link,
-            'description': description,
-            'type': type,
-            'datetime': date.isoformat(),
-            'date_year_month_day': date.isoformat()[:10],
-    	    'date_year_month': date.isoformat()[:7],
-            'date_year': date.isoformat()[:4]
-        }, unique_columns=['author', 'title', 'source_url'])
+            'description': description
+        }
+        data = make_activity(data, date, source)
+        table.writerow(
+            data,
+            unique_columns=['author', 'title', 'source_url']
+            )
+

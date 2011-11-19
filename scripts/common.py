@@ -1,21 +1,40 @@
 import ConfigParser
 import os
+import UserDict
 
-from webstore.client import Database
+import webstore.client
 
 
 config_file = os.path.join(
         os.path.dirname(os.path.dirname(__file__)),
         'dashboard.cfg')
 
-config = ConfigParser.SafeConfigParser()
+defaults = {'webstore.port': 80}
+config = ConfigParser.SafeConfigParser(defaults)
 config.read([config_file])
 
-webstore_host = config.get('db', 'webstore.host')
-webstore_user = config.get('db', 'webstore.user')
-webstore_password = config.get('db', 'webstore.password')
-webstore_db = config.get('db', 'webstore.db')
+webstore_url = config.get('db', 'webstore.url')
 
-database = Database(webstore_host, webstore_user, webstore_db,
-       webstore_user, webstore_password)
+database = webstore.client.URL(webstore_url)[0]
+
+def make_activity(indict, date, source):
+    outdict = dict(indict)
+    outdict.update({
+            'source_id': source.id,
+            'channel': source.channel,
+            'project_id': source.project_id,
+            'datetime': date.isoformat(),
+            'datetime_year_month_day': date.isoformat()[:10],
+    	    'datetime_year_month': date.isoformat()[:7],
+            'datetime_year': date.isoformat()[:4]
+        })
+    return outdict
+
+class Source(UserDict.IterableUserDict):
+    '''Readonly source object'''
+    
+    def __init__(self, dict_):
+        UserDict.IterableUserDict.__init__(self, dict_)
+        for key, value in dict_.items():
+            setattr(self, key, value)
 
