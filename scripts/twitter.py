@@ -15,36 +15,36 @@ The tweepy package helps with finding that ID and much more.
 
 import logging
 
+from common import make_activity
 import tweepy
 
 
 log = logging.getLogger(__name__)
 
 
-def gather(database, url=None, type='twitter'):
+def gather(database, source, config):
     # url should be like "http(s)://twitter.com/okfn" or simply "okfn"
-    username = url[url.rfind('/') + 1:]
+    username = source.url[source.url.rfind('/') + 1:]
     user = tweepy.api.get_user(username)
     user_id = user.id
     user_realname = user.name
     statuses = tweepy.api.user_timeline(user_id, count=20)
 
-    log.info("%s: %s" % (type, username))
+    log.info("%s: %s" % (source.type, username))
     
     table = database['activity']
     for s in statuses:
         author = s.author.screen_name
         text = s.text
-        dt = s.created_at.isoformat()
+        dt = s.created_at
         url = "http://twitter.com/#!/%s/statuses/%d" % (username, s.id)
-        table.writerow({
+        data = {
             'author': user_realname,
             'title': text,
             'source_url': url,
-            'description': text,
-            'type': type,
-            'datetime': dt,
-            'date_year_month_day': dt[:10],
-    	    'date_year_month': dt[:7],
-            'date_year': dt[:4]
-        }, unique_columns=['author', 'title', 'source_url'])
+            'description': text
+            }
+        data = make_activity(data, dt, source)
+        table.writerow(data,
+            unique_columns=['author', 'title', 'source_url'])
+
