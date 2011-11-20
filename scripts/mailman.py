@@ -12,22 +12,6 @@ from common import make_activity
 log = logging.getLogger(__name__)
 
 
-def gather_listinfo(database, url=None):
-    fh = urllib2.urlopen(url)
-    data = fh.read().replace('us-ascii', '')
-    fh.close()
-    doc = html.fromstring(data)
-    for link in doc.findall('.//tr//a'):
-        if not 'mailman/listinfo' in link.get('href'):
-            continue
-        url = link.get('href').replace('mailman/listinfo', 
-                                       'pipermail')
-        try:
-            gather_pipermail(database, url=url)
-        except IOError, io:
-            log.exception(io)
-
-
 def gather_pipermail(database, source, config, how_many_months=1):
     '''Gather mailman archives info.
 
