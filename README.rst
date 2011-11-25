@@ -20,6 +20,14 @@ The repository has this layout::
 For Developers
 ==============
 
+Frontend App
+------------
+
+In your browser visit::
+
+  app/index.html
+
+
 Backend and Data Harvesting
 ---------------------------
 
@@ -55,15 +63,14 @@ To see command options do::
 
   python scripts/gather.py -h
 
+The list of people is pulled separately out of the okfn.org buddypress db. A
+csv is extracted and posted online at: http://okfn.org/dashboard/cache/okfn_members.csv
 
-Frontend App
-------------
+You then need to pull it down and have it locally at data/members.csv. Then run::
 
-To test e.g. the members map locally you need to allow the browser access to
-local (json) files. This is fine by default in FF and IE but in Chrome you
-need to pass the following option::
+  python scripts/members.py -h
 
-  --allow-file-access-from-files
+And follow the instructions.
 
 
 TODO
