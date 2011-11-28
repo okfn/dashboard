@@ -10,11 +10,6 @@ Dashboard.Member = Backbone.Model.extend({
   },
 });
 
-// The core collection of members
-Dashboard.members = new (Backbone.Collection.extend({
-  model: Dashboard.Member,
-}))();
-
 // Class: Tabular view for members
 Dashboard.MemberTableView = Backbone.View.extend({
   initialize: function() {
@@ -69,7 +64,6 @@ Dashboard.Util.createMap = function(divName) {
     memberCollection.each(function(member) {
       var geolocation = member.get('geolocation');
       if (geolocation != undefined) {
-        console.log(geolocation);
         point  = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point(
               geolocation.lng,geolocation.lat).transform(
@@ -150,32 +144,94 @@ Dashboard.Util.createMap = function(divName) {
 
 // On document ready, set up the application
 $(function() {
-  // Initialise the map
-  var map = Dashboard.Util.createMap('js-member-map');
+  var config = { 
+    webstore: 'http://webstore.thedatahub.org/okfn/dashboard-dev'
+  };
 
-  // Bind a view to the DOM
-  Dashboard.memberTableView = new Dashboard.MemberTableView({
-    el: $('.js-member-view'),
-    collection: Dashboard.members,
+  var workspace = new Dashboard.Controller.Workspace(config);
   });
 
-  // Generate a dummy member
-  Dashboard.members.add();
 
-  // Pull data from the server and load it into the model
-  var dataUrl = 'members.json';
-  $.getJSON(dataUrl, function(dataset) {
-    for (key in dataset) {
-      var memberData = dataset[key];
-      Dashboard.members.add({
-        key: key,
-        name: memberData.Name, 
-        location: memberData.Location,
-        geolocation: memberData.geolocation,
+Dashboard.Controller = function($) {
+  var my = {};
+
+  my.Workspace = Backbone.Router.extend({
+    routes: {
+      "": "index",
+      "activity/:projectId": "activity"
+    },
+
+    initialize: function(customConfig) {
+      this.config = {
+        webstore: 'http://localhost:5000/'
+      };
+      _.extend(this.config, customConfig);
+      Backbone.history.start()
+    },
+
+    switchView: function(view) {
+      $('.page-view').hide();
+      $('#' + view + '-page').show();
+    },
+
+    index: function(query, page) {
+      // The core collection of members
+      var members = new (Backbone.Collection.extend({
+        model: Dashboard.Member,
+      }))();
+
+      // Initialise the map
+      var map = Dashboard.Util.createMap('js-member-map');
+
+      // Bind a view to the DOM
+      var memberTableView = new Dashboard.MemberTableView({
+        el: $('.js-member-view'),
+        collection: members,
       });
+
+      // Generate a dummy member
+      members.add();
+
+      // Pull data from the server and load it into the model
+      var dataUrl = 'dev.json';
+      $.getJSON(dataUrl, function(dataset) {
+        for (key in dataset) {
+          var memberData = dataset[key];
+          members.add({
+            key: key,
+            name: memberData.Name, 
+            location: memberData.Location,
+            geolocation: memberData.geolocation,
+          });
+        }
+        map.addMembers(members);
+      });
+    },
+
+    activity: function(projectId) {
+      var $leftpane = $('.left-pane');
+      this.$thread = $('<div />').attr('class', '.page-view').attr('id', 'thread-page');
+      $leftpane.append(this.$thread);
+      var thread = new Dashboard.Model.Thread({
+        id: thread.id,
+      });
+      // hacky but best way to boot it i think
+      thread.fetch({
+        success: function() {
+          thread.updateNoteList();
+        }
+      });
+      my.threadView = new Dashboard.View.ThreadView({
+        el: this.$thread,
+        model: thread
+        });
+      my.timemap = new Dashboard.View.TimeMapView({
+        el: $('#timemap'),
+        collection: thread.notes
+      });
+      my.timemap.render();
     }
-    map.addMembers(Dashboard.members);
   });
-});
 
-
+  return my;
+}(jQuery);

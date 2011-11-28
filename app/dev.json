@@ -1,0 +1,64 @@
+{
+  "acka47": {
+    "Location": "Cologne, Germany", 
+    "Name": "Adrian Pohl", 
+    "geolocation": {
+      "adminCode1": "07", 
+      "adminName1": "North Rhine-Westphalia", 
+      "countryCode": "DE", 
+      "countryName": "Germany", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2886242, 
+      "lat": 50.933333300000001, 
+      "lng": 6.9500000000000002, 
+      "name": "Cologne", 
+      "population": 963395, 
+      "toponymName": "K\u00f6ln"
+    }
+  }, 
+  "aculich": {
+    "Location": "San Francisco, CA", 
+    "Name": "Aaron Culich", 
+    "geolocation": {
+      "adminCode1": "CA", 
+      "adminName1": "California", 
+      "countryCode": "US", 
+      "countryName": "United States", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 5391959, 
+      "lat": 37.774929499999999, 
+      "lng": -122.4194155, 
+      "name": "San Francisco", 
+      "population": 732072, 
+      "toponymName": "San Francisco"
+    }
+  }, 
+  "agatalotauro": {
+    "Description/ About me": "R\u00e9sum\u00e9 \n\\\n\n\\\n\tThis  resum\u00e8 is intended to introduce myself and explore your potential need for someone with my unusual blend of qualifications (collaborations).\n\\\n \n\\\n\tBeginning my academic career at the University of Palermo, School of Architecture, I graduated in 1993 (gaining the highest distinction) and was able to gain valuable cultural experience under the Erasmus Exchange Programme 1992-93 (coordinated by Full. Prof. R. La Franca and tutored by Full Prof. N. Teymur and Jhon Archer).  The result of my final theses was published in Progetto di Laurea 1993.\n\\\nAfter moving to England I held several positions with the Simpson Associates Architects and The Pickard Filanson Partnership, BBC Project Office (New Broad casting House, Manchester) under the COMET Programme.  In these positions I had the indispensable advantage of gaining valuable computer experiences, professional skills, and management knowledge. \n\\\n\n\\\n\tBeing employed as Research Assistance by the University of Manchester, School of Architecture and Town Planning (under the MPhil Course), I was able to refine my human relations, leadership and cultural expertise.  Responsible for the International Post Graduate Group, providing supply and academic supports for cultural exchange programme, I was required to utilise all my previous expertise and knowledge. I also attended two Master Courses (II level) at the \u201cScuola Superiore\u201d, Catania University (coordinated by Full Prof. Giarrizzo, Aymard, De Carlo and I. Rizzo). Part of her research was also conducted at the Innovation Relay Centre (http://www.innovationrelay.net/, Catania University) API Industrie and Consorzio Catania Ricerche. I worked for the ESE (European School of Economics - Communication &amp; Media Studies) as a Visual Communication &amp; Computer graphics lecturer (a.a. 2001-2). I participated in several European Research and Educational Programmes providing supply and academic supports for cultural exchange programmes. I attended the Ph.D Course in \u201cGeomatics and Territorial Information Systems\u201d (supervisor and coordinator Full Prof. G. Manzoni, Trieste University) from 2004 to 2007. \n\\\n\n\\\nI successfully completed the Teaching with WebTycho Training Session \\\\\\CTLA201\\\\\\\" - UMUC\\\\'s Center for Teaching and Learning - University of Maryland University College \u2013 Instructor Prof. Deb Hullet", 
+    "Location": "Catania", 
+    "Name": "Agata Lo Tauro", 
+    "Website": "www.miur.it", 
+    "geolocation": {
+      "adminCode1": "15", 
+      "adminName1": "Sicily", 
+      "countryCode": "IT", 
+      "countryName": "Italy", 
+      "fcl": "P", 
+      "fclName": "city, village,...", 
+      "fcode": "PPLA2", 
+      "fcodeName": "seat of a second-order administrative division", 
+      "geonameId": 2525068, 
+      "lat": 37.502133957882101, 
+      "lng": 15.087189674377401, 
+      "name": "Catania", 
+      "population": 313110, 
+      "toponymName": "Catania"
+    }
+  } 
+}
