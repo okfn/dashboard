@@ -11,6 +11,7 @@ import urllib
 import subprocess
 from collections import defaultdict
 
+import common
 from common import database
 from datautil.clitools import _main
 
@@ -60,10 +61,10 @@ def normalize(datadict_):
 def geocode_data():
     '''Geocode the string locations using geonames.'''
     data = json.load(open(MEMBERS_RAW))
-    baseurl = 'http://api.geonames.org/searchJSON?maxRows=1&username=demo&q='
+    baseurl = 'http://api.geonames.org/searchJSON?maxRows=1&user=%s&q=' % common.geocode_username
     for key, value in data.items():
-        if 'Location' in value:
-            loc = value['Location']
+        if 'location' in value:
+            loc = value['location']
             loc = loc.encode('utf8', 'ignore')
             # loc = loc.replace
             _url = baseurl + urllib.quote(loc)
@@ -97,7 +98,6 @@ def upload_to_webstore():
             data['spatial'] = json.dumps(data['spatial'])
         table.writerow(data, unique_columns=['username'])
         print 'Processed: %s (of %s)' % (count, len(out))
-
 
 if __name__ == '__main__':
     _main(locals())

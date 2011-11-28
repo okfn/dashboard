@@ -15,6 +15,8 @@ config.read([config_file])
 
 webstore_url = config.get('db', 'webstore.url')
 
+geocode_username = config.get('geocode', 'geocode.username')
+
 database = webstore.client.URL(webstore_url)[0]
 
 def make_activity(indict, date, source):
