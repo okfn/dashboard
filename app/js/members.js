@@ -158,6 +158,7 @@ Dashboard.Controller = function($) {
   my.Workspace = Backbone.Router.extend({
     routes: {
       "": "index",
+      "activity": "activity",
       "activity/:projectId": "activity"
     },
 
@@ -171,10 +172,13 @@ Dashboard.Controller = function($) {
 
     switchView: function(view) {
       $('.page-view').hide();
-      $('#' + view + '-page').show();
+      $('.page-' + view).show();
+      $('.topbar li').removeClass('active');
+      $('.topbar li[action="'+view+'"]').addClass('active');
     },
 
     index: function(query, page) {
+      this.switchView('index');
       // The core collection of members
       var members = new (Backbone.Collection.extend({
         model: Dashboard.Member,
@@ -209,27 +213,31 @@ Dashboard.Controller = function($) {
     },
 
     activity: function(projectId) {
-      var $leftpane = $('.left-pane');
-      this.$thread = $('<div />').attr('class', '.page-view').attr('id', 'thread-page');
-      $leftpane.append(this.$thread);
-      var thread = new Dashboard.Model.Thread({
-        id: thread.id,
-      });
-      // hacky but best way to boot it i think
-      thread.fetch({
-        success: function() {
-          thread.updateNoteList();
-        }
-      });
-      my.threadView = new Dashboard.View.ThreadView({
-        el: this.$thread,
-        model: thread
+      this.switchView('activity');
+
+      var $el = $('.page-activity');
+
+      var url = 'http://webstore.thedatahub.org/okfn/dashboard-dev/activity/distinct/datetime_year_month.json?_sort=asc:datetime_year_month';
+      $.getJSON(url, function(data) {
+        var d = [];
+        $.each(data.data, function(idx, item) {
+          var _out = [
+              Date.parse(item.datetime_year_month)
+            , item._count
+          ];
+          d.push(_out);
         });
-      my.timemap = new Dashboard.View.TimeMapView({
-        el: $('#timemap'),
-        collection: thread.notes
+        var options = {
+            xaxis: { mode: "time" }
+        };
+        var plot = $.plot($el.find("#placeholder"), [
+            {
+              data: d,
+              bars: { show: true, barWidth:  15 * 24 * 60 * 60 * 1000, fillColor: '#404040', lineWidth: 0 }
+            }
+          ],
+          options);
       });
-      my.timemap.render();
     }
   });
 

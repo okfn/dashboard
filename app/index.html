@@ -31,13 +31,20 @@
 
     <div class="container">
     <div class="content">
-      <h2>Open Knowledge Foundation Member Map</h2>
-      <div class="js-member-view" style="border: 1px solid #999; background: #f7f7f7; padding: 10px; margin: 10px;">
-        <table class="js-member-table">
-        </table>
-        <form action="#" class="js-add-member"><input type="text" class="js-add-member-name"/> <input type="submit" class="js-add-member-submit" /></form>
+      <div class="page-view page-index">
+        <h2>Open Knowledge Foundation Member Map</h2>
+        <div class="js-member-view" style="border: 1px solid #999; background: #f7f7f7; padding: 10px; margin: 10px;">
+          <table class="js-member-table">
+          </table>
+          <form action="#" class="js-add-member"><input type="text" class="js-add-member-name"/> <input type="submit" class="js-add-member-submit" /></form>
+        </div>
+        <div id="js-member-map">
+        </div>
       </div>
-      <div id="js-member-map">
+
+      <div class="page-view page-activity" style="display: none;">
+        <h2>Activity per month</h2>
+        <div id="placeholder" style="width:100%;height:300px;"></div> 
       </div>
 
     </div> <!-- /content -->
@@ -47,10 +54,10 @@
     <div class="topbar">
       <div class="fill">
         <div class="container">
-          <h3><a href="index.html">Dashboard</a></h3>
+          <h3><a href="#">Dashboard</a></h3>
           <ul class="nav">
-            <li class="active"><a href="map.html">Members Map</a></li>
-            <li><a href="activity.html">Activity</a></li>
+            <li action="index"><a href="#">Members Map</a></li>
+            <li action="activity"><a href="#activity">Activity</a></li>
           </ul>
         </div>
       </div>
