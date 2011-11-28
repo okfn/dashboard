@@ -6,16 +6,30 @@ Dashboard.Member = Backbone.Model.extend({
   defaults: {
     'name': 'John Doe',
     'location': 'Nowhere', 
-    'geolocation': {}, 
+    'geolocation': {
+      adminCode1: "07",
+      adminName1: "North Rhine-Westphalia",
+      countryCode: "DE",
+      countryName: "Germany",
+      fcl: "P",
+      fclName: "city, village,...",
+      fcode: "PPLA2",
+      fcodeName: "seat of a second-order administrative division",
+      geonameId: 2886242,
+      lat: 50.9333333,
+      lng: 6.95,
+      name: "Cologne",
+      population: 963395,
+      toponymName: "Köln"
+    }
   },
 });
 
 // Class: Tabular view for members
 Dashboard.MemberTableView = Backbone.View.extend({
   initialize: function() {
-    if (this.collection.length>0) 
-      throw "Must be initted with an empty collection.";
-    this.collection.bind('add', this.render, this);
+    this.collection.bind('all', this.render, this);
+    this.render();
   },
   events: {
     'submit .js-add-member': 'addMember',
@@ -45,29 +59,60 @@ Dashboard.MemberTableView = Backbone.View.extend({
 
 
 // Utility function to create a map
-Dashboard.Util.createMap = function(divName) {
-  var my= {};
-  var iconokfn = new OpenLayers.StyleMap({
-      'pointRadius': 10,
-      'externalGraphic': "img/okfn16.png"
-  });
-  var vectorAttributes = {styleMap:iconokfn,strategies: [new OpenLayers.Strategy.Cluster()]};
-  
-  // Create my attributes
-  my.map = new OpenLayers.Map(divName);
-  my.map.addLayer(new OpenLayers.Layer.OSM());
-  my.vectors = new OpenLayers.Layer.Vector("Members",vectorAttributes);
+Dashboard.MemberMapView = Backbone.View.extend({
+  initialize: function() {
+    _.bindAll(this,'onPopupClose');
+    this.collection.bind('all', this.renderMembers, this);
 
-  // Function: Add a member point to the map
-  my.addMembers = function(memberCollection) {
+    // Mapping attributes
+    var vectorAttributes = {
+      styleMap: new OpenLayers.StyleMap({
+        'pointRadius': 10,
+        'externalGraphic': "img/okfn16.png"
+      }),
+      strategies: [new OpenLayers.Strategy.Cluster()]
+    };
+    // Create the map
+    this.map = new OpenLayers.Map(this.options.divName);
+    this.map.addLayer(new OpenLayers.Layer.OSM());
+    this.vectors = new OpenLayers.Layer.Vector("Members",vectorAttributes);
+
+    this.map.addLayers([this.vectors]);
+    this.selectControl = new OpenLayers.Control.SelectFeature(
+      [this.vectors],
+      {clickout: true, 
+       toggle: false, 
+       multiple: false, 
+       hover: false 
+      }
+    );
+    this.map.addControl(this.selectControl);
+    this.selectControl.activate();
+    var context = this;
+    this.vectors.events.on({
+        "featureselected": function(e) {
+          context.onFeatureSelect(e.feature);
+        },
+        "featureunselected": function(e) {
+          context.onFeatureUnselect(e.feature);
+        }
+    });
+
+    var cp = new OpenLayers.Geometry.Point(0,0).transform(new OpenLayers.Projection("EPSG:4326")); 
+    this.map.setCenter(cp,2);
+  },
+
+  // Function: Add member points to the map
+  renderMembers: function() {
+    var context = this;
     var pointList = [];
-    memberCollection.each(function(member) {
+    this.collection.each(function(member) {
       var geolocation = member.get('geolocation');
       if (geolocation != undefined) {
-        point  = new OpenLayers.Feature.Vector(
+        var point  = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point(
               geolocation.lng,geolocation.lat).transform(
-                new OpenLayers.Projection("EPSG:4326"),my.map.getProjectionObject()));
+                new OpenLayers.Projection("EPSG:4326"),context.map.getProjectionObject()));
         point.attributes = {
           userid: member.get('key'),
           name: member.get('name'),
@@ -76,15 +121,15 @@ Dashboard.Util.createMap = function(divName) {
         pointList.push(point);
       }
     });
-    my.vectors.addFeatures(pointList);
-  }
+    this.vectors.removeAllFeatures();
+    this.vectors.addFeatures(pointList);
+  },
 
+  onPopupClose: function(evt) {
+    this.selectControl.unselect(selectedFeature);
+  },
 
-  function onPopupClose(evt) {
-    selectControl.unselect(selectedFeature);
-  }
-
-  function onFeatureSelect(feature){
+  onFeatureSelect: function(feature) {
     selectedFeature = feature;
     var desc = "<html><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><body>";
     if (feature.cluster.length > 1) {
@@ -92,10 +137,10 @@ Dashboard.Util.createMap = function(divName) {
     }
     for (var i=0; i < feature.cluster.length; ++i){
       var userlink = 'http://okfn.org/members/' + feature.cluster[i].attributes.userid; 
-        desc += '<div style="width:240px;">';
-      desc += '<img src="img/okfnlogo.png" align="left"/><a target="_blank" href="' + userlink + '">' + feature.cluster[i].attributes.name + '</a>';
-      desc += '<br/>' + feature.cluster[i].attributes.location;
-      desc += '</div>';
+        desc += '<div style="width:240px;" class"popup-content">';
+        desc += '<img src="img/okfnlogo.png" align="left" class="popup-image"/><a target="_blank" href="' + userlink + '">' + feature.cluster[i].attributes.name + '</a>';
+        desc += '<br/>' + feature.cluster[i].attributes.location;
+        desc += '</div>';
     }
     if (feature.cluster.length > 1) {
       desc += "<br/><em>tip: increase the zoom level</em>";
@@ -107,50 +152,18 @@ Dashboard.Util.createMap = function(divName) {
         desc,
         null,
         true,
-        onPopupClose); 
+        this.onPopupClose); 
 
     feature.popup = popup;
-    my.map.addPopup(popup);
-  }
+    this.map.addPopup(popup);
+  },
 
-  function onFeatureUnselect(feature) {
-    my.map.removePopup(feature.popup);
+  onFeatureUnselect: function(feature) {
+    this.map.removePopup(feature.popup);
     feature.popup.destroy();
     feature.popup = null;
   }
-
-  my.map.addLayers([my.vectors]);
-  selectControl = new OpenLayers.Control.SelectFeature(
-  [my.vectors],{clickout: true, toggle: false, 
-        multiple: false, hover: false }
-  );
-  my.map.addControl(selectControl);
-  selectControl.activate();
-  my.vectors.events.on({
-      "featureselected": function(e) {
-        onFeatureSelect(e.feature);
-      },
-      "featureunselected": function(e) {
-        onFeatureUnselect(e.feature);
-      }
-  });
-
-  cp = new OpenLayers.Geometry.Point(0,0).transform(new OpenLayers.Projection("EPSG:4326")); 
-  my.map.setCenter(cp,2);
-
-  return my;
-};
-
-
-// On document ready, set up the application
-$(function() {
-  var config = { 
-    webstore: 'http://webstore.thedatahub.org/okfn/dashboard-dev'
-  };
-
-  var workspace = new Dashboard.Controller.Workspace(config);
-  });
-
+});
 
 Dashboard.Controller = function($) {
   var my = {};
@@ -179,37 +192,13 @@ Dashboard.Controller = function($) {
 
     index: function(query, page) {
       this.switchView('index');
-      // The core collection of members
-      var members = new (Backbone.Collection.extend({
-        model: Dashboard.Member,
-      }))();
-
-      // Initialise the map
-      var map = Dashboard.Util.createMap('js-member-map');
 
       // Bind a view to the DOM
       var memberTableView = new Dashboard.MemberTableView({
         el: $('.js-member-view'),
-        collection: members,
+        collection: Dashboard.members,
       });
 
-      // Generate a dummy member
-      members.add();
-
-      // Pull data from the server and load it into the model
-      var dataUrl = 'dev.json';
-      $.getJSON(dataUrl, function(dataset) {
-        for (key in dataset) {
-          var memberData = dataset[key];
-          members.add({
-            key: key,
-            name: memberData.Name, 
-            location: memberData.Location,
-            geolocation: memberData.geolocation,
-          });
-        }
-        map.addMembers(members);
-      });
     },
 
     activity: function(projectId) {
@@ -243,3 +232,46 @@ Dashboard.Controller = function($) {
 
   return my;
 }(jQuery);
+
+
+// On document ready, set up the application
+$(function() {
+  var config = { 
+    webstore: 'http://webstore.thedatahub.org/okfn/dashboard-dev'
+  };
+
+  // The core collection of members
+  Dashboard.members = new (Backbone.Collection.extend({
+    model: Dashboard.Member,
+  }))();
+  // Generate a dummy member
+  var members = Dashboard.members;
+
+  // Pull data from the server and load it into the model
+  var dataUrl = 'dev.json';
+  $.getJSON(dataUrl, function(dataset) {
+    for (key in dataset) {
+      var memberData = dataset[key];
+      members.add({
+        key: key,
+        name: memberData.Name, 
+        location: memberData.Location,
+        geolocation: memberData.geolocation,
+      });
+    }
+  });
+
+  $('.js-debug-map').click(function(e) {
+    members.add();
+  });
+
+  // Create singleton OpenLayers map
+  Dashboard.memberView = new Dashboard.MemberMapView({
+    collection: Dashboard.members,
+    divName: 'js-member-map'
+  });
+
+  var workspace = new Dashboard.Controller.Workspace(config);
+});
+
+
