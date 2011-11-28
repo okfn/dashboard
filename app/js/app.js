@@ -35,6 +35,7 @@ Dashboard.MemberTableView = Backbone.View.extend({
     'submit .js-add-member': 'addMember',
   },
   addMember: function(event) {
+    console.log('added member');
     var inputBox = this.$('.js-add-member-name');
     var name = inputBox.val();
     inputBox.val('');
@@ -104,6 +105,7 @@ Dashboard.MemberMapView = Backbone.View.extend({
 
   // Function: Add member points to the map
   renderMembers: function() {
+    console.log('renderMembers');
     var context = this;
     var pointList = [];
     this.collection.each(function(member) {
@@ -248,17 +250,21 @@ $(function() {
   var members = Dashboard.members;
 
   // Pull data from the server and load it into the model
-  var dataUrl = 'dev.json';
+  var dataUrl = '../cache/members.geo.json';
   $.getJSON(dataUrl, function(dataset) {
+    var arr=[];
     for (key in dataset) {
       var memberData = dataset[key];
-      members.add({
+      arr.push(new Dashboard.Member({
         key: key,
-        name: memberData.Name, 
-        location: memberData.Location,
-        geolocation: memberData.geolocation,
-      });
+        name: memberData.name, 
+        location: memberData.location,
+        geolocation: memberData.spatial
+      }));
     }
+    // Add them all at once, then trigger an update event
+    members.add(arr, {silent: true});
+    members.trigger('add');
   });
 
   $('.js-debug-map').click(function(e) {
