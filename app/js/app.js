@@ -74,7 +74,7 @@ Dashboard.MemberMapView = Backbone.View.extend({
       strategies: [new OpenLayers.Strategy.Cluster()]
     };
     // Create the map
-    this.map = new OpenLayers.Map(this.options.divName);
+    this.map = new OpenLayers.Map(this.options.divName, {theme: null});
     this.map.addLayer(new OpenLayers.Layer.OSM());
     this.vectors = new OpenLayers.Layer.Vector("Members",vectorAttributes);
 
