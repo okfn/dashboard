@@ -27,6 +27,12 @@ In your browser visit::
 
   app/index.html
 
+Frontend App Tests
+------------------
+
+In your browser visit::
+
+  app/test/index.html
 
 Backend and Data Harvesting
 ---------------------------
