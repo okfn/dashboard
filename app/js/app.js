@@ -22,7 +22,7 @@ Dashboard.Member = Backbone.Model.extend({
       population: 963395,
       toponymName: "Köln"
     }
-  },
+  }
 });
 
 // Class: Tabular view for members
@@ -32,7 +32,7 @@ Dashboard.MemberTableView = Backbone.View.extend({
     this.render();
   },
   events: {
-    'submit .js-add-member': 'addMember',
+    'submit .js-add-member': 'addMember'
   },
   addMember: function(event) {
     console.log('added member');
@@ -45,8 +45,12 @@ Dashboard.MemberTableView = Backbone.View.extend({
   render: function() {
     var table = $(this.el).find('.js-member-table');
     var template = $('tr.js-template-member');
-    if (table.length==0) throw "Can't find view";
-    if (template.length==0) throw "Can't find template";
+    if (table.length === 0) {
+      throw "Can't find view";
+    }
+    if (template.length === 0) {
+      throw "Can't find template";
+    }
     
     // Reflow the table rows
     table.find('tr').remove();
@@ -110,7 +114,7 @@ Dashboard.MemberMapView = Backbone.View.extend({
     var pointList = [];
     this.collection.each(function(member) {
       var geolocation = member.get('geolocation');
-      if (geolocation != undefined) {
+      if (geolocation) {
         var point  = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point(
               geolocation.lng,geolocation.lat).transform(
@@ -118,7 +122,7 @@ Dashboard.MemberMapView = Backbone.View.extend({
         point.attributes = {
           userid: member.get('key'),
           name: member.get('name'),
-          location: member.get('location'),
+          location: member.get('location')
         };
         pointList.push(point);
       }
@@ -182,7 +186,7 @@ Dashboard.Controller = function($) {
         webstore: 'http://localhost:5000/'
       };
       _.extend(this.config, customConfig);
-      Backbone.history.start()
+      Backbone.history.start();
     },
 
     switchView: function(view) {
@@ -198,7 +202,7 @@ Dashboard.Controller = function($) {
       // Bind a view to the DOM
       var memberTableView = new Dashboard.MemberTableView({
         el: $('.js-member-view'),
-        collection: Dashboard.members,
+        collection: Dashboard.members
       });
 
     },
@@ -213,8 +217,8 @@ Dashboard.Controller = function($) {
         var d = [];
         $.each(data.data, function(idx, item) {
           var _out = [
-              Date.parse(item.datetime_year_month)
-            , item._count
+              Date.parse(item.datetime_year_month),
+              item._count
           ];
           d.push(_out);
         });
@@ -244,7 +248,7 @@ $(function() {
 
   // The core collection of members
   Dashboard.members = new (Backbone.Collection.extend({
-    model: Dashboard.Member,
+    model: Dashboard.Member
   }))();
   // Generate a dummy member
   var members = Dashboard.members;
@@ -253,14 +257,16 @@ $(function() {
   var dataUrl = '../cache/members.geo.json';
   $.getJSON(dataUrl, function(dataset) {
     var arr=[];
-    for (key in dataset) {
-      var memberData = dataset[key];
-      arr.push(new Dashboard.Member({
-        key: key,
-        name: memberData.name, 
-        location: memberData.location,
-        geolocation: memberData.spatial
-      }));
+    for (var key in dataset) {
+      if (dataset.hasOwnProperty(key)) {
+        var memberData = dataset[key];
+        arr.push(new Dashboard.Member({
+          key: key,
+          name: memberData.name,
+          location: memberData.location,
+          geolocation: memberData.spatial
+        }));
+      }
     }
     // Add them all at once, then trigger an update event
     members.add(arr, {silent: true});
