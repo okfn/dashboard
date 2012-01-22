@@ -12,6 +12,7 @@ The repository has this layout::
        `-- js: JavaScript files, often exported by scripts
        `-- css: style sheets
        `-- img: image files
+       `-- test: js tests
      `-- scripts: scripts to extract data from various sources
      `-- cache: cache directory for data during processing
      `-- data: houses permanent stored (bulk) data
