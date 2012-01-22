@@ -114,7 +114,7 @@ Dashboard.MemberMapView = Backbone.View.extend({
     var pointList = [];
     this.collection.each(function(member) {
       var geolocation = member.get('geolocation');
-      if (geolocation !== undefined) {
+      if (geolocation) {
         var point  = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point(
               geolocation.lng,geolocation.lat).transform(
