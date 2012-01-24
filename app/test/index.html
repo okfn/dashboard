@@ -36,6 +36,20 @@
   jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
   jasmine.getEnv().execute();
 </script>
+
 <div id='map'/>
+
+<!-- The test page currently loads app.js, which starts up the entire js
+     application. We should not do that. Instead, the test page should
+     load specific scripts that include the objects (models, views, etc.)
+     under test. So until app.js is broken into multiple files we need
+     the following HTML markup for the app to load without errors. -->
+<div class="js-member-view">
+  <table class="js-member-table"></table>
+</div>
+<table style="display: none;">
+  <tr class="js-template-member"></tr>
+</table>
+
 </body>
 </html>
