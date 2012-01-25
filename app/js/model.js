@@ -27,3 +27,27 @@ Dashboard.Member = Backbone.Model.extend({
     }
   }
 });
+
+Dashboard.MemberCollection = Backbone.Collection.extend({
+    model: Dashboard.Member,
+
+    /**
+     * parse creates member specifications from the JSON server
+     * response.
+     */
+    parse: function(data) {
+        var members = [], key, m;
+        for(key in data) {
+            if (data.hasOwnProperty(key)) {
+                m = data[key];
+                members.push({
+                    key: key,
+                    name: m.name,
+                    location: m.location,
+                    geolocation: m.spatial
+                });
+            }
+        }
+        return members;
+    }
+});
