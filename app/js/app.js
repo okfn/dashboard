@@ -12,7 +12,8 @@ Dashboard.Controller = function($) {
       "activity/:projectId": "activity"
     },
 
-    initialize: function(customConfig) {
+    initialize: function(members, customConfig) {
+      this.members = members;
       this.config = {
         webstore: 'http://localhost:5000/'
       };
@@ -33,7 +34,7 @@ Dashboard.Controller = function($) {
       // Bind a view to the DOM
       var memberTableView = new Dashboard.MemberTableView({
         el: $('.js-member-view'),
-        collection: Dashboard.members
+        collection: this.members
       });
 
     },
@@ -77,32 +78,9 @@ $(function() {
     webstore: 'http://webstore.thedatahub.org/okfn/dashboard-dev'
   };
 
-  // The core collection of members
-  Dashboard.members = new (Backbone.Collection.extend({
-    model: Dashboard.Member
-  }))();
-  // Generate a dummy member
-  var members = Dashboard.members;
-
-  // Pull data from the server and load it into the model
-  var dataUrl = '../cache/members.geo.json';
-  $.getJSON(dataUrl, function(dataset) {
-    var arr=[];
-    for (var key in dataset) {
-      if (dataset.hasOwnProperty(key)) {
-        var memberData = dataset[key];
-        arr.push(new Dashboard.Member({
-          key: key,
-          name: memberData.name,
-          location: memberData.location,
-          geolocation: memberData.spatial
-        }));
-      }
-    }
-    // Add them all at once, then trigger an update event
-    members.add(arr, {silent: true});
-    members.trigger('add');
-  });
+  var members = new Dashboard.MemberCollection();
+  members.url = '../cache/members.geo.json';
+  members.fetch();
 
   $('.js-debug-map').click(function(e) {
     members.add();
@@ -110,11 +88,11 @@ $(function() {
 
   // Create singleton OpenLayers map
   Dashboard.memberView = new Dashboard.MemberMapView({
-    collection: Dashboard.members,
+    collection: members,
     divName: 'js-member-map'
   });
 
-  var workspace = new Dashboard.Controller.Workspace(config);
+  var workspace = new Dashboard.Controller.Workspace(members, config);
 });
 
 
