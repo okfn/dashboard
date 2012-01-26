@@ -1,6 +1,4 @@
 var Dashboard = Dashboard || {};
-Dashboard.Util = Dashboard.Util || {};
-
 
 Dashboard.Controller = function($) {
   var my = {};
