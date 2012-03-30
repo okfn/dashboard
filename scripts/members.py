@@ -12,7 +12,6 @@ import subprocess
 from collections import defaultdict
 
 import common
-from common import database
 from datautil.clitools import _main
 
 CSV_SOURCE = 'data/members.csv'
@@ -37,13 +36,14 @@ def convert_from_csv_to_json(csv_location=CSV_SOURCE,
                 continue
             out[key][row[1]] = row[2]
         except:
-            print row
+            print('Error: %s' % row)
     for username in out:
         out[username]['username'] = username
+        out[username]['id'] = username
     for username in out:
         out[username] = normalize(out[username])
     outfo = open(output_file, 'w')
-    json.dump(out, outfo, indent=2, sort_keys=True)
+    json.dump(out.values(), outfo, indent=2, sort_keys=True)
 
 
 def normalize(datadict_):
@@ -60,9 +60,12 @@ def normalize(datadict_):
 
 def geocode_data():
     '''Geocode the string locations using geonames.'''
+    report_file = MEMBERS_GEO + '.report.json'
+    report = []
     data = json.load(open(MEMBERS_RAW))
-    baseurl = 'http://api.geonames.org/searchJSON?maxRows=1&user=%s&q=' % common.geocode_username
-    for key, value in data.items():
+    geocode_username = common.config.get('geocode', 'username')
+    baseurl = 'http://api.geonames.org/searchJSON?maxRows=1&username=%s&q=' % geocode_username
+    for value in data:
         if 'location' in value:
             loc = value['location']
             loc = loc.encode('utf8', 'ignore')
@@ -72,32 +75,20 @@ def geocode_data():
             res = fo.read()
             res = json.loads(res)
             if res['geonames']:
-                data[key]['spatial'] = res['geonames'][0]
-                print 'Matched ok: %s to %s' % (loc,
+                value['spatial'] = res['geonames'][0]
+                msg = 'Matched ok: %s to %s' % (loc,
                         res['geonames'][0]['name'].encode('utf8', 'ignore'))
+                status = 'ok'
             else:
-                print 'Failed to match: %s' % loc
+                status = 'error'
+                msg = 'Failed to match: %s' % loc
+            report.append([value['id'], status, msg])
+            print msg
             time.sleep(0.5) 
     fileobj = open(MEMBERS_GEO, 'w')
     json.dump(data, fileobj, indent=2, sort_keys=True)
+    json.dump(report, open(report_file), indent=2, sort_keys=True)
 
-
-def upload_to_webstore():
-    table = database['person']
-    fileobj = open(MEMBERS_GEO)
-    out = json.load(fileobj)
-    count = 0
-    for username, info in out.items():
-        count += 1
-        data = dict(info)
-        data['username'] = username
-        data = normalize(data)
-        if 'spatial' in data:
-            # have to dump to a string due to
-            # https://github.com/okfn/webstore/issues/25
-            data['spatial'] = json.dumps(data['spatial'])
-        table.writerow(data, unique_columns=['username'])
-        print 'Processed: %s (of %s)' % (count, len(out))
 
 if __name__ == '__main__':
     _main(locals())
