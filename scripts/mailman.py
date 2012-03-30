@@ -12,7 +12,13 @@ from common import make_activity
 log = logging.getLogger(__name__)
 
 
-def gather_pipermail(database, source, config, how_many_months=1):
+def gather(database, source, alldata=False):
+    if alldata:
+        gather_pipermail(database, source, how_many_months=0)
+    else:
+        gather_pipermail(database, source, how_many_months=1)
+
+def gather_pipermail(database, source, how_many_months=1):
     '''Gather mailman archives info.
 
     :param how_many_months: how many months back to go in the archives. Set to

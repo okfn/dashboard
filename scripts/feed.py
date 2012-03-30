@@ -8,14 +8,16 @@ from common import make_activity
 log = logging.getLogger(__name__)
 
 
-def gather(database, source, config):
+def gather(database, source):
     feed = feedparser.parse(source.feed_url)
     try:
         log.info("%s: %s" % (source.type, feed.feed.title))
     except AttributeError:
         log.error('Failed to retrieve: %s' % source.feed_url)
     table = database['activity']
+    count = 0
     for e in feed.entries:
+        count += 1
         try:
             author = e.author_detail.name
         except AttributeError:
@@ -46,4 +48,5 @@ def gather(database, source, config):
             data,
             unique_columns=['author', 'title', 'source_url']
             )
+    return count
 
