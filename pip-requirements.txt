@@ -1,5 +1,4 @@
 lxml
-webstore-client
 feedparser
 -e git+https://github.com/okfn/datautil#egg=datautil
 tweepy

@@ -2,9 +2,6 @@ import ConfigParser
 import os
 import UserDict
 
-import webstore.client
-
-
 config_file = os.path.join(
         os.path.dirname(os.path.dirname(__file__)),
         'dashboard.cfg')
@@ -13,11 +10,13 @@ defaults = {'webstore.port': 80}
 config = ConfigParser.SafeConfigParser(defaults)
 config.read([config_file])
 
-webstore_url = config.get('db', 'webstore.url')
+class LocalDB:
+    def writerow(data, **kwargs):
+        pass
 
-geocode_username = config.get('geocode', 'geocode.username')
-
-database = webstore.client.URL(webstore_url)[0]
+database = {
+    'activity': LocalDB()
+}
 
 def make_activity(indict, date, source):
     outdict = dict(indict)
