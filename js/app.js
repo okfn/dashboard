@@ -77,7 +77,7 @@ $(function() {
   };
 
   var members = new Dashboard.MemberCollection();
-  members.url = '../cache/members.geo.json';
+  members.url = 'cache/members.geo.json';
   members.fetch();
 
   $('.js-debug-map').click(function(e) {
