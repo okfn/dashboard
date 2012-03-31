@@ -2,14 +2,14 @@ window.Dashboard = window.Dashboard || {};
 
 Dashboard.MemberTableView = Backbone.View.extend({
   initialize: function() {
-    this.collection.bind('all', this.render, this);
+    _.bindAll(this, 'render');
+    this.collection.bind('all', this.render);
     this.render();
   },
   events: {
     'submit .js-add-member': 'addMember'
   },
   addMember: function(event) {
-    console.log('added member');
     var inputBox = this.$('.js-add-member-name');
     var name = inputBox.val();
     inputBox.val('');
@@ -38,8 +38,8 @@ Dashboard.MemberTableView = Backbone.View.extend({
 
 Dashboard.MemberMapView = Backbone.View.extend({
   initialize: function() {
-    _.bindAll(this,'onPopupClose');
-    this.collection.bind('all', this.renderMembers, this);
+    _.bindAll(this,'onPopupClose', 'renderMembers');
+    this.collection.bind('all', this.renderMembers);
 
     // Mapping attributes
     var vectorAttributes = {
@@ -81,7 +81,6 @@ Dashboard.MemberMapView = Backbone.View.extend({
 
   // Function: Add member points to the map
   renderMembers: function() {
-    console.log('renderMembers');
     var context = this;
     var pointList = [];
     this.collection.each(function(member) {
