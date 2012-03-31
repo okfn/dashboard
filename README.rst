@@ -1,32 +1,47 @@
-A Community Dashboard for the Open Knowledge Foundation. See wiki for details of project:
-http://wiki.okfn.org/Community_Dashboard.
+A Community Dashboard for the Open Knowledge Foundation. See wiki for details
+of project: http://wiki.okfn.org/Community_Dashboard.
+
+* Live site: http://okfnlabs.org/dashboard/
+* DataHub Dataset: http://datahub.io/dataset/okfn-dashboard
+* Git repo: http://github.com/okfn/dashboard
+* Issues: http://github.com/okfn/dashboard/issues
+* Mailing list: http://lists.okfn.org/mailman/listinfo/okfn-labs
 
 
-Directory Structure
-===================
+Using It
+========
 
-The repository has this layout::
+First, setup the git submodules needed by the frontend app::
 
-    -- okfn-dashboard
-     `-- app: webapp
-       `-- js: JavaScript files, often exported by scripts
-       `-- css: style sheets
-       `-- img: image files
-       `-- test: js tests
-     `-- scripts: scripts to extract data from various sources
-     `-- cache: cache directory for data during processing
-     `-- data: houses permanent stored (bulk) data
-     
+  git submodule init
+  git submodule update
+
+Then, just open in your browser::
+
+  index.html
+
+Note: if you are using Chrome you may need to open this from a webserver as
+chrome prevents loading the local data files (even if you are opening a local
+file) for security reasons.
+
 
 For Developers
 ==============
 
-Frontend App
-------------
+Directory Structure
+-------------------
 
-In your browser visit::
+The repository has this layout::
 
-  app/index.html
+    -- okfn-dashboard
+     `index.html: JS webapp
+     `-- js: JavaScript files, often exported by scripts
+     `-- css: style sheets
+     `-- img: image files
+     `-- test: js tests
+     `-- scripts: scripts to extract data from various sources
+     `-- cache: cache directory for data during processing
+     `-- data: houses permanent stored (bulk) data
 
 Frontend App Tests
 ------------------
@@ -75,24 +90,4 @@ You then need to pull it down and have it locally at data/members.csv. Then run:
   python scripts/members.py -h
 
 And follow the instructions.
-
-
-TODO
-----
-
-2011-04-22 p:members Conversion from csv dump of members to json is not
-handling wrapped lines (in descriptions) correctly.
-
-2011-04-22 p:members cannot see more than one marker if 2 or more markers
-in exact same long/lat (as happens frequently because we have imprecise 
-initial locations).
-
-2011-04-25 p:members 
-Replaced Google Maps with OpenStreetMap by using OpenLayers.
-OKFN logo used as a marker for the members positions.
-Problem of overlapping data with the same coordinates solved 
-by using the clustering function of OpenLayers:
-click on the icon and this show the list of 
-members in that place (this depends on the zoom level).
-Possible fix: change the icon size in relation to the number of users
 
