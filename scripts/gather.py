@@ -34,6 +34,8 @@ def run(source_id=None):
 
     Can specify a source id to just gather for that source.
     '''
+    csv_url = config.get('db', 'projects')
+    fp = urllib.urlretrieve(csv_url, 'data/projects.csv')[0]
     csv_url = config.get('db', 'sources')
     fp = urllib.urlretrieve(csv_url, 'data/sources.csv')[0]
     fo = open(fp)
