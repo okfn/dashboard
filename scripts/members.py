@@ -17,6 +17,7 @@ from datautil.clitools import _main
 CSV_SOURCE = 'data/members.csv'
 MEMBERS_RAW = 'cache/members.raw.json'
 MEMBERS_GEO = 'cache/members.geo.json'
+MEMBERS_GEOJSON = 'cache/members.geojson.json'
 
 def convert_from_csv_to_json(csv_location=CSV_SOURCE,
         output_file=MEMBERS_RAW):
@@ -41,12 +42,12 @@ def convert_from_csv_to_json(csv_location=CSV_SOURCE,
         out[username]['username'] = username
         out[username]['id'] = username
     for username in out:
-        out[username] = normalize(out[username])
+        out[username] = _normalize(out[username])
     outfo = open(output_file, 'w')
     json.dump(out.values(), outfo, indent=2, sort_keys=True)
 
 
-def normalize(datadict_):
+def _normalize(datadict_):
     out = dict(datadict_)
     for key,val in out.items():
         del out[key]
@@ -89,6 +90,27 @@ def geocode_data():
     json.dump(data, fileobj, indent=2, sort_keys=True)
     json.dump(report, open(report_file), indent=2, sort_keys=True)
 
+def geojson():
+    '''Convert geonames style data to geojson.'''
+    data = json.load(open(MEMBERS_GEO))
+    for value in data:
+        if 'spatial' in value:
+            cur = value['spatial']
+            out = {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [ cur['lng'], cur['lat'] ]
+                },
+                'properties': {
+                    'country': cur['countryName'],
+                    'country_code': cur.get('countryCode', None),
+                    'name': value['location']
+                }
+            }
+            value['spatial'] = out
+    fileobj = open(MEMBERS_GEOJSON, 'w')
+    json.dump(data, fileobj, indent=2, sort_keys=True)
 
 if __name__ == '__main__':
     _main(locals())
