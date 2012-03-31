@@ -10,7 +10,7 @@ import unittest
 
 # Add 'scripts' folder to module search path allowing to execute 
 # this test module from inside its 'test' folder.
-path = os.path.join(os.path.dirname(__file__), '..', 'scripts')
+path = os.path.join(os.path.dirname(__file__), '..')
 sys.path.insert(0, path)
 del path
 
