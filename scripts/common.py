@@ -2,20 +2,19 @@ import ConfigParser
 import os
 import UserDict
 
+from datastore.client import DatastoreClient
+
 config_file = os.path.join(
         os.path.dirname(os.path.dirname(__file__)),
         'dashboard.cfg')
 
-defaults = {'webstore.port': 80}
-config = ConfigParser.SafeConfigParser(defaults)
+config = ConfigParser.SafeConfigParser()
 config.read([config_file])
 
-class LocalDB:
-    def writerow(data, **kwargs):
-        pass
+table_activity = DatastoreClient(config.get('db', 'datastore.activity'))
 
 database = {
-    'activity': LocalDB()
+    'activity': table_activity
 }
 
 def make_activity(indict, date, source):
