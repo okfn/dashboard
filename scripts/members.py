@@ -39,7 +39,6 @@ def convert_from_csv_to_json(csv_location=CSV_SOURCE,
         except:
             print('Error: %s' % row)
     for username in out:
-        out[username]['username'] = username
         out[username]['id'] = username
     for username in out:
         out[username] = _normalize(out[username])
