@@ -10,8 +10,13 @@
     <![endif]-->
 
     <link rel="stylesheet" href="vendor/recline/vendor/bootstrap/2.0.2/css/bootstrap.css">
+    <link rel="stylesheet" href="vendor/recline/vendor/leaflet/leaflet.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="vendor/recline/vendor/leaflet/leaflet.ie.css" />
+    <![endif]-->
     <link rel="stylesheet" href="vendor/recline/css/data-explorer.css">
     <link rel="stylesheet" href="vendor/recline/css/graph-flot.css">
+    <link rel="stylesheet" href="vendor/recline/css/map.css">
     <link rel="stylesheet" href="vendor/recline/vendor/bootstrap/2.0.2/css/bootstrap-responsive.css">
 
     <!-- 3rd party libraries -->
@@ -22,20 +27,15 @@
     <script type="text/javascript" src="vendor/recline/vendor/jquery.flot-0.7.js"></script>
     <script type="text/javascript" src="vendor/recline/vendor/jquery.mustache.js"></script>
     <script type="text/javascript" src="vendor/recline/vendor/bootstrap/2.0.2/bootstrap.js"></script>
-
-    <!-- OpenLayers styles -->
-    <link rel="stylesheet" href="js/openlayers/theme/default/style.css">
+    <script type="text/javascript" src="vendor/recline/vendor/leaflet/leaflet.js"></script>
+    <script type="text/javascript" src="vendor/recline/recline.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
 
     <script type="text/javascript" src="vendor/jquery/jquery.tmpl.js"></script>
-    <script language="javascript" src="js/openlayers/openlayers.dashboard.js"></script>
     <script language="javascript" src="js/model.js"></script>
     <script language="javascript" src="js/view.js"></script>
     <script language="javascript" src="js/app.js"></script>
-    <script type="text/javascript">
-      OpenLayers.ImgPath = "js/openlayers/img/";
-    </script>
   </head>
   <body>
     <!-- Header navigation -->
@@ -54,14 +54,8 @@
     <div class="container">
     <div class="content">
       <div class="page-view page-index">
-        <h2>Open Knowledge Foundation Member Map</h2>
-        <div class="js-member-view" style="border: 1px solid #999; background: #f7f7f7; padding: 10px; margin: 10px; display: none;">
-          <table class="js-member-table">
-          </table>
-          <form action="#" class="js-add-member"><input type="text" class="js-add-member-name"/> <input type="submit" class="js-add-member-submit" /></form>
-        </div>
-        <div id="js-member-map">
-        </div>
+        <h2>Open Knowledge Foundation Community Members</h2>
+        <div class="data-explorer-here"></div>
       </div>
 
       <div class="page-view page-activity" style="display: none;">

@@ -10,11 +10,21 @@ Dashboard.Controller = function($) {
       "activity/:projectId": "activity"
     },
 
-    initialize: function(members, customConfig) {
-      this.members = members;
-      this.config = {
-        webstore: 'http://localhost:5000/'
-      };
+    initialize: function(customConfig, membersData) {
+      var members_url = 'cache/members.geojson.json';
+      var fields = [
+        {id: 'id'},
+        {id: 'name'},
+        {id: 'location'},
+        {id: 'website'},
+        {id: 'twitter'},
+        {id: 'description'},
+        {id: 'spatial'}
+      ]
+      this.dataset = recline.Backend.createDataset(membersData, fields);
+      // fix size so we get all members by default
+      this.dataset.queryState.set({size: 1500}, {silent: true});
+      this.config = {};
       _.extend(this.config, customConfig);
       Backbone.history.start();
     },
@@ -28,13 +38,29 @@ Dashboard.Controller = function($) {
 
     index: function(query, page) {
       this.switchView('index');
-
-      // Bind a view to the DOM
-      var memberTableView = new Dashboard.MemberTableView({
-        el: $('.js-member-view'),
-        collection: this.members
+      var $el = $('<div />');
+      $el.appendTo($('.data-explorer-here'));
+      var views = [
+        {
+          id: 'grid',
+          label: 'Grid',
+          view: new recline.View.DataGrid({
+            model: this.dataset
+          })
+        },
+        {
+          id: 'map',
+          label: 'Map',
+          view: new recline.View.Map({
+            model: this.dataset
+          })
+        }
+      ];
+      window.dataExplorer = new recline.View.DataExplorer({
+        el: $el
+        , model: this.dataset
+        , views: views
       });
-
     },
 
     activity: function(projectId) {
@@ -76,21 +102,12 @@ $(function() {
     webstore: 'http://webstore.thedatahub.org/okfn/dashboard-dev'
   };
 
-  var members = new Dashboard.MemberCollection();
-  members.url = 'cache/members.geo.json';
-  members.fetch();
-
-  $('.js-debug-map').click(function(e) {
-    members.add();
+  var membersUrl = 'cache/members.geojson.json';
+  var jqxhr = $.getJSON(membersUrl);
+  jqxhr.done(function(membersData) {
+    var tmp = membersData.slice(0,5);
+    var workspace = new Dashboard.Controller.Workspace(config, membersData);
   });
-
-  // Create singleton OpenLayers map
-  Dashboard.memberView = new Dashboard.MemberMapView({
-    collection: members,
-    divName: 'js-member-map'
-  });
-
-  var workspace = new Dashboard.Controller.Workspace(members, config);
 });
 
 
