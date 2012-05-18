@@ -5,13 +5,12 @@ Dashboard.Controller = function($) {
 
   my.Workspace = Backbone.Router.extend({
     routes: {
-      "": "index",
+      ".*": "index",
       "activity": "activity",
       "activity/:projectId": "activity"
     },
 
     initialize: function(customConfig, membersData) {
-      var members_url = 'cache/members.geojson.json';
       var fields = [
         {id: 'id'},
         {id: 'name'},
@@ -19,11 +18,11 @@ Dashboard.Controller = function($) {
         {id: 'website'},
         {id: 'twitter'},
         {id: 'description'},
-        {id: 'spatial'}
+        {id: 'spatial', type: 'object'}
       ]
       this.dataset = recline.Backend.createDataset(membersData, fields);
       // fix size so we get all members by default
-      this.dataset.queryState.set({size: 1500}, {silent: true});
+      this.dataset.queryState.set({size: 900}, {silent: true});
       this.config = {};
       _.extend(this.config, customConfig);
       Backbone.history.start();
@@ -44,7 +43,7 @@ Dashboard.Controller = function($) {
         {
           id: 'grid',
           label: 'Grid',
-          view: new recline.View.DataGrid({
+          view: new recline.View.Grid({
             model: this.dataset
           })
         },
@@ -60,6 +59,9 @@ Dashboard.Controller = function($) {
         el: $el
         , model: this.dataset
         , views: views
+        , state: {
+          currentView: 'map'
+        }
       });
     },
 
@@ -102,7 +104,7 @@ $(function() {
     webstore: 'http://webstore.thedatahub.org/okfn/dashboard-dev'
   };
 
-  var membersUrl = 'cache/members.geojson.json';
+  var membersUrl = 'data/members.geojson.json';
   var jqxhr = $.getJSON(membersUrl);
   jqxhr.done(function(membersData) {
     var tmp = membersData.slice(0,5);
