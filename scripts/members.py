@@ -3,13 +3,13 @@
 '''Parse members csv dump exported from mysql into json format.
 
 '''
-
 import csv
 import time
 import json
 import urllib
-import subprocess
 from collections import defaultdict
+import hashlib
+import math
 
 import common
 from datautil.clitools import _main
@@ -95,11 +95,17 @@ def geojson():
     for value in data:
         if 'spatial' in value:
             cur = value['spatial']
+            # add some jitter
+            username = value['id']
+            jitter = float(int(hashlib.md5(username).hexdigest(), 16)) % (2*math.pi)
+            radius = 0.05
+            lng = cur['lng'] + math.cos(jitter)*radius
+            lat = cur['lat'] + math.sin(jitter)*radius
             out = {
                 'type': 'Feature',
                 'geometry': {
                     'type': 'Point',
-                    'coordinates': [ cur['lng'], cur['lat'] ]
+                    'coordinates': [ lng, lat ]
                 },
                 'properties': {
                     'country': cur['countryName'],
