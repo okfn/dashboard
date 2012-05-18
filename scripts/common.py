@@ -2,7 +2,7 @@ import ConfigParser
 import os
 import UserDict
 
-from datastore.client import DatastoreClient
+from datastore.client import DataStoreClient
 
 config_file = os.path.join(
         os.path.dirname(os.path.dirname(__file__)),
@@ -11,7 +11,7 @@ config_file = os.path.join(
 config = ConfigParser.SafeConfigParser()
 config.read([config_file])
 
-table_activity = DatastoreClient(config.get('db', 'datastore.activity'))
+table_activity = DataStoreClient(config.get('db', 'datastore.activity'))
 
 database = {
     'activity': table_activity
