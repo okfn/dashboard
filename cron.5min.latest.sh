@@ -11,7 +11,10 @@ mysql <$INFILE >$OUTFILE
 
 # Enter the repo and perform a commit
 cd $OUTREPO
-# git diff --no-ext-diff --quiet --exit-code
-#git commit -a -m "Hourly dump of members."
-#git pull origin members-db-dump
-#git push origin members-db-dump
+
+if git diff --no-ext-diff --quiet --exit-code; then
+  : # no changes
+else
+  git commit -a -m "Committing lastest database dump." --amend 
+  git push origin master -f
+fi

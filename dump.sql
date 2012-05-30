@@ -27,5 +27,4 @@ LEFT JOIN  /* Append buddypress.website */
 LEFT JOIN  /* Append buddypress.location */
   okfn_org_bp_xprofile_data AS locations
   ON okfn_org_users.ID=locations.user_id AND locations.field_id=6
-INTO OUTFILE '/tmp/sqldump.csv'
 ;
