@@ -4,11 +4,13 @@
 INFILE=dump.members.sql
 OUTREPO=gist/latest
 OUTFILE=$OUTREPO/members.csv
+JSONFILE=$OUTREPO/members.json
 
 cd ~/dashboard
 # Run the query and overwrite the dump file
 mysql <$INFILE >$OUTFILE
 python utf8.py $OUTFILE
+python create_json.py $OUTFILE $JSONFILE
 
 # Enter the repo and perform a commit
 cd $OUTREPO
