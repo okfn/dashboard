@@ -8,6 +8,7 @@ OUTFILE=$OUTREPO/members.csv
 cd ~/dashboard
 # Run the query and overwrite the dump file
 mysql <$INFILE >$OUTFILE
+python utf8.py $OUTFILE
 
 # Enter the repo and perform a commit
 cd $OUTREPO
