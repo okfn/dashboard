@@ -1,0 +1,21 @@
+
+.loaded {
+    display:none;
+}
+td.preview {
+    width: 300px;
+    max-width: 300px;
+}
+.namelink {
+    display: inline-block;
+    margin: 2px 5px;
+    text-align: middle;
+    padding: 2px 20px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+}
+h1 {
+    display: block;
+    text-align: center;
+    margin: 50px 0;
+}

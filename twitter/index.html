@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>OKFN Twitter</title>
+    <meta name="author" content="Open Knowledge Foundation">
+    <link rel="stylesheet" href="../vendor/bootstrap/1.3.0/bootstrap.min.css">
+    <link rel="stylesheet" href="twitter.css">
+    <script type="text/javascript" src="../vendor/jquery/jquery-1.7.js"></script>
+    <script language="javascript" src="twitter.js"></script>
+    <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+  </head>
+  <body>
+    <h1>Twitter Accounts on OKFN.org</h1>
+    <table>
+      <tr>
+        <td class="preview">
+        <script>
+          twitterWidget = new TWTR.Widget({
+            version: 2,
+            type: 'profile',
+            rpp: 3,
+            interval: 30000,
+            width: 250,
+            height: 200,
+            theme: {
+              shell: {
+                background: '#333333',
+                color: '#ffffff'
+              },
+              tweets: {
+                background: '#000000',
+                color: '#ffffff',
+                links: '#4aed05'
+              }
+            },
+            features: {
+              scrollbar: false,
+              loop: false,
+              live: true,
+              behavior: 'default'
+            }
+          }).render();
+        </script>
+        </td>
+        <td class="list">
+          <div class="loading">Loading data...</div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
