@@ -19,6 +19,7 @@ cd $OUTREPO
 if git diff --no-ext-diff --quiet --exit-code; then
   : # no changes
 else
-  git commit -a -m "Committing lastest database dump." --amend 
+  git reset --soft HEAD^
+  git commit -a -m "Overwriting latest commit." 
   git push origin master -f
 fi

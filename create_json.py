@@ -5,7 +5,7 @@ import csv,sys,json,codecs
 
 reader = csv.DictReader(open(infile,'r'),delimiter='\t')
 out = [row for row in reader]
-json.dump(out,open(outfile,'w'),indent=4)
+json.dump(out,open(outfile,'w'))
 
 if len(sys.argv)>3:
     # Dump a jsonp file too
