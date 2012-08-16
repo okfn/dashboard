@@ -20,7 +20,11 @@ Dashboard.Controller = function($) {
         {id: 'description'},
         {id: 'spatial', type: 'object'}
       ]
-      this.dataset = recline.Backend.createDataset(membersData, fields);
+      this.dataset = new recline.Model.Dataset({
+        records: membersData,
+        fields: fields
+      });
+      this.dataset.fetch();
       // fix size so we get all members by default
       this.dataset.queryState.set({size: 900}, {silent: true});
       this.config = {};
@@ -41,24 +45,25 @@ Dashboard.Controller = function($) {
       $el.appendTo($('.data-explorer-here'));
       var views = [
         {
-          id: 'grid',
-          label: 'Grid',
-          view: new recline.View.Grid({
-            model: this.dataset
-          })
-        },
-        {
           id: 'map',
           label: 'Map',
           view: new recline.View.Map({
             model: this.dataset
           })
+        },
+        {
+          id: 'grid',
+          label: 'Grid',
+          view: new recline.View.SlickGrid({
+            model: this.dataset
+          })
         }
       ];
-      window.dataExplorer = new recline.View.DataExplorer({
+      window.dataExplorer = new recline.View.MultiView({
         el: $el
         , model: this.dataset
         , views: views
+        , sidebarViews: []
         , state: {
           currentView: 'map'
         }
