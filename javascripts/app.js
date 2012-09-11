@@ -852,7 +852,7 @@ function program2(depth0,data) {
 function program4(depth0,data) {
   
   
-  return "\n        <a class=\"avatar\" href=\"/images/mm-250.jpeg\"><img src=\"/images/mm-50.jpeg\" width=\"50\" height\"50\"/></a>\n      ";}
+  return "\n        <a class=\"avatar\" href=\"images/mm-250.jpeg\"><img src=\"images/mm-50.jpeg\" width=\"50\" height\"50\"/></a>\n      ";}
 
   buffer += "<div class=\"activity\">\n  ";
   foundHelper = helpers.person;
@@ -869,7 +869,7 @@ function program4(depth0,data) {
   stack1 = foundHelper || depth0.text;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "text", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\n  </div>\n  <div class=\"icon\">\n    <img src=\"/images/icons/";
+  buffer += escapeExpression(stack1) + "\n  </div>\n  <div class=\"icon\">\n    <img src=\"images/icons/";
   foundHelper = helpers._activity_type;
   stack1 = foundHelper || depth0._activity_type;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
