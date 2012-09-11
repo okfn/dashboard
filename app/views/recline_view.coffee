@@ -1,4 +1,4 @@
-template = require './templates/members_map'
+template = require './templates/recline'
 
 module.exports = class MembersMapView extends Backbone.View
   id: 'members-map'
