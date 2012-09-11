@@ -1,6 +1,0 @@
-lxml
-feedparser
--e git+https://github.com/okfn/datautil#egg=datautil
--e git+https://github.com/okfn/datastore-client#egg=datastore-client
-tweepy
-
