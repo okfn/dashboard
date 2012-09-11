@@ -1,0 +1,32 @@
+<div class="activity">
+  {{#with person}}
+    <div class="person">
+      {{#if avatar}}
+        <a class="avatar" href="{{avatar}}"><img src="{{avatar}}" width="50" height"50"/></a>
+      {{else}}
+        <a class="avatar" href="/images/mm-250.jpeg"><img src="/images/mm-50.jpeg" width="50" height"50"/></a>
+      {{/if}}
+      <a class="name" href="{{permalink}}">{{display_name}}</a>
+      <span class="github">(@<a href="http://github.com/{{github}}">{{github}}</a>)</span>
+    </div>
+
+    <div style="display:none;">
+      twitter: {{twitter}}
+      last_active: {{last_active}}
+      website: {{website}}
+      about: {{about}}
+      registered: {{registered}}
+      location: {{location}}
+      login: {{login}}
+      _opinion: {{_opinion}}
+      avatar: {{avatar}}
+    </div>
+  {{/with}}
+  <div class="middle">
+    {{text}}
+  </div>
+  <div class="icon">
+    <img src="/images/icons/{{_activity_type}}.png" width="40" height="40"/>
+  </div>
+  <div class="clearfix"></div>
+</div>

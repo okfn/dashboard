@@ -1,4 +1,42 @@
 #content {
-  margin-top: 70px;
+  margin-top: 60px;
+  min-height: 300px;
+}
+#content h1 {
+  border-bottom: 1px solid #000;
+  margin-top: 0;
+  margin-bottom: 30px;
 }
 
+
+.footer {
+  border-top: 2px solid #ccc;
+  margin-top: 50px;
+  padding-top: 20px;
+  margin-bottom: 50px;
+}
+.footer .etc-link {
+  float: right;
+}
+.footer .etc-link a {
+  display: block;
+  text-align: right;
+}
+
+
+#legendholder {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 200px;
+  background: #fff;
+  display: none;
+}
+#graphholder {
+  position: relative;
+}
+
+#graphholder:hover #legendholder,
+#legendholder:hover {
+  display: block;
+}

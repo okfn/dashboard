@@ -3,9 +3,10 @@ template = require 'views/templates/home'
 module.exports = class HomeView extends Backbone.View
   id: 'home'
   template: template
+  initialize: (@target) ->
 
   renderData: ->
 
-  render: (target) ->
+  render: ->
     @$el.html @template @renderData
-    target.append @$el
+    @target.html @$el

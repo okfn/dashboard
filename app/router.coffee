@@ -1,10 +1,22 @@
+GithubView = require 'views/github_view'
 HomeView = require 'views/home_view'
 PersonView = require 'views/person_view'
 ProjectView = require 'views/project_view'
-GithubView = require 'views/github_view'
 MailmanView = require 'views/mailman_view'
 TwitterView = require 'views/twitter_view'
 ReclineView = require 'views/recline_view'
+
+# Function to consistently target the main div
+content = -> $('#content')
+# Generator of singleton view pages
+singletons =
+  githubView: -> return @_github = @_github or new GithubView(content())
+  homeView: -> return @_home = @_home or new HomeView(content())
+  personView: -> return @_person = @_person or new PersonView(content())
+  projectView: -> return @_project = @_project or new ProjectView(content())
+  mailmanView: -> return @_mailman = @_mailman or new MailmanView(content())
+  twitterView: -> return @_twitter = @_twitter or new TwitterView(content())
+  reclineView: -> return @_recline = @_recline or new ReclineView(content())
 
 module.exports = class Router extends Backbone.Router
   routes:
@@ -13,36 +25,21 @@ module.exports = class Router extends Backbone.Router
     'person': 'person'
     'project': 'project'
     'github': 'github'
+    'github/:graphmode': 'github'
     'mailman': 'mailman'
     'twitter': 'twitter'
-
-  target: ->
-    $('#content')
-
   home: ->
-    @target().empty()
-    new HomeView().render @target()
-
+    singletons.homeView().render()
   person: ->
-    @target().empty()
-    new PersonView().render @target()
-
+    singletons.personView().render()
   project: ->
-    @target().empty()
-    new ProjectView().render @target()
-
-  github: ->
-    @target().empty()
-    new GithubView().render @target()
-
+    singletons.projectView().render()
+  github: (graphMode='watchers') ->
+    singletons.githubView().graphMode = graphMode
+    singletons.githubView().render()
   mailman: ->
-    @target().empty()
-    new MailmanView().render @target()
-
+    singletons.mailmanView().render()
   twitter: ->
-    @target().empty()
-    new TwitterView().render @target()
-
+    singletons.twitterView().render()
   recline: ->
-    @target().empty()
-    new ReclineView().render @target()
+    singletons.reclineView().render()

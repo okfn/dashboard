@@ -2,8 +2,9 @@ template = require 'views/templates/project'
 
 module.exports = class ProjectView extends Backbone.View
   template: template
+  initialize: (@target) ->
   renderData: ->
 
-  render: (target) ->
+  render: ->
     @$el.html @template @renderData
-    target.append @$el
+    @target.html @$el
