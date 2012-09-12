@@ -179,15 +179,432 @@
   }
 }));
 (this.require.define({
+  "projects": function(exports, require, module) {
+    
+/*
+TODO jpekel (Joris)
+TODO naomilillie
+TODO lauranewman
+TODO noelmas (Sam Leon)
+TODO katbraybrooke
+*/
+
+(function() {
+
+  module.exports = [
+    {
+      category: 'CKAN / The Data Hub',
+      projects: [
+        {
+          name: 'ckan',
+          title: 'CKAN',
+          description: 'CKAN is an open-source data hub. CKAN makes it easy to publish, share and find data. It provides a powerful and extensible system for cataloging and storing datasets, with an intuitive web front-end and API.',
+          link: ['http://ckan.org', 'http://wiki.okfn.org/Projects/CKAN'],
+          people: ['ross', 'toby', 'darwin', 'markw', 'seanh', 'shevski', 'davidraznick', 'amercader', 'johnglover', 'aron', 'dread', 'thejimmyg'],
+          mailman: ['ckan-dev', 'ckan-discuss', 'ckan-changes', 'ckan-news'],
+          github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols', 'okfn/buildkit', 'okfn/webstore', 'okfn/dpm']
+        }, {
+          name: 'datahub',
+          title: 'The Data Hub',
+          people: [],
+          mailman: ['datahub-announce', 'datahub-news'],
+          github: ['okfn/datahub']
+        }, {
+          name: 'ckanext',
+          title: 'CKAN Extensions',
+          people: ['ross', 'toby', 'darwin', 'markw', 'seanh', 'shevski', 'davidraznick', 'amercader', 'johnglover', 'aron', 'dread', 'thejimmyg'],
+          mailman: [],
+          github: ['okfn/ckanext-webstorer', 'okfn/ckanext-iati', 'okfn/ckanext-archiver', 'okfn/ckanext-wordpresser', 'okfn/ckanext-example', 'okfn/ckanext-qa', 'okfn/ckanext-datacatalogs', 'okfn/ckanext-apps']
+        }, {
+          name: 'datacatalogs',
+          title: 'Data Catalogs',
+          link: ['datacatalogs.org'],
+          people: [],
+          mailman: ['data-catalogs'],
+          github: ['okfn/ckanext-datacatalogs']
+        }
+      ]
+    }, {
+      category: 'Open Data',
+      projects: [
+        {
+          name: 'openspending',
+          title: 'OpenSpending',
+          link: ['http://openspending.org', 'http://blog.openspending.org/', 'http://twitter.com/openspending', 'http://wiki.openspending.org/Main_Page'],
+          people: ['pudo', 'lucychambers', 'grgr', 'vitorbaptista'],
+          mailman: ['openspending', 'openspending-dev'],
+          github: ['okfn/dpkg-israel-state-budget', 'okfn/openspending.plugins.datatables', 'okfn/openspending.plugins.treemap', 'openspending/openspending', 'openspending/openspendingjs', 'openspending/dotorg', 'openspending/openspending-etl']
+        }, {
+          name: 'schoolofdata',
+          title: 'School Of Data',
+          link: ['http://schoolofdata.org', 'http://handbook.schoolofdata.org', 'http://opendatahandbook.org', 'http://wiki.okfn.org/Projects/Open_Data_Handbook'],
+          people: ['mihi', 'jenlowe'],
+          mailman: ['School-of-data', 'Scoda-dev', 'open-data-handbook'],
+          github: ['okfn/datawrangling', 'okfn/schoolofdata', 'okfn/opendatahandbook']
+        }, {
+          name: 'opendatacommons',
+          title: 'Open Data Commons',
+          description: 'Open Data Commons provides legal solutions for open data, including the Public Domain Dedication and License (PDDL) and the Open Database License (ODbL).',
+          link: ['http://www.opendatacommons.org/', 'http://wiki.okfn.org/Open_Data_Commons'],
+          people: [],
+          mailman: ['odc-coord', 'odc-discuss'],
+          github: []
+        }, {
+          name: 'lod2',
+          title: 'LOD (Linked Open Data)',
+          description: 'LOD2 is an EU-funded project involving a consortium of groups across Europe working to develop linked open data availability and to enable the creation of knowledge from interlinked data.',
+          link: ['http://lod2.eu/'],
+          people: [],
+          mailman: ['lod2'],
+          github: []
+        }, {
+          name: 'wdmmg',
+          title: 'Where Does My Money Go?',
+          description: 'Find out where UK public finance goes with this open-source, embeddable web application. Explore the data using maps, timelines, and best of breed visualisation technologies.',
+          link: ['http://wheredoesmymoneygo.org/blog/'],
+          people: [],
+          mailman: ['wdmmg-announce'],
+          github: ['openspending/cameroon.openspending.org', 'openspending/wheredoesmymoneygo.org']
+        }, {
+          name: 'publicdomain',
+          title: 'Public Domain Works',
+          description: 'The Public Domain Works DB is an open registry of artistic works that are in the public domain. It is currently focused on books and sound recordings.',
+          link: ['http://publicdomainworks.net', 'http://wiki.okfn.org/Public_Domain_Calculators', 'http://publicdomainreview.org'],
+          people: [],
+          mailman: ['pd-discuss', 'publicdomainreview'],
+          github: ['okfn/pdcalc', 'okfn/pdw2']
+        }, {
+          name: 'opendefinition',
+          title: 'The Open Definition',
+          description: 'The Open (Knowledge) Definition (OD) sets out principles to define the \'open\' in open knowledge. The term knowledge is used broadly and it includes all forms of data, content such as music, films or books as well any other types of information.',
+          link: ['http://www.opendefinition.org/'],
+          people: [],
+          mailman: ['od-coord', 'od-discuss'],
+          github: ['okfn/licenses', 'okfn/opendefinition']
+        }
+      ]
+    }, {
+      category: 'OKFN Labs',
+      projects: [
+        {
+          name: 'recline',
+          title: 'Recline',
+          link: ['http://reclinejs.org'],
+          people: ['rgrp'],
+          mailman: [],
+          github: ['okfn/recline', 'okfn/timeliner']
+        }, {
+          name: 'annotator',
+          title: 'Annotator',
+          description: 'Annotate any web page simply by incorporating two lines of javascript into your site or running our bookmarklet.',
+          link: ['http://annotateit.org'],
+          people: [],
+          mailman: ['annotator-dev'],
+          github: ['okfn/annotator', 'okfn/annotateit', 'okfn/annotator-store', 'okfn/annotator-wordpress', 'okfn/texts.annotateit.org']
+        }, {
+          name: 'dashboard',
+          title: 'Dashboard',
+          link: ['http://okfnlabs.org/dashboard', 'http://activityapi.herokuapp.com'],
+          people: ['zephod'],
+          mailman: [],
+          github: ['okfn/activityapi', 'okfn/dashboard']
+        }, {
+          name: 'yourtopia',
+          title: 'YourTopia',
+          link: ['http://yourtopia.net', 'http://italia.yourtopia.net/'],
+          people: ['zephod'],
+          mailman: ['yourtopia'],
+          github: ['okfn/yourtopia']
+        }, {
+          name: 'labs-projects',
+          title: 'Experimental Projects',
+          people: ['zephod', 'rgrp', 'vndimitrova'],
+          mailman: ['okfn-labs', 'open-history'],
+          github: ['okfn/bubbletree', 'okfn/hypernotes', 'okfn/okfn.github.com', 'sprints.okfnlabs.org', 'okfn/facetview']
+        }
+      ]
+    }, {
+      category: 'Bibliographic Data',
+      projects: [
+        {
+          name: 'openbiblio',
+          title: 'Working Group: OpenBiblio',
+          description: 'Open Bibliography is a JISC funded project to advocate open access to bibliographic data and to demonstrate ways that such open datasets could be utilised.',
+          link: ['openbiblio.net'],
+          people: ['markmacgillivray', 'petermr', 'tomoinn'],
+          mailman: ['open-bibliography', 'bibliographica-users', 'bibliographica-folktales'],
+          github: []
+        }, {
+          name: 'bibserver',
+          title: 'BibServer & BibJSON',
+          link: ['bibsoup.net'],
+          people: ['markmacgillivray', 'petermr', 'tomoinn'],
+          mailman: ['Bibjson-dev', 'openbiblio-dev'],
+          github: ['okfn/bibserver']
+        }
+      ]
+    }, {
+      category: 'Core',
+      projects: [
+        {
+          name: 'okfn.org',
+          title: 'OKFN Core',
+          link: ['http://okfn.org', 'http://blog.okfn.org'],
+          people: ['mintcanary', 'zephod', 'noelmas', 'nilstoedtmann', 'bobbydonovan'],
+          mailman: ['okfn-coord', 'okfn-help'],
+          github: ['okfn/wordpress-theme-okfn', 'okfn/wordpress-json-api-okfn']
+        }
+      ]
+    }, {
+      category: 'Chapters',
+      projects: [
+        {
+          name: 'chapter-austria',
+          title: 'OKFN Austria',
+          description: 'The Austrian chapter of the OKFN',
+          link: [],
+          people: [],
+          mailman: ['okfn-at'],
+          github: []
+        }, {
+          name: 'chapter-germany',
+          title: 'OKFN Germany',
+          description: 'The German chapter of the OKFN',
+          link: ['http://okfn.de', 'http://wiki.okfn.org/Chapter/Germany'],
+          people: [],
+          mailman: ['okfn-de'],
+          github: []
+        }, {
+          name: 'chapter-brazil',
+          title: 'OKFN Brazil',
+          description: 'The Brazilian chapter of the OKFN',
+          link: ['http://br.okfn.org', 'http://wiki.okfn.org/Chapter/Brazil'],
+          people: [],
+          mailman: ['okfn-br'],
+          github: []
+        }, {
+          name: 'chapter-belgium',
+          title: 'OKFN Belgium',
+          description: 'The Belgian chapter of the OKFN',
+          link: ['http://okfn.be', 'http://wiki.okfn.org/Chapter/Belgium'],
+          people: [],
+          mailman: ['okfn-be'],
+          github: []
+        }, {
+          name: 'chapter-finland',
+          title: 'OKFN Finland',
+          description: 'The Finnish chapter of the OKFN',
+          link: ['http://fi.okfn.org'],
+          people: [],
+          mailman: ['okfn-fi'],
+          github: []
+        }, {
+          name: 'chapter-italy',
+          title: 'OKFN Italy',
+          description: 'The Italian chapter of the OKFN',
+          link: ['http://it.okfn.org'],
+          people: [],
+          mailman: ['okfn-it'],
+          github: []
+        }, {
+          name: 'chapter-all',
+          title: 'All Chapters',
+          description: 'All chapters of the OKFN',
+          link: ['http://okfn.de', 'http://br.okfn.org', 'http://okfn.be', 'http://fi.okfn.org', 'http://it.okfn.org'],
+          people: [],
+          mailman: ['okfn-at', 'okfn-de', 'okfn-be', 'okfn-br', 'okfn-fi', 'okfn-it'],
+          github: []
+        }
+      ]
+    }, {
+      category: 'Working Groups',
+      projects: [
+        {
+          name: 'wg-eu-open-data',
+          title: 'EU Open Data',
+          description: 'Working Group on EU Open Data',
+          link: ['http://wiki.okfn.org/Wg/euopendata'],
+          people: [],
+          mailman: ['euopendata'],
+          github: []
+        }, {
+          name: 'wg-open-bibliographic-data',
+          title: 'Open Bibliographic Data',
+          description: 'Working Group for those interested in Open Bibliographic Data',
+          link: ['http://openbiblio.net/', 'http://wiki.okfn.org/OpenBiblio'],
+          people: [],
+          mailman: [],
+          github: []
+        }, {
+          name: 'wg-open-development',
+          title: 'Open Development',
+          description: 'Working for Open Knowledge in International Development',
+          link: ['http://open-development.okfn.org/', 'http://wiki.okfn.org/Working_Groups/Development'],
+          people: [],
+          mailman: ['open-development'],
+          github: []
+        }, {
+          name: 'wg-open-economics',
+          title: 'Open Economics',
+          description: 'Working Group for those interested in Open Data in Economics',
+          link: ['http://openeconomics.net/', 'http://wiki.okfn.org/Working_Groups/Economics'],
+          people: [],
+          mailman: ['open-economics'],
+          github: []
+        }, {
+          name: 'wg-open-government-data',
+          title: 'Open Government Data',
+          description: 'Working Group for those interested in Open Government Data',
+          link: ['http://opengovernmentdata.org/', 'http://wiki.okfn.org/Working_Groups/Government'],
+          people: [],
+          mailman: ['open-government'],
+          github: []
+        }, {
+          name: 'wg-open-linguistics',
+          title: 'Open Linguistics',
+          description: 'Working Group for those interested in Open Data about Linguistics',
+          link: ['http://linguistics.okfn.org/', 'http://wiki.okfn.org/Working_Groups/linguistics'],
+          people: [],
+          mailman: ['open-linguistics'],
+          github: []
+        }, {
+          name: 'wg-open-resources-in-the-humanities',
+          title: 'Open Resources in the Humanities',
+          description: 'Act as a central point of reference and support for people interested in open resources in humanities research and teaching.',
+          link: ['http://humanities.okfn.org/', 'http://wiki.okfn.org/Working_Groups/Humanities'],
+          people: [],
+          mailman: ['open-humanities'],
+          github: []
+        }, {
+          name: 'wg-open-science',
+          title: 'Open Science',
+          description: 'Our focus is promoting the open availability of scientific data, and we do this by developing guidelines and tools for scientists and publishers, along with other projects related to open scientific data',
+          link: ['http://science.okfn.org/', 'http://wiki.okfn.org/Wg/science'],
+          people: [],
+          mailman: ['open-science'],
+          github: []
+        }, {
+          name: 'wg-open-spending-data',
+          title: 'Open Spending Data',
+          description: 'Working Group for those interested in Open Spending Data ',
+          link: ['http://openspending.org', 'http://wiki.openspending.org/Working_Group'],
+          people: [],
+          mailman: ['openspending'],
+          github: []
+        }, {
+          name: 'wg-public-domain',
+          title: 'Public Domain',
+          description: 'Working Group on the Public Domain, including Public Domain Calculators and the Public Domain Review',
+          link: ['http://wiki.okfn.org/Working_Groups/publicdomain'],
+          people: [],
+          mailman: ['pd-discuss'],
+          github: []
+        }, {
+          name: 'wg-open-design',
+          title: 'Open Design',
+          description: 'A working group for designers and makers',
+          link: ['http://design.okfn.org/'],
+          people: [],
+          mailman: ['opendesign'],
+          github: []
+        }, {
+          name: 'wg-open-glam-and-cultural-heritage',
+          title: 'Open GLAM and Cultural Heritage',
+          description: '',
+          link: ['openglam.org'],
+          people: [],
+          mailman: ['open-glam'],
+          github: []
+        }, {
+          name: 'wg-open-data-in-archaeology',
+          title: 'Open Data in Archaeology',
+          description: 'Working Group for Open Data in Archaeology',
+          link: ['http://archaeology.okfn.org/', 'http://wiki.okfn.org/Working_Groups/archaeology'],
+          people: [],
+          mailman: ['open-archaeology'],
+          github: []
+        }, {
+          name: 'wg-open-access',
+          title: 'Open @ccess',
+          description: 'Sharing the results of scientific research.',
+          link: ['http://access.okfn.org/', 'http://wiki.okfn.org/Working_Groups/access'],
+          people: [],
+          mailman: ['open-access'],
+          github: []
+        }, {
+          name: 'wg-open-climate-science',
+          title: 'Open Climate Science',
+          description: 'Working Group for those interested',
+          link: ['http://wiki.okfn.org/Working_Groups/climatescience'],
+          people: [],
+          mailman: ['open-climate-science'],
+          github: []
+        }, {
+          name: 'wg-open-hardware',
+          title: 'Open Hardware',
+          description: 'Working Group for those Interested in Open Hardware',
+          link: ['http://wiki.okfn.org/Wg/hardware ', 'http://wiki.okfn.org/Open_Hardware'],
+          people: [],
+          mailman: ['open-hardware'],
+          github: []
+        }, {
+          name: 'wg-open-legislation',
+          title: 'Open Legislation',
+          description: 'Working Group for those Interested in Open Legislation',
+          link: ['http://wiki.okfn.org/Working_Groups/openlegislation'],
+          people: [],
+          mailman: ['open-legislation'],
+          github: []
+        }, {
+          name: 'wg-open-transport',
+          title: 'Open Transport',
+          description: 'Working group for those interested in Open Transport.',
+          link: ['http://wiki.okfn.org/Working_Groups/Transport'],
+          people: [],
+          mailman: ['open-transport'],
+          github: []
+        }, {
+          name: 'wg-open-visualisation-technologies',
+          title: 'Open Visualisation Technologies',
+          description: 'Working Group for those interested in Open Visualisation Technologies',
+          link: ['http://wiki.okfn.org/Working_Groups/Visualization'],
+          people: [],
+          mailman: ['open-visualisation'],
+          github: []
+        }, {
+          name: 'wg-open-geospatial-data',
+          title: 'Open Geospatial Data',
+          description: 'Working Group for those interested in Open Geodata',
+          link: ['http://wiki.okfn.org/Working_Groups/Geodata'],
+          people: [],
+          mailman: ['geo-discuss', 'open-geodata'],
+          github: []
+        }, {
+          name: 'wg-open-text-book',
+          title: 'Open Text Book',
+          description: 'Open Text Book is a registry of textbooks which are free for anyone to use, reuse and redistribute - from mathematics to geology, from engineering to art history.',
+          link: ['http://www.opentextbook.org/', 'http://wiki.okfn.org/Wg/opentextbooks'],
+          people: [],
+          mailman: ['opentextbooks'],
+          github: []
+        }
+      ]
+    }
+  ];
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
   "router": function(exports, require, module) {
     (function() {
-  var GithubView, HomeView, MailmanView, PersonView, ProjectView, ReclineView, Router, TwitterView, content, singletons,
+  var GithubView, MailmanView, PersonView, ProjectView, ReclineView, Router, TwitterView, content, singletons,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
   GithubView = require('views/github_view');
-
-  HomeView = require('views/home_view');
 
   PersonView = require('views/person_view');
 
@@ -205,25 +622,19 @@
 
   singletons = {
     githubView: function() {
-      return this._github = this._github || new GithubView(content());
-    },
-    homeView: function() {
-      return this._home = this._home || new HomeView(content());
+      return this._github = this._github || new GithubView();
     },
     personView: function() {
-      return this._person = this._person || new PersonView(content());
+      return this._person = this._person || new PersonView();
     },
     projectView: function() {
-      return this._project = this._project || new ProjectView(content());
+      return this._project = this._project || new ProjectView();
     },
     mailmanView: function() {
-      return this._mailman = this._mailman || new MailmanView(content());
+      return this._mailman = this._mailman || new MailmanView();
     },
     twitterView: function() {
-      return this._twitter = this._twitter || new TwitterView(content());
-    },
-    reclineView: function() {
-      return this._recline = this._recline || new ReclineView(content());
+      return this._twitter = this._twitter || new TwitterView();
     }
   };
 
@@ -232,48 +643,66 @@
     __extends(Router, _super);
 
     function Router() {
+      this.setCurrent = __bind(this.setCurrent, this);
       Router.__super__.constructor.apply(this, arguments);
     }
 
     Router.prototype.routes = {
-      '': 'home',
+      '': 'project',
       'recline': 'recline',
       'person': 'person',
       'project': 'project',
+      'project/:projectName': 'project',
       'github': 'github',
       'github/:graphmode': 'github',
       'mailman': 'mailman',
       'twitter': 'twitter'
     };
 
-    Router.prototype.home = function() {
-      return singletons.homeView().render();
+    Router.prototype.initialize = function() {
+      var _this = this;
+      return this.on('all', function(trigger) {
+        trigger = trigger.split(':');
+        if (trigger[0] === 'route') {
+          $('.navbar .nav li').removeClass('active');
+          return $('.navbar .nav li[action="' + trigger[1] + '"]').addClass('active');
+        }
+      });
+    };
+
+    Router.prototype.setCurrent = function(view) {
+      if (!(view === this.currentView)) {
+        this.currentView = view;
+        return view.render(content());
+      }
     };
 
     Router.prototype.person = function() {
-      return singletons.personView().render();
+      return this.setCurrent(singletons.personView());
     };
 
-    Router.prototype.project = function() {
-      return singletons.projectView().render();
+    Router.prototype.project = function(projectName) {
+      if (projectName == null) projectName = null;
+      singletons.projectView().showProject(projectName);
+      return this.setCurrent(singletons.projectView());
     };
 
     Router.prototype.github = function(graphMode) {
       if (graphMode == null) graphMode = 'watchers';
-      singletons.githubView().graphMode = graphMode;
-      return singletons.githubView().render();
+      this.setCurrent(singletons.githubView());
+      return singletons.githubView().showGraph(graphMode);
     };
 
     Router.prototype.mailman = function() {
-      return singletons.mailmanView().render();
+      return this.setCurrent(singletons.mailmanView());
     };
 
     Router.prototype.twitter = function() {
-      return singletons.twitterView().render();
+      return this.setCurrent(singletons.twitterView());
     };
 
     Router.prototype.recline = function() {
-      return singletons.reclineView().render();
+      return this.setCurrent(singletons.reclineView());
     };
 
     return Router;
@@ -357,6 +786,9 @@
 
     function GithubView() {
       this.render = __bind(this.render, this);
+      this.renderGraph = __bind(this.renderGraph, this);
+      this.renderActivity = __bind(this.renderActivity, this);
+      this.showGraph = __bind(this.showGraph, this);
       this.gotHistory = __bind(this.gotHistory, this);
       this.gotActivity = __bind(this.gotActivity, this);
       GithubView.__super__.constructor.apply(this, arguments);
@@ -382,16 +814,7 @@
       'size': []
     };
 
-    GithubView.prototype.renderData = function() {
-      return {
-        activityUrl: this.activityUrl,
-        historyUrl: this.historyUrl,
-        subtitle: this.resultHistory ? 'Tracking ' + Object.keys(this.resultHistory.data).length + ' repositories' : 'Loading...'
-      };
-    };
-
-    GithubView.prototype.initialize = function(target) {
-      this.target = target;
+    GithubView.prototype.initialize = function() {
       $.ajax({
         url: this.historyUrl,
         dataType: 'jsonp',
@@ -406,7 +829,7 @@
 
     GithubView.prototype.gotActivity = function(resultActivity) {
       this.resultActivity = resultActivity;
-      return this.render();
+      return this.renderActivity();
     };
 
     GithubView.prototype.gotHistory = function(resultHistory) {
@@ -451,17 +874,47 @@
           this.graphFilter['size'].push(reponame);
         }
       }
-      return this.render();
+      return this.renderGraph();
     };
 
-    GithubView.prototype.render = function() {
-      var activity, data, dom, filtered, _i, _j, _len, _len2, _ref, _ref2;
-      this.$el.html(this.template(this.renderData()));
-      this.target.html(this.$el);
+    GithubView.prototype.showGraph = function(graphMode) {
+      this.graphMode = graphMode;
+      return this.renderGraph();
+    };
+
+    GithubView.prototype.renderActivity = function() {
+      var activity, dom, _i, _len, _ref, _results;
+      dom = this.$el.find('.activity-stream');
+      if (!this.resultActivity) {
+        dom.spin();
+        return;
+      }
+      dom.spin(false);
+      dom.empty();
+      _ref = this.resultActivity.data;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        activity = _ref[_i];
+        _results.push(dom.append(activityView.render(activity)));
+      }
+      return _results;
+    };
+
+    GithubView.prototype.renderGraph = function() {
+      var data, dom, domInner, filtered, subtitle, _i, _len, _ref;
+      dom = this.$el.find('#graphholder');
+      if (!this.resultHistory) {
+        this.$el.find('h2 small').html('Loading...');
+        dom.spin();
+        return;
+      }
+      dom.spin(false);
+      subtitle = 'Tracking ' + Object.keys(this.resultHistory.data).length + ' repositories';
+      this.$el.find('h2 small').html(subtitle);
       this.$el.find('.nav li').removeClass('active');
       this.$el.find('.nav li[action="' + this.graphMode + '"]').addClass('active');
-      dom = this.$el.find('.graph');
-      dom.empty();
+      domInner = dom.find('.graph');
+      domInner.empty();
       if (this.graphData[this.graphMode]) {
         filtered = [];
         _ref = this.graphData[this.graphMode];
@@ -471,7 +924,7 @@
             filtered.push(data);
           }
         }
-        $.plot(dom, filtered, {
+        return $.plot(domInner, filtered, {
           xaxis: {
             mode: "time"
           },
@@ -481,61 +934,23 @@
           }
         });
       }
-      this.$el.find('#graphholder').spin(!this.resultHistory);
-      dom = this.$el.find('.activity-stream');
-      if (this.resultActivity) {
-        _ref2 = this.resultActivity.data;
-        for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
-          activity = _ref2[_j];
-          dom.append(activityView.render(activity));
-        }
-        return dom.spin(false);
-      } else {
-        return dom.spin();
-      }
+    };
+
+    GithubView.prototype.render = function(target) {
+      var renderData;
+      renderData = function() {
+        return {
+          activityUrl: this.activityUrl,
+          historyUrl: this.historyUrl
+        };
+      };
+      this.$el.html(this.template(renderData));
+      target.html(this.$el);
+      this.renderGraph();
+      return this.renderActivity();
     };
 
     return GithubView;
-
-  })(Backbone.View);
-
-}).call(this);
-
-  }
-}));
-(this.require.define({
-  "views/home_view": function(exports, require, module) {
-    (function() {
-  var HomeView, template,
-    __hasProp = Object.prototype.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
-
-  template = require('views/templates/home');
-
-  module.exports = HomeView = (function(_super) {
-
-    __extends(HomeView, _super);
-
-    function HomeView() {
-      HomeView.__super__.constructor.apply(this, arguments);
-    }
-
-    HomeView.prototype.id = 'home';
-
-    HomeView.prototype.template = template;
-
-    HomeView.prototype.initialize = function(target) {
-      this.target = target;
-    };
-
-    HomeView.prototype.renderData = function() {};
-
-    HomeView.prototype.render = function() {
-      this.$el.html(this.template(this.renderData));
-      return this.target.html(this.$el);
-    };
-
-    return HomeView;
 
   })(Backbone.View);
 
@@ -562,15 +977,11 @@
 
     MailmanView.prototype.template = template;
 
-    MailmanView.prototype.initialize = function(target) {
-      this.target = target;
-    };
-
     MailmanView.prototype.renderData = function() {};
 
-    MailmanView.prototype.render = function() {
+    MailmanView.prototype.render = function(target) {
       this.$el.html(this.template(this.renderData));
-      return this.target.html(this.$el);
+      return target.html(this.$el);
     };
 
     return MailmanView;
@@ -600,15 +1011,11 @@
 
     PersonView.prototype.template = template;
 
-    PersonView.prototype.initialize = function(target) {
-      this.target = target;
-    };
-
     PersonView.prototype.renderData = function() {};
 
-    PersonView.prototype.render = function() {
+    PersonView.prototype.render = function(target) {
       this.$el.html(this.template(this.renderData));
-      return this.target.html(this.$el);
+      return target.html(this.$el);
     };
 
     return PersonView;
@@ -622,31 +1029,72 @@
 (this.require.define({
   "views/project_view": function(exports, require, module) {
     (function() {
-  var ProjectView, template,
+  var ProjectView, category, project, projectJson, projectMap, template, templateInner, _i, _j, _len, _len2, _ref,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
   template = require('views/templates/project');
+
+  templateInner = require('views/templates/project_inner');
+
+  projectJson = require('projects');
+
+  projectMap = {};
+
+  for (_i = 0, _len = projectJson.length; _i < _len; _i++) {
+    category = projectJson[_i];
+    _ref = category.projects;
+    for (_j = 0, _len2 = _ref.length; _j < _len2; _j++) {
+      project = _ref[_j];
+      projectMap[project.name] = project;
+    }
+  }
 
   module.exports = ProjectView = (function(_super) {
 
     __extends(ProjectView, _super);
 
     function ProjectView() {
+      this.renderProject = __bind(this.renderProject, this);
       ProjectView.__super__.constructor.apply(this, arguments);
     }
 
     ProjectView.prototype.template = template;
 
-    ProjectView.prototype.initialize = function(target) {
-      this.target = target;
+    ProjectView.prototype.active = null;
+
+    ProjectView.prototype.showProject = function(active) {
+      this.active = active;
+      return this.renderProject();
     };
 
-    ProjectView.prototype.renderData = function() {};
+    ProjectView.prototype.render = function(target) {
+      var active, nav, renderData;
+      renderData = {
+        projectJson: projectJson,
+        subtitle: 'Tracking ' + Object.keys(projectMap).length + ' projects'
+      };
+      this.$el.html(this.template(renderData));
+      target.html(this.$el);
+      this.renderProject();
+      nav = this.$el.find('.nav');
+      active = nav.find('.active');
+      if (active.length) {
+        nav.scrollTop(active.position().top);
+        return nav.scrollTop(active.index() * 26 - 10);
+      }
+    };
 
-    ProjectView.prototype.render = function() {
-      this.$el.html(this.template(this.renderData));
-      return this.target.html(this.$el);
+    ProjectView.prototype.renderProject = function() {
+      var renderData;
+      this.$el.find('.nav li').removeClass('active');
+      this.$el.find('.nav li[action="' + this.active + '"]').addClass('active');
+      renderData = {
+        active: this.active,
+        project: projectMap[this.active]
+      };
+      return this.$el.find('.active-project-pane').html(templateInner(renderData));
     };
 
     return ProjectView;
@@ -895,16 +1343,6 @@ function program4(depth0,data) {
   }
 }));
 (this.require.define({
-  "views/templates/home": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
-
-
-  return "\nHome view\n";});
-  }
-}));
-(this.require.define({
   "views/templates/mailman": function(exports, require, module) {
     module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
@@ -938,10 +1376,195 @@ function program4(depth0,data) {
   "views/templates/project": function(exports, require, module) {
     module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
+  var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, stack2;
+  buffer += "\n                <li class=\"nav-header\">";
+  foundHelper = helpers.category;
+  stack1 = foundHelper || depth0.category;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "category", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</li>\n                ";
+  foundHelper = helpers.projects;
+  stack1 = foundHelper || depth0.projects;
+  stack2 = helpers.each;
+  tmp1 = self.program(2, program2, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n            ";
+  return buffer;}
+function program2(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n                    <li action=\"";
+  foundHelper = helpers.name;
+  stack1 = foundHelper || depth0.name;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\"><a href=\"#project/";
+  foundHelper = helpers.name;
+  stack1 = foundHelper || depth0.name;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\">";
+  foundHelper = helpers.title;
+  stack1 = foundHelper || depth0.title;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "title", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</a></li>\n                ";
+  return buffer;}
 
-  return "<code>TODO</code> project view\n\n";});
+  buffer += "<h1>Projects <small>";
+  foundHelper = helpers.subtitle;
+  stack1 = foundHelper || depth0.subtitle;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "subtitle", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</small></h1>\n<div class=\"row\">\n    <div class=\"span3\">\n        <ul class=\"nav nav-list well\" style=\"max-height: 400px; overflow: scroll;\">\n            ";
+  foundHelper = helpers.projectJson;
+  stack1 = foundHelper || depth0.projectJson;
+  stack2 = helpers.each;
+  tmp1 = self.program(1, program1, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </ul>\n    </div>\n    <div class=\"active-project-pane\">\n    </div>\n</div>\n\n\n";
+  return buffer;});
+  }
+}));
+(this.require.define({
+  "views/templates/project_inner": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, stack2;
+  buffer += "\n";
+  foundHelper = helpers.project;
+  stack1 = foundHelper || depth0.project;
+  stack2 = helpers['with'];
+  tmp1 = self.program(2, program2, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n";
+  return buffer;}
+function program2(depth0,data) {
+  
+  var buffer = "", stack1, stack2;
+  buffer += "\n<div class=\"span9\">\n    <h2>";
+  foundHelper = helpers.title;
+  stack1 = foundHelper || depth0.title;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "title", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</h2>\n</div>\n<div class=\"span3\">\n    <div class=\"well\">\n        <h4>People</h4>\n        <ul>";
+  foundHelper = helpers.people;
+  stack1 = foundHelper || depth0.people;
+  stack2 = helpers.each;
+  tmp1 = self.program(3, program3, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</ul>\n    </div>\n</div>\n<div class=\"span3\">\n    <div class=\"well\">\n        <h4>Github</h4>\n        <ul>";
+  foundHelper = helpers.github;
+  stack1 = foundHelper || depth0.github;
+  stack2 = helpers.each;
+  tmp1 = self.program(5, program5, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</ul>\n    </div>\n</div>\n<div class=\"span3\">\n    <div class=\"well\">\n        <h4>Mailman</h4>\n        <ul>";
+  foundHelper = helpers.mailman;
+  stack1 = foundHelper || depth0.mailman;
+  stack2 = helpers.each;
+  tmp1 = self.program(7, program7, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</ul>\n    </div>\n</div>\n<div class=\"span3\">\n    <div class=\"well\">\n    <h4>Links</h4>\n    <ul>";
+  foundHelper = helpers.link;
+  stack1 = foundHelper || depth0.link;
+  stack2 = helpers.each;
+  tmp1 = self.program(9, program9, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</ul>\n    </div>\n</div>\n";
+  return buffer;}
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "<li>";
+  stack1 = depth0;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "this", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</li>";
+  return buffer;}
+
+function program5(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "<li>";
+  stack1 = depth0;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "this", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</li>";
+  return buffer;}
+
+function program7(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "<li>";
+  stack1 = depth0;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "this", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</li>";
+  return buffer;}
+
+function program9(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "<li>";
+  stack1 = depth0;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "this", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</li>";
+  return buffer;}
+
+function program11(depth0,data) {
+  
+  
+  return "\n<div class=\"span9\">\n    <h2>Select a project...</h2>\n</div>\n";}
+
+  foundHelper = helpers.active;
+  stack1 = foundHelper || depth0.active;
+  stack2 = helpers['if'];
+  tmp1 = self.program(1, program1, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.program(11, program11, data);
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n";
+  return buffer;});
   }
 }));
 (this.require.define({
@@ -983,15 +1606,11 @@ function program4(depth0,data) {
 
     TwitterView.prototype.template = template;
 
-    TwitterView.prototype.initialize = function(target) {
-      this.target = target;
-    };
-
     TwitterView.prototype.renderData = function() {};
 
-    TwitterView.prototype.render = function() {
+    TwitterView.prototype.render = function(target) {
       this.$el.html(this.template(this.renderData));
-      return this.target.html(this.$el);
+      return target.html(this.$el);
     };
 
     return TwitterView;
