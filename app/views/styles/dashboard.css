@@ -24,19 +24,3 @@
 }
 
 
-#legendholder {
-  position: absolute;
-  left: 100%;
-  top: 0;
-  width: 200px;
-  background: #fff;
-  display: none;
-}
-#graphholder {
-  position: relative;
-}
-
-#graphholder:hover #legendholder,
-#legendholder:hover {
-  display: block;
-}

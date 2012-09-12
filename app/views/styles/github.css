@@ -1,0 +1,19 @@
+#legendholder {
+  position: absolute;
+  left: 96%;
+  top: 0;
+  width: 200px;
+  background: #fff;
+  display: none;
+  border: 1px solid #ccc;
+  padding: 4px;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+#graphholder {
+  position: relative;
+}
+
+#graphholder:hover #legendholder,
+#legendholder:hover {
+  display: block;
+}

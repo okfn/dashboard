@@ -2,9 +2,8 @@ template = require 'views/templates/twitter'
 
 module.exports = class TwitterView extends Backbone.View
   template: template
-  initialize: (@target) ->
   renderData: ->
 
-  render: ->
+  render: (target) ->
     @$el.html @template @renderData
-    @target.html @$el
+    target.html @$el

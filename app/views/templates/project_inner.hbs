@@ -1,0 +1,35 @@
+{{#if active}}
+{{#with project}}
+<div class="span9">
+    <h2>{{title}}</h2>
+</div>
+<div class="span3">
+    <div class="well">
+        <h4>People</h4>
+        <ul>{{#each people}}<li>{{this}}</li>{{/each}}</ul>
+    </div>
+</div>
+<div class="span3">
+    <div class="well">
+        <h4>Github</h4>
+        <ul>{{#each github}}<li>{{this}}</li>{{/each}}</ul>
+    </div>
+</div>
+<div class="span3">
+    <div class="well">
+        <h4>Mailman</h4>
+        <ul>{{#each mailman}}<li>{{this}}</li>{{/each}}</ul>
+    </div>
+</div>
+<div class="span3">
+    <div class="well">
+    <h4>Links</h4>
+    <ul>{{#each link}}<li>{{this}}</li>{{/each}}</ul>
+    </div>
+</div>
+{{/with}}
+{{else}}
+<div class="span9">
+    <h2>Select a project...</h2>
+</div>
+{{/if}}
