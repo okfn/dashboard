@@ -79,6 +79,18 @@
   }
 }).call(this);
 (this.require.define({
+  "activityapi": function(exports, require, module) {
+    (function() {
+
+  module.exports = {
+    url: 'http://activityapi.herokuapp.com/api/1'
+  };
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
   "initialize": function(exports, require, module) {
     (function() {
   var Router;
@@ -682,7 +694,7 @@ TODO katbraybrooke
     };
 
     Router.prototype.project = function(projectName) {
-      if (projectName == null) projectName = null;
+      if (projectName == null) projectName = 'ckan';
       singletons.projectView().showProject(projectName);
       return this.setCurrent(singletons.projectView());
     };
@@ -1029,14 +1041,22 @@ TODO katbraybrooke
 (this.require.define({
   "views/project_view": function(exports, require, module) {
     (function() {
-  var ProjectView, category, project, projectJson, projectMap, template, templateInner, _i, _j, _len, _len2, _ref,
+  var ProjectView, api, category, project, projectJson, projectMap, template, _i, _j, _len, _len2, _ref,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  template = require('views/templates/project');
+  template = {
+    page: require('views/templates/project'),
+    inner: require('views/templates/project_inner'),
+    pane: {
+      mailman_details: require('views/templates/mailman_details'),
+      person_details: require('views/templates/person_details'),
+      github_details: require('views/templates/github_details')
+    }
+  };
 
-  templateInner = require('views/templates/project_inner');
+  api = require('activityapi');
 
   projectJson = require('projects');
 
@@ -1056,17 +1076,169 @@ TODO katbraybrooke
     __extends(ProjectView, _super);
 
     function ProjectView() {
-      this.renderProject = __bind(this.renderProject, this);
+      this.renderPaneMailman = __bind(this.renderPaneMailman, this);
+      this.renderPanePeople = __bind(this.renderPanePeople, this);
+      this.renderPaneGithub = __bind(this.renderPaneGithub, this);
+      this.renderInner = __bind(this.renderInner, this);
+      this.clickNavPeople = __bind(this.clickNavPeople, this);
+      this.clickNavGithub = __bind(this.clickNavGithub, this);
+      this.clickNavMailman = __bind(this.clickNavMailman, this);
+      this.gotPaneMailman = __bind(this.gotPaneMailman, this);
+      this.gotPaneGithub = __bind(this.gotPaneGithub, this);
+      this.gotPanePeople = __bind(this.gotPanePeople, this);
+      this.project = __bind(this.project, this);
       ProjectView.__super__.constructor.apply(this, arguments);
     }
 
-    ProjectView.prototype.template = template;
-
     ProjectView.prototype.active = null;
 
+    ProjectView.prototype.project = function() {
+      return projectMap[this.active];
+    };
+
     ProjectView.prototype.showProject = function(active) {
+      var ajax_github, ajax_mailman, ajax_people, comma, p, person, _k, _len3, _ref2;
       this.active = active;
-      return this.renderProject();
+      p = this.project();
+      this.resultGithub = null;
+      this.graphGithub = null;
+      this.resultMailman = null;
+      this.graphMailman = null;
+      ajax_github = api.url + '/history/github';
+      ajax_mailman = api.url + '/history/mailman';
+      ajax_people = api.url + '/data/person?per_page=' + p.people.length + '&login=';
+      comma = false;
+      _ref2 = p.people;
+      for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
+        person = _ref2[_k];
+        if (comma) ajax_people += ',';
+        comma = true;
+        ajax_people += person;
+      }
+      $.ajax({
+        url: ajax_github,
+        dataType: 'jsonp',
+        success: this.gotPaneGithub
+      });
+      $.ajax({
+        url: ajax_mailman,
+        dataType: 'jsonp',
+        success: this.gotPaneMailman
+      });
+      $.ajax({
+        url: ajax_people,
+        dataType: 'jsonp',
+        success: this.gotPanePeople
+      });
+      p.mailman_url = ajax_mailman;
+      return this.renderInner();
+    };
+
+    ProjectView.prototype.gotPanePeople = function(resultPeople) {
+      this.resultPeople = resultPeople;
+      return this.renderPanePeople();
+    };
+
+    ProjectView.prototype.gotPaneGithub = function(resultGithub) {
+      var color, d, k, name, series, v, _k, _l, _len3, _len4, _ref2, _ref3, _ref4;
+      this.resultGithub = resultGithub;
+      this.graphGithub = {
+        'watchers': [],
+        'forks': [],
+        'issues': [],
+        'size': []
+      };
+      color = 0;
+      _ref2 = this.project().github;
+      for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
+        name = _ref2[_k];
+        color = (color + 1) % 30;
+        series = {};
+        _ref3 = this.graphGithub;
+        for (k in _ref3) {
+          v = _ref3[k];
+          series[k] = [];
+        }
+        _ref4 = this.resultGithub.data[name].data;
+        for (_l = 0, _len4 = _ref4.length; _l < _len4; _l++) {
+          d = _ref4[_l];
+          for (k in series) {
+            v = series[k];
+            v.push([new Date(d.timestamp), d[k]]);
+          }
+        }
+        for (k in series) {
+          v = series[k];
+          this.graphGithub[k].push({
+            label: name,
+            data: v,
+            color: color
+          });
+        }
+      }
+      return this.renderPaneGithub();
+    };
+
+    ProjectView.prototype.gotPaneMailman = function(resultMailman) {
+      var color, d, k, name, series, v, _k, _l, _len3, _len4, _ref2, _ref3, _ref4;
+      this.resultMailman = resultMailman;
+      this.graphMailman = {
+        'posts': [],
+        'subscribers': []
+      };
+      color = 0;
+      _ref2 = this.project().mailman;
+      for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
+        name = _ref2[_k];
+        color = (color + 1) % 30;
+        series = {};
+        _ref3 = this.graphMailman;
+        for (k in _ref3) {
+          v = _ref3[k];
+          series[k] = [];
+        }
+        _ref4 = this.resultMailman.data[name].data;
+        for (_l = 0, _len4 = _ref4.length; _l < _len4; _l++) {
+          d = _ref4[_l];
+          for (k in series) {
+            v = series[k];
+            v.push([new Date(d.timestamp), d[k]]);
+          }
+        }
+        for (k in series) {
+          v = series[k];
+          this.graphMailman[k].push({
+            label: name,
+            data: v,
+            color: color
+          });
+        }
+      }
+      return this.renderPaneMailman();
+    };
+
+    ProjectView.prototype.clickNavMailman = function(e) {
+      var action;
+      action = $($(e.currentTarget).parents('li')[0]).attr('action');
+      this.renderPaneMailman(action);
+      e.preventDefault();
+      return false;
+    };
+
+    ProjectView.prototype.clickNavGithub = function(e) {
+      var action;
+      action = $($(e.currentTarget).parents('li')[0]).attr('action');
+      this.renderPaneGithub(action);
+      e.preventDefault();
+      return false;
+    };
+
+    ProjectView.prototype.clickNavPeople = function(e) {
+      var action;
+      action = $($(e.currentTarget).parents('li')[0]).attr('action');
+      this.renderPanePeople(action);
+      e.preventDefault();
+      return false;
     };
 
     ProjectView.prototype.render = function(target) {
@@ -1075,26 +1247,129 @@ TODO katbraybrooke
         projectJson: projectJson,
         subtitle: 'Tracking ' + Object.keys(projectMap).length + ' projects'
       };
-      this.$el.html(this.template(renderData));
+      this.$el.html(template.page(renderData));
       target.html(this.$el);
-      this.renderProject();
+      this.renderInner();
       nav = this.$el.find('.nav');
       active = nav.find('.active');
       if (active.length) {
         nav.scrollTop(active.position().top);
-        return nav.scrollTop(active.index() * 26 - 10);
+        return nav.scrollTop(active.index() * 26 - 50);
       }
     };
 
-    ProjectView.prototype.renderProject = function() {
+    ProjectView.prototype.renderInner = function() {
       var renderData;
       this.$el.find('.nav li').removeClass('active');
       this.$el.find('.nav li[action="' + this.active + '"]').addClass('active');
       renderData = {
         active: this.active,
-        project: projectMap[this.active]
+        project: this.project()
       };
-      return this.$el.find('.active-project-pane').html(templateInner(renderData));
+      this.$el.find('.active-project-pane').html(template.inner(renderData));
+      this.$el.find('#mailman-nav a').on('click', this.clickNavMailman);
+      this.$el.find('#github-nav li').not('.dropdown').find('a').on('click', this.clickNavGithub);
+      this.$el.find('#people-nav a').on('click', this.clickNavPeople);
+      this.renderPaneGithub();
+      this.renderPaneMailman();
+      return this.renderPanePeople();
+    };
+
+    ProjectView.prototype.renderPaneGithub = function(action) {
+      var dom, graph, m, _k, _len3, _ref2, _results;
+      if (action == null) action = "watchers";
+      this.$el.find('#github-nav li').removeClass('active');
+      this.$el.find('#github-nav li[action="' + action + '"]').addClass('active');
+      dom = this.$el.find('#pane-github');
+      dom.empty();
+      if (!this.resultGithub) {
+        dom.spin();
+        return;
+      }
+      dom.spin(false);
+      if (action === 'watchers' || action === 'issues' || action === 'forks' || action === 'size') {
+        graph = $('<div/>').css({
+          height: 180,
+          'margin-top': 10
+        }).appendTo(dom);
+        return $.plot(graph, this.graphGithub[action], {
+          xaxis: {
+            mode: "time"
+          }
+        });
+      } else if (action === 'activity') {
+        return dom.html('<code>TODO</code> AJAX load Activity');
+      } else if (action === 'details') {
+        _ref2 = this.project().github;
+        _results = [];
+        for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
+          m = _ref2[_k];
+          _results.push(dom.append(template.pane.github_details(this.resultGithub.data[m].repo)));
+        }
+        return _results;
+      } else {
+        return dom.html('<code>Bad pathway</code>');
+      }
+    };
+
+    ProjectView.prototype.renderPanePeople = function(action) {
+      var dom, m, _k, _len3, _ref2, _results;
+      if (action == null) action = "details";
+      this.$el.find('#people-nav li').removeClass('active');
+      this.$el.find('#people-nav li[action="' + action + '"]').addClass('active');
+      dom = this.$el.find('#pane-people');
+      dom.empty();
+      if (!this.resultPeople) {
+        dom.spin();
+        return;
+      }
+      dom.spin(false);
+      if (action === 'details') {
+        _ref2 = this.resultPeople.data || [];
+        _results = [];
+        for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
+          m = _ref2[_k];
+          _results.push(dom.append(template.pane.person_details(m)));
+        }
+        return _results;
+      } else if (action === 'activity') {
+        return dom.html('<code>TODO</code> AJAX load Activity');
+      }
+    };
+
+    ProjectView.prototype.renderPaneMailman = function(action) {
+      var dom, graph, m, _k, _len3, _ref2, _results;
+      if (action == null) action = "posts";
+      this.$el.find('#mailman-nav li').removeClass('active');
+      this.$el.find('#mailman-nav li[action="' + action + '"]').addClass('active');
+      dom = this.$el.find('#pane-mailman');
+      dom.empty();
+      if (!this.resultMailman) {
+        dom.spin();
+        return;
+      }
+      dom.spin(false);
+      if (action === 'posts' || action === 'subscribers') {
+        graph = $('<div/>').css({
+          height: 180,
+          'margin-top': 10
+        }).appendTo(dom);
+        return $.plot(graph, this.graphMailman[action], {
+          xaxis: {
+            mode: "time"
+          }
+        });
+      } else if (action === 'details') {
+        _ref2 = this.project().mailman;
+        _results = [];
+        for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
+          m = _ref2[_k];
+          _results.push(dom.append(template.pane.mailman_details(this.resultMailman.data[m].mailman)));
+        }
+        return _results;
+      } else {
+        return dom.html('<code>TODO</code> ajax grab activity');
+      }
     };
 
     return ProjectView;
@@ -1343,6 +1618,57 @@ function program4(depth0,data) {
   }
 }));
 (this.require.define({
+  "views/templates/github_details": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div style=\"margin-bottom: 4px;\">\n  <strong><a href=\"";
+  foundHelper = helpers.html_url;
+  stack1 = foundHelper || depth0.html_url;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "html_url", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\">";
+  foundHelper = helpers.full_name;
+  stack1 = foundHelper || depth0.full_name;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "full_name", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</a></strong>:\n  ";
+  foundHelper = helpers.description;
+  stack1 = foundHelper || depth0.description;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\n  <ul>\n    <li><strong>Language: </strong>";
+  foundHelper = helpers.language;
+  stack1 = foundHelper || depth0.language;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "language", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</li>\n    <li><strong>Fork: </strong>";
+  foundHelper = helpers.fork;
+  stack1 = foundHelper || depth0.fork;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "fork", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</li>\n    <li><strong>Homepage: </strong><a href=\"";
+  foundHelper = helpers.homepage;
+  stack1 = foundHelper || depth0.homepage;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "homepage", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\">";
+  foundHelper = helpers.homepage;
+  stack1 = foundHelper || depth0.homepage;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "homepage", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</a></li>\n    <li><strong>Created: </strong>";
+  foundHelper = helpers.created_at;
+  stack1 = foundHelper || depth0.created_at;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "created_at", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</li>\n  </ul>\n</div>\n\n";
+  return buffer;});
+  }
+}));
+(this.require.define({
   "views/templates/mailman": function(exports, require, module) {
     module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
@@ -1350,6 +1676,32 @@ function program4(depth0,data) {
 
 
   return "<code>TODO</code> mailinglist view\n\n";});
+  }
+}));
+(this.require.define({
+  "views/templates/mailman_details": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div style=\"margin-bottom: 4px;\">\n  <strong><a href=\"";
+  foundHelper = helpers.link;
+  stack1 = foundHelper || depth0.link;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "link", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\">";
+  foundHelper = helpers.name;
+  stack1 = foundHelper || depth0.name;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</a></strong>:\n  ";
+  foundHelper = helpers.description;
+  stack1 = foundHelper || depth0.description;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\n</div>\n";
+  return buffer;});
   }
 }));
 (this.require.define({
@@ -1370,6 +1722,62 @@ function program4(depth0,data) {
 
 
   return "<code>TODO</code> people directory view\n";});
+  }
+}));
+(this.require.define({
+  "views/templates/person_details": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div style=\"margin-bottom: 4px;\">\n<img class=\"pull-left\" src=\"";
+  foundHelper = helpers.avatar;
+  stack1 = foundHelper || depth0.avatar;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "avatar", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\" style=\"margin-right: 8px;\" width=\"50\" height=\"50\"/>\n  <strong><a href=\"";
+  foundHelper = helpers.permalink;
+  stack1 = foundHelper || depth0.permalink;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "permalink", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\">";
+  foundHelper = helpers.display_name;
+  stack1 = foundHelper || depth0.display_name;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "display_name", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</a></strong>:\n  ";
+  foundHelper = helpers.about;
+  stack1 = foundHelper || depth0.about;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "about", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\n  <ul>\n    <li><strong>Homepage: </strong><a href=\"";
+  foundHelper = helpers.website;
+  stack1 = foundHelper || depth0.website;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "website", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\">";
+  foundHelper = helpers.website;
+  stack1 = foundHelper || depth0.website;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "website", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</a></li>\n    <li><strong>Github: </strong>";
+  foundHelper = helpers.github;
+  stack1 = foundHelper || depth0.github;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "github", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</li>\n    <li><strong>Twitter: </strong>";
+  foundHelper = helpers.twitter;
+  stack1 = foundHelper || depth0.twitter;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "twitter", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</li>\n    <li><strong>Last Active: </strong>";
+  foundHelper = helpers.last_active;
+  stack1 = foundHelper || depth0.last_active;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "last_active", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</li>\n  </ul>\n</div>\n\n\n";
+  return buffer;});
   }
 }));
 (this.require.define({
@@ -1467,9 +1875,14 @@ function program2(depth0,data) {
   stack1 = foundHelper || depth0.title;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "title", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</h2>\n</div>\n<div class=\"span3\">\n    <div class=\"well\">\n        <h4>People</h4>\n        <ul>";
-  foundHelper = helpers.people;
-  stack1 = foundHelper || depth0.people;
+  buffer += escapeExpression(stack1) + "</h2>\n    <div class=\"row\">\n        <div class=\"span5\">\n            <div class=\"pane label-pane\">\n                <label>Mailing Lists</label>\n                <ul class=\"nav nav-tabs\" id=\"mailman-nav\">\n                    <li action=\"posts\"><a href=\"#\">Posts</a></li>\n                    <li action=\"subscribers\"><a href=\"#\">Subscribers</a></li>\n                    <li action=\"activity\"><a href=\"#\">Activity</a></li>\n                    <li action=\"details\"><a href=\"#\">Details</a></li>\n                </ul>\n                <div id=\"pane-mailman\"></div>\n            </div>\n        </div>\n        <div class=\"span4\">\n            <div class=\"pane label-pane\">\n                <label>Github</label>\n                <ul class=\"nav nav-tabs\" id=\"github-nav\">\n                    <li class=\"dropdown\">\n                    <a class=\"dropdown-toggle\"\n                        data-toggle=\"dropdown\"\n                        href=\"#\">\n                        Graph\n                        <b class=\"caret\"></b>\n                    </a>\n                    <ul class=\"dropdown-menu\">\n                        <li action=\"watchers\"><a href=\"#\">Watchers</a></li>\n                        <li action=\"size\"><a href=\"#\">Size</a></li>\n                        <li action=\"issues\"><a href=\"#\">Issues</a></li>\n                        <li action=\"forks\"><a href=\"#\">Forks</a></li>\n                    </ul>\n                    <li action=\"activity\"><a href=\"#\">Activity</a></li>\n                    <li action=\"details\"><a href=\"#\">Details</a></li>\n                </ul>\n                <div id=\"pane-github\"></div>\n            </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"row\">\n        <div class=\"span4\">\n            <div class=\"pane label-pane\">\n                <label>Recent Events</label>\n                <div id=\"pane-activity\"><code>TODO</code> AJAX load stream</div>\n            </div>\n        </div>\n        <div class=\"span5\">\n            <div class=\"pane label-pane\">\n                <label>People</label>\n                <ul class=\"nav nav-tabs\" id=\"people-nav\">\n                    <li action=\"details\"><a href=\"#\">Details</a></li>\n                    <li action=\"activity\"><a href=\"#\">Activity</a></li>\n                </ul>\n                <div id=\"pane-people\"></div>\n            </div>\n        </div>\n    </div>\n    <div class=\"row\" style=\"margin-top: 40px;\">\n        <div class=\"span8 offset4\">\n            <div class=\"well\">\n                <strong>Description: </strong>";
+  foundHelper = helpers.description;
+  stack1 = foundHelper || depth0.description;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\n                <ul>";
+  foundHelper = helpers.link;
+  stack1 = foundHelper || depth0.link;
   stack2 = helpers.each;
   tmp1 = self.program(3, program3, data);
   tmp1.hash = {};
@@ -1477,79 +1890,23 @@ function program2(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</ul>\n    </div>\n</div>\n<div class=\"span3\">\n    <div class=\"well\">\n        <h4>Github</h4>\n        <ul>";
-  foundHelper = helpers.github;
-  stack1 = foundHelper || depth0.github;
-  stack2 = helpers.each;
-  tmp1 = self.program(5, program5, data);
-  tmp1.hash = {};
-  tmp1.fn = tmp1;
-  tmp1.inverse = self.noop;
-  stack1 = stack2.call(depth0, stack1, tmp1);
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</ul>\n    </div>\n</div>\n<div class=\"span3\">\n    <div class=\"well\">\n        <h4>Mailman</h4>\n        <ul>";
-  foundHelper = helpers.mailman;
-  stack1 = foundHelper || depth0.mailman;
-  stack2 = helpers.each;
-  tmp1 = self.program(7, program7, data);
-  tmp1.hash = {};
-  tmp1.fn = tmp1;
-  tmp1.inverse = self.noop;
-  stack1 = stack2.call(depth0, stack1, tmp1);
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</ul>\n    </div>\n</div>\n<div class=\"span3\">\n    <div class=\"well\">\n    <h4>Links</h4>\n    <ul>";
-  foundHelper = helpers.link;
-  stack1 = foundHelper || depth0.link;
-  stack2 = helpers.each;
-  tmp1 = self.program(9, program9, data);
-  tmp1.hash = {};
-  tmp1.fn = tmp1;
-  tmp1.inverse = self.noop;
-  stack1 = stack2.call(depth0, stack1, tmp1);
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</ul>\n    </div>\n</div>\n";
+  buffer += "</ul>\n            </div>\n        </div>\n    </div>\n</div>\n";
   return buffer;}
 function program3(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "<li>";
+  buffer += "<li><a href=\"";
   stack1 = depth0;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "this", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</li>";
+  buffer += escapeExpression(stack1) + "\">";
+  stack1 = depth0;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "this", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</a></li>";
   return buffer;}
 
 function program5(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "<li>";
-  stack1 = depth0;
-  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "this", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</li>";
-  return buffer;}
-
-function program7(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "<li>";
-  stack1 = depth0;
-  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "this", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</li>";
-  return buffer;}
-
-function program9(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "<li>";
-  stack1 = depth0;
-  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "this", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</li>";
-  return buffer;}
-
-function program11(depth0,data) {
   
   
   return "\n<div class=\"span9\">\n    <h2>Select a project...</h2>\n</div>\n";}
@@ -1560,10 +1917,20 @@ function program11(depth0,data) {
   tmp1 = self.program(1, program1, data);
   tmp1.hash = {};
   tmp1.fn = tmp1;
-  tmp1.inverse = self.program(11, program11, data);
+  tmp1.inverse = self.program(5, program5, data);
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n";
+  return buffer;});
+  }
+}));
+(this.require.define({
+  "views/templates/project_inner_mailman": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", foundHelper, self=this;
+
+
   return buffer;});
   }
 }));
