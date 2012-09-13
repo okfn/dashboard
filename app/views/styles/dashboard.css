@@ -28,6 +28,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 8px;
+  margin-bottom: 15px;
 }
 .label-pane {
   position: relative;
@@ -46,4 +47,17 @@
   -webkit-border-radius: 4px 0 4px 0;
      -moz-border-radius: 4px 0 4px 0;
           border-radius: 4px 0 4px 0;
+}
+
+
+#pane-people,
+#pane-activity,
+#pane-github,
+#pane-mailman {
+  min-height: 200px;
+  max-height: 200px;
+  height: 200px;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }

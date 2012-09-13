@@ -12,32 +12,58 @@
                     <li action="activity"><a href="#">Activity</a></li>
                     <li action="details"><a href="#">Details</a></li>
                 </ul>
-                <div id="pane-mailman" style="min-height: 220px;"></div>
+                <div id="pane-mailman"></div>
             </div>
         </div>
         <div class="span4">
-            <div class="well">
-                <h3>Github</h3>
-                <ul>{{#each github}}<li>{{this}}</li>{{/each}}</ul>
+            <div class="pane label-pane">
+                <label>Github</label>
+                <ul class="nav nav-tabs" id="github-nav">
+                    <li class="dropdown">
+                    <a class="dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#">
+                        Graph
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li action="watchers"><a href="#">Watchers</a></li>
+                        <li action="size"><a href="#">Size</a></li>
+                        <li action="issues"><a href="#">Issues</a></li>
+                        <li action="forks"><a href="#">Forks</a></li>
+                    </ul>
+                    <li action="activity"><a href="#">Activity</a></li>
+                    <li action="details"><a href="#">Details</a></li>
+                </ul>
+                <div id="pane-github"></div>
+            </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="span4">
-            <div class="well">
-                <h3>People</h3>
-                <ul>{{#each people}}<li>{{this}}</li>{{/each}}</ul>
+            <div class="pane label-pane">
+                <label>Recent Events</label>
+                <div id="pane-activity"><code>TODO</code> AJAX load stream</div>
             </div>
         </div>
         <div class="span5">
-            <h3>Activity</h3>
-            <div class="activity-stream" style="min-height:200px;"></div>
+            <div class="pane label-pane">
+                <label>People</label>
+                <ul class="nav nav-tabs" id="people-nav">
+                    <li action="details"><a href="#">Details</a></li>
+                    <li action="activity"><a href="#">Activity</a></li>
+                </ul>
+                <div id="pane-people"></div>
+            </div>
         </div>
     </div>
     <div class="row" style="margin-top: 40px;">
-        <div class="well">
-            <strong>Description: </strong>{{description}}
-            <ul>{{#each link}}<li><a href="{{this}}">{{this}}</a></li>{{/each}}</ul>
+        <div class="span8 offset4">
+            <div class="well">
+                <strong>Description: </strong>{{description}}
+                <ul>{{#each link}}<li><a href="{{this}}">{{this}}</a></li>{{/each}}</ul>
+            </div>
         </div>
     </div>
 </div>
