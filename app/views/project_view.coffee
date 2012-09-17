@@ -37,27 +37,18 @@ module.exports = class ProjectView extends Backbone.View
 
     ## Nav Callbacks
     ## -------------
-    clickNavMailman: (e) =>
-        action = $($(e.currentTarget).parents('li')[0]).attr('action')
-        @renderPaneMailman(action)
-        e.preventDefault()
-        return false;
-
-    clickNavGithub: (e) =>
-        action = $($(e.currentTarget).parents('li')[0]).attr('action')
-        @renderPaneGithub(action)
-        e.preventDefault()
-        return false;
-
-    clickNavPeople: (e) =>
-        action = $($(e.currentTarget).parents('li')[0]).attr('action')
-        @renderPanePeople(action)
-        e.preventDefault()
-        return false;
+    navHandler: (renderCallback) ->
+        # Create an event handler which handles nav events
+        # and calls back to a render function
+        return (e) ->
+            action = $($(e.currentTarget).parents('li')[0]).attr('action')
+            renderCallback(action)
+            e.preventDefault()
+            return false;
 
     ## Renderers
     ## ---------
-    render: (target) ->
+    renderPage: (target) ->
         renderData = 
             projectJson: projectJson
             subtitle: 'Tracking '+Object.keys(projectMap).length+' projects'
@@ -79,9 +70,9 @@ module.exports = class ProjectView extends Backbone.View
             project: @project()
         @$el.find('.active-project-pane').html template.inner(renderData)
         # Bind to nav
-        @$el.find('#mailman-nav a').on('click',@clickNavMailman)
-        @$el.find('#github-nav li').not('.dropdown').find('a').on('click',@clickNavGithub)
-        @$el.find('#people-nav a').on('click',@clickNavPeople)
+        @$el.find('#mailman-nav a').on('click',@navHandler(@renderPaneMailman))
+        @$el.find('#github-nav li').not('.dropdown').find('a').on('click',@navHandler(@renderPaneGithub))
+        @$el.find('#people-nav a').on('click',@navHandler(@renderPanePeople))
         # Subrender
         @renderPaneGithub()
         @renderPaneMailman()

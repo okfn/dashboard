@@ -38,7 +38,7 @@ module.exports = class Router extends Backbone.Router
     setCurrent: (view) =>
         if not (view==@currentView)
             @currentView = view
-            view.render content()
+            view.renderPage content()
 
     ## Router Paths
     ## ------------

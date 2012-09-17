@@ -20,6 +20,7 @@ module.exports =
         if not logins
             callback {}
         url = @url + '/data/person?per_page=' + logins.length + '&login=' + @_join(logins)
+        @_fetch url, callback
 
 
     ## Private Methods
