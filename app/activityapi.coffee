@@ -1,24 +1,24 @@
 module.exports = 
-    #url: 'http://activityapi.herokuapp.com/api/1'
-    url: 'http://localhost:5000/api/1'
+    url: 'http://activityapi.herokuapp.com/api/1'
+    #url: 'http://localhost:5000/api/1'
 
     ## Methods
     ## =======
     ajaxHistoryGithub: (repos, callback) ->
-        if not repos
-            callback {}
+        if not repos.length
+            callback null
         url = @url + '/history/github?repo=' + @_join(repos) + '&per_page=90'
         @_fetch url, callback
 
     ajaxHistoryMailman: (lists, callback) ->
-        if not lists
-            callback {}
+        if not lists.length
+            callback null
         url = @url + '/history/mailman?list=' + @_join(lists) + '&per_page=90'
         @_fetch url, callback
 
     ajaxDataPerson: (logins, callback) ->
-        if not logins
-            callback {}
+        if not logins.length
+            callback null
         url = @url + '/data/person?per_page=' + logins.length + '&login=' + @_join(logins)
         @_fetch url, callback
 
