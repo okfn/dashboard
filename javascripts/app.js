@@ -83,24 +83,33 @@
     (function() {
 
   module.exports = {
-    url: 'http://localhost:5000/api/1',
+    url: 'http://activityapi.herokuapp.com/api/1',
     ajaxHistoryGithub: function(repos, callback) {
       var url;
-      if (!repos.length) callback(null);
-      url = this.url + '/history/github?repo=' + this._join(repos) + '&per_page=90';
-      return this._fetch(url, callback);
+      if (!repos.length) {
+        return callback(null);
+      } else {
+        url = this.url + '/history/github?repo=' + this._join(repos) + '&per_page=90';
+        return this._fetch(url, callback);
+      }
     },
     ajaxHistoryMailman: function(lists, callback) {
       var url;
-      if (!lists.length) callback(null);
-      url = this.url + '/history/mailman?list=' + this._join(lists) + '&per_page=90';
-      return this._fetch(url, callback);
+      if (!lists.length) {
+        return callback(null);
+      } else {
+        url = this.url + '/history/mailman?list=' + this._join(lists) + '&per_page=90';
+        return this._fetch(url, callback);
+      }
     },
     ajaxDataPerson: function(logins, callback) {
       var url;
-      if (!logins.length) callback(null);
-      url = this.url + '/data/person?per_page=' + logins.length + '&login=' + this._join(logins);
-      return this._fetch(url, callback);
+      if (!logins.length) {
+        return callback(null);
+      } else {
+        url = this.url + '/data/person?per_page=' + logins.length + '&login=' + this._join(logins);
+        return this._fetch(url, callback);
+      }
     },
     _join: function(strings) {
       var comma, out, s, _i, _len;
@@ -737,8 +746,8 @@ TODO katbraybrooke
 
     Router.prototype.project = function(projectName) {
       if (projectName == null) projectName = 'ckan';
-      singletons.projectView().showProject(projectName);
-      return this.setCurrent(singletons.projectView());
+      this.setCurrent(singletons.projectView());
+      return singletons.projectView().showProject(projectName);
     };
 
     Router.prototype.github = function(graphMode) {
@@ -1090,11 +1099,16 @@ TODO katbraybrooke
 
   template = {
     page: require('views/templates/project'),
-    inner: require('views/templates/project_inner'),
     pane: {
-      mailman_details: require('views/templates/mailman_details'),
-      person_details: require('views/templates/person_details'),
-      github_details: require('views/templates/github_details')
+      mailman: require('views/templates/pane_mailman'),
+      person: require('views/templates/pane_people'),
+      github: require('views/templates/pane_github'),
+      project: require('views/templates/pane_project')
+    },
+    details: {
+      mailman: require('views/templates/mailman_details'),
+      person: require('views/templates/person_details'),
+      github: require('views/templates/github_details')
     }
   };
 
@@ -1121,7 +1135,7 @@ TODO katbraybrooke
       this.renderPaneMailman = __bind(this.renderPaneMailman, this);
       this.renderPanePeople = __bind(this.renderPanePeople, this);
       this.renderPaneGithub = __bind(this.renderPaneGithub, this);
-      this.renderInner = __bind(this.renderInner, this);
+      this.addPane = __bind(this.addPane, this);
       this.project = __bind(this.project, this);
       ProjectView.__super__.constructor.apply(this, arguments);
     }
@@ -1140,34 +1154,53 @@ TODO katbraybrooke
       this.resultGithub = null;
       this.resultMailman = null;
       this.resultPeople = null;
+      this.$el.find('#project-container').empty();
+      this.$el.find('.nav li').removeClass('active');
+      this.$el.find('.nav li[action="' + this.active + '"]').addClass('active');
       if (p) {
+        if (p.description) {
+          this.addPane(template.pane.project, function(pane) {
+            return pane.find('.inner').html(project.description);
+          });
+        }
         api.ajaxHistoryGithub(p.github, function(resultGithub) {
           _this.resultGithub = resultGithub;
-          return _this.renderPaneGithub();
+          if (_this.resultGithub && _this.resultGithub.ok) {
+            return _this.addPane(template.pane.github, _this.renderPaneGithub);
+          }
         });
         api.ajaxHistoryMailman(p.mailman, function(resultMailman) {
           _this.resultMailman = resultMailman;
-          return _this.renderPaneMailman();
+          if (_this.resultMailman && _this.resultMailman.ok) {
+            return _this.addPane(template.pane.mailman, _this.renderPaneMailman);
+          }
         });
-        api.ajaxDataPerson(p.people, function(resultPeople) {
+        return api.ajaxDataPerson(p.people, function(resultPeople) {
           _this.resultPeople = resultPeople;
-          return _this.renderPanePeople();
+          if (_this.resultPeople && _this.resultPeople.ok) {
+            return _this.addPane(template.pane.person, _this.renderPanePeople);
+          }
         });
       }
-      return this.renderInner();
     };
 
-    ProjectView.prototype.navHandler = function(renderCallback) {
-      return function(e) {
+    ProjectView.prototype.addPane = function(template, renderCallback) {
+      var clickNav, pane,
+        _this = this;
+      pane = $(template());
+      this.$el.find('#project-container').append(pane);
+      clickNav = function(e) {
         var action, dropdown, li;
         li = $($(e.currentTarget).parents('li')[0]);
         action = li.attr('action');
-        renderCallback(action);
+        renderCallback(pane, action);
         e.preventDefault();
         dropdown = li.parents('.dropdown');
         dropdown.click();
         return false;
       };
+      pane.find('.nav li').not('.dropdown').find('a').on('click', clickNav);
+      return renderCallback(pane);
     };
 
     ProjectView.prototype.renderPage = function(target) {
@@ -1178,7 +1211,6 @@ TODO katbraybrooke
       };
       this.$el.html(template.page(renderData));
       target.html(this.$el);
-      this.renderInner();
       nav = this.$el.find('.nav');
       active = nav.find('.active');
       if (active.length) {
@@ -1187,37 +1219,15 @@ TODO katbraybrooke
       }
     };
 
-    ProjectView.prototype.renderInner = function() {
-      var renderData;
-      this.$el.find('.nav li').removeClass('active');
-      this.$el.find('.nav li[action="' + this.active + '"]').addClass('active');
-      renderData = {
-        active: this.active,
-        project: this.project()
-      };
-      this.$el.find('.active-project-pane').html(template.inner(renderData));
-      this.$el.find('#mailman-nav a').on('click', this.navHandler(this.renderPaneMailman));
-      this.$el.find('#github-nav li').not('.dropdown').find('a').on('click', this.navHandler(this.renderPaneGithub));
-      this.$el.find('#people-nav a').on('click', this.navHandler(this.renderPanePeople));
-      this.renderPaneGithub();
-      this.renderPaneMailman();
-      return this.renderPanePeople();
-    };
-
-    ProjectView.prototype.renderPaneGithub = function(action) {
-      var active, color, d, dom, domElement, m, plotData, repodata, reponame, _k, _len3, _ref2, _ref3, _results;
+    ProjectView.prototype.renderPaneGithub = function(pane, action) {
+      var active, color, d, domElement, m, pane_inner, plotData, repodata, reponame, _k, _len3, _ref2, _ref3, _results;
       if (action == null) action = "watchers";
-      this.$el.find('#github-nav li').removeClass('active');
-      active = this.$el.find('#github-nav li[action="' + action + '"]');
+      pane_inner = pane.find('.inner');
+      pane_inner.empty();
+      pane.find('.nav li').removeClass('active');
+      active = pane.find('.nav li[action="' + action + '"]');
       active.addClass('active');
       active.parents('li.dropdown').addClass('active');
-      dom = this.$el.find('#pane-github');
-      dom.empty();
-      if (!this.resultGithub) {
-        dom.spin();
-        return;
-      }
-      dom.spin(false);
       if (action === 'watchers' || action === 'issues' || action === 'forks' || action === 'size') {
         plotData = [];
         color = 0;
@@ -1242,61 +1252,54 @@ TODO katbraybrooke
         domElement = $('<div/>').css({
           height: 180,
           'margin-top': 10
-        }).appendTo(dom);
+        }).appendTo(pane_inner);
         return $.plot(domElement, plotData, {
           xaxis: {
             mode: "time"
           }
         });
       } else if (action === 'activity') {
-        return dom.html('<code>TODO</code> AJAX load Activity');
+        return pane_inner.html('<code>TODO</code> AJAX load Activity');
       } else if (action === 'details') {
         _ref3 = this.project().github;
         _results = [];
         for (_k = 0, _len3 = _ref3.length; _k < _len3; _k++) {
           m = _ref3[_k];
-          _results.push(dom.append(template.pane.github_details(this.resultGithub.data[m].repo)));
+          _results.push(pane_inner.append(template.details.github(this.resultGithub.data[m].repo)));
         }
         return _results;
       } else {
-        return dom.html('<code>Bad pathway</code>');
+        return pane_inner.html('<code>Bad pathway</code>');
       }
     };
 
-    ProjectView.prototype.renderPanePeople = function(action) {
-      var m, pane, _k, _len3, _ref2, _results;
+    ProjectView.prototype.renderPanePeople = function(pane, action) {
+      var m, pane_inner, _k, _len3, _ref2, _results;
       if (action == null) action = "details";
-      if (!this.resultPeople) return;
-      pane = this.$el.find('#pane-people');
-      pane.find('#people-nav li').removeClass('active');
-      pane.find('#people-nav li[action="' + action + '"]').addClass('active');
-      pane.empty();
-      dom.spin(false);
+      pane_inner = pane.find('.inner');
+      pane_inner.empty();
+      pane.find('.nav li').removeClass('active');
+      pane.find('.nav li[action="' + action + '"]').addClass('active');
       if (action === 'details') {
         _ref2 = this.resultPeople.data || [];
         _results = [];
         for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
           m = _ref2[_k];
-          _results.push(dom.append(template.pane.person_details(m)));
+          _results.push(pane_inner.append(template.details.person(m)));
         }
         return _results;
       } else if (action === 'activity') {
-        return dom.html('<code>TODO</code> AJAX load Activity');
+        return pane_inner.html('<code>TODO</code> AJAX load Activity');
       }
     };
 
-    ProjectView.prototype.renderPaneMailman = function(action) {
-      var color, d, dom, domElement, listData, listName, m, plotData, series, _k, _len3, _ref2, _ref3, _results;
+    ProjectView.prototype.renderPaneMailman = function(pane, action) {
+      var color, d, domElement, listData, listName, m, pane_inner, plotData, series, _k, _len3, _ref2, _ref3, _results;
       if (action == null) action = "posts";
-      if (!this.resultMailman) {
-        dom.spin();
-        return;
-      }
-      this.$el.find('#mailman-nav li').removeClass('active');
-      this.$el.find('#mailman-nav li[action="' + action + '"]').addClass('active');
-      dom = this.$el.find('#pane-mailman');
-      dom.empty();
-      dom.spin(false);
+      pane_inner = pane.find('.inner');
+      pane_inner.empty();
+      pane.find('.nav li').removeClass('active');
+      pane.find('.nav li[action="' + action + '"]').addClass('active');
       if (action === 'posts' || action === 'subscribers') {
         plotData = [];
         color = 0;
@@ -1323,7 +1326,7 @@ TODO katbraybrooke
         domElement = $('<div/>').css({
           height: 180,
           'margin-top': 10
-        }).appendTo(dom);
+        }).appendTo(pane_inner);
         return $.plot(domElement, plotData, {
           xaxis: {
             mode: "time"
@@ -1334,11 +1337,11 @@ TODO katbraybrooke
         _results = [];
         for (_k = 0, _len3 = _ref3.length; _k < _len3; _k++) {
           m = _ref3[_k];
-          _results.push(dom.append(template.pane.mailman_details(this.resultMailman.data[m].mailman)));
+          _results.push(pane_inner.append(template.details.mailman(this.resultMailman.data[m].mailman)));
         }
         return _results;
       } else {
-        return dom.html('<code>TODO</code> ajax grab activity');
+        return pane_inner.html('<code>TODO</code> ajax grab activity');
       }
     };
 
@@ -1701,7 +1704,7 @@ function program4(depth0,data) {
   var foundHelper, self=this;
 
 
-  return "<div class=\"pane label-pane\">\n    <label>Github</label>\n    <ul class=\"nav nav-tabs\" id=\"github-nav\">\n        <li class=\"dropdown\">\n        <a class=\"dropdown-toggle\"\n            data-toggle=\"dropdown\"\n            href=\"#\">\n            Graph\n            <b class=\"caret\"></b>\n        </a>\n        <ul class=\"dropdown-menu\">\n            <li action=\"watchers\"><a href=\"#\">Watchers</a></li>\n            <li action=\"size\"><a href=\"#\">Size</a></li>\n            <li action=\"issues\"><a href=\"#\">Issues</a></li>\n            <li action=\"forks\"><a href=\"#\">Forks</a></li>\n        </ul>\n        <li action=\"activity\"><a href=\"#\">Activity</a></li>\n        <li action=\"details\"><a href=\"#\">Details</a></li>\n    </ul>\n    <div id=\"pane-github\"></div>\n</div>\n";});
+  return "<div class=\"pane label-pane\">\n    <label>Github</label>\n    <ul class=\"nav nav-tabs\">\n        <li class=\"dropdown\">\n        <a class=\"dropdown-toggle\"\n            data-toggle=\"dropdown\"\n            href=\"#\">\n            Graph\n            <b class=\"caret\"></b>\n        </a>\n        <ul class=\"dropdown-menu\">\n            <li action=\"watchers\"><a href=\"#\">Watchers</a></li>\n            <li action=\"size\"><a href=\"#\">Size</a></li>\n            <li action=\"issues\"><a href=\"#\">Issues</a></li>\n            <li action=\"forks\"><a href=\"#\">Forks</a></li>\n        </ul>\n        <li action=\"activity\"><a href=\"#\">Activity</a></li>\n        <li action=\"details\"><a href=\"#\">Details</a></li>\n    </ul>\n    <div class=\"inner\"></div>\n</div>\n";});
   }
 }));
 (this.require.define({
@@ -1711,7 +1714,7 @@ function program4(depth0,data) {
   var foundHelper, self=this;
 
 
-  return "<div class=\"pane label-pane\">\n    <label>Mailing Lists</label>\n    <ul class=\"nav nav-tabs\" id=\"mailman-nav\">\n        <li action=\"posts\"><a href=\"#\">Posts</a></li>\n        <li action=\"subscribers\"><a href=\"#\">Subscribers</a></li>\n        <li action=\"activity\"><a href=\"#\">Activity</a></li>\n        <li action=\"details\"><a href=\"#\">Details</a></li>\n    </ul>\n    <div id=\"pane-mailman\"></div>\n</div>\n";});
+  return "<div class=\"pane label-pane\">\n    <label>Mailing Lists</label>\n    <ul class=\"nav nav-tabs\" id=\"mailman-nav\">\n        <li action=\"posts\"><a href=\"#\">Posts</a></li>\n        <li action=\"subscribers\"><a href=\"#\">Subscribers</a></li>\n        <li action=\"activity\"><a href=\"#\">Activity</a></li>\n        <li action=\"details\"><a href=\"#\">Details</a></li>\n    </ul>\n    <div class=\"inner\"></div>\n</div>\n";});
   }
 }));
 (this.require.define({
@@ -1721,41 +1724,17 @@ function program4(depth0,data) {
   var foundHelper, self=this;
 
 
-  return "<div class=\"pane label-pane\">\n    <label>People</label>\n    <ul class=\"nav nav-tabs\" id=\"people-nav\">\n        <li action=\"details\"><a href=\"#\">Details</a></li>\n        <li action=\"activity\"><a href=\"#\">Activity</a></li>\n    </ul>\n    <div id=\"pane-people\"></div>\n</div>\n";});
+  return "<div class=\"pane label-pane\">\n    <label>People</label>\n    <ul class=\"nav nav-tabs\" id=\"people-nav\">\n        <li action=\"details\"><a href=\"#\">Details</a></li>\n        <li action=\"activity\"><a href=\"#\">Activity</a></li>\n    </ul>\n    <div class=\"inner\"></div>\n</div>\n";});
   }
 }));
 (this.require.define({
   "views/templates/pane_project": function(exports, require, module) {
     module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
-  var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+  var foundHelper, self=this;
 
-function program1(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "<li><a href=\"";
-  stack1 = depth0;
-  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "this", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\">";
-  stack1 = depth0;
-  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "this", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</a></li>";
-  return buffer;}
 
-  buffer += "<div class=\"pane label-pane well\">\n    <label>Description</label>\n    <ul>";
-  foundHelper = helpers.link;
-  stack1 = foundHelper || depth0.link;
-  stack2 = helpers.each;
-  tmp1 = self.program(1, program1, data);
-  tmp1.hash = {};
-  tmp1.fn = tmp1;
-  tmp1.inverse = self.noop;
-  stack1 = stack2.call(depth0, stack1, tmp1);
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</ul>\n</div>\n";
-  return buffer;});
+  return "<div class=\"pane label-pane pane-collapse\">\n    <label>Description</label>\n    <div class=\"inner\"></div>\n</div>\n";});
   }
 }));
 (this.require.define({
@@ -1876,7 +1855,7 @@ function program2(depth0,data) {
   stack1 = foundHelper || depth0.subtitle;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "subtitle", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</small></h1>\n<div class=\"row\">\n    <div class=\"span3\">\n        <ul class=\"nav nav-list well\" style=\"max-height: 400px; overflow: scroll;\">\n            ";
+  buffer += escapeExpression(stack1) + "</small></h1>\n<div class=\"row-fluid\">\n    <div class=\"span3\">\n        <ul class=\"nav nav-list well\" style=\"max-height: 400px; overflow: scroll;\">\n            ";
   foundHelper = helpers.projectJson;
   stack1 = foundHelper || depth0.projectJson;
   stack2 = helpers.each;
@@ -1886,7 +1865,7 @@ function program2(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </ul>\n    </div>\n    <div class=\"active-project-pane\">\n    </div>\n</div>\n\n\n";
+  buffer += "\n        </ul>\n    </div>\n    <div id=\"project-container\" class=\"span9\">\n    </div>\n</div>\n\n\n";
   return buffer;});
   }
 }));
@@ -1894,49 +1873,9 @@ function program2(depth0,data) {
   "views/templates/project_inner": function(exports, require, module) {
     module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
-  var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+  var buffer = "", foundHelper, self=this;
 
-function program1(depth0,data) {
-  
-  var buffer = "", stack1, stack2;
-  buffer += "\n    ";
-  foundHelper = helpers.project;
-  stack1 = foundHelper || depth0.project;
-  stack2 = helpers['with'];
-  tmp1 = self.program(2, program2, data);
-  tmp1.hash = {};
-  tmp1.fn = tmp1;
-  tmp1.inverse = self.noop;
-  stack1 = stack2.call(depth0, stack1, tmp1);
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n";
-  return buffer;}
-function program2(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n        <h2>";
-  foundHelper = helpers.title;
-  stack1 = foundHelper || depth0.title;
-  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "title", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</h2>\n    ";
-  return buffer;}
 
-function program4(depth0,data) {
-  
-  
-  return "\n    <h2>Select a project...</h2>\n";}
-
-  foundHelper = helpers.active;
-  stack1 = foundHelper || depth0.active;
-  stack2 = helpers['if'];
-  tmp1 = self.program(1, program1, data);
-  tmp1.hash = {};
-  tmp1.fn = tmp1;
-  tmp1.inverse = self.program(4, program4, data);
-  stack1 = stack2.call(depth0, stack1, tmp1);
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n";
   return buffer;});
   }
 }));

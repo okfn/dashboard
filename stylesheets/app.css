@@ -115,17 +115,18 @@
           border-radius: 4px 0 4px 0;
 }
 
-
-#pane-people,
-#pane-activity,
-#pane-github,
-#pane-mailman {
-  min-height: 200px;
-  max-height: 200px;
-  height: 200px;
+.pane {
+  min-height: 250px;
+  max-height: 250px;
+  height: 250px;
   overflow: scroll;
   overflow-x: hidden;
   overflow-y: scroll;
+}
+.pane.pane-collapse {
+  min-height: 0 !important;
+  max-height: auto !important;
+  height: auto;
 }
 #legendholder {
   position: absolute;
