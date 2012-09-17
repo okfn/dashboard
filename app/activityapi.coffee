@@ -1,6 +1,6 @@
 module.exports = 
-    #url: 'http://activityapi.herokuapp.com/api/1'
-    url: 'http://localhost:5000/api/1'
+    url: 'http://activityapi.herokuapp.com/api/1'
+    #url: 'http://localhost:5000/api/1'
 
     ## Methods
     ## =======

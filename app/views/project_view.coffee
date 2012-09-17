@@ -4,6 +4,7 @@ template =
         mailman: require 'views/templates/pane_mailman'
         person: require 'views/templates/pane_people'
         github: require 'views/templates/pane_github'
+        project: require 'views/templates/pane_project'
     details: 
         mailman: require 'views/templates/mailman_details'
         person: require 'views/templates/person_details'
@@ -36,6 +37,8 @@ module.exports = class ProjectView extends Backbone.View
         @$el.find('.nav li').removeClass 'active'
         @$el.find('.nav li[action="'+@active+'"]').addClass 'active'
         if p
+            if p.description
+                @addPane template.pane.project, (pane)=> pane.find('.inner').html(project.description)
             api.ajaxHistoryGithub p.github, (@resultGithub) => 
                 if @resultGithub && @resultGithub.ok
                     @addPane template.pane.github, @renderPaneGithub

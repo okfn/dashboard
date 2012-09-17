@@ -57,3 +57,8 @@
   overflow-x: hidden;
   overflow-y: scroll;
 }
+.pane.pane-collapse {
+  min-height: 0 !important;
+  max-height: auto !important;
+  height: auto;
+}
