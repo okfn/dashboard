@@ -41,9 +41,12 @@ module.exports = class ProjectView extends Backbone.View
         # Create an event handler which handles nav events
         # and calls back to a render function
         return (e) ->
-            action = $($(e.currentTarget).parents('li')[0]).attr('action')
+            li = $($(e.currentTarget).parents('li')[0])
+            action = li.attr('action')
             renderCallback(action)
             e.preventDefault()
+            dropdown = li.parents('.dropdown')
+            dropdown.click()
             return false;
 
     ## Renderers
@@ -81,7 +84,9 @@ module.exports = class ProjectView extends Backbone.View
     renderPaneGithub: (action="watchers") =>
         # Update nav
         @$el.find('#github-nav li').removeClass 'active'
-        @$el.find('#github-nav li[action="'+action+'"]').addClass 'active'
+        active = @$el.find('#github-nav li[action="'+action+'"]')
+        active.addClass 'active'
+        active.parents('li.dropdown').addClass 'active'
         # Render inner
         dom = @$el.find '#pane-github'
         dom.empty()
