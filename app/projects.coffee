@@ -180,7 +180,7 @@ module.exports = [
             title: 'OKFN Core'
             link: ['http://okfn.org','http://blog.okfn.org']
             people: ['mintcanary','zephod','noelmas','nilstoedtmann','bobbydonovan']
-            mailman: ['okfn-coord','okfn-help']
+            mailman: ['okfn-coord','okfn-help','okfn-discuss']
             github: ['okfn/wordpress-theme-okfn','okfn/wordpress-json-api-okfn']
         }
         ]
