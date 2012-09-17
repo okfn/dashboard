@@ -26,77 +26,17 @@ module.exports = class ProjectView extends Backbone.View
         p = @project()
         # Trash cached data
         @resultGithub = null
-        @graphGithub = null
         @resultMailman = null
-        @graphMailman = null
-        # Download new data
-        ajax_github = api.url+'/history/github'
-        ajax_mailman = api.url+'/history/mailman'
-        ajax_people = api.url+'/data/person?per_page='+p.people.length+'&login='
-        comma = false
-        for person in p.people
-            if comma
-                ajax_people+=','
-            comma = true
-            ajax_people += person
-
-        $.ajax
-            url: ajax_github
-            dataType: 'jsonp'
-            success: @gotPaneGithub
-        $.ajax
-            url: ajax_mailman
-            dataType: 'jsonp'
-            success: @gotPaneMailman
-        $.ajax
-            url: ajax_people
-            dataType: 'jsonp'
-            success: @gotPanePeople
-        p.mailman_url = ajax_mailman
+        @resultPeople = null
+        if p
+            api.ajaxHistoryGithub p.github, (@resultGithub) => @renderPaneGithub()
+            api.ajaxHistoryMailman p.mailman, (@resultMailman) => @renderPaneMailman()
+            api.ajaxDataPerson p.people, (@resultPeople) => @renderPanePeople()
         # Update the DOM
         @renderInner()
 
-    ## Data Receive Hooks
-    ## ------------------
-    gotPanePeople: (@resultPeople) =>
-        @renderPanePeople()
-
-    gotPaneGithub: (@resultGithub) =>
-        @graphGithub = 
-            'watchers':[]
-            'forks':[]
-            'issues':[]
-            'size':[]
-        color = 0
-        for name in @project().github
-            color = (color+1) % 30
-            series = {} 
-            for k,v of @graphGithub
-                series[k] = []
-            for d in @resultGithub.data[name].data
-                for k,v of series
-                    v.push [ new Date(d.timestamp), d[k] ]
-            for k,v of series
-                @graphGithub[k].push { label: name, data: v, color: color }
-        @renderPaneGithub()
-
-    gotPaneMailman: (@resultMailman) =>
-        @graphMailman = 
-            'posts':[]
-            'subscribers':[]
-        color = 0
-        for name in @project().mailman
-            color = (color+1) % 30
-            series = {} 
-            for k,v of @graphMailman
-                series[k] = []
-            for d in @resultMailman.data[name].data
-                for k,v of series
-                    v.push [ new Date(d.timestamp), d[k] ]
-            for k,v of series
-                @graphMailman[k].push { label: name, data: v, color: color }
-        @renderPaneMailman()
-
+    ## Nav Callbacks
+    ## -------------
     clickNavMailman: (e) =>
         action = $($(e.currentTarget).parents('li')[0]).attr('action')
         @renderPaneMailman(action)
@@ -117,7 +57,6 @@ module.exports = class ProjectView extends Backbone.View
 
     ## Renderers
     ## ---------
-    #
     render: (target) ->
         renderData = 
             projectJson: projectJson
@@ -162,8 +101,15 @@ module.exports = class ProjectView extends Backbone.View
         # Update loading state
         dom.spin(false)
         if action=='watchers' or action=='issues' or action=='forks' or action=='size'
-            graph = $('<div/>').css({height:180,'margin-top':10}).appendTo(dom)
-            $.plot graph, @graphGithub[action], { xaxis: { mode: "time" } }
+            plotData = []
+            color = 0
+            for reponame,repodata of @resultGithub.data
+                plotData.push 
+                    label: reponame
+                    data: ([new Date(d.timestamp),d[action]] for d in repodata.data)
+                    color: (++color) % 30
+            domElement = $('<div/>').css({height:180,'margin-top':10}).appendTo(dom)
+            $.plot domElement, plotData, { xaxis: { mode: "time" } }
         else if action=='activity'
             dom.html '<code>TODO</code> AJAX load Activity'
         else if action=='details'
@@ -206,8 +152,17 @@ module.exports = class ProjectView extends Backbone.View
         # Update loading state
         dom.spin(false)
         if action=='posts' or action=='subscribers'
-            graph = $('<div/>').css({height:180,'margin-top':10}).appendTo(dom)
-            $.plot graph, @graphMailman[action], { xaxis: { mode: "time" } }
+            plotData = []
+            color = 0
+            for listName, listData of @resultMailman.data
+                color = (color+1) % 30
+                series = ([ new Date(d.timestamp), d[action] ] for d in listData.data)
+                plotData.push 
+                    label: listData.mailman.name
+                    data: series
+                    color: color
+            domElement = $('<div/>').css({height:180,'margin-top':10}).appendTo(dom)
+            $.plot domElement, plotData, { xaxis: { mode: "time" } }
         else if action=='details'
             for m in @project().mailman
                 dom.append template.pane.mailman_details @resultMailman.data[m].mailman
