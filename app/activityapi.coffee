@@ -43,7 +43,9 @@ class ActivityApi extends Backbone.Model
             out += s
         return out
 
-    _error: (a,b) ->
+    _error: (a,b) =>
+        @trigger 'ajaxMinusMinus'
+        @trigger 'ajaxError'
         console.error 'AJAX error',a,b
 
     _fetch: (url, callback) ->

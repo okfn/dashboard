@@ -9,19 +9,13 @@ for category in projectJson
         projectMap[project.name] = project
 
 module.exports = class ProjectPage extends Backbone.View
-    active: null
-    project: => projectMap[@active]
-
-    ## Methods
-    ## -------
-    showProject: (@active) ->
-        p = @project()
+    showProject: (projectName) ->
         # Fix up that DOM
         inner = @$el.find('#project-container')
         if @view
             @view.removeFromDom()
-        if p
-            @view = new ProjectView(p)
+        if projectName
+            @view = new ProjectView(projectMap[projectName])
             inner.append @view.$el
 
     renderPage: (target) ->
@@ -32,7 +26,7 @@ module.exports = class ProjectPage extends Backbone.View
         target.html @$el
         # On full-render, scroll the nav-bar
         nav = @$el.find('.nav')
-        active = nav.find('.active')
-        if active.length
-            nav.scrollTop active.position().top
-            nav.scrollTop( active.index() * 26 - 50 )
+        navActive = nav.find('.active')
+        if navActive.length
+            nav.scrollTop navActive.position().top
+            nav.scrollTop( navActive.index() * 26 - 50 )

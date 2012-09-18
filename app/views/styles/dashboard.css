@@ -17,6 +17,18 @@
     top: 64px;
     z-index: 99;
 }
+#loading .text {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    color: #fff;
+    z-index: 999;
+    width: 380px;
+    text-align: center;
+    font-size: 11px;
+    text-shadow: 0 0 2px #000;
+}
+
 
 
 .footer {
