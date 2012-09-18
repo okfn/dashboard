@@ -81,10 +81,24 @@
 (this.require.define({
   "activityapi": function(exports, require, module) {
     (function() {
+  var ActivityApi,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  module.exports = {
-    url: 'http://activityapi.herokuapp.com/api/1',
-    ajaxHistoryGithub: function(repos, callback) {
+  ActivityApi = (function(_super) {
+
+    __extends(ActivityApi, _super);
+
+    function ActivityApi() {
+      this._error = __bind(this._error, this);
+      this._wrapCallback = __bind(this._wrapCallback, this);
+      ActivityApi.__super__.constructor.apply(this, arguments);
+    }
+
+    ActivityApi.prototype.url = 'http://activityapi.herokuapp.com/api/1';
+
+    ActivityApi.prototype.ajaxHistoryGithub = function(repos, callback) {
       var url;
       if (!repos.length) {
         return callback(null);
@@ -92,8 +106,9 @@
         url = this.url + '/history/github?repo=' + this._join(repos) + '&per_page=90';
         return this._fetch(url, callback);
       }
-    },
-    ajaxHistoryMailman: function(lists, callback) {
+    };
+
+    ActivityApi.prototype.ajaxHistoryMailman = function(lists, callback) {
       var url;
       if (!lists.length) {
         return callback(null);
@@ -101,8 +116,9 @@
         url = this.url + '/history/mailman?list=' + this._join(lists) + '&per_page=90';
         return this._fetch(url, callback);
       }
-    },
-    ajaxDataPerson: function(logins, callback) {
+    };
+
+    ActivityApi.prototype.ajaxDataPerson = function(logins, callback) {
       var url;
       if (!logins.length) {
         return callback(null);
@@ -110,8 +126,17 @@
         url = this.url + '/data/person?per_page=' + logins.length + '&login=' + this._join(logins);
         return this._fetch(url, callback);
       }
-    },
-    _join: function(strings) {
+    };
+
+    ActivityApi.prototype._wrapCallback = function(callback) {
+      var _this = this;
+      return function(data) {
+        _this.trigger('ajaxMinusMinus');
+        return callback(data);
+      };
+    };
+
+    ActivityApi.prototype._join = function(strings) {
       var comma, out, s, _i, _len;
       out = '';
       comma = false;
@@ -122,20 +147,30 @@
         out += s;
       }
       return out;
-    },
-    _error: function(a, b) {
-      return console.err('AJAX error', a, b);
-    },
-    _fetch: function(url, callback) {
+    };
+
+    ActivityApi.prototype._error = function(a, b) {
+      this.trigger('ajaxMinusMinus');
+      this.trigger('ajaxError');
+      return console.error('AJAX error', a, b);
+    };
+
+    ActivityApi.prototype._fetch = function(url, callback) {
       if (!callback) throw 'I require a callback function';
+      this.trigger('ajaxPlusPlus');
       return $.ajax({
         url: url,
-        success: callback,
+        success: this._wrapCallback(callback),
         dataType: 'jsonp',
         error: this._error
       });
-    }
-  };
+    };
+
+    return ActivityApi;
+
+  })(Backbone.Model);
+
+  module.exports = new ActivityApi();
 
 }).call(this);
 
@@ -144,12 +179,16 @@
 (this.require.define({
   "initialize": function(exports, require, module) {
     (function() {
-  var Router;
+  var LoadingView, Router;
 
   Router = require('router');
 
+  LoadingView = require('views/loading_view');
+
   $(function() {
+    var loadingView;
     this.router = new Router();
+    loadingView = new LoadingView();
     return Backbone.history.start();
   });
 
@@ -662,22 +701,20 @@ TODO katbraybrooke
 (this.require.define({
   "router": function(exports, require, module) {
     (function() {
-  var GithubView, MailmanView, PersonView, ProjectView, ReclineView, Router, TwitterView, content, singletons,
+  var GithubView, MailmanView, PersonView, ProjectPage, Router, TwitterView, content, singletons,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  GithubView = require('views/github_view');
+  GithubView = require('views/page_github');
 
-  PersonView = require('views/person_view');
+  PersonView = require('views/page_people');
 
-  ProjectView = require('views/project_view');
+  ProjectPage = require('views/page_project');
 
-  MailmanView = require('views/mailman_view');
+  MailmanView = require('views/page_mailman');
 
-  TwitterView = require('views/twitter_view');
-
-  ReclineView = require('views/recline_view');
+  TwitterView = require('views/page_twitter');
 
   content = function() {
     return $('#content');
@@ -690,8 +727,8 @@ TODO katbraybrooke
     personView: function() {
       return this._person = this._person || new PersonView();
     },
-    projectView: function() {
-      return this._project = this._project || new ProjectView();
+    projectPage: function() {
+      return this._project = this._project || new ProjectPage();
     },
     mailmanView: function() {
       return this._mailman = this._mailman || new MailmanView();
@@ -746,8 +783,8 @@ TODO katbraybrooke
 
     Router.prototype.project = function(projectName) {
       if (projectName == null) projectName = 'ckan';
-      this.setCurrent(singletons.projectView());
-      return singletons.projectView().showProject(projectName);
+      this.setCurrent(singletons.projectPage());
+      return singletons.projectPage().showProject(projectName);
     };
 
     Router.prototype.github = function(graphMode) {
@@ -832,14 +869,114 @@ TODO katbraybrooke
   }
 }));
 (this.require.define({
-  "views/github_view": function(exports, require, module) {
+  "views/loading_view": function(exports, require, module) {
+    (function() {
+  var LoadingView, api, template,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  api = require('activityapi');
+
+  template = require('views/templates/loading_bar');
+
+  module.exports = LoadingView = (function(_super) {
+
+    __extends(LoadingView, _super);
+
+    function LoadingView() {
+      this.error = __bind(this.error, this);
+      this.minusMinus = __bind(this.minusMinus, this);
+      this.plusPlus = __bind(this.plusPlus, this);
+      this.percent = __bind(this.percent, this);
+      this.initialize = __bind(this.initialize, this);
+      LoadingView.__super__.constructor.apply(this, arguments);
+    }
+
+    LoadingView.prototype.highWaterMark = 0;
+
+    LoadingView.prototype.current = 0;
+
+    LoadingView.prototype.gotError = false;
+
+    LoadingView.prototype.dom = function() {
+      return $('#loading');
+    };
+
+    LoadingView.prototype.initialize = function() {
+      api.bind('ajaxPlusPlus', this.plusPlus);
+      api.bind('ajaxMinusMinus', this.minusMinus);
+      return api.bind('ajaxError', this.error);
+    };
+
+    LoadingView.prototype.percent = function() {
+      var percent, remaining;
+      remaining = this.highWaterMark - this.current;
+      if (this.highWaterMark > 0) {
+        return (3 + Math.ceil((remaining * 97) / this.highWaterMark)) + '%';
+      }
+      return percent = '100%';
+    };
+
+    LoadingView.prototype.plusPlus = function() {
+      var dom;
+      this.current++;
+      this.highWaterMark = Math.max(this.highWaterMark, this.current);
+      dom = this.dom();
+      dom.stop().show().css({
+        opacity: 1
+      });
+      return dom.html(template({
+        percent: this.percent()
+      }));
+    };
+
+    LoadingView.prototype.minusMinus = function() {
+      var dom;
+      this.current--;
+      dom = this.dom();
+      if (this.current === 0) {
+        this.highWaterMark = 0;
+        if (this.gotError) {
+          this.gotError = false;
+        } else {
+          dom.fadeOut(1000);
+        }
+      }
+      return dom.find('.bar').css({
+        width: this.percent()
+      });
+    };
+
+    LoadingView.prototype.error = function() {
+      var dom;
+      this.gotError = true;
+      dom = this.dom();
+      dom.stop().show().css({
+        opacity: 1
+      });
+      return dom.find('.bar').css({
+        'background-color': '#c00'
+      });
+    };
+
+    return LoadingView;
+
+  })(Backbone.View);
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
+  "views/page_github": function(exports, require, module) {
     (function() {
   var GithubView, activityView, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  template = require('views/templates/github');
+  template = require('views/templates/page/github');
 
   activityView = require('views/activity_view');
 
@@ -848,7 +985,7 @@ TODO katbraybrooke
     __extends(GithubView, _super);
 
     function GithubView() {
-      this.render = __bind(this.render, this);
+      this.renderPage = __bind(this.renderPage, this);
       this.renderGraph = __bind(this.renderGraph, this);
       this.renderActivity = __bind(this.renderActivity, this);
       this.showGraph = __bind(this.showGraph, this);
@@ -999,7 +1136,7 @@ TODO katbraybrooke
       }
     };
 
-    GithubView.prototype.render = function(target) {
+    GithubView.prototype.renderPage = function(target) {
       var renderData;
       renderData = function() {
         return {
@@ -1022,13 +1159,13 @@ TODO katbraybrooke
   }
 }));
 (this.require.define({
-  "views/mailman_view": function(exports, require, module) {
+  "views/page_mailman": function(exports, require, module) {
     (function() {
   var MailmanView, template,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  template = require('views/templates/mailman');
+  template = require('views/templates/page/mailman');
 
   module.exports = MailmanView = (function(_super) {
 
@@ -1042,7 +1179,7 @@ TODO katbraybrooke
 
     MailmanView.prototype.renderData = function() {};
 
-    MailmanView.prototype.render = function(target) {
+    MailmanView.prototype.renderPage = function(target) {
       this.$el.html(this.template(this.renderData));
       return target.html(this.$el);
     };
@@ -1056,13 +1193,13 @@ TODO katbraybrooke
   }
 }));
 (this.require.define({
-  "views/person_view": function(exports, require, module) {
+  "views/page_people": function(exports, require, module) {
     (function() {
   var PersonView, template,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  template = require('views/templates/person');
+  template = require('views/templates/page/people');
 
   module.exports = PersonView = (function(_super) {
 
@@ -1076,7 +1213,7 @@ TODO katbraybrooke
 
     PersonView.prototype.renderData = function() {};
 
-    PersonView.prototype.render = function(target) {
+    PersonView.prototype.renderPage = function(target) {
       this.$el.html(this.template(this.renderData));
       return target.html(this.$el);
     };
@@ -1090,29 +1227,15 @@ TODO katbraybrooke
   }
 }));
 (this.require.define({
-  "views/project_view": function(exports, require, module) {
+  "views/page_project": function(exports, require, module) {
     (function() {
-  var ProjectView, api, category, project, projectJson, projectMap, template, _i, _j, _len, _len2, _ref,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  var ProjectPage, ProjectView, category, project, projectJson, projectMap, template, _i, _j, _len, _len2, _ref,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  template = {
-    page: require('views/templates/project'),
-    pane: {
-      mailman: require('views/templates/pane_mailman'),
-      person: require('views/templates/pane_people'),
-      github: require('views/templates/pane_github'),
-      project: require('views/templates/pane_project')
-    },
-    details: {
-      mailman: require('views/templates/mailman_details'),
-      person: require('views/templates/person_details'),
-      github: require('views/templates/github_details')
-    }
-  };
+  ProjectView = require('views/project_view');
 
-  api = require('activityapi');
+  template = require('views/templates/page/project');
 
   projectJson = require('projects');
 
@@ -1127,6 +1250,106 @@ TODO katbraybrooke
     }
   }
 
+  module.exports = ProjectPage = (function(_super) {
+
+    __extends(ProjectPage, _super);
+
+    function ProjectPage() {
+      ProjectPage.__super__.constructor.apply(this, arguments);
+    }
+
+    ProjectPage.prototype.showProject = function(projectName) {
+      var inner;
+      inner = this.$el.find('#project-container');
+      if (this.view) this.view.removeFromDom();
+      if (projectName) {
+        this.view = new ProjectView(projectMap[projectName]);
+        return inner.append(this.view.$el);
+      }
+    };
+
+    ProjectPage.prototype.renderPage = function(target) {
+      var nav, navActive, renderData;
+      renderData = {
+        projectJson: projectJson,
+        subtitle: 'Tracking ' + Object.keys(projectMap).length + ' projects'
+      };
+      this.$el.html(template(renderData));
+      target.html(this.$el);
+      nav = this.$el.find('.nav');
+      navActive = nav.find('.active');
+      if (navActive.length) {
+        nav.scrollTop(navActive.position().top);
+        return nav.scrollTop(navActive.index() * 26 - 50);
+      }
+    };
+
+    return ProjectPage;
+
+  })(Backbone.View);
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
+  "views/page_twitter": function(exports, require, module) {
+    (function() {
+  var TwitterView, template,
+    __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  template = require('views/templates/page/twitter');
+
+  module.exports = TwitterView = (function(_super) {
+
+    __extends(TwitterView, _super);
+
+    function TwitterView() {
+      TwitterView.__super__.constructor.apply(this, arguments);
+    }
+
+    TwitterView.prototype.template = template;
+
+    TwitterView.prototype.renderData = function() {};
+
+    TwitterView.prototype.renderPage = function(target) {
+      this.$el.html(this.template(this.renderData));
+      return target.html(this.$el);
+    };
+
+    return TwitterView;
+
+  })(Backbone.View);
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
+  "views/project_view": function(exports, require, module) {
+    (function() {
+  var ProjectView, api, template,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  template = {
+    pane: {
+      mailman: require('views/templates/pane/mailman'),
+      person: require('views/templates/pane/people'),
+      github: require('views/templates/pane/github'),
+      project: require('views/templates/pane/project')
+    },
+    details: {
+      mailman: require('views/templates/details/mailman'),
+      person: require('views/templates/details/person'),
+      github: require('views/templates/details/github')
+    }
+  };
+
+  api = require('activityapi');
+
   module.exports = ProjectView = (function(_super) {
 
     __extends(ProjectView, _super);
@@ -1136,59 +1359,71 @@ TODO katbraybrooke
       this.renderPanePeople = __bind(this.renderPanePeople, this);
       this.renderPaneGithub = __bind(this.renderPaneGithub, this);
       this.addPane = __bind(this.addPane, this);
-      this.project = __bind(this.project, this);
+      this.removeFromDom = __bind(this.removeFromDom, this);
+      this.initialize = __bind(this.initialize, this);
       ProjectView.__super__.constructor.apply(this, arguments);
     }
 
-    ProjectView.prototype.active = null;
+    ProjectView.prototype.cancel = false;
 
-    ProjectView.prototype.project = function() {
-      return projectMap[this.active];
-    };
-
-    ProjectView.prototype.showProject = function(active) {
-      var p,
-        _this = this;
-      this.active = active;
-      p = this.project();
-      this.resultGithub = null;
-      this.resultMailman = null;
-      this.resultPeople = null;
-      this.$el.find('#project-container').empty();
-      this.$el.find('.nav li').removeClass('active');
-      this.$el.find('.nav li[action="' + this.active + '"]').addClass('active');
-      if (p) {
-        if (p.description) {
-          this.addPane(template.pane.project, function(pane) {
-            return pane.find('.inner').html(project.description);
-          });
-        }
-        api.ajaxHistoryGithub(p.github, function(resultGithub) {
-          _this.resultGithub = resultGithub;
-          if (_this.resultGithub && _this.resultGithub.ok) {
-            return _this.addPane(template.pane.github, _this.renderPaneGithub);
-          }
-        });
-        api.ajaxHistoryMailman(p.mailman, function(resultMailman) {
-          _this.resultMailman = resultMailman;
-          if (_this.resultMailman && _this.resultMailman.ok) {
-            return _this.addPane(template.pane.mailman, _this.renderPaneMailman);
-          }
-        });
-        return api.ajaxDataPerson(p.people, function(resultPeople) {
-          _this.resultPeople = resultPeople;
-          if (_this.resultPeople && _this.resultPeople.ok) {
-            return _this.addPane(template.pane.person, _this.renderPanePeople);
-          }
+    ProjectView.prototype.initialize = function(project) {
+      var _this = this;
+      this.project = project;
+      if (this.project.description) {
+        this.addPane(template.pane.project, function(pane) {
+          return pane.find('.inner').html(_this.project.description);
         });
       }
+      api.ajaxHistoryGithub(this.project.github, function(resultGithub) {
+        _this.resultGithub = resultGithub;
+        if (_this.resultGithub && _this.resultGithub.ok) {
+          return _this.addPane(template.pane.github, _this.renderPaneGithub);
+        }
+      });
+      api.ajaxHistoryMailman(this.project.mailman, function(resultMailman) {
+        _this.resultMailman = resultMailman;
+        if (_this.resultMailman && _this.resultMailman.ok) {
+          return _this.addPane(template.pane.mailman, _this.renderPaneMailman);
+        }
+      });
+      return api.ajaxDataPerson(this.project.people, function(resultPeople) {
+        _this.resultPeople = resultPeople;
+        if (_this.resultPeople && _this.resultPeople.ok) {
+          return _this.addPane(template.pane.person, _this.renderPanePeople);
+        }
+      });
+    };
+
+    ProjectView.prototype.removeFromDom = function() {
+      this.cancel = true;
+      return this.$el.remove();
     };
 
     ProjectView.prototype.addPane = function(template, renderCallback) {
-      var clickNav, pane,
+      var child, clickNav, getIndex, myIndex, pane, _i, _len, _ref,
         _this = this;
+      if (this.cancel) return;
       pane = $(template());
-      this.$el.find('#project-container').append(pane);
+      getIndex = function(domElement) {
+        var index, label;
+        label = $($(domElement).find('label')[0]).text();
+        index = ['Description', 'Mailing Lists', 'Github', 'People'].indexOf(label);
+        if (index === -1) {
+          return 999;
+        } else {
+          return index;
+        }
+      };
+      myIndex = getIndex(pane);
+      _ref = this.$el.children();
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        child = _ref[_i];
+        if (myIndex >= 0 && myIndex < (getIndex(child))) {
+          pane.insertBefore($(child));
+          break;
+        }
+      }
+      if (!pane.parent().length) this.$el.append(pane);
       clickNav = function(e) {
         var action, dropdown, li;
         li = $($(e.currentTarget).parents('li')[0]);
@@ -1200,7 +1435,11 @@ TODO katbraybrooke
         return false;
       };
       pane.find('.nav li').not('.dropdown').find('a').on('click', clickNav);
-      return renderCallback(pane);
+      renderCallback(pane);
+      pane.css({
+        display: 'none'
+      });
+      return pane.fadeIn(500);
     };
 
     ProjectView.prototype.renderPage = function(target) {
@@ -1220,7 +1459,7 @@ TODO katbraybrooke
     };
 
     ProjectView.prototype.renderPaneGithub = function(pane, action) {
-      var active, color, d, domElement, m, pane_inner, plotData, repodata, reponame, _k, _len3, _ref2, _ref3, _results;
+      var active, color, d, domElement, m, pane_inner, plotData, repodata, reponame, _i, _len, _ref, _ref2, _results;
       if (action == null) action = "watchers";
       pane_inner = pane.find('.inner');
       pane_inner.empty();
@@ -1231,17 +1470,17 @@ TODO katbraybrooke
       if (action === 'watchers' || action === 'issues' || action === 'forks' || action === 'size') {
         plotData = [];
         color = 0;
-        _ref2 = this.resultGithub.data;
-        for (reponame in _ref2) {
-          repodata = _ref2[reponame];
+        _ref = this.resultGithub.data;
+        for (reponame in _ref) {
+          repodata = _ref[reponame];
           plotData.push({
             label: reponame,
             data: (function() {
-              var _k, _len3, _ref3, _results;
-              _ref3 = repodata.data;
+              var _i, _len, _ref2, _results;
+              _ref2 = repodata.data;
               _results = [];
-              for (_k = 0, _len3 = _ref3.length; _k < _len3; _k++) {
-                d = _ref3[_k];
+              for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+                d = _ref2[_i];
                 _results.push([new Date(d.timestamp), d[action]]);
               }
               return _results;
@@ -1261,10 +1500,10 @@ TODO katbraybrooke
       } else if (action === 'activity') {
         return pane_inner.html('<code>TODO</code> AJAX load Activity');
       } else if (action === 'details') {
-        _ref3 = this.project().github;
+        _ref2 = this.project().github;
         _results = [];
-        for (_k = 0, _len3 = _ref3.length; _k < _len3; _k++) {
-          m = _ref3[_k];
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          m = _ref2[_i];
           _results.push(pane_inner.append(template.details.github(this.resultGithub.data[m].repo)));
         }
         return _results;
@@ -1274,17 +1513,17 @@ TODO katbraybrooke
     };
 
     ProjectView.prototype.renderPanePeople = function(pane, action) {
-      var m, pane_inner, _k, _len3, _ref2, _results;
+      var m, pane_inner, _i, _len, _ref, _results;
       if (action == null) action = "details";
       pane_inner = pane.find('.inner');
       pane_inner.empty();
       pane.find('.nav li').removeClass('active');
       pane.find('.nav li[action="' + action + '"]').addClass('active');
       if (action === 'details') {
-        _ref2 = this.resultPeople.data || [];
+        _ref = this.resultPeople.data || [];
         _results = [];
-        for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
-          m = _ref2[_k];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          m = _ref[_i];
           _results.push(pane_inner.append(template.details.person(m)));
         }
         return _results;
@@ -1294,7 +1533,7 @@ TODO katbraybrooke
     };
 
     ProjectView.prototype.renderPaneMailman = function(pane, action) {
-      var color, d, domElement, listData, listName, m, pane_inner, plotData, series, _k, _len3, _ref2, _ref3, _results;
+      var color, d, domElement, listData, listName, m, pane_inner, plotData, series, _i, _len, _ref, _ref2, _results;
       if (action == null) action = "posts";
       pane_inner = pane.find('.inner');
       pane_inner.empty();
@@ -1303,16 +1542,16 @@ TODO katbraybrooke
       if (action === 'posts' || action === 'subscribers') {
         plotData = [];
         color = 0;
-        _ref2 = this.resultMailman.data;
-        for (listName in _ref2) {
-          listData = _ref2[listName];
+        _ref = this.resultMailman.data;
+        for (listName in _ref) {
+          listData = _ref[listName];
           color = (color + 1) % 30;
           series = (function() {
-            var _k, _len3, _ref3, _results;
-            _ref3 = listData.data;
+            var _i, _len, _ref2, _results;
+            _ref2 = listData.data;
             _results = [];
-            for (_k = 0, _len3 = _ref3.length; _k < _len3; _k++) {
-              d = _ref3[_k];
+            for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+              d = _ref2[_i];
               _results.push([new Date(d.timestamp), d[action]]);
             }
             return _results;
@@ -1333,10 +1572,10 @@ TODO katbraybrooke
           }
         });
       } else if (action === 'details') {
-        _ref3 = this.project().mailman;
+        _ref2 = this.project().mailman;
         _results = [];
-        for (_k = 0, _len3 = _ref3.length; _k < _len3; _k++) {
-          m = _ref3[_k];
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          m = _ref2[_i];
           _results.push(pane_inner.append(template.details.mailman(this.resultMailman.data[m].mailman)));
         }
         return _results;
@@ -1346,96 +1585,6 @@ TODO katbraybrooke
     };
 
     return ProjectView;
-
-  })(Backbone.View);
-
-}).call(this);
-
-  }
-}));
-(this.require.define({
-  "views/recline_view": function(exports, require, module) {
-    (function() {
-  var MembersMapView, template,
-    __hasProp = Object.prototype.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
-
-  template = require('./templates/recline');
-
-  module.exports = MembersMapView = (function(_super) {
-
-    __extends(MembersMapView, _super);
-
-    function MembersMapView() {
-      MembersMapView.__super__.constructor.apply(this, arguments);
-    }
-
-    MembersMapView.prototype.id = 'members-map';
-
-    MembersMapView.prototype.template = template;
-
-    MembersMapView.prototype.renderData = function() {};
-
-    MembersMapView.prototype.gotMembers = function(membersData) {
-      var dataset, fields, reclineElement, views;
-      reclineElement = $('.data-explorer-here');
-      fields = [
-        {
-          id: 'id'
-        }, {
-          id: 'name'
-        }, {
-          id: 'location'
-        }, {
-          id: 'website'
-        }, {
-          id: 'twitter'
-        }, {
-          id: 'description'
-        }, {
-          id: 'spatial',
-          type: 'object'
-        }
-      ];
-      dataset = new recline.Model.Dataset({
-        records: membersData,
-        fields: fields
-      });
-      dataset.fetch();
-      dataset.queryState.set({
-        size: 900
-      }, {
-        silent: true
-      });
-      views = [
-        {
-          id: 'grid',
-          label: 'Grid',
-          view: new recline.View.SlickGrid({
-            model: dataset
-          })
-        }
-      ];
-      return window.dataExplorer = new recline.View.MultiView({
-        el: reclineElement,
-        model: dataset,
-        views: views,
-        sidebarViews: [],
-        state: {
-          currentView: 'grid'
-        }
-      });
-    };
-
-    MembersMapView.prototype.render = function(target) {
-      var membersUrl;
-      this.$el.html(this.template(this.renderData));
-      target.append(this.$el);
-      membersUrl = 'data/members.geojson.json';
-      return $.getJSON(membersUrl, null, this.gotMembers);
-    };
-
-    return MembersMapView;
 
   })(Backbone.View);
 
@@ -1575,23 +1724,7 @@ function program4(depth0,data) {
   }
 }));
 (this.require.define({
-  "views/templates/github": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
-
-
-  buffer += "<h1>Github <small>";
-  foundHelper = helpers.subtitle;
-  stack1 = foundHelper || depth0.subtitle;
-  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "subtitle", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</small></h1>\n<div class=\"row\">\n  <div class=\"span7\">\n    <ul class=\"nav nav-tabs\">\n      <li action=\"watchers\"><a href=\"#github/watchers\">Watchers</a></li>\n      <li action=\"forks\"><a href=\"#github/forks\">Forks</a></li>\n      <li action=\"issues\" style=\"text-decoration: line-through;\"><a href=\"#github/issues\">Issues</a></li>\n      <li action=\"size\"><a href=\"#github/size\">Size</a></li>\n    </ul>\n    <div id=\"graphholder\" style=\"min-height:400px;\">\n      <div class=\"graph\" style=\"height: 400px;\"></div>\n      <div id=\"legendholder\"></div>\n    </div>\n  </div>\n  <div class=\"span5\">\n    <div class=\"activity-stream\" style=\"min-height:500px;\"></div>\n  </div>\n</div>\n";
-  return buffer;});
-  }
-}));
-(this.require.define({
-  "views/templates/github_details": function(exports, require, module) {
+  "views/templates/details/github": function(exports, require, module) {
     module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
@@ -1642,17 +1775,7 @@ function program4(depth0,data) {
   }
 }));
 (this.require.define({
-  "views/templates/mailman": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
-
-
-  return "<code>TODO</code> mailinglist view\n\n";});
-  }
-}));
-(this.require.define({
-  "views/templates/mailman_details": function(exports, require, module) {
+  "views/templates/details/mailman": function(exports, require, module) {
     module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
@@ -1678,77 +1801,7 @@ function program4(depth0,data) {
   }
 }));
 (this.require.define({
-  "views/templates/member": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
-
-
-  return "<table style=\"display: none;\">\n  <tr class=\"js-template-member\">\n    <td>Member: ${name}</td>\n    <td>Location: ${location}</td>\n    <td>Geolocation: ${geolocation}</td>\n  </tr>\n</table>\n\n\n";});
-  }
-}));
-(this.require.define({
-  "views/templates/pane_activity": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
-
-
-  return "<div class=\"pane label-pane\">\n    <label>Recent Events</label>\n    <div id=\"pane-activity\"><code>TODO</code> AJAX load stream</div>\n</div>\n";});
-  }
-}));
-(this.require.define({
-  "views/templates/pane_github": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
-
-
-  return "<div class=\"pane label-pane\">\n    <label>Github</label>\n    <ul class=\"nav nav-tabs\">\n        <li class=\"dropdown\">\n        <a class=\"dropdown-toggle\"\n            data-toggle=\"dropdown\"\n            href=\"#\">\n            Graph\n            <b class=\"caret\"></b>\n        </a>\n        <ul class=\"dropdown-menu\">\n            <li action=\"watchers\"><a href=\"#\">Watchers</a></li>\n            <li action=\"size\"><a href=\"#\">Size</a></li>\n            <li action=\"issues\"><a href=\"#\">Issues</a></li>\n            <li action=\"forks\"><a href=\"#\">Forks</a></li>\n        </ul>\n        <li action=\"activity\"><a href=\"#\">Activity</a></li>\n        <li action=\"details\"><a href=\"#\">Details</a></li>\n    </ul>\n    <div class=\"inner\"></div>\n</div>\n";});
-  }
-}));
-(this.require.define({
-  "views/templates/pane_mailman": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
-
-
-  return "<div class=\"pane label-pane\">\n    <label>Mailing Lists</label>\n    <ul class=\"nav nav-tabs\" id=\"mailman-nav\">\n        <li action=\"posts\"><a href=\"#\">Posts</a></li>\n        <li action=\"subscribers\"><a href=\"#\">Subscribers</a></li>\n        <li action=\"activity\"><a href=\"#\">Activity</a></li>\n        <li action=\"details\"><a href=\"#\">Details</a></li>\n    </ul>\n    <div class=\"inner\"></div>\n</div>\n";});
-  }
-}));
-(this.require.define({
-  "views/templates/pane_people": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
-
-
-  return "<div class=\"pane label-pane\">\n    <label>People</label>\n    <ul class=\"nav nav-tabs\" id=\"people-nav\">\n        <li action=\"details\"><a href=\"#\">Details</a></li>\n        <li action=\"activity\"><a href=\"#\">Activity</a></li>\n    </ul>\n    <div class=\"inner\"></div>\n</div>\n";});
-  }
-}));
-(this.require.define({
-  "views/templates/pane_project": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
-
-
-  return "<div class=\"pane label-pane pane-collapse\">\n    <label>Description</label>\n    <div class=\"inner\"></div>\n</div>\n";});
-  }
-}));
-(this.require.define({
-  "views/templates/person": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
-
-
-  return "<code>TODO</code> people directory view\n";});
-  }
-}));
-(this.require.define({
-  "views/templates/person_details": function(exports, require, module) {
+  "views/templates/details/person": function(exports, require, module) {
     module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
@@ -1804,7 +1857,64 @@ function program4(depth0,data) {
   }
 }));
 (this.require.define({
-  "views/templates/project": function(exports, require, module) {
+  "views/templates/loading_bar": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class=\"progress progress-striped active\"><div class=\"bar\" style=\"width: ";
+  foundHelper = helpers.percent;
+  stack1 = foundHelper || depth0.percent;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "percent", { hash: {} }); }
+  buffer += escapeExpression(stack1) + ";\"></div><div class=\"text\">";
+  foundHelper = helpers.text;
+  stack1 = foundHelper || depth0.text;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "text", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</div></div>\n";
+  return buffer;});
+  }
+}));
+(this.require.define({
+  "views/templates/page/github": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+
+  buffer += "<h1>Github <small>";
+  foundHelper = helpers.subtitle;
+  stack1 = foundHelper || depth0.subtitle;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "subtitle", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</small></h1>\n<div class=\"row\">\n  <div class=\"span7\">\n    <ul class=\"nav nav-tabs\">\n      <li action=\"watchers\"><a href=\"#github/watchers\">Watchers</a></li>\n      <li action=\"forks\"><a href=\"#github/forks\">Forks</a></li>\n      <li action=\"issues\" style=\"text-decoration: line-through;\"><a href=\"#github/issues\">Issues</a></li>\n      <li action=\"size\"><a href=\"#github/size\">Size</a></li>\n    </ul>\n    <div id=\"graphholder\" style=\"min-height:400px;\">\n      <div class=\"graph\" style=\"height: 400px;\"></div>\n      <div id=\"legendholder\"></div>\n    </div>\n  </div>\n  <div class=\"span5\">\n    <div class=\"activity-stream\" style=\"min-height:500px;\"></div>\n  </div>\n</div>\n";
+  return buffer;});
+  }
+}));
+(this.require.define({
+  "views/templates/page/mailman": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var foundHelper, self=this;
+
+
+  return "<code>TODO</code> mailinglist view\n\n";});
+  }
+}));
+(this.require.define({
+  "views/templates/page/people": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var foundHelper, self=this;
+
+
+  return "<code>TODO</code> people directory view\n";});
+  }
+}));
+(this.require.define({
+  "views/templates/page/project": function(exports, require, module) {
     module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
@@ -1870,37 +1980,7 @@ function program2(depth0,data) {
   }
 }));
 (this.require.define({
-  "views/templates/project_inner": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var buffer = "", foundHelper, self=this;
-
-
-  return buffer;});
-  }
-}));
-(this.require.define({
-  "views/templates/project_inner_mailman": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var buffer = "", foundHelper, self=this;
-
-
-  return buffer;});
-  }
-}));
-(this.require.define({
-  "views/templates/recline": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
-
-
-  return "<div class=\"page-view page-index\">\n  <h2>Open Knowledge Foundation Community Members</h2>\n  <div class=\"data-explorer-here\"></div>\n</div>\n\n<div class=\"page-view page-activity\" style=\"display: none;\">\n  <h2>Activity per month</h2>\n  <div id=\"placeholder\" style=\"width:100%;height:300px;\"></div> \n</div>\n";});
-  }
-}));
-(this.require.define({
-  "views/templates/twitter": function(exports, require, module) {
+  "views/templates/page/twitter": function(exports, require, module) {
     module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var foundHelper, self=this;
@@ -1910,36 +1990,52 @@ function program2(depth0,data) {
   }
 }));
 (this.require.define({
-  "views/twitter_view": function(exports, require, module) {
-    (function() {
-  var TwitterView, template,
-    __hasProp = Object.prototype.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+  "views/templates/pane/activity": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var foundHelper, self=this;
 
-  template = require('views/templates/twitter');
 
-  module.exports = TwitterView = (function(_super) {
+  return "<div class=\"pane label-pane\">\n    <label>Recent Events</label>\n    <div id=\"pane-activity\"><code>TODO</code> AJAX load stream</div>\n</div>\n";});
+  }
+}));
+(this.require.define({
+  "views/templates/pane/github": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var foundHelper, self=this;
 
-    __extends(TwitterView, _super);
 
-    function TwitterView() {
-      TwitterView.__super__.constructor.apply(this, arguments);
-    }
+  return "<div class=\"pane label-pane\">\n    <label>Github</label>\n    <ul class=\"nav nav-tabs\">\n        <li class=\"dropdown\">\n        <a class=\"dropdown-toggle\"\n            data-toggle=\"dropdown\"\n            href=\"#\">\n            Graph\n            <b class=\"caret\"></b>\n        </a>\n        <ul class=\"dropdown-menu\">\n            <li action=\"watchers\"><a href=\"#\">Watchers</a></li>\n            <li action=\"size\"><a href=\"#\">Size</a></li>\n            <li action=\"issues\"><a href=\"#\">Issues</a></li>\n            <li action=\"forks\"><a href=\"#\">Forks</a></li>\n        </ul>\n        <li action=\"activity\"><a href=\"#\">Activity</a></li>\n        <li action=\"details\"><a href=\"#\">Details</a></li>\n    </ul>\n    <div class=\"inner\"></div>\n</div>\n";});
+  }
+}));
+(this.require.define({
+  "views/templates/pane/mailman": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var foundHelper, self=this;
 
-    TwitterView.prototype.template = template;
 
-    TwitterView.prototype.renderData = function() {};
+  return "<div class=\"pane label-pane\">\n    <label>Mailing Lists</label>\n    <ul class=\"nav nav-tabs\" id=\"mailman-nav\">\n        <li action=\"posts\"><a href=\"#\">Posts</a></li>\n        <li action=\"subscribers\"><a href=\"#\">Subscribers</a></li>\n        <li action=\"activity\"><a href=\"#\">Activity</a></li>\n        <li action=\"details\"><a href=\"#\">Details</a></li>\n    </ul>\n    <div class=\"inner\"></div>\n</div>\n";});
+  }
+}));
+(this.require.define({
+  "views/templates/pane/people": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var foundHelper, self=this;
 
-    TwitterView.prototype.render = function(target) {
-      this.$el.html(this.template(this.renderData));
-      return target.html(this.$el);
-    };
 
-    return TwitterView;
+  return "<div class=\"pane label-pane\">\n    <label>People</label>\n    <ul class=\"nav nav-tabs\" id=\"people-nav\">\n        <li action=\"details\"><a href=\"#\">Details</a></li>\n        <li action=\"activity\"><a href=\"#\">Activity</a></li>\n    </ul>\n    <div class=\"inner\"></div>\n</div>\n";});
+  }
+}));
+(this.require.define({
+  "views/templates/pane/project": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var foundHelper, self=this;
 
-  })(Backbone.View);
 
-}).call(this);
-
+  return "<div class=\"pane label-pane pane-collapse\">\n    <label>Description</label>\n    <div class=\"inner\"></div>\n</div>\n";});
   }
 }));

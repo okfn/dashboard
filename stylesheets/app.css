@@ -74,6 +74,26 @@
   margin-bottom: 30px;
 }
 
+#loading {
+    width: 400px;
+    height: 20px;
+    position: absolute;
+    margin-left: -100px;
+    left: 50%;
+    top: 64px;
+    z-index: 99;
+}
+#loading .text {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    color: #fff;
+    z-index: 999;
+    width: 380px;
+    text-align: center;
+    font-size: 11px;
+    text-shadow: 0 0 2px #000;
+}
 
 .footer {
   border-top: 2px solid #ccc;
@@ -89,6 +109,7 @@
   text-align: right;
 }
 
+/* TODO export to project.css? */
 
 .pane {
   border: 1px solid #ccc;
