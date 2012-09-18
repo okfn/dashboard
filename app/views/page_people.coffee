@@ -1,9 +1,9 @@
-template = require 'views/templates/person'
+template = require 'views/templates/page/people'
 
 module.exports = class PersonView extends Backbone.View
   template: template
   renderData: ->
 
-  render: (target) ->
+  renderPage: (target) ->
     @$el.html @template @renderData
     target.html @$el

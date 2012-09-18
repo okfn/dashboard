@@ -1,5 +1,5 @@
 ProjectView = require 'views/project_view'
-template = require 'views/templates/project_page'
+template = require 'views/templates/page/project'
 
 # Project data
 projectJson = require 'projects'

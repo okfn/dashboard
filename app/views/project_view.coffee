@@ -1,13 +1,13 @@
 template = 
     pane: 
-        mailman: require 'views/templates/pane_mailman'
-        person: require 'views/templates/pane_people'
-        github: require 'views/templates/pane_github'
-        project: require 'views/templates/pane_project'
+        mailman: require 'views/templates/pane/mailman'
+        person: require 'views/templates/pane/people'
+        github: require 'views/templates/pane/github'
+        project: require 'views/templates/pane/project'
     details: 
-        mailman: require 'views/templates/mailman_details'
-        person: require 'views/templates/person_details'
-        github: require 'views/templates/github_details'
+        mailman: require 'views/templates/details/mailman'
+        person: require 'views/templates/details/person'
+        github: require 'views/templates/details/github'
 
 # Data api
 api = require 'activityapi'

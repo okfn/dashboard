@@ -1,9 +1,8 @@
-GithubView = require 'views/github_view'
-PersonView = require 'views/person_view'
-ProjectPage = require 'views/project_page'
-MailmanView = require 'views/mailman_view'
-TwitterView = require 'views/twitter_view'
-ReclineView = require 'views/recline_view'
+GithubView = require 'views/page_github'
+PersonView = require 'views/page_people'
+ProjectPage = require 'views/page_project'
+MailmanView = require 'views/page_mailman'
+TwitterView = require 'views/page_twitter'
 
 # Function to consistently target the main div
 content = -> $('#content')

@@ -1,4 +1,4 @@
-template = require 'views/templates/github'
+template = require 'views/templates/page/github'
 activityView = require 'views/activity_view'
 
 module.exports = class GithubView extends Backbone.View
@@ -100,7 +100,7 @@ module.exports = class GithubView extends Backbone.View
                     filtered.push data
             $.plot domInner, filtered, { xaxis: { mode: "time" }, legend: { show: true, container: '#legendholder' }}
 
-    render: (target) =>
+    renderPage: (target) =>
         renderData = ->
             activityUrl: @activityUrl
             historyUrl: @historyUrl

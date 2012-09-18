@@ -1,9 +1,9 @@
-template = require 'views/templates/mailman'
+template = require 'views/templates/page/mailman'
 
 module.exports = class MailmanView extends Backbone.View
   template: template
   renderData: ->
 
-  render: (target) ->
+  renderPage: (target) ->
     @$el.html @template @renderData
     target.html @$el
