@@ -8,6 +8,16 @@
   margin-bottom: 30px;
 }
 
+#loading {
+    width: 400px;
+    height: 20px;
+    position: absolute;
+    margin-left: -100px;
+    left: 50%;
+    top: 64px;
+    z-index: 99;
+}
+
 
 .footer {
   border-top: 2px solid #ccc;
@@ -23,6 +33,7 @@
   text-align: right;
 }
 
+/* TODO export to project.css? */
 
 .pane {
   border: 1px solid #ccc;

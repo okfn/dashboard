@@ -1,6 +1,6 @@
 GithubView = require 'views/github_view'
 PersonView = require 'views/person_view'
-ProjectView = require 'views/project_view'
+ProjectPage = require 'views/project_page'
 MailmanView = require 'views/mailman_view'
 TwitterView = require 'views/twitter_view'
 ReclineView = require 'views/recline_view'
@@ -11,7 +11,7 @@ content = -> $('#content')
 singletons =
     githubView:  -> return @_github = @_github or new GithubView()
     personView:  -> return @_person = @_person or new PersonView()
-    projectView: -> return @_project = @_project or new ProjectView()
+    projectPage: -> return @_project = @_project or new ProjectPage()
     mailmanView: -> return @_mailman = @_mailman or new MailmanView()
     twitterView: -> return @_twitter = @_twitter or new TwitterView()
 
@@ -46,8 +46,8 @@ module.exports = class Router extends Backbone.Router
     person: ->
         @setCurrent singletons.personView()
     project: (projectName='ckan') ->
-        @setCurrent singletons.projectView()
-        singletons.projectView().showProject projectName
+        @setCurrent singletons.projectPage()
+        singletons.projectPage().showProject projectName
     github: (graphMode='watchers') ->
         @setCurrent singletons.githubView()
         singletons.githubView().showGraph graphMode

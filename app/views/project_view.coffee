@@ -1,5 +1,4 @@
 template = 
-    page: require 'views/templates/project'
     pane: 
         mailman: require 'views/templates/pane_mailman'
         person: require 'views/templates/pane_people'
@@ -13,43 +12,31 @@ template =
 # Data api
 api = require 'activityapi'
 
-# Project data
-projectJson = require 'projects'
-projectMap = {}
-for category in projectJson
-    for project in category.projects
-        projectMap[project.name] = project
-
 module.exports = class ProjectView extends Backbone.View
-    active: null
-    project: => projectMap[@active]
 
-    ## Methods
-    ## -------
-    showProject: (@active) ->
-        p = @project()
-        # Trash cached data & the DOM
-        @resultGithub = null
-        @resultMailman = null
-        @resultPeople = null
-        # Fix up that DOM
-        @$el.find('#project-container').empty()
-        @$el.find('.nav li').removeClass 'active'
-        @$el.find('.nav li[action="'+@active+'"]').addClass 'active'
-        if p
-            if p.description
-                @addPane template.pane.project, (pane)=> pane.find('.inner').html(p.description)
-            api.ajaxHistoryGithub p.github, (@resultGithub) => 
-                if @resultGithub && @resultGithub.ok
-                    @addPane template.pane.github, @renderPaneGithub
-            api.ajaxHistoryMailman p.mailman, (@resultMailman) => 
-                if @resultMailman && @resultMailman.ok
-                    @addPane template.pane.mailman, @renderPaneMailman
-            api.ajaxDataPerson p.people, (@resultPeople) => 
-                if @resultPeople && @resultPeople.ok
-                    @addPane template.pane.person, @renderPanePeople
+    cancel: false
+
+    initialize: (@project) =>
+        # Fly, my AJAX pretties!
+        if @project.description
+            @addPane template.pane.project, (pane)=> pane.find('.inner').html(@project.description)
+        api.ajaxHistoryGithub @project.github, (@resultGithub) => 
+            if @resultGithub && @resultGithub.ok
+                @addPane template.pane.github, @renderPaneGithub
+        api.ajaxHistoryMailman @project.mailman, (@resultMailman) => 
+            if @resultMailman && @resultMailman.ok
+                @addPane template.pane.mailman, @renderPaneMailman
+        api.ajaxDataPerson @project.people, (@resultPeople) => 
+            if @resultPeople && @resultPeople.ok
+                @addPane template.pane.person, @renderPanePeople
+    
+    removeFromDom: =>
+        @cancel = true
+        @$el.remove()
 
     addPane: (template, renderCallback) =>
+        # Ignore responses after this page has been destroyed
+        if @cancel then return
         pane = $(template())
         # Useful function
         getIndex = (domElement) -> 
@@ -57,14 +44,13 @@ module.exports = class ProjectView extends Backbone.View
             index = ['Description', 'Mailing Lists', 'Github', 'People'].indexOf label
             return if index==-1 then 999 else index
         # Insertion sort will try to maintain an ordering on added panes
-        container = @$el.find('#project-container')
         myIndex = getIndex pane
-        for child in container.children()
+        for child in @$el.children()
             if myIndex>=0 and myIndex<(getIndex child)
                 pane.insertBefore $(child)
                 break
         if not pane.parent().length
-            container.append pane
+            @$el.append pane
         # Bind to DOM 
         clickNav = (e) =>
             li = $($(e.currentTarget).parents('li')[0])
@@ -77,6 +63,8 @@ module.exports = class ProjectView extends Backbone.View
         pane.find('.nav li').not('.dropdown').find('a').on('click',clickNav)
         # Initial render
         renderCallback(pane)
+        pane.css {display:'none'}
+        pane.fadeIn(500)
 
 
     ## Renderers
