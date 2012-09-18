@@ -38,7 +38,7 @@ module.exports = class ProjectView extends Backbone.View
         @$el.find('.nav li[action="'+@active+'"]').addClass 'active'
         if p
             if p.description
-                @addPane template.pane.project, (pane)=> pane.find('.inner').html(project.description)
+                @addPane template.pane.project, (pane)=> pane.find('.inner').html(p.description)
             api.ajaxHistoryGithub p.github, (@resultGithub) => 
                 if @resultGithub && @resultGithub.ok
                     @addPane template.pane.github, @renderPaneGithub
@@ -50,9 +50,21 @@ module.exports = class ProjectView extends Backbone.View
                     @addPane template.pane.person, @renderPanePeople
 
     addPane: (template, renderCallback) =>
-        # Create DOM elements
         pane = $(template())
-        @$el.find('#project-container').append(pane)
+        # Useful function
+        getIndex = (domElement) -> 
+            label = $($(domElement).find('label')[0]).text()
+            index = ['Description', 'Mailing Lists', 'Github', 'People'].indexOf label
+            return if index==-1 then 999 else index
+        # Insertion sort will try to maintain an ordering on added panes
+        container = @$el.find('#project-container')
+        myIndex = getIndex pane
+        for child in container.children()
+            if myIndex>=0 and myIndex<(getIndex child)
+                pane.insertBefore $(child)
+                break
+        if not pane.parent().length
+            container.append pane
         # Bind to DOM 
         clickNav = (e) =>
             li = $($(e.currentTarget).parents('li')[0])
