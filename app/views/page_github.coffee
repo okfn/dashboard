@@ -98,7 +98,8 @@ module.exports = class GithubView extends Backbone.View
             for data in @graphData[@graphMode]
                 if _.contains @graphFilter[@graphMode], data.label
                     filtered.push data
-            $.plot domInner, filtered, { xaxis: { mode: "time" }, legend: { show: true, container: '#legendholder' }}
+            if domInner.width()>0
+                $.plot domInner, filtered, { xaxis: { mode: "time" }, legend: { show: true, container: '#legendholder' }}
 
     renderPage: (target) =>
         renderData = ->

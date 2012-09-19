@@ -14,9 +14,11 @@ api = require 'activityapi'
 
 module.exports = class ProjectView extends Backbone.View
 
-    cancel: false
-
-    initialize: (@project) =>
+    initialize: (parent, @project) =>
+        parent.append @$el
+        @$el.masonry
+          itemSelector: '.pane'
+          columnWidth: 380
         # Fly, my AJAX pretties!
         if @project.description
             @addPane template.pane.project, (pane)=> pane.find('.inner').html(@project.description)
@@ -30,13 +32,10 @@ module.exports = class ProjectView extends Backbone.View
             if @resultPeople && @resultPeople.ok
                 @addPane template.pane.person, @renderPanePeople
     
-    removeFromDom: =>
-        @cancel = true
-        @$el.remove()
-
     addPane: (template, renderCallback) =>
-        # Ignore responses after this page has been destroyed
-        if @cancel then return
+        if @$el.parent().length == 0
+            # No longer in DOM? Sorry AJAX, you were too slow
+            return
         pane = $(template())
         # Useful function
         getIndex = (domElement) -> 
@@ -65,6 +64,8 @@ module.exports = class ProjectView extends Backbone.View
         renderCallback(pane)
         pane.css {display:'none'}
         pane.fadeIn(500)
+        if @$el.width()>0
+            @$el.masonry 'reload'
 
 
     ## Renderers
@@ -100,7 +101,8 @@ module.exports = class ProjectView extends Backbone.View
                     data: ([new Date(d.timestamp),d[action]] for d in repodata.data)
                     color: (++color) % 30
             domElement = $('<div/>').css({height:180,'margin-top':10}).appendTo(pane_inner)
-            $.plot domElement, plotData, { xaxis: { mode: "time" } }
+            if domElement.width()>0
+                $.plot domElement, plotData, { xaxis: { mode: "time" } }
         else if action=='activity'
             pane_inner.html '<code>TODO</code> AJAX load Activity'
         else if action=='details'
@@ -136,7 +138,8 @@ module.exports = class ProjectView extends Backbone.View
                     data: series
                     color: color
             domElement = $('<div/>').css({height:180,'margin-top':10}).appendTo(pane_inner)
-            $.plot domElement, plotData, { xaxis: { mode: "time" } }
+            if domElement.width()>0
+                $.plot domElement, plotData, { xaxis: { mode: "time" } }
         else if action=='details'
             for m in @project().mailman
                 pane_inner.append template.details.mailman @resultMailman.data[m].mailman

@@ -10,13 +10,10 @@ for category in projectJson
 
 module.exports = class ProjectPage extends Backbone.View
     showProject: (projectName) ->
-        # Fix up that DOM
         inner = @$el.find('#project-container')
-        if @view
-            @view.removeFromDom()
+        inner.empty()
         if projectName
-            @view = new ProjectView(projectMap[projectName])
-            inner.append @view.$el
+            view = new ProjectView(inner, projectMap[projectName])
 
     renderPage: (target) ->
         renderData = 

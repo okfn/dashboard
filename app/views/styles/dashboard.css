@@ -50,6 +50,11 @@
   border-radius: 5px;
   padding: 8px;
   margin-bottom: 15px;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 350px;
+  float: left;
 }
 .label-pane {
   position: relative;
@@ -70,16 +75,3 @@
           border-radius: 4px 0 4px 0;
 }
 
-.pane {
-  min-height: 250px;
-  max-height: 250px;
-  height: 250px;
-  overflow: scroll;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-.pane.pane-collapse {
-  min-height: 0 !important;
-  max-height: auto !important;
-  height: auto;
-}
