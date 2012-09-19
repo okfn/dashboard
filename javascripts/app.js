@@ -96,7 +96,7 @@
       ActivityApi.__super__.constructor.apply(this, arguments);
     }
 
-    ActivityApi.prototype.url = 'http://activityapi.herokuapp.com/api/1';
+    ActivityApi.prototype.url = 'http://localhost:5000/api/1';
 
     ActivityApi.prototype.ajaxHistoryGithub = function(repos, callback) {
       var url;
@@ -1124,15 +1124,17 @@ TODO katbraybrooke
             filtered.push(data);
           }
         }
-        return $.plot(domInner, filtered, {
-          xaxis: {
-            mode: "time"
-          },
-          legend: {
-            show: true,
-            container: '#legendholder'
-          }
-        });
+        if (domInner.width() > 0) {
+          return $.plot(domInner, filtered, {
+            xaxis: {
+              mode: "time"
+            },
+            legend: {
+              show: true,
+              container: '#legendholder'
+            }
+          });
+        }
       }
     };
 
@@ -1259,12 +1261,11 @@ TODO katbraybrooke
     }
 
     ProjectPage.prototype.showProject = function(projectName) {
-      var inner;
+      var inner, view;
       inner = this.$el.find('#project-container');
-      if (this.view) this.view.removeFromDom();
+      inner.empty();
       if (projectName) {
-        this.view = new ProjectView(projectMap[projectName]);
-        return inner.append(this.view.$el);
+        return view = new ProjectView(inner, projectMap[projectName]);
       }
     };
 
@@ -1359,16 +1360,18 @@ TODO katbraybrooke
       this.renderPanePeople = __bind(this.renderPanePeople, this);
       this.renderPaneGithub = __bind(this.renderPaneGithub, this);
       this.addPane = __bind(this.addPane, this);
-      this.removeFromDom = __bind(this.removeFromDom, this);
       this.initialize = __bind(this.initialize, this);
       ProjectView.__super__.constructor.apply(this, arguments);
     }
 
-    ProjectView.prototype.cancel = false;
-
-    ProjectView.prototype.initialize = function(project) {
+    ProjectView.prototype.initialize = function(parent, project) {
       var _this = this;
       this.project = project;
+      parent.append(this.$el);
+      this.$el.masonry({
+        itemSelector: '.pane',
+        columnWidth: 380
+      });
       if (this.project.description) {
         this.addPane(template.pane.project, function(pane) {
           return pane.find('.inner').html(_this.project.description);
@@ -1394,15 +1397,10 @@ TODO katbraybrooke
       });
     };
 
-    ProjectView.prototype.removeFromDom = function() {
-      this.cancel = true;
-      return this.$el.remove();
-    };
-
     ProjectView.prototype.addPane = function(template, renderCallback) {
       var child, clickNav, getIndex, myIndex, pane, _i, _len, _ref,
         _this = this;
-      if (this.cancel) return;
+      if (this.$el.parent().length === 0) return;
       pane = $(template());
       getIndex = function(domElement) {
         var index, label;
@@ -1439,7 +1437,8 @@ TODO katbraybrooke
       pane.css({
         display: 'none'
       });
-      return pane.fadeIn(500);
+      pane.fadeIn(500);
+      if (this.$el.width() > 0) return this.$el.masonry('reload');
     };
 
     ProjectView.prototype.renderPage = function(target) {
@@ -1492,11 +1491,13 @@ TODO katbraybrooke
           height: 180,
           'margin-top': 10
         }).appendTo(pane_inner);
-        return $.plot(domElement, plotData, {
-          xaxis: {
-            mode: "time"
-          }
-        });
+        if (domElement.width() > 0) {
+          return $.plot(domElement, plotData, {
+            xaxis: {
+              mode: "time"
+            }
+          });
+        }
       } else if (action === 'activity') {
         return pane_inner.html('<code>TODO</code> AJAX load Activity');
       } else if (action === 'details') {
@@ -1566,11 +1567,13 @@ TODO katbraybrooke
           height: 180,
           'margin-top': 10
         }).appendTo(pane_inner);
-        return $.plot(domElement, plotData, {
-          xaxis: {
-            mode: "time"
-          }
-        });
+        if (domElement.width() > 0) {
+          return $.plot(domElement, plotData, {
+            xaxis: {
+              mode: "time"
+            }
+          });
+        }
       } else if (action === 'details') {
         _ref2 = this.project().mailman;
         _results = [];
