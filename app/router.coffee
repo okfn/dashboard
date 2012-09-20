@@ -44,8 +44,10 @@ module.exports = class Router extends Backbone.Router
     person: ->
         @setCurrent singletons.personView()
     project: (projectName='ckan') ->
-        @setCurrent singletons.projectPage()
-        singletons.projectPage().showProject projectName
+        view = singletons.projectPage()
+        if not view==@currentView
+            @currentView = view
+        view.renderPage content(), projectName
     github: (graphMode='watchers') ->
         @setCurrent singletons.githubView()
         singletons.githubView().showGraph graphMode
