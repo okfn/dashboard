@@ -1,17 +1,5 @@
-<h1>Projects <small>{{subtitle}}</small></h1>
-<div class="row-fluid">
-    <div class="span3">
-        <ul class="nav nav-list well" style="max-height: 400px; overflow: scroll;">
-            {{#each projectJson}}
-                <li class="nav-header">{{category}}</li>
-                {{#each projects}}
-                    <li action="{{name}}"><a href="#project/{{name}}">{{title}}</a></li>
-                {{/each}}
-            {{/each}}
-        </ul>
-    </div>
-    <div id="project-container" class="span9">
-    </div>
+<h1>Projects <small class="subtitle"></small></h1>
+<div id="project-container">
 </div>
 
 

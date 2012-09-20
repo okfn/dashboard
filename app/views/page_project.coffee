@@ -2,24 +2,24 @@ ProjectView = require 'views/project_view'
 template = require 'views/templates/page/project'
 
 # Project data
-projectJson = require 'projects'
+projects = require 'projects'
 projectMap = {}
-for category in projectJson
-    for project in category.projects
-        projectMap[project.name] = project
+for project in projects
+    projectMap[project.name] = project
 
 module.exports = class ProjectPage extends Backbone.View
-    showProject: (projectName) ->
+    showProject: (projectName) =>
         inner = @$el.find('#project-container')
         inner.empty()
+        title = 'Select a project...'
         if projectName
             view = new ProjectView(inner, projectMap[projectName])
+            title = projectMap[projectName].title
+        @$el.find('h1 .subtitle').html title
 
-    renderPage: (target) ->
-        renderData = 
-            projectJson: projectJson
-            subtitle: 'Tracking '+Object.keys(projectMap).length+' projects'
-        @$el.html template renderData
+
+    renderPage: (target) =>
+        @$el.html template()
         target.html @$el
         # On full-render, scroll the nav-bar
         nav = @$el.find('.nav')

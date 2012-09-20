@@ -17,7 +17,6 @@ singletons =
 module.exports = class Router extends Backbone.Router
     routes:
         '': 'project'
-        'recline': 'recline'
         'person': 'person'
         'project': 'project'
         'project/:projectName': 'project'

@@ -21,7 +21,17 @@
         <div class="container-fluid">
           <a class="brand" href="#">Dashboard</a>
           <ul class="nav">
-            <li action="project"><a href="#project">Projects</a></li>
+            <li class="dropdown" action="project">
+            <a class="dropdown-toggle"
+                data-toggle="dropdown"
+                href="#">
+                Projects
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" id="project-list">
+                <li><a href="#" onClick="return false;">Loading...</a></li>
+            </ul>
+            </li>
             <li action="person"><a style="text-decoration: line-through;" href="#person">People</a></li>
             <li action="github"><a href="#github">Github</a></li>
             <li action="mailman"><a style="text-decoration: line-through;" href="#mailman">Mailing Lists</a></li>
