@@ -17,6 +17,7 @@ module.exports = [
         people: ['ross','toby','darwin','markw','seanh','shevski','davidraznick','amercader','johnglover','aron','dread','thejimmyg']
         mailman: ['ckan-dev','ckan-discuss','ckan-changes','ckan-news','datahub-announce','datahub-news']
         github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols', 'okfn/buildkit', 'okfn/webstore', 'okfn/dpm','okfn/datahub']
+        headline_github: 'okfn/ckan'
     }
     {
         name: 'openspending'
@@ -35,6 +36,7 @@ module.exports = [
         people: ['mihi','jenlowe']
         mailman: ['School-of-data','Scoda-dev','open-data-handbook']
         github: ['okfn/datawrangling','okfn/schoolofdata','okfn/opendatahandbook']
+        headline_github: 'okfn/schoolofdata'
     }
     {
         name: 'lod2'
@@ -47,13 +49,33 @@ module.exports = [
         github: []
     }
     {
+        name: 'recline'
+        title: 'Recline.js'
+        twitter: 'reclinejs'
+        link: ['http://reclinejs.org']
+        people: ['rgrp','maxogden']
+        mailman: []
+        github: ['okfn/recline']
+        headline_github: 'okfn/recline'
+    }
+    {
+        name: 'annotator'
+        title: 'Annotator'
+        twitter: 'okfnlabs'
+        link: ['http://annotateit.org']
+        people: ['nickstenning']
+        mailman: ['annotator-dev']
+        github: ['okfn/annotator','okfn/annotateit','okfn/annotator-store','okfn/annotator-wordpress','okfn/texts.annotateit.org']
+        headline_github: 'okfn/annotator'
+    }
+    {
         name: 'labs'
         title: 'OKFN Labs'
         twitter: 'okfnlabs'
-        link: ['http://reclinejs.org','http://annotateit.org','http://okfnlabs.org/dashboard','http://activityapi.herokuapp.com','http://yourtopia.net','http://italia.yourtopia.net/']
+        link: ['http://annotateit.org','http://okfnlabs.org/dashboard','http://activityapi.herokuapp.com','http://yourtopia.net','http://italia.yourtopia.net/']
         people: ['rgrp','zephod','vndimitrova']
-        mailman: ['annotator-dev','yourtopia','okfn-labs','open-history']
-        github: ['okfn/recline','okfn/timeliner','okfn/annotator','okfn/annotateit','okfn/annotator-store','okfn/annotator-wordpress','okfn/texts.annotateit.org','okfn/activityapi','okfn/dashboard','okfn/yourtopia','okfn/bubbletree','okfn/hypernotes','okfn/okfn.github.com','sprints.okfnlabs.org','okfn/facetview']
+        mailman: ['yourtopia','okfn-labs','open-history']
+        github: ['okfn/timeliner','okfn/activityapi','okfn/dashboard','okfn/yourtopia','okfn/bubbletree','okfn/hypernotes','okfn/okfn.github.com','sprints.okfnlabs.org','okfn/facetview']
     }
     {
         name: 'openbiblio'
@@ -63,6 +85,7 @@ module.exports = [
         people: ['markmacgillivray','petermr','tomoinn']
         mailman: ['open-bibliography','bibliographica-users','bibliographica-folktales','Bibjson-dev','openbiblio-dev']
         github: ['okfn/bibserver']
+        headline_github: 'okfn/bibserver'
     }
     {
         name: 'okfestival'

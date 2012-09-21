@@ -1,6 +1,7 @@
 template_page = require 'views/templates/page/project'
 template_pane = require 'views/templates/pane'
 template_pane_twitter = require 'views/templates/pane_twitter'
+template_pane_github = require 'views/templates/pane_github'
 template_details = 
     mailman: require 'views/templates/details/mailman'
     person: require 'views/templates/details/person'
@@ -12,8 +13,8 @@ api = require 'activityapi'
 # Order of panes tries to be consistent
 pane_order = [
     'Twitter',
-    'Mailman Posts (NVD3)', 
-    'Mailman Posts (flotr2)', 
+    'People',
+    'Github',
     'Description', 
     'Mailman Subscribers', 
     'Mailman Posts', 
@@ -22,7 +23,7 @@ pane_order = [
     'Github: Issues', 
     'Github: Size', 
     'Github: Forks', 
-    'People']
+]
 
 # Project data
 projects = require 'projects'
@@ -48,6 +49,8 @@ module.exports = class ProjectPage extends Backbone.View
                 @addPane 'Twitter', @renderPaneTwitter
         api.ajaxHistoryGithub @project.github, (@resultGithub) => 
             if @resultGithub && @resultGithub.ok
+                if @project.headline_github
+                    @addPane 'Github', @renderPaneGithub
                 @addPane 'Github: Watchers', @renderPaneGithubGraph('watchers')
                 @addPane 'Github: Size', @renderPaneGithubGraph('size')
                 @addPane 'Github: Issues', @renderPaneGithubGraph('issues')
@@ -137,6 +140,10 @@ module.exports = class ProjectPage extends Backbone.View
 
     renderPaneTwitter: (pane) =>
         pane.html template_pane_twitter @resultTwitter.account
+
+    renderPaneGithub: (pane) =>
+        x = @resultGithub.data[ @project.headline_github ]
+        pane.html template_pane_github { 'repo':x.repo,'data':x.data[x.data.length-1] }
 
     renderNvd3MailmanPosts: (pane) =>
         test_data = stream_layers(3,128,.1).map( (data, i)->{ key: 'Stream' + i, values: data })

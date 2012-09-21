@@ -90,17 +90,14 @@
     padding: 5px 0;
 }
 
-.statistic.twitter {
+.github .statistic,
+.twitter .statistic {
   width: 33%;
 }
-.description.twitter {
-  font-size: 10px;
-  line-height: 12px;
-}
-.description.twitter .name {
+.twitter .name {
   font-weight: bold;
 }
-.description.twitter .screen_name {
+.statistics-pane .sub-name {
   color: #999;
 }
 

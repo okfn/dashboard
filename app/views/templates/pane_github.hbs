@@ -1,0 +1,17 @@
+<div class="statistics-pane github">
+    {{#with data}}
+        <div class="statistic-container">
+            <div class="statistic"><div class="top">{{watchers}}</div><div class="bottom">watchers</div></div>
+            <div class="statistic"><div class="top">{{issues}}</div><div class="bottom">issues</div></div>
+            <div class="statistic"><div class="top">{{forks}}</div><div class="bottom">forks</div></div>
+        </div>
+    {{/with}}
+    {{#with repo}}
+    <div class="clearfix"> </div>
+    <div class="description">
+        {{#if language}}<span class="label label-info">{{language}}</span>{{/if}}
+        <span class="sub-name">(<a href="{{html_url}}">{{full_name}}</a>)</span>:
+        <span class="content">"{{description}}"</span>
+    </div>
+    {{/with}}
+</div>
