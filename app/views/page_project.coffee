@@ -1,5 +1,6 @@
 template_page = require 'views/templates/page/project'
 template_pane = require 'views/templates/pane'
+template_pane_twitter = require 'views/templates/pane_twitter'
 template_details = 
     mailman: require 'views/templates/details/mailman'
     person: require 'views/templates/details/person'
@@ -10,6 +11,7 @@ api = require 'activityapi'
 
 # Order of panes tries to be consistent
 pane_order = [
+    'Twitter',
     'Mailman Posts (NVD3)', 
     'Mailman Posts (flotr2)', 
     'Description', 
@@ -41,6 +43,9 @@ module.exports = class ProjectPage extends Backbone.View
         # Fly, my AJAX pretties!
         if @project.description
             @addPane 'Description', (pane)=> pane.html(@project.description)
+        api.ajaxTwitter @project.twitter, (@resultTwitter) => 
+            if @resultTwitter && @resultTwitter.ok
+                @addPane 'Twitter', @renderPaneTwitter
         api.ajaxHistoryGithub @project.github, (@resultGithub) => 
             if @resultGithub && @resultGithub.ok
                 @addPane 'Github: Watchers', @renderPaneGithubGraph('watchers')
@@ -53,7 +58,7 @@ module.exports = class ProjectPage extends Backbone.View
                 @addPane 'Mailman Posts', @renderPaneMailmanGraph('posts')
                 @addPane 'Mailman Lists', @renderPaneMailmanLists
                 #@addPane 'Mailman Posts (NVD3)', @renderNvd3MailmanPosts
-                @addPane 'Mailman Posts (flotr2)', @renderFlotr2MailmanPosts
+                #@addPane 'Mailman Posts (flotr2)', @renderFlotr2MailmanPosts
         api.ajaxDataPerson @project.people, (@resultPeople) => 
             if @resultPeople && @resultPeople.ok
                 @addPane 'People', @renderPanePeople
@@ -82,6 +87,13 @@ module.exports = class ProjectPage extends Backbone.View
         pane.css {display:'none'}
         pane.fadeIn(500)
         @container.masonry 'reload'
+
+    setPaneWidth: (pane, columns) =>
+        # Resize the width of this pane to span multiple columns
+        width = columns * 380 - 30
+        parent = $( pane.parents('.pane')[0] )
+        parent.css 'width', width
+
 
     ## Renderers
     ## ---------
@@ -123,10 +135,11 @@ module.exports = class ProjectPage extends Backbone.View
         for m in @project.mailman
             pane.append template_details.mailman @resultMailman.data[m].mailman
 
+    renderPaneTwitter: (pane) =>
+        pane.html template_pane_twitter @resultTwitter.account
+
     renderNvd3MailmanPosts: (pane) =>
         test_data = stream_layers(3,128,.1).map( (data, i)->{ key: 'Stream' + i, values: data })
-        console.log test_data
-        console.log @resultMailman
         pane.append('<div id="nvd3-demo" style="height: 200px;"><svg></svg></div>')
 
         postGraph = []
@@ -158,7 +171,6 @@ module.exports = class ProjectPage extends Backbone.View
     renderFlotr2MailmanPosts: (pane) =>
         pane.append $('<div id="editor-render-0"/>').css({height:200})
         container = $('#editor-render-0')[0]
-        console.log container
         d1    = []
         start = new Date("2009/01/01 01:00").getTime()
         options = null

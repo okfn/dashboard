@@ -1,9 +1,16 @@
 class ActivityApi extends Backbone.Model
-    #url: 'http://activityapi.herokuapp.com/api/1'
-    url: 'http://localhost:5000/api/1'
+    url: 'http://activityapi.herokuapp.com/api/1'
+    #url: 'http://localhost:5000/api/1'
 
     ## Methods
     ## =======
+    ajaxTwitter: (screen_name, callback) ->
+        if not screen_name
+            callback null
+        else 
+            url = @url + '/history/twitter/account?name=' + screen_name
+            return @_fetch url, callback
+
     ajaxHistoryGithub: (repos, callback) ->
         if not repos.length
             callback null

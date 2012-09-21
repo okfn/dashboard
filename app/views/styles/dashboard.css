@@ -75,3 +75,32 @@
           border-radius: 4px 0 4px 0;
 }
 
+.statistic-container {
+    margin: 0 auto;
+    width: 80%;
+}
+.statistic {
+  float: left;
+  text-align: center;
+}
+.statistic .top {
+    font-size: 25px;
+}
+.statistic .bottom {
+    padding: 5px 0;
+}
+
+.statistic.twitter {
+  width: 33%;
+}
+.description.twitter {
+  font-size: 10px;
+  line-height: 12px;
+}
+.description.twitter .name {
+  font-weight: bold;
+}
+.description.twitter .screen_name {
+  color: #999;
+}
+
