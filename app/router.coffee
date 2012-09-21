@@ -28,10 +28,12 @@ module.exports = class Router extends Backbone.Router
     initialize: ->
         # Trigger nav updates
         @on 'all', (trigger) =>
+            location = (window.location.hash.slice(1))
             trigger = trigger.split(':')
             if trigger[0]=='route'
               $('.navbar .nav li').removeClass 'active'
-              $('.navbar .nav li[action="'+trigger[1]+'"]').addClass 'active'
+              active = $('.navbar .nav li[action="'+location+'"]')
+              active.add( active.parents('.dropdown') ).addClass 'active'
 
     setCurrent: (view) =>
         if not (view==@currentView)
@@ -43,7 +45,7 @@ module.exports = class Router extends Backbone.Router
     #
     person: ->
         @setCurrent singletons.personView()
-    project: (projectName='ckan') ->
+    project: (projectName='okfn') ->
         view = singletons.projectPage()
         if not view==@currentView
             @currentView = view

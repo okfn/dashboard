@@ -26,6 +26,14 @@ exports.config =
           'vendor/scripts/jquery-1.7.2.js',
           'vendor/scripts/underscore-1.3.3.js',
           'vendor/scripts/backbone-0.9.2.js'
+          'vendor/nvd3/d3.v2.js'
+          'vendor/nvd3/nv.d3.js'
+          'vendor/nvd3/tooltip.js'
+          'vendor/nvd3/legend.js'
+          'vendor/nvd3/axis.js'
+          'vendor/nvd3/multiBar.js'
+          'vendor/nvd3/multiBarChart.js'
+          'vendor/nvd3/stream_layers.js'
         ]
 
     stylesheets:

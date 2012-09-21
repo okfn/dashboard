@@ -1,28 +1,82 @@
-###
-TODO jpekel (Joris)
-TODO naomilillie
-TODO lauranewman
-TODO noelmas (Sam Leon)
-TODO katbraybrooke 
-###
-
 module.exports = [
     {
+        name: 'okfn'
+        title: 'Open Knowledge Foundation'
+        twitter: 'okfn'
+        link: ['http://okfn.org','http://blog.okfn.org']
+        people: ['mintcanary','zephod','noelmas','nilstoedtmann','bobbydonovan']
+        mailman: ['okfn-coord','okfn-help','okfn-discuss']
+        github: []
+    }
+    {
         name: 'ckan'
+        twitter: 'ckanproject'
         title: 'CKAN'
         description: 'CKAN is an open-source data hub. CKAN makes it easy to publish, share and find data. It provides a powerful and extensible system for cataloging and storing datasets, with an intuitive web front-end and API.'
         link: ['http://ckan.org','http://wiki.okfn.org/Projects/CKAN']
         people: ['ross','toby','darwin','markw','seanh','shevski','davidraznick','amercader','johnglover','aron','dread','thejimmyg']
-        mailman: ['ckan-dev','ckan-discuss','ckan-changes','ckan-news']
-        github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols', 'okfn/buildkit', 'okfn/webstore', 'okfn/dpm' ]
+        mailman: ['ckan-dev','ckan-discuss','ckan-changes','ckan-news','datahub-announce','datahub-news']
+        github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols', 'okfn/buildkit', 'okfn/webstore', 'okfn/dpm','okfn/datahub']
     }
     {
-        name: 'datahub'
-        title: 'The Data Hub'
-        people: []
-        mailman: ['datahub-announce','datahub-news']
-        github: ['okfn/datahub']
+        name: 'openspending'
+        title: 'OpenSpending'
+        twitter: 'openspending'
+        link: ['http://openspending.org','http://blog.openspending.org/','http://twitter.com/openspending','http://wiki.openspending.org/Main_Page','http://wheredoesmymoneygo.org/blog/']
+        people: ['pudo','lucychambers','grgr','vitorbaptista']
+        mailman: ['openspending','openspending-dev','wdmmg-announce']
+        github: ['okfn/dpkg-israel-state-budget','okfn/openspending.plugins.datatables','okfn/openspending.plugins.treemap','openspending/openspending','openspending/openspendingjs','openspending/dotorg','openspending/openspending-etl','openspending/cameroon.openspending.org','openspending/wheredoesmymoneygo.org']
     }
+    {
+        name: 'schoolofdata'
+        title: 'School Of Data'
+        twitter: 'schoolofdata'
+        link: ['http://schoolofdata.org','http://handbook.schoolofdata.org','http://opendatahandbook.org','http://wiki.okfn.org/Projects/Open_Data_Handbook']
+        people: ['mihi','jenlowe']
+        mailman: ['School-of-data','Scoda-dev','open-data-handbook']
+        github: ['okfn/datawrangling','okfn/schoolofdata','okfn/opendatahandbook']
+    }
+    {
+        name: 'lod2'
+        title: 'LOD (Linked Open Data)'
+        twitter: 'lod2project'
+        description: 'LOD2 is an EU-funded project involving a consortium of groups across Europe working to develop linked open data availability and to enable the creation of knowledge from interlinked data.'
+        link: ['http://lod2.eu/']
+        people: []
+        mailman: ['lod2']
+        github: []
+    }
+    {
+        name: 'labs'
+        title: 'OKFN Labs'
+        twitter: 'okfnlabs'
+        link: ['http://reclinejs.org','http://annotateit.org','http://okfnlabs.org/dashboard','http://activityapi.herokuapp.com','http://yourtopia.net','http://italia.yourtopia.net/']
+        people: ['rgrp','zephod','vndimitrova']
+        mailman: ['annotator-dev','yourtopia','okfn-labs','open-history']
+        github: ['okfn/recline','okfn/timeliner','okfn/annotator','okfn/annotateit','okfn/annotator-store','okfn/annotator-wordpress','okfn/texts.annotateit.org','okfn/activityapi','okfn/dashboard','okfn/yourtopia','okfn/bubbletree','okfn/hypernotes','okfn/okfn.github.com','sprints.okfnlabs.org','okfn/facetview']
+    }
+    {
+        name: 'openbiblio'
+        title: 'OpenBiblio'
+        description: 'Open Bibliography is a JISC funded project to advocate open access to bibliographic data and to demonstrate ways that such open datasets could be utilised.'
+        link: ['openbiblio.net','bibsoup.net']
+        people: ['markmacgillivray','petermr','tomoinn']
+        mailman: ['open-bibliography','bibliographica-users','bibliographica-folktales','Bibjson-dev','openbiblio-dev']
+        github: ['okfn/bibserver']
+    }
+    {
+        name: 'okfestival'
+        title: 'OKFestival'
+        twitter: 'okfestival'
+        link: ['http://okfestival.org']
+        people: ['keyboardkat']
+        mailman: ['OKFestival-Coord','Okfest-opendev']
+        github: []
+    }
+]
+
+###
+module.exports = [
     {
         name: 'ckanext'
         title: 'CKAN Extensions'
@@ -39,22 +93,6 @@ module.exports = [
         github: ['okfn/ckanext-datacatalogs']
     }
     {
-        name: 'openspending'
-        title: 'OpenSpending'
-        link: ['http://openspending.org','http://blog.openspending.org/','http://twitter.com/openspending','http://wiki.openspending.org/Main_Page']
-        people: ['pudo','lucychambers','grgr','vitorbaptista']
-        mailman: ['openspending','openspending-dev']
-        github: ['okfn/dpkg-israel-state-budget','okfn/openspending.plugins.datatables','okfn/openspending.plugins.treemap','openspending/openspending','openspending/openspendingjs','openspending/dotorg','openspending/openspending-etl']
-    }
-    {
-        name: 'schoolofdata'
-        title: 'School Of Data'
-        link: ['http://schoolofdata.org','http://handbook.schoolofdata.org','http://opendatahandbook.org','http://wiki.okfn.org/Projects/Open_Data_Handbook']
-        people: ['mihi','jenlowe']
-        mailman: ['School-of-data','Scoda-dev','open-data-handbook']
-        github: ['okfn/datawrangling','okfn/schoolofdata','okfn/opendatahandbook']
-    }
-    {
         name: 'opendatacommons'
         title: 'Open Data Commons'
         description: 'Open Data Commons provides legal solutions for open data, including the Public Domain Dedication and License (PDDL) and the Open Database License (ODbL).'
@@ -62,24 +100,6 @@ module.exports = [
         people: []
         mailman: ['odc-coord','odc-discuss']
         github: []
-    }
-    {
-        name: 'lod2'
-        title: 'LOD (Linked Open Data)'
-        description: 'LOD2 is an EU-funded project involving a consortium of groups across Europe working to develop linked open data availability and to enable the creation of knowledge from interlinked data.'
-        link: ['http://lod2.eu/']
-        people: []
-        mailman: ['lod2']
-        github: []
-    }
-    {
-        name: 'wdmmg'
-        title: 'Where Does My Money Go?'
-        description: 'Find out where UK public finance goes with this open-source, embeddable web application. Explore the data using maps, timelines, and best of breed visualisation technologies.'
-        link: ['http://wheredoesmymoneygo.org/blog/']
-        people: []
-        mailman: ['wdmmg-announce']
-        github: ['openspending/cameroon.openspending.org','openspending/wheredoesmymoneygo.org']
     }
     {
         name: 'publicdomain'
@@ -98,71 +118,6 @@ module.exports = [
         people: []
         mailman: ['od-coord','od-discuss']
         github: ['okfn/licenses','okfn/opendefinition']
-    }
-    {
-        name: 'recline'
-        title: 'Recline'
-        link: ['http://reclinejs.org']
-        people: ['rgrp']
-        mailman: []
-        github: ['okfn/recline','okfn/timeliner']
-    }
-    {
-        name: 'annotator'
-        title: 'Annotator'
-        description: 'Annotate any web page simply by incorporating two lines of javascript into your site or running our bookmarklet.'
-        link: ['http://annotateit.org']
-        people: []
-        mailman: ['annotator-dev']
-        github: ['okfn/annotator','okfn/annotateit','okfn/annotator-store','okfn/annotator-wordpress','okfn/texts.annotateit.org']
-    }
-    {
-        name: 'dashboard'
-        title: 'Dashboard'
-        link: ['http://okfnlabs.org/dashboard','http://activityapi.herokuapp.com']
-        people: ['zephod']
-        mailman: []
-        github: ['okfn/activityapi','okfn/dashboard']
-    }
-    {
-        name: 'yourtopia'
-        title: 'YourTopia'
-        link: ['http://yourtopia.net','http://italia.yourtopia.net/']
-        people: ['zephod']
-        mailman: ['yourtopia']
-        github: ['okfn/yourtopia']
-    }
-    {
-        name: 'labs-projects'
-        title: 'Experimental Projects'
-        people: ['zephod','rgrp','vndimitrova']
-        mailman: ['okfn-labs','open-history']
-        github: ['okfn/bubbletree','okfn/hypernotes','okfn/okfn.github.com','sprints.okfnlabs.org','okfn/facetview']
-    }
-    {
-        name: 'openbiblio'
-        title: 'Working Group: OpenBiblio'
-        description: 'Open Bibliography is a JISC funded project to advocate open access to bibliographic data and to demonstrate ways that such open datasets could be utilised.'
-        link: ['openbiblio.net']
-        people: ['markmacgillivray','petermr','tomoinn']
-        mailman: ['open-bibliography','bibliographica-users','bibliographica-folktales']
-        github: []
-    }
-    {
-        name: 'bibserver'
-        title: 'BibServer & BibJSON'
-        link: ['bibsoup.net']
-        people: ['markmacgillivray','petermr','tomoinn']
-        mailman: ['Bibjson-dev','openbiblio-dev']
-        github: ['okfn/bibserver']
-    }
-    {
-        name: 'okfn.org'
-        title: 'OKFN Core'
-        link: ['http://okfn.org','http://blog.okfn.org']
-        people: ['mintcanary','zephod','noelmas','nilstoedtmann','bobbydonovan']
-        mailman: ['okfn-coord','okfn-help','okfn-discuss']
-        github: ['okfn/wordpress-theme-okfn','okfn/wordpress-json-api-okfn']
     }
     {
         name: 'chapter-austria'
@@ -418,3 +373,4 @@ module.exports = [
     }
 ]
 
+###
