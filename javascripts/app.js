@@ -1269,8 +1269,6 @@
     __extends(ProjectPage, _super);
 
     function ProjectPage() {
-      this.renderFlotr2MailmanPosts = __bind(this.renderFlotr2MailmanPosts, this);
-      this.renderNvd3MailmanPosts = __bind(this.renderNvd3MailmanPosts, this);
       this.renderPaneGithub = __bind(this.renderPaneGithub, this);
       this.renderPaneTwitter = __bind(this.renderPaneTwitter, this);
       this.renderPaneMailmanLists = __bind(this.renderPaneMailmanLists, this);
@@ -1489,106 +1487,6 @@
         'repo': x.repo,
         'data': x.data[x.data.length - 1]
       }));
-    };
-
-    ProjectPage.prototype.renderNvd3MailmanPosts = function(pane) {
-      var key, postGraph, series, seriesId, test_data, value, _ref,
-        _this = this;
-      test_data = stream_layers(3, 128, .1).map(function(data, i) {
-        return {
-          key: 'Stream' + i,
-          values: data
-        };
-      });
-      pane.append('<div id="nvd3-demo" style="height: 200px;"><svg></svg></div>');
-      postGraph = [];
-      seriesId = 0;
-      _ref = this.resultMailman.data;
-      for (key in _ref) {
-        value = _ref[key];
-        series = {
-          key: key,
-          values: []
-        };
-        postGraph.push(series);
-        $.each(value.data, function(x, data) {
-          return series.values.push({
-            series: seriesId,
-            x: x,
-            y: data.posts
-          });
-        });
-        seriesId += 1;
-      }
-      return nv.addGraph(function() {
-        var chart;
-        chart = nv.models.stackedArea();
-        chart.width(350);
-        chart.height(200);
-        d3.select('#nvd3-demo svg').datum(postGraph).transition().duration(100).call(chart);
-        return chart;
-      });
-    };
-
-    ProjectPage.prototype.renderFlotr2MailmanPosts = function(pane) {
-      var callback, container, d1, drawGraph, graph, i, o, options, start, x,
-        _this = this;
-      pane.append($('<div id="editor-render-0"/>').css({
-        height: 200
-      }));
-      container = $('#editor-render-0')[0];
-      d1 = [];
-      start = new Date("2009/01/01 01:00").getTime();
-      options = null;
-      graph = null;
-      i = null;
-      o = null;
-      x = null;
-      for (i = 0; i < 100; i++) {
-        x = start + (i * 1000 * 3600 * 24 * 36.5);
-        d1.push([x, i + Math.random() * 30 + Math.sin(i / 20 + Math.random() * 2) * 20 + Math.sin(i / 10 + Math.random()) * 10]);
-      }
-      options = {
-        xaxis: {
-          mode: 'time',
-          labelsAngle: 45
-        },
-        selection: {
-          mode: 'x'
-        },
-        HtmlText: false,
-        title: 'Time'
-      };
-      drawGraph = function(opts) {
-        o = Flotr._.extend(Flotr._.clone(options), opts || {});
-        return Flotr.draw(container, [
-          {
-            data: d1,
-            lines: {
-              fill: true
-            }
-          }
-        ], o);
-      };
-      graph = drawGraph();
-      Flotr.EventAdapter.observe(container, 'flotr:select', function(area) {
-        return graph = drawGraph({
-          xaxis: {
-            min: area.x1,
-            max: area.x2,
-            mode: 'time',
-            labelsAngle: 45
-          },
-          yaxis: {
-            min: area.y1,
-            max: area.y2
-          }
-        });
-      });
-      callback = function() {
-        return graph = drawGraph();
-      };
-      return Flotr.EventAdapter.observe(container, 'flotr:click', callback);
     };
 
     return ProjectPage;
