@@ -26,14 +26,31 @@ exports.config =
           'vendor/scripts/jquery-1.7.2.js',
           'vendor/scripts/underscore-1.3.3.js',
           'vendor/scripts/backbone-0.9.2.js'
-          'vendor/nvd3/d3.v2.js'
-          'vendor/nvd3/nv.d3.js'
-          'vendor/nvd3/tooltip.js'
-          'vendor/nvd3/legend.js'
-          'vendor/nvd3/axis.js'
-          'vendor/nvd3/multiBar.js'
-          'vendor/nvd3/multiBarChart.js'
-          'vendor/nvd3/stream_layers.js'
+          'vendor/rickshaw/Rickshaw.js',
+          'vendor/rickshaw/Rickshaw.Class.js',
+          'vendor/rickshaw/Rickshaw.Compat.ClassList.js',
+          'vendor/rickshaw/Rickshaw.Graph.js',
+          'vendor/rickshaw/Rickshaw.Graph.Renderer.js',
+          'vendor/rickshaw/Rickshaw.Graph.Renderer.Area.js',
+          'vendor/rickshaw/Rickshaw.Graph.Renderer.Line.js',
+          'vendor/rickshaw/Rickshaw.Graph.Renderer.Bar.js',
+          'vendor/rickshaw/Rickshaw.Graph.Renderer.ScatterPlot.js',
+          'vendor/rickshaw/Rickshaw.Graph.RangeSlider.js',
+          'vendor/rickshaw/Rickshaw.Graph.HoverDetail.js',
+          'vendor/rickshaw/Rickshaw.Graph.Annotate.js',
+          'vendor/rickshaw/Rickshaw.Graph.Legend.js',
+          'vendor/rickshaw/Rickshaw.Graph.Axis.Time.js',
+          'vendor/rickshaw/Rickshaw.Graph.Behavior.Series.Toggle.js',
+          'vendor/rickshaw/Rickshaw.Graph.Behavior.Series.Order.js',
+          'vendor/rickshaw/Rickshaw.Graph.Behavior.Series.Highlight.js',
+          'vendor/rickshaw/Rickshaw.Graph.Smoother.js',
+          'vendor/rickshaw/Rickshaw.Graph.Unstacker.js',
+          'vendor/rickshaw/Rickshaw.Fixtures.Time.js',
+          'vendor/rickshaw/Rickshaw.Fixtures.Number.js',
+          'vendor/rickshaw/Rickshaw.Fixtures.RandomData.js',
+          'vendor/rickshaw/Rickshaw.Fixtures.Color.js',
+          'vendor/rickshaw/Rickshaw.Color.Palette.js',
+          'vendor/rickshaw/Rickshaw.Graph.Axis.Y.js',
         ]
 
     stylesheets:
