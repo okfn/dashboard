@@ -50,9 +50,6 @@
   border-radius: 5px;
   padding: 8px;
   margin-bottom: 15px;
-  overflow: scroll;
-  overflow-x: hidden;
-  overflow-y: scroll;
   width: 350px;
   float: left;
 }

@@ -2,6 +2,7 @@ template_page = require 'views/templates/page/project'
 template_pane = require 'views/templates/pane'
 template_pane_twitter = require 'views/templates/pane_twitter'
 template_pane_github = require 'views/templates/pane_github'
+template_rickshaw_graph = require 'views/templates/rickshaw_graph'
 template_details = 
     mailman: require 'views/templates/details/mailman'
     person: require 'views/templates/details/person'
@@ -12,17 +13,17 @@ api = require 'activityapi'
 
 # Order of panes tries to be consistent
 pane_order = [
-    'Twitter',
-    'People',
-    'Github',
-    'Description', 
-    'Mailman Subscribers', 
-    'Mailman Posts', 
-    'Mailman Lists', 
-    'Github: Watchers', 
-    'Github: Issues', 
-    'Github: Size', 
-    'Github: Forks', 
+    'Twitter'
+    'People'
+    'Github'
+    'Description'
+    'Mailman Subscribers'
+    'Mailman Posts'
+    'Mailman Lists'
+    'Github: Watchers'
+    'Github: Issues'
+    'Github: Size'
+    'Github: Forks'
 ]
 
 # Project data
@@ -60,8 +61,6 @@ module.exports = class ProjectPage extends Backbone.View
                 @addPane 'Mailman Subscribers', @renderPaneMailmanGraph('subscribers')
                 @addPane 'Mailman Posts', @renderPaneMailmanGraph('posts')
                 @addPane 'Mailman Lists', @renderPaneMailmanLists
-                #@addPane 'Mailman Posts (NVD3)', @renderNvd3MailmanPosts
-                #@addPane 'Mailman Posts (flotr2)', @renderFlotr2MailmanPosts
         api.ajaxDataPerson @project.people, (@resultPeople) => 
             if @resultPeople && @resultPeople.ok
                 @addPane 'People', @renderPanePeople
@@ -102,15 +101,44 @@ module.exports = class ProjectPage extends Backbone.View
     ## ---------
     renderPaneGithubGraph: (action) =>
         return (pane) =>
-            plotData = []
-            color = 0
+            series = []
+            palette = new Rickshaw.Color.Palette {scheme:'colorwheel'}
             for reponame,repodata of @resultGithub.data
-                plotData.push 
-                    label: reponame
-                    data: ([new Date(d.timestamp),d[action]] for d in repodata.data)
-                    color: (++color) % 30
-            domElement = $('<div/>').css({height:180}).appendTo(pane)
-            $.plot domElement, plotData, { xaxis: { mode: "time" } }
+                data = (
+                    { x : new Date(d.timestamp).toUnixTimestamp(), y : d[action] } for d in repodata.data
+                )
+                series.push 
+                    name: reponame
+                    color: palette.color()
+                    data: data
+            # Ensure all series are the same length
+            series.sort (x,y)->y.data.length-x.data.length
+            for x in [1...series.length]
+                while series[x].data.length<series[0].data.length
+                    # Pad it with 0s, cloning the x axis values from the longer series
+                    series[x].data.unshift {x:series[0].data[series[0].data.length-series[x].data.length-1].x,y:0}
+            # Build DOM using Rickshaw graphing library
+            domGraph = $(template_rickshaw_graph()).appendTo pane
+            data = series[0].data
+            graph = new Rickshaw.Graph {
+                    element: domGraph.find('.chart')[0]
+                    renderer: 'bar'
+                    width: domGraph.width() - 50
+                    height: 180
+                    series: series
+            }
+            x_axis = new Rickshaw.Graph.Axis.Time { graph: graph } 
+            y_axis = new Rickshaw.Graph.Axis.Y {
+              graph: graph
+              orientation: 'left'
+              tickFormat: Rickshaw.Fixtures.Number.formatKMBT
+              element: domGraph.find('.y-axis')[0]
+            }
+            hoverDetail = new Rickshaw.Graph.HoverDetail {
+              graph: graph
+            }
+            graph.render();
+
 
     renderPaneRepositories: (pane) =>
         for m in @project.github
@@ -122,17 +150,43 @@ module.exports = class ProjectPage extends Backbone.View
 
     renderPaneMailmanGraph: (action) =>
         return (pane) =>
-            plotData = []
-            color = 0
+            series = []
+            palette = new Rickshaw.Color.Palette {scheme:'colorwheel'}
             for listName, listData of @resultMailman.data
-                color = (color+1) % 30
-                series = ([ new Date(d.timestamp), d[action] ] for d in listData.data)
-                plotData.push 
-                    label: listData.mailman.name
-                    data: series
-                    color: color
-            domElement = $('<div/>').css({height:180}).appendTo(pane)
-            $.plot domElement, plotData, { xaxis: { mode: "time" } }
+                data = (
+                    { x : new Date(d.timestamp).toUnixTimestamp(), y : d[action] } for d in listData.data
+                )
+                series.push 
+                    name: listData.mailman.name
+                    color: palette.color()
+                    data: data
+            # Ensure all series are the same length
+            series.sort (x,y)->y.data.length-x.data.length
+            for x in [1...series.length]
+                while series[x].data.length<series[0].data.length
+                    # Pad it with 0s, cloning the x axis values from the longer series
+                    series[x].data.unshift {x:series[0].data[series[0].data.length-series[x].data.length-1].x,y:0}
+            # Build DOM using Rickshaw graphing library
+            domGraph = $(template_rickshaw_graph()).appendTo pane
+            data = series[0].data
+            graph = new Rickshaw.Graph {
+                    element: domGraph.find('.chart')[0]
+                    renderer: 'bar'
+                    width: domGraph.width() - 50
+                    height: 180
+                    series: series
+            }
+            x_axis = new Rickshaw.Graph.Axis.Time { graph: graph } 
+            y_axis = new Rickshaw.Graph.Axis.Y {
+              graph: graph
+              orientation: 'left'
+              tickFormat: Rickshaw.Fixtures.Number.formatKMBT
+              element: domGraph.find('.y-axis')[0]
+            }
+            hoverDetail = new Rickshaw.Graph.HoverDetail {
+              graph: graph
+            }
+            graph.render();
 
     renderPaneMailmanLists: (pane) =>
         for m in @project.mailman

@@ -22,7 +22,7 @@ class ActivityApi extends Backbone.Model
         if not lists.length
             callback null
         else 
-            url = @url + '/history/mailman?list=' + @_join(lists) + '&per_page=90'
+            url = @url + '/history/mailman?list=' + @_join(lists) + '&per_page=26&grain=week'
             return @_fetch url, callback
 
     ajaxDataPerson: (logins, callback) ->

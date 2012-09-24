@@ -1,0 +1,13 @@
+.rickshaw {
+  position: relative;
+}
+.rickshaw .y-axis {
+  position: absolute; 
+  top: 0;
+  bottom: 0;
+  width: 30px;
+}
+.rickshaw .chart {
+  position: relative;
+  left: 30px;
+}
