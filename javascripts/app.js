@@ -123,7 +123,7 @@
       if (!lists.length) {
         return callback(null);
       } else {
-        url = this.url + '/history/mailman?list=' + this._join(lists) + '&per_page=90';
+        url = this.url + '/history/mailman?list=' + this._join(lists) + '&per_page=26&grain=week';
         return this._fetch(url, callback);
       }
     };
@@ -1232,7 +1232,7 @@
 (this.require.define({
   "views/page_project": function(exports, require, module) {
     (function() {
-  var ProjectPage, api, pane_order, project, projectMap, projects, template_details, template_page, template_pane, template_pane_github, template_pane_twitter, _i, _len,
+  var ProjectPage, api, pane_order, project, projectMap, projects, template_details, template_page, template_pane, template_pane_github, template_pane_twitter, template_rickshaw_graph, _i, _len,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
@@ -1244,6 +1244,8 @@
   template_pane_twitter = require('views/templates/pane_twitter');
 
   template_pane_github = require('views/templates/pane_github');
+
+  template_rickshaw_graph = require('views/templates/rickshaw_graph');
 
   template_details = {
     mailman: require('views/templates/details/mailman'),
@@ -1374,35 +1376,66 @@
     ProjectPage.prototype.renderPaneGithubGraph = function(action) {
       var _this = this;
       return function(pane) {
-        var color, d, domElement, plotData, repodata, reponame, _ref;
-        plotData = [];
-        color = 0;
+        var d, data, domGraph, graph, hoverDetail, palette, repodata, reponame, series, x, x_axis, y_axis, _ref, _ref2;
+        series = [];
+        palette = new Rickshaw.Color.Palette({
+          scheme: 'colorwheel'
+        });
         _ref = _this.resultGithub.data;
         for (reponame in _ref) {
           repodata = _ref[reponame];
-          plotData.push({
-            label: reponame,
-            data: (function() {
-              var _j, _len2, _ref2, _results;
-              _ref2 = repodata.data;
-              _results = [];
-              for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
-                d = _ref2[_j];
-                _results.push([new Date(d.timestamp), d[action]]);
-              }
-              return _results;
-            })(),
-            color: (++color) % 30
+          data = (function() {
+            var _j, _len2, _ref2, _results;
+            _ref2 = repodata.data;
+            _results = [];
+            for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+              d = _ref2[_j];
+              _results.push({
+                x: new Date(d.timestamp).toUnixTimestamp(),
+                y: d[action]
+              });
+            }
+            return _results;
+          })();
+          series.push({
+            name: reponame,
+            color: palette.color(),
+            data: data
           });
         }
-        domElement = $('<div/>').css({
-          height: 180
-        }).appendTo(pane);
-        return $.plot(domElement, plotData, {
-          xaxis: {
-            mode: "time"
-          }
+        series.sort(function(x, y) {
+          return y.data.length - x.data.length;
         });
+        for (x = 1, _ref2 = series.length; 1 <= _ref2 ? x < _ref2 : x > _ref2; 1 <= _ref2 ? x++ : x--) {
+          while (series[x].data.length < series[0].data.length) {
+            series[x].data.unshift({
+              x: series[0].data[series[0].data.length - series[x].data.length - 1].x,
+              y: 0
+            });
+          }
+        }
+        domGraph = $(template_rickshaw_graph()).appendTo(pane);
+        data = series[0].data;
+        graph = new Rickshaw.Graph({
+          element: domGraph.find('.chart')[0],
+          renderer: 'bar',
+          width: domGraph.width() - 50,
+          height: 180,
+          series: series
+        });
+        x_axis = new Rickshaw.Graph.Axis.Time({
+          graph: graph
+        });
+        y_axis = new Rickshaw.Graph.Axis.Y({
+          graph: graph,
+          orientation: 'left',
+          tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+          element: domGraph.find('.y-axis')[0]
+        });
+        hoverDetail = new Rickshaw.Graph.HoverDetail({
+          graph: graph
+        });
+        return graph.render();
       };
     };
 
@@ -1431,37 +1464,66 @@
     ProjectPage.prototype.renderPaneMailmanGraph = function(action) {
       var _this = this;
       return function(pane) {
-        var color, d, domElement, listData, listName, plotData, series, _ref;
-        plotData = [];
-        color = 0;
+        var d, data, domGraph, graph, hoverDetail, listData, listName, palette, series, x, x_axis, y_axis, _ref, _ref2;
+        series = [];
+        palette = new Rickshaw.Color.Palette({
+          scheme: 'colorwheel'
+        });
         _ref = _this.resultMailman.data;
         for (listName in _ref) {
           listData = _ref[listName];
-          color = (color + 1) % 30;
-          series = (function() {
+          data = (function() {
             var _j, _len2, _ref2, _results;
             _ref2 = listData.data;
             _results = [];
             for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
               d = _ref2[_j];
-              _results.push([new Date(d.timestamp), d[action]]);
+              _results.push({
+                x: new Date(d.timestamp).toUnixTimestamp(),
+                y: d[action]
+              });
             }
             return _results;
           })();
-          plotData.push({
-            label: listData.mailman.name,
-            data: series,
-            color: color
+          series.push({
+            name: listData.mailman.name,
+            color: palette.color(),
+            data: data
           });
         }
-        domElement = $('<div/>').css({
-          height: 180
-        }).appendTo(pane);
-        return $.plot(domElement, plotData, {
-          xaxis: {
-            mode: "time"
-          }
+        series.sort(function(x, y) {
+          return y.data.length - x.data.length;
         });
+        for (x = 1, _ref2 = series.length; 1 <= _ref2 ? x < _ref2 : x > _ref2; 1 <= _ref2 ? x++ : x--) {
+          while (series[x].data.length < series[0].data.length) {
+            series[x].data.unshift({
+              x: series[0].data[series[0].data.length - series[x].data.length - 1].x,
+              y: 0
+            });
+          }
+        }
+        domGraph = $(template_rickshaw_graph()).appendTo(pane);
+        data = series[0].data;
+        graph = new Rickshaw.Graph({
+          element: domGraph.find('.chart')[0],
+          renderer: 'bar',
+          width: domGraph.width() - 50,
+          height: 180,
+          series: series
+        });
+        x_axis = new Rickshaw.Graph.Axis.Time({
+          graph: graph
+        });
+        y_axis = new Rickshaw.Graph.Axis.Y({
+          graph: graph,
+          orientation: 'left',
+          tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+          element: domGraph.find('.y-axis')[0]
+        });
+        hoverDetail = new Rickshaw.Graph.HoverDetail({
+          graph: graph
+        });
+        return graph.render();
       };
     };
 
@@ -2035,5 +2097,15 @@ function program4(depth0,data) {
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
   buffer += escapeExpression(stack1) + "\"</span>\n    </div>\n</div>\n";
   return buffer;});
+  }
+}));
+(this.require.define({
+  "views/templates/rickshaw_graph": function(exports, require, module) {
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var foundHelper, self=this;
+
+
+  return "<div class=\"rickshaw\">\n  <div class=\"y-axis\"></div>\n  <div class=\"chart\">\n</div>\n";});
   }
 }));
