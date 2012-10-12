@@ -35,10 +35,13 @@ class ActivityApi extends Backbone.Model
 
     ## Private Methods
     ## ===============
-    _wrapCallback: (callback) =>
+    _wrapCallback: (url,callback) =>
         return (data) =>
             @trigger 'ajaxMinusMinus'
-            callback(data)
+            if (data.ok is true)
+                callback(data)
+            else
+                console.error 'Could not load',url,data
 
     _join: (strings) ->
         out = ''
@@ -62,7 +65,7 @@ class ActivityApi extends Backbone.Model
         @trigger 'ajaxPlusPlus'
         $.ajax 
             url: url
-            success: @_wrapCallback callback
+            success: @_wrapCallback url, callback
             dataType: 'jsonp'
             error: @_error
 
