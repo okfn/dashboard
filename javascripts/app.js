@@ -138,11 +138,15 @@
       }
     };
 
-    ActivityApi.prototype._wrapCallback = function(callback) {
+    ActivityApi.prototype._wrapCallback = function(url, callback) {
       var _this = this;
       return function(data) {
         _this.trigger('ajaxMinusMinus');
-        return callback(data);
+        if (data.ok === true) {
+          return callback(data);
+        } else {
+          return console.error('Could not load', url, data);
+        }
       };
     };
 
@@ -170,7 +174,7 @@
       this.trigger('ajaxPlusPlus');
       return $.ajax({
         url: url,
-        success: this._wrapCallback(callback),
+        success: this._wrapCallback(url, callback),
         dataType: 'jsonp',
         error: this._error
       });
@@ -327,7 +331,7 @@
       link: ['http://openspending.org', 'http://blog.openspending.org/', 'http://twitter.com/openspending', 'http://wiki.openspending.org/Main_Page', 'http://wheredoesmymoneygo.org/blog/'],
       people: ['pudo', 'lucychambers', 'grgr', 'vitorbaptista'],
       mailman: ['openspending', 'openspending-dev', 'wdmmg-announce'],
-      github: ['okfn/dpkg-israel-state-budget', 'okfn/openspending.plugins.datatables', 'okfn/openspending.plugins.treemap', 'openspending/openspending', 'openspending/openspendingjs', 'openspending/dotorg', 'openspending/openspending-etl', 'openspending/cameroon.openspending.org', 'openspending/wheredoesmymoneygo.org']
+      github: ['okfn/dpkg-israel-state-budget', 'okfn/openspending.plugins.datatables', 'okfn/openspending.plugins.treemap']
     }, {
       name: 'schoolofdata',
       title: 'School Of Data',
@@ -370,8 +374,8 @@
       twitter: 'okfnlabs',
       link: ['http://annotateit.org', 'http://okfnlabs.org/dashboard', 'http://activityapi.herokuapp.com', 'http://yourtopia.net', 'http://italia.yourtopia.net/'],
       people: ['rgrp', 'zephod', 'vndimitrova'],
-      mailman: ['yourtopia', 'okfn-labs', 'open-history'],
-      github: ['okfn/timeliner', 'okfn/activityapi', 'okfn/dashboard', 'okfn/yourtopia', 'okfn/bubbletree', 'okfn/hypernotes', 'okfn/okfn.github.com', 'sprints.okfnlabs.org', 'okfn/facetview']
+      mailman: ['Yourtopia', 'okfn-labs', 'open-history'],
+      github: ['okfn/timeliner', 'okfn/activityapi', 'okfn/dashboard', 'okfn/yourtopia', 'okfn/bubbletree', 'okfn/hypernotes', 'okfn/okfn.github.com', 'okfn/sprints.okfnlabs.org', 'okfn/facetview']
     }, {
       name: 'openbiblio',
       title: 'OpenBiblio',
@@ -2109,3 +2113,4 @@ function program4(depth0,data) {
   return "<div class=\"rickshaw\">\n  <div class=\"y-axis\"></div>\n  <div class=\"chart\">\n</div>\n";});
   }
 }));
+
