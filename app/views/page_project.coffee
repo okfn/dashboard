@@ -11,20 +11,6 @@ template_details =
 # Data api
 api = require 'activityapi'
 
-# Order of panes tries to be consistent
-pane_order = [
-    'Twitter'
-    'People'
-    'Github'
-    'Description'
-    'Mailman Subscribers'
-    'Mailman Posts'
-    'Mailman Lists'
-    'Github: Watchers'
-    'Github: Issues'
-    'Github: Size'
-    'Github: Forks'
-]
 
 # Project data
 projects = require 'projects'
@@ -50,6 +36,9 @@ module.exports = class ProjectPage extends Backbone.View
                 @addPane 'Twitter', @renderPaneTwitter
         api.ajaxHistoryGithub @project.github, (@resultGithub) => 
             if @resultGithub && @resultGithub.ok
+                # API serves descending order data
+                for key,repo of @resultGithub.data
+                    repo.data.reverse()
                 if @project.headline_github
                     @addPane 'Github', @renderPaneGithub
                 @addPane 'Github: Watchers', @renderPaneGithubGraph('watchers')
@@ -58,32 +47,27 @@ module.exports = class ProjectPage extends Backbone.View
                 @addPane 'Github: Forks', @renderPaneGithubGraph('forks')
         api.ajaxHistoryMailman @project.mailman, (@resultMailman) => 
             if @resultMailman && @resultMailman.ok
+                # API serves descending order data
+                for key,mailman of @resultMailman.data
+                    mailman.data.reverse()
                 @addPane 'Mailman Subscribers', @renderPaneMailmanGraph('subscribers')
                 @addPane 'Mailman Posts', @renderPaneMailmanGraph('posts')
                 @addPane 'Mailman Lists', @renderPaneMailmanLists
         api.ajaxDataPerson @project.people, (@resultPeople) => 
             if @resultPeople && @resultPeople.ok
                 @addPane 'People', @renderPanePeople
+        if @project.buddypress_history
+            api.ajaxHistoryBuddypress (@resultBuddypress) => 
+              # API serves descending order data
+              @resultBuddypress.data.reverse()
+              @addPane 'okfn.org members', @renderPaneBuddypressHistory
 
     
     addPane: (title, renderCallback) =>
         if @container.width()==0
             # AJAX came too late. DOM was destroyed.
             return
-        pane = $(template_pane {title:title})
-        # Useful function
-        getIndex = (domElement) -> 
-            index = pane_order.indexOf title
-            if index<0 then throw 'Bad configuration; not found: '+title
-            return index
-        # Insertion sort will try to maintain an ordering on added panes
-        myIndex = getIndex pane
-        for child in @container.children()
-            if myIndex>=0 and myIndex<(getIndex child)
-                pane.insertBefore $(child)
-                break
-        if not pane.parent().length
-            @container.append pane
+        pane = $(template_pane {title:title}).appendTo @container
         # Initial render
         renderCallback(pane.find '.inner')
         pane.css {display:'none'}
@@ -99,6 +83,38 @@ module.exports = class ProjectPage extends Backbone.View
 
     ## Renderers
     ## ---------
+    renderPaneBuddypressHistory: (pane) =>
+        console.log @resultBuddypress
+        series = [
+            name: 'Members'
+            color: 'blue'
+            data: (
+                { x : new Date(d.timestamp).toUnixTimestamp(), y : d.num_users } for d in @resultBuddypress.data
+            )
+        ]
+        # Build DOM using Rickshaw graphing library
+        domGraph = $(template_rickshaw_graph()).appendTo pane
+        graph = new Rickshaw.Graph {
+                element: domGraph.find('.chart')[0]
+                renderer: 'line'
+                width: domGraph.width() - 50
+                height: 180
+                series: series
+        }
+        time = new Rickshaw.Fixtures.Time()
+        x_axis = new Rickshaw.Graph.Axis.Time 
+            graph: graph
+            timeUnit: time.unit('month')
+        y_axis = new Rickshaw.Graph.Axis.Y 
+            graph: graph
+            orientation: 'left'
+            tickFormat: Rickshaw.Fixtures.Number.formatKMBT
+            element: domGraph.find('.y-axis')[0]
+        hoverDetail = new Rickshaw.Graph.HoverDetail
+              graph: graph
+        graph.render()
+
+
     renderPaneGithubGraph: (action) =>
         return (pane) =>
             series = []

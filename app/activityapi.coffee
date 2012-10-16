@@ -18,6 +18,10 @@ class ActivityApi extends Backbone.Model
             url = @url + '/history/github?repo=' + @_join(repos) + '&per_page=90'
             return @_fetch url, callback
 
+    ajaxHistoryBuddypress: (callback) ->
+        url = @url + '/history/buddypress?per_page=52&grain=week'
+        return @_fetch url, callback
+
     ajaxHistoryMailman: (lists, callback) ->
         if not lists.length
             callback null

@@ -7,6 +7,7 @@ module.exports = [
         people: ['mintcanary','zephod','noelmas','nilstoedtmann','bobbydonovan']
         mailman: ['okfn-coord','okfn-help','okfn-discuss']
         github: []
+        buddypress_history: true
     }
     {
         name: 'ckan'
