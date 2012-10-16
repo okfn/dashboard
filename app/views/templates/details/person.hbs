@@ -1,13 +1,15 @@
-<div style="margin-bottom: 4px;">
-<img class="pull-left" src="{{avatar}}" style="margin-right: 8px;" width="50" height="50"/>
-  <strong><a href="{{permalink}}">{{display_name}}</a></strong>:
-  {{about}}
-  <ul>
-    <li><strong>Homepage: </strong><a href="{{website}}">{{website}}</a></li>
-    <li><strong>Github: </strong>{{github}}</li>
-    <li><strong>Twitter: </strong>{{twitter}}</li>
-    <li><strong>Last Active: </strong>{{last_active}}</li>
-  </ul>
-</div>
+{{#each person}}
+  <div style="margin-bottom: 4px;">
+  <img class="pull-left" src="{{avatar}}" style="margin-right: 8px;" width="50" height="50"/>
+    <strong><a href="{{permalink}}">{{display_name}}</a></strong>:
+    {{about}}
+    <ul>
+      <li><strong>Homepage: </strong><a href="{{website}}">{{website}}</a></li>
+      <li><strong>Github: </strong>{{github}}</li>
+      <li><strong>Twitter: </strong>{{twitter}}</li>
+      <li><strong>Last Active: </strong>{{last_active}}</li>
+    </ul>
+  </div>
+{{/each}}
 
 

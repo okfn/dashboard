@@ -122,22 +122,23 @@ module.exports = class ProjectPage extends Backbone.View
             data = series[0].data
             graph = new Rickshaw.Graph {
                     element: domGraph.find('.chart')[0]
-                    renderer: 'bar'
+                    renderer: 'line'
                     width: domGraph.width() - 50
                     height: 180
                     series: series
             }
-            x_axis = new Rickshaw.Graph.Axis.Time { graph: graph } 
-            y_axis = new Rickshaw.Graph.Axis.Y {
-              graph: graph
-              orientation: 'left'
-              tickFormat: Rickshaw.Fixtures.Number.formatKMBT
-              element: domGraph.find('.y-axis')[0]
-            }
-            hoverDetail = new Rickshaw.Graph.HoverDetail {
-              graph: graph
-            }
-            graph.render();
+            time = new Rickshaw.Fixtures.Time()
+            x_axis = new Rickshaw.Graph.Axis.Time 
+                graph: graph
+                timeUnit: time.unit('month')
+            y_axis = new Rickshaw.Graph.Axis.Y 
+                graph: graph
+                orientation: 'left'
+                tickFormat: Rickshaw.Fixtures.Number.formatKMBT
+                element: domGraph.find('.y-axis')[0]
+            hoverDetail = new Rickshaw.Graph.HoverDetail
+                graph: graph
+            graph.render()
 
 
     renderPaneRepositories: (pane) =>
@@ -145,8 +146,8 @@ module.exports = class ProjectPage extends Backbone.View
             pane.append template_details.github @resultGithub.data[m].repo
 
     renderPanePeople: (pane) =>
-        for m in @resultPeople.data.slice(0,3) or []
-            pane.append template_details.person m
+        pane.append template_details.person { person: @resultPeople.data }
+        
 
     renderPaneMailmanGraph: (action) =>
         return (pane) =>
