@@ -96,7 +96,7 @@
       ActivityApi.__super__.constructor.apply(this, arguments);
     }
 
-    ActivityApi.prototype.url = 'http://localhost:5000/api/1';
+    ActivityApi.prototype.url = 'http://activityapi.herokuapp.com/api/1';
 
     ActivityApi.prototype.ajaxHistoryGithub = function(repos, callback) {
       var url;
@@ -317,7 +317,7 @@
       title: 'Open Knowledge Foundation',
       twitter: 'okfn',
       link: ['http://okfn.org', 'http://blog.okfn.org'],
-      people: ['mintcanary', 'zephod', 'noelmas', 'nilstoedtmann', 'bobbydonovan'],
+      people: [],
       mailman: ['okfn-coord', 'okfn-help', 'okfn-discuss'],
       github: [],
       buddypress_history: true
@@ -329,7 +329,7 @@
       link: ['http://ckan.org', 'http://wiki.okfn.org/Projects/CKAN'],
       people: ['ross', 'toby', 'darwin', 'markw', 'seanh', 'shevski', 'davidraznick', 'amercader', 'johnglover', 'aron', 'dread', 'thejimmyg'],
       mailman: ['ckan-dev', 'ckan-discuss', 'ckan-changes', 'ckan-news', 'datahub-announce', 'datahub-news'],
-      github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols', 'okfn/buildkit', 'okfn/webstore', 'okfn/dpm', 'okfn/datahub'],
+      github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols'],
       headline_github: 'okfn/ckan'
     }, {
       name: 'openspending',
@@ -380,7 +380,7 @@
       title: 'OKFN Labs',
       twitter: 'okfnlabs',
       link: ['http://annotateit.org', 'http://okfnlabs.org/dashboard', 'http://activityapi.herokuapp.com', 'http://yourtopia.net', 'http://italia.yourtopia.net/'],
-      people: ['rgrp', 'zephod', 'vndimitrova'],
+      people: ['pudo', 'rgrp', 'zephod', 'vndimitrova'],
       mailman: ['Yourtopia', 'okfn-labs', 'open-history'],
       github: ['okfn/timeliner', 'okfn/activityapi', 'okfn/dashboard', 'okfn/yourtopia', 'okfn/bubbletree', 'okfn/hypernotes', 'okfn/okfn.github.com', 'okfn/sprints.okfnlabs.org', 'okfn/facetview']
     }, {
@@ -400,6 +400,12 @@
       people: ['keyboardkat'],
       mailman: ['OKFestival-Coord', 'Okfest-opendev'],
       github: []
+    }, {
+      name: 'webadmin',
+      title: 'Website Admin',
+      people: ['samsmith', 'zephod', 'samleon', 'nilstoedtmann', 'bobbydonovan'],
+      mailman: ['okfn-coord', 'okfn-help'],
+      github: ['okfn/wordpress-theme-okfn']
     }
   ];
 
@@ -1246,7 +1252,8 @@
   var ProjectPage, api, project, projectMap, projects, template_details, template_page, template_pane, template_pane_github, template_pane_twitter, template_rickshaw_graph, _i, _len,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = Object.prototype.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; },
+    __indexOf = Array.prototype.indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   template_page = require('views/templates/page/project');
 
@@ -1359,8 +1366,26 @@
         }
       });
       api.ajaxDataPerson(this.project.people, function(resultPeople) {
+        var logins, name, x, _j, _len2, _ref;
         _this.resultPeople = resultPeople;
         if (_this.resultPeople && _this.resultPeople.ok) {
+          logins = (function() {
+            var _j, _len2, _ref, _results;
+            _ref = this.resultPeople.data;
+            _results = [];
+            for (_j = 0, _len2 = _ref.length; _j < _len2; _j++) {
+              x = _ref[_j];
+              _results.push(x.login);
+            }
+            return _results;
+          }).call(_this);
+          _ref = _this.project.people;
+          for (_j = 0, _len2 = _ref.length; _j < _len2; _j++) {
+            name = _ref[_j];
+            if (!(__indexOf.call(logins, name) >= 0)) {
+              console.log('Warning: People list contains "' + name + '"; no such person.');
+            }
+          }
           return _this.addPane('People', _this.renderPanePeople);
         }
       });
@@ -1520,6 +1545,11 @@
     };
 
     ProjectPage.prototype.renderPanePeople = function(pane) {
+      var i, _ref;
+      for (i = 0, _ref = this.resultPeople.data.length; 0 <= _ref ? i < _ref : i > _ref; 0 <= _ref ? i++ : i--) {
+        this.resultPeople.data[i].id = i;
+        this.resultPeople.data[i].link_title = this.resultPeople.data[i].display_name.split(' ')[0];
+      }
       return pane.append(template_details.person({
         person: this.resultPeople.data
       }));
@@ -1950,7 +1980,18 @@ function program4(depth0,data) {
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n  <div style=\"margin-bottom: 4px;\">\n  <img class=\"pull-left\" src=\"";
+  buffer += "\n    <li><a href=\"#\">";
+  foundHelper = helpers.link_title;
+  stack1 = foundHelper || depth0.link_title;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "link_title", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</a></li>\n";
+  return buffer;}
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n  <div class=\"paginate-person\" style=\"margin-bottom: 4px;\">\n  <img class=\"pull-left\" src=\"";
   foundHelper = helpers.avatar;
   stack1 = foundHelper || depth0.avatar;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -1998,6 +2039,7 @@ function program1(depth0,data) {
   buffer += escapeExpression(stack1) + "</li>\n    </ul>\n  </div>\n";
   return buffer;}
 
+  buffer += "<div class=\"pane-people\">\n<div class=\"pagination\"><ul>\n";
   foundHelper = helpers.person;
   stack1 = foundHelper || depth0.person;
   stack2 = helpers.each;
@@ -2007,7 +2049,17 @@ function program1(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n\n\n";
+  buffer += "\n</ul></div>\n\n";
+  foundHelper = helpers.person;
+  stack1 = foundHelper || depth0.person;
+  stack2 = helpers.each;
+  tmp1 = self.program(3, program3, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</div>\n";
   return buffer;});
   }
 }));
