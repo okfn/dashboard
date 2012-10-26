@@ -4,7 +4,7 @@ module.exports = [
         title: 'Open Knowledge Foundation'
         twitter: 'okfn'
         link: ['http://okfn.org','http://blog.okfn.org']
-        people: ['mintcanary','zephod','noelmas','nilstoedtmann','bobbydonovan']
+        people: []
         mailman: ['okfn-coord','okfn-help','okfn-discuss']
         github: []
         buddypress_history: true
@@ -17,7 +17,7 @@ module.exports = [
         link: ['http://ckan.org','http://wiki.okfn.org/Projects/CKAN']
         people: ['ross','toby','darwin','markw','seanh','shevski','davidraznick','amercader','johnglover','aron','dread','thejimmyg']
         mailman: ['ckan-dev','ckan-discuss','ckan-changes','ckan-news','datahub-announce','datahub-news']
-        github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols', 'okfn/buildkit', 'okfn/webstore', 'okfn/dpm','okfn/datahub']
+        github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols', ]
         headline_github: 'okfn/ckan'
     }
     {
@@ -75,7 +75,7 @@ module.exports = [
         title: 'OKFN Labs'
         twitter: 'okfnlabs'
         link: ['http://annotateit.org','http://okfnlabs.org/dashboard','http://activityapi.herokuapp.com','http://yourtopia.net','http://italia.yourtopia.net/']
-        people: ['rgrp','zephod','vndimitrova']
+        people: ['pudo','rgrp','zephod','vndimitrova']
         mailman: ['Yourtopia','okfn-labs','open-history']
         github: ['okfn/timeliner','okfn/activityapi','okfn/dashboard','okfn/yourtopia','okfn/bubbletree','okfn/hypernotes','okfn/okfn.github.com','okfn/sprints.okfnlabs.org','okfn/facetview']
     }
@@ -97,6 +97,13 @@ module.exports = [
         people: ['keyboardkat']
         mailman: ['OKFestival-Coord','Okfest-opendev']
         github: []
+    }
+    {
+        name: 'webadmin'
+        title: 'Website Admin'
+        people: ['samsmith','zephod','samleon','nilstoedtmann','bobbydonovan']
+        mailman: ['okfn-coord','okfn-help']
+        github: ['okfn/wordpress-theme-okfn']
     }
 ]
 
