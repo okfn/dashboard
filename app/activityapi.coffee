@@ -2,6 +2,7 @@ class ActivityApi extends Backbone.Model
     url: 'http://activityapi.herokuapp.com/api/1'
     #url: 'http://localhost:5000/api/1'
 
+
     ## Methods
     ## =======
     ajaxHistoryGithub: (repos, callback) ->
