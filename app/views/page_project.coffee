@@ -31,9 +31,13 @@ module.exports = class ProjectPage extends Backbone.View
         # Fly, my AJAX pretties!
         if @project.description
             @addPane 'Description', (pane)=> pane.html(@project.description)
-        api.ajaxTwitter @project.twitter, (@resultTwitter) => 
+        api.ajaxHistoryTwitter @project.twitter, (@resultTwitter) => 
             if @resultTwitter && @resultTwitter.ok
+                # API serves descending order data
+                for key, twitter of @resultTwitter.data
+                    twitter.data.reverse()
                 @addPane 'Twitter', @renderPaneTwitter
+                @addPane 'Twitter Metrics', @renderPaneTwitterGraph
         api.ajaxHistoryGithub @project.github, (@resultGithub) => 
             if @resultGithub && @resultGithub.ok
                 # API serves descending order data
@@ -84,7 +88,6 @@ module.exports = class ProjectPage extends Backbone.View
     ## Renderers
     ## ---------
     renderPaneBuddypressHistory: (pane) =>
-        console.log @resultBuddypress
         series = [
             name: 'Members'
             color: 'blue'
@@ -210,7 +213,54 @@ module.exports = class ProjectPage extends Backbone.View
             pane.append template_details.mailman @resultMailman.data[m].mailman
 
     renderPaneTwitter: (pane) =>
-        pane.html template_pane_twitter @resultTwitter.account
+        pane.html template_pane_twitter @resultTwitter.data[@project.twitter].account
+
+    renderPaneTwitterGraph: (pane) =>
+        twitterdata = @resultTwitter.data[@project.twitter].data
+        series = [
+            {
+                name: 'Followers'
+                color: 'orange'
+                data: (
+                    { x : new Date(d.timestamp).toUnixTimestamp(), y : d.followers } for d in twitterdata
+                )
+            }
+            {
+                name: 'Tweets'
+                color: 'green'
+                data: (
+                    { x : new Date(d.timestamp).toUnixTimestamp(), y : d.tweets } for d in twitterdata
+                )
+            }
+            {
+                name: 'Following'
+                color: 'red'
+                data: (
+                    { x : new Date(d.timestamp).toUnixTimestamp(), y : d.following } for d in twitterdata
+                )
+            }
+        ]
+        # Build DOM using Rickshaw graphing library
+        domGraph = $(template_rickshaw_graph()).appendTo pane
+        graph = new Rickshaw.Graph {
+                element: domGraph.find('.chart')[0]
+                renderer: 'line'
+                width: domGraph.width() - 50
+                height: 180
+                series: series
+        }
+        time = new Rickshaw.Fixtures.Time()
+        x_axis = new Rickshaw.Graph.Axis.Time 
+            graph: graph
+            timeUnit: time.unit('month')
+        y_axis = new Rickshaw.Graph.Axis.Y 
+            graph: graph
+            orientation: 'left'
+            tickFormat: Rickshaw.Fixtures.Number.formatKMBT
+            element: domGraph.find('.y-axis')[0]
+        hoverDetail = new Rickshaw.Graph.HoverDetail
+              graph: graph
+        graph.render()
 
     renderPaneGithub: (pane) =>
         x = @resultGithub.data[ @project.headline_github ]
