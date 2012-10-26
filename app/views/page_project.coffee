@@ -59,6 +59,11 @@ module.exports = class ProjectPage extends Backbone.View
                 @addPane 'Mailman Lists', @renderPaneMailmanLists
         api.ajaxDataPerson @project.people, (@resultPeople) => 
             if @resultPeople && @resultPeople.ok
+                # Verify result
+                logins = ( x.login for x in @resultPeople.data )
+                for name in @project.people
+                    if not (name in logins)
+                        console.log 'Warning: People list contains "'+name+'"; no such person.'
                 @addPane 'People', @renderPanePeople
         if @project.buddypress_history
             api.ajaxHistoryBuddypress (@resultBuddypress) => 
@@ -165,6 +170,9 @@ module.exports = class ProjectPage extends Backbone.View
             pane.append template_details.github @resultGithub.data[m].repo
 
     renderPanePeople: (pane) =>
+        for i in [0...@resultPeople.data.length]
+            @resultPeople.data[i].id = i
+            @resultPeople.data[i].link_title = @resultPeople.data[i].display_name.split(' ')[0]
         pane.append template_details.person { person: @resultPeople.data }
         
 
