@@ -96,17 +96,7 @@
       ActivityApi.__super__.constructor.apply(this, arguments);
     }
 
-    ActivityApi.prototype.url = 'http://activityapi.herokuapp.com/api/1';
-
-    ActivityApi.prototype.ajaxTwitter = function(screen_name, callback) {
-      var url;
-      if (!screen_name) {
-        return callback(null);
-      } else {
-        url = this.url + '/history/twitter/account?name=' + screen_name;
-        return this._fetch(url, callback);
-      }
-    };
+    ActivityApi.prototype.url = 'http://localhost:5000/api/1';
 
     ActivityApi.prototype.ajaxHistoryGithub = function(repos, callback) {
       var url;
@@ -130,6 +120,16 @@
         return callback(null);
       } else {
         url = this.url + '/history/mailman?list=' + this._join(lists) + '&per_page=26&grain=week';
+        return this._fetch(url, callback);
+      }
+    };
+
+    ActivityApi.prototype.ajaxHistoryTwitter = function(account, callback) {
+      var url;
+      if (!account) {
+        return callback(null);
+      } else {
+        url = this.url + '/history/twitter/account?name=' + account + '&per_page=30&grain=day';
         return this._fetch(url, callback);
       }
     };
@@ -1281,6 +1281,7 @@
 
     function ProjectPage() {
       this.renderPaneGithub = __bind(this.renderPaneGithub, this);
+      this.renderPaneTwitterGraph = __bind(this.renderPaneTwitterGraph, this);
       this.renderPaneTwitter = __bind(this.renderPaneTwitter, this);
       this.renderPaneMailmanLists = __bind(this.renderPaneMailmanLists, this);
       this.renderPaneMailmanGraph = __bind(this.renderPaneMailmanGraph, this);
@@ -1312,10 +1313,17 @@
           return pane.html(_this.project.description);
         });
       }
-      api.ajaxTwitter(this.project.twitter, function(resultTwitter) {
+      api.ajaxHistoryTwitter(this.project.twitter, function(resultTwitter) {
+        var key, twitter, _ref;
         _this.resultTwitter = resultTwitter;
         if (_this.resultTwitter && _this.resultTwitter.ok) {
-          return _this.addPane('Twitter', _this.renderPaneTwitter);
+          _ref = _this.resultTwitter.data;
+          for (key in _ref) {
+            twitter = _ref[key];
+            twitter.data.reverse();
+          }
+          _this.addPane('Twitter', _this.renderPaneTwitter);
+          return _this.addPane('Twitter Metrics', _this.renderPaneTwitterGraph);
         }
       });
       api.ajaxHistoryGithub(this.project.github, function(resultGithub) {
@@ -1388,7 +1396,6 @@
 
     ProjectPage.prototype.renderPaneBuddypressHistory = function(pane) {
       var d, domGraph, graph, hoverDetail, series, time, x_axis, y_axis;
-      console.log(this.resultBuddypress);
       series = [
         {
           name: 'Members',
@@ -1596,7 +1603,83 @@
     };
 
     ProjectPage.prototype.renderPaneTwitter = function(pane) {
-      return pane.html(template_pane_twitter(this.resultTwitter.account));
+      return pane.html(template_pane_twitter(this.resultTwitter.data[this.project.twitter].account));
+    };
+
+    ProjectPage.prototype.renderPaneTwitterGraph = function(pane) {
+      var d, domGraph, graph, hoverDetail, series, time, twitterdata, x_axis, y_axis;
+      twitterdata = this.resultTwitter.data[this.project.twitter].data;
+      series = [
+        {
+          name: 'Followers',
+          color: 'orange',
+          data: (function() {
+            var _j, _len2, _results;
+            _results = [];
+            for (_j = 0, _len2 = twitterdata.length; _j < _len2; _j++) {
+              d = twitterdata[_j];
+              _results.push({
+                x: new Date(d.timestamp).toUnixTimestamp(),
+                y: d.followers
+              });
+            }
+            return _results;
+          })()
+        }, {
+          name: 'Tweets',
+          color: 'green',
+          data: (function() {
+            var _j, _len2, _results;
+            _results = [];
+            for (_j = 0, _len2 = twitterdata.length; _j < _len2; _j++) {
+              d = twitterdata[_j];
+              _results.push({
+                x: new Date(d.timestamp).toUnixTimestamp(),
+                y: d.tweets
+              });
+            }
+            return _results;
+          })()
+        }, {
+          name: 'Following',
+          color: 'red',
+          data: (function() {
+            var _j, _len2, _results;
+            _results = [];
+            for (_j = 0, _len2 = twitterdata.length; _j < _len2; _j++) {
+              d = twitterdata[_j];
+              _results.push({
+                x: new Date(d.timestamp).toUnixTimestamp(),
+                y: d.following
+              });
+            }
+            return _results;
+          })()
+        }
+      ];
+      domGraph = $(template_rickshaw_graph()).appendTo(pane);
+      graph = new Rickshaw.Graph({
+        element: domGraph.find('.chart')[0],
+        renderer: 'line',
+        width: domGraph.width() - 50,
+        height: 180,
+        series: series
+      });
+      time = new Rickshaw.Fixtures.Time();
+      x_axis = new Rickshaw.Graph.Axis.Time({
+        graph: graph,
+        timeUnit: time.unit('month')
+      });
+      y_axis = new Rickshaw.Graph.Axis.Y({
+        graph: graph,
+        orientation: 'left',
+        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+        element: domGraph.find('.y-axis')[0]
+      });
+      hoverDetail = new Rickshaw.Graph.HoverDetail({
+        graph: graph
+      });
+      return graph.render();
     };
 
     ProjectPage.prototype.renderPaneGithub = function(pane) {
