@@ -5,7 +5,7 @@ module.exports = [
         twitter: 'okfn'
         link: ['http://okfn.org','http://blog.okfn.org']
         people: ['mintcanary','zephod','noelmas','nilstoedtmann','bobbydonovan']
-        mailman: ['okfn-coord','okfn-help','okfn-discuss']
+        mailman: ['okfn-discuss','okfn-announce']
         github: []
         buddypress_history: true
     }
