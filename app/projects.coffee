@@ -5,7 +5,7 @@ module.exports = [
         twitter: 'okfn'
         link: ['http://okfn.org','http://blog.okfn.org']
         people: []
-        mailman: ['okfn-coord','okfn-help','okfn-discuss']
+        mailman: ['okfn-discuss','okfn-announce']
         github: []
         buddypress_history: true
     }
@@ -16,8 +16,8 @@ module.exports = [
         description: 'CKAN is an open-source data hub. CKAN makes it easy to publish, share and find data. It provides a powerful and extensible system for cataloging and storing datasets, with an intuitive web front-end and API.'
         link: ['http://ckan.org','http://wiki.okfn.org/Projects/CKAN']
         people: ['ross','toby','darwin','markw','seanh','shevski','davidraznick','amercader','johnglover','aron','dread','thejimmyg']
-        mailman: ['ckan-dev','ckan-discuss','ckan-changes','ckan-news','datahub-announce','datahub-news']
-        github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols', ]
+        mailman: ['ckan-dev','ckan-discuss']
+        github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols', 'okfn/buildkit', 'okfn/webstore', 'okfn/dpm','okfn/datahub']
         headline_github: 'okfn/ckan'
     }
     {
