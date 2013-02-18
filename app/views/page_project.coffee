@@ -4,6 +4,7 @@ template_pane_twitter = require 'views/templates/pane_twitter'
 template_pane_github = require 'views/templates/pane_github'
 template_rickshaw_graph = require 'views/templates/rickshaw_graph'
 template_details = 
+    mailchimp: require 'views/templates/details_mailchimp'
     mailman: require 'views/templates/details_mailman'
     github: require 'views/templates/details_github'
 
@@ -55,7 +56,6 @@ module.exports = class ProjectPage extends Backbone.View
                 if @project.headline_github
                     @addPane 'Github', @renderPaneGithub
                 @addPane 'Github: Watchers', @renderPaneGithubGraph('watchers')
-                @addPane 'Github: Size', @renderPaneGithubGraph('size')
                 @addPane 'Github: Issues', @renderPaneGithubGraph('issues')
                 @addPane 'Github: Forks', @renderPaneGithubGraph('forks')
         api.ajaxHistoryMailman @project.mailman, (@resultMailman) => 
@@ -64,7 +64,14 @@ module.exports = class ProjectPage extends Backbone.View
                 for key,mailman of @resultMailman.data
                     mailman.data.reverse()
                 @addPane 'Mailman', @renderPaneMailman
-                #@addPane 'Mailman Posts', @renderPaneMailmanGraph('posts')
+        api.ajaxHistoryMailchimp @project.mailchimp, (@resultMailchimp) => 
+            if @resultMailchimp && @resultMailchimp.ok
+                # API serves descending order data
+                for key,value of @resultMailchimp.data
+                    value.data.reverse()
+                    # TODO temp
+                    value.members = 9999
+                @addPane 'Mailchimp', @renderPaneMailchimp
 
     
     addPane: (title, renderCallback) =>
@@ -208,6 +215,43 @@ module.exports = class ProjectPage extends Backbone.View
               graph: graph
             }
             graph.render()
+
+
+    renderPaneMailchimp: (pane) =>
+        # Header: Broad statistics
+        for m in @project.mailchimp
+            pane.append template_details.mailchimp @resultMailchimp.data[m]
+        series = []
+        palette = new Rickshaw.Color.Palette {scheme:'colorwheel'}
+        for listName, listData of @resultMailchimp.data
+            data = (
+                { x : new Date(d.timestamp).toUnixTimestamp(), y : d['members'] } for d in listData.data
+            )
+            series.push 
+                name: listData.name
+                color: palette.color()
+                data: data
+        # Build DOM using Rickshaw graphing library
+        domGraph = $(template_rickshaw_graph()).appendTo pane
+        data = series[0].data
+        graph = new Rickshaw.Graph {
+                element: domGraph.find('.chart')[0]
+                renderer: 'line'
+                width: domGraph.width() - 50
+                height: 180
+                series: series
+        }
+        x_axis = new Rickshaw.Graph.Axis.Time { graph: graph } 
+        y_axis = new Rickshaw.Graph.Axis.Y {
+          graph: graph
+          orientation: 'left'
+          tickFormat: Rickshaw.Fixtures.Number.formatKMBT
+          element: domGraph.find('.y-axis')[0]
+        }
+        hoverDetail = new Rickshaw.Graph.HoverDetail {
+          graph: graph
+        }
+        graph.render()
 
     renderPaneTwitter: (pane) =>
         pane.append template_pane_twitter @resultTwitter.data[@project.twitter].account

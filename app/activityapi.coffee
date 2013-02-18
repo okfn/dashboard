@@ -12,6 +12,13 @@ class ActivityApi extends Backbone.Model
             url = @url + '/history/github?repo=' + @_join(repos) + '&per_page=90'
             return @_fetch url, callback
 
+    ajaxHistoryMailchimp: (lists, callback) ->
+        if lists is undefined or not lists.length
+            callback null
+        else 
+            url = @url + '/history/mailchimp?list=' + @_join(lists) + '&per_page=26&grain=week'
+            return @_fetch url, callback
+
     ajaxHistoryMailman: (lists, callback) ->
         if not lists.length
             callback null
