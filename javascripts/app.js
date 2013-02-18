@@ -1,1 +1,1306 @@
-(function(){"use strict";var a=typeof window!="undefined"?window:global;if(typeof a.require=="function")return;var b={},c={},d=function(a,b){return{}.hasOwnProperty.call(a,b)},e=function(a,b){var c=[],d,e;/^\.\.?(\/|$)/.test(b)?d=[a,b].join("/").split("/"):d=b.split("/");for(var f=0,g=d.length;f<g;f++)e=d[f],e===".."?c.pop():e!=="."&&e!==""&&c.push(e);return c.join("/")},f=function(a){return a.split("/").slice(0,-1).join("/")},g=function(b){return function(c){var d=f(b),g=e(d,c);return a.require(g)}},h=function(a,b){var d={id:a,exports:{}};b(d.exports,g(a),d);var e=c[a]=d.exports;return e},i=function(a){var f=e(a,".");if(d(c,f))return c[f];if(d(b,f))return h(f,b[f]);var g=e(f,"./index");if(d(c,g))return c[g];if(d(b,g))return h(g,b[g]);throw new Error('Cannot find module "'+a+'"')},j=function(a){for(var c in a)d(a,c)&&(b[c]=a[c])};a.require=i,a.require.define=j,a.require.brunch=!0})(),window.require.define({activityapi:function(a,b,c){((function(){var a,b=function(a,b){return function(){return a.apply(b,arguments)}},d=Object.prototype.hasOwnProperty,e=function(a,b){function e(){this.constructor=a}for(var c in b)d.call(b,c)&&(a[c]=b[c]);return e.prototype=b.prototype,a.prototype=new e,a.__super__=b.prototype,a};a=function(a){function c(){this._error=b(this._error,this),this._wrapCallback=b(this._wrapCallback,this),c.__super__.constructor.apply(this,arguments)}return e(c,a),c.prototype.url="http://activityapi.herokuapp.com/api/1",c.prototype.ajaxHistoryGithub=function(a,b){var c;return a.length?(c=this.url+"/history/github?repo="+this._join(a)+"&per_page=90",this._fetch(c,b)):b(null)},c.prototype.ajaxHistoryMailchimp=function(a,b){var c;return a===void 0||!a.length?b(null):(c=this.url+"/history/mailchimp?list="+this._join(a)+"&per_page=26&grain=week",this._fetch(c,b))},c.prototype.ajaxHistoryMailman=function(a,b){var c;return a.length?(c=this.url+"/history/mailman?list="+this._join(a)+"&per_page=26&grain=week",this._fetch(c,b)):b(null)},c.prototype.ajaxHistoryTwitter=function(a,b){var c;return a?(c=this.url+"/history/twitter/account?name="+a+"&per_page=26&grain=week",this._fetch(c,b)):b(null)},c.prototype._wrapCallback=function(a,b){var c=this;return function(d){return c.trigger("ajaxMinusMinus"),d.ok===!0?b(d):console.error("Could not load",a,d)}},c.prototype._join=function(a){var b,c,d,e,f;c="",b=!1;for(e=0,f=a.length;e<f;e++)d=a[e],b&&(c+=","),b=!0,c+=d;return c},c.prototype._error=function(a,b){return this.trigger("ajaxMinusMinus"),this.trigger("ajaxError"),console.error("AJAX error",a,b)},c.prototype._fetch=function(a,b){if(!b)throw"I require a callback function";return this.trigger("ajaxPlusPlus"),$.ajax({url:a,success:this._wrapCallback(a,b),dataType:"jsonp",error:this._error})},c}(Backbone.Model),c.exports=new a})).call(this)}}),window.require.define({initialize:function(a,b,c){((function(){var a,c,d;c=b("router"),a=b("views/loading_view"),d=b("projects"),$(function(){var b,e,f,g,h,i,j,k,l,m,n,o,p;g=$("ul.nav").empty();for(l=0,n=d.length;l<n;l++){i=d[l];if("item"in i)e=i.item,k=$('<li action="project/'+e.name+'"><a href="#project/'+e.name+'">'+e.title+"</li>"),k.appendTo(g);else{b=$('<li class="dropdown" action="project"><a class="dropdown-toggle" data-toggle="dropdown" href="#">'+i.header+'<b class="caret"></b></a></li>'),b.appendTo(g),j=$('<ul class="dropdown-menu" />').appendTo(b),p=i.items;for(m=0,o=p.length;m<o;m++)h=p[m],j.append($('<li action="project/'+h.name+'"><a href="#project/'+h.name+'">'+h.title+"</a></li>"))}}return this.router=new c,f=new a,Backbone.history.start()})})).call(this)}}),window.require.define({"models/person":function(a,b,c){((function(){var a,b=Object.prototype.hasOwnProperty,d=function(a,c){function e(){this.constructor=a}for(var d in c)b.call(c,d)&&(a[d]=c[d]);return e.prototype=c.prototype,a.prototype=new e,a.__super__=c.prototype,a};c.exports=a=function(a){function b(){b.__super__.constructor.apply(this,arguments)}return d(b,a),b.prototype.defaults={name:"John Doe",location:"Nowhere",geolocation:{adminCode1:"07",adminName1:"North Rhine-Westphalia",countryCode:"DE",countryName:"Germany",fcl:"P",fclName:"city, village,...",fcode:"PPLA2",fcodeName:"seat of a second-order administrative division",geonameId:2886242,lat:50.9333333,lng:6.95,name:"Cologne",population:963395,toponymName:"Köl"}},b}(Backbone.Model)})).call(this)}}),window.require.define({"models/person_collection":function(a,b,c){((function(){var a,b=Object.prototype.hasOwnProperty,d=function(a,c){function e(){this.constructor=a}for(var d in c)b.call(c,d)&&(a[d]=c[d]);return e.prototype=c.prototype,a.prototype=new e,a.__super__=c.prototype,a};c.exports=a=function(a){function b(){b.__super__.constructor.apply(this,arguments)}return d(b,a),b.prototype.model=Dashboard.Member,b.prototype.parse=function(a){var b,c,d;c=[];for(b in a)d=a[b],c.push({key:b,name:d.name,location:d.location,geolocation:d.spatial});return c},b}(Backbone.Collection)})).call(this)}}),window.require.define({projects:function(a,b,c){((function(){c.exports=[{header:"Network",item:{name:"okfn",title:"Network",twitter:"okfn",link:["http://okfn.org","http://blog.okfn.org"],mailman:["okfn-discuss","okfn-announce"],github:[],mailchimp:["Open Knowledge Foundation Announce Mailing List"]}},{header:"Projects",items:[{name:"ckan",twitter:"ckanproject",title:"CKAN",description:"CKAN is an open-source data hub. CKAN makes it easy to publish, share and find data. It provides a powerful and extensible system for cataloging and storing datasets, with an intuitive web front-end and API.",link:["http://ckan.org","http://wiki.okfn.org/Projects/CKAN"],mailman:["ckan-dev","ckan-discuss"],github:["okfn/ckan","okfn/ckanclient","okfn/dataprotocols","okfn/buildkit","okfn/webstore","okfn/dpm","okfn/datahub"],headline_github:"okfn/ckan"},{name:"openspending",title:"OpenSpending",twitter:"openspending",link:["http://openspending.org","http://blog.openspending.org/","http://twitter.com/openspending","http://wiki.openspending.org/Main_Page","http://wheredoesmymoneygo.org/blog/"],mailman:["openspending","openspending-dev","wdmmg-announce"],github:["okfn/dpkg-israel-state-budget","okfn/openspending.plugins.datatables","okfn/openspending.plugins.treemap"]},{name:"schoolofdata",title:"School Of Data",twitter:"schoolofdata",link:["http://schoolofdata.org","http://handbook.schoolofdata.org","http://opendatahandbook.org","http://wiki.okfn.org/Projects/Open_Data_Handbook"],mailman:["School-of-data","Scoda-dev","open-data-handbook"],github:["okfn/datawrangling","okfn/schoolofdata","okfn/opendatahandbook"],headline_github:"okfn/schoolofdata"},{name:"lod2",title:"LOD (Linked Open Data)",twitter:"lod2project",description:"LOD2 is an EU-funded project involving a consortium of groups across Europe working to develop linked open data availability and to enable the creation of knowledge from interlinked data.",link:["http://lod2.eu/"],mailman:["lod2"],github:[]},{name:"recline",title:"Recline.js",twitter:"reclinejs",link:["http://reclinejs.org"],mailman:[],github:["okfn/recline"],headline_github:"okfn/recline"},{name:"annotator",title:"Annotator",twitter:"okfnlabs",link:["http://annotateit.org"],mailman:["annotator-dev"],github:["okfn/annotator","okfn/annotateit","okfn/annotator-store","okfn/annotator-wordpress","okfn/texts.annotateit.org"],headline_github:"okfn/annotator"},{name:"labs",title:"OKFN Labs",twitter:"okfnlabs",link:["http://annotateit.org","http://okfnlabs.org/dashboard","http://activityapi.herokuapp.com","http://yourtopia.net","http://italia.yourtopia.net/"],mailman:["Yourtopia","okfn-labs","open-history"],github:["okfn/timeliner","okfn/activityapi","okfn/dashboard","okfn/yourtopia","okfn/bubbletree","okfn/hypernotes","okfn/okfn.github.com","okfn/sprints.okfnlabs.org","okfn/facetview"]}]},{header:"OKFestival",item:{name:"okfestival",title:"OKFestival",twitter:"okfestival",link:["http://okfestival.org"],mailman:["OKFestival-Coord","Okfest-opendev"],github:[]}}]})).call(this)}}),window.require.define({router:function(a,b,c){((function(){var a,d,e,f,g=function(a,b){return function(){return a.apply(b,arguments)}},h=Object.prototype.hasOwnProperty,i=function(a,b){function d(){this.constructor=a}for(var c in b)h.call(b,c)&&(a[c]=b[c]);return d.prototype=b.prototype,a.prototype=new d,a.__super__=b.prototype,a};a=b("views/page_project"),e=function(){return $("#content")},f={projectPage:function(){return this._project=this._project||new a}},c.exports=d=function(a){function b(){this.setCurrent=g(this.setCurrent,this),b.__super__.constructor.apply(this,arguments)}return i(b,a),b.prototype.routes={"":"project",project:"project","project/:projectName":"project"},b.prototype.initialize=function(){var a=this;return this.on("all",function(a){var b,c;c=window.location.hash.slice(1),a=a.split(":");if(a[0]==="route")return $(".navbar .nav li").removeClass("active"),b=$('.navbar .nav li[action="'+c+'"]'),b.add(b.parents(".dropdown")).addClass("active")})},b.prototype.setCurrent=function(a){if(a!==this.currentView)return this.currentView=a,a.renderPage(e())},b.prototype.project=function(a){var b;return a==null&&(a="okfn"),b=f.projectPage(),!b===this.currentView&&(this.currentView=b),b.renderPage(e(),a)},b}(Backbone.Router)})).call(this)}}),window.require.define({"views/loading_view":function(a,b,c){((function(){var a,d,e,f=function(a,b){return function(){return a.apply(b,arguments)}},g=Object.prototype.hasOwnProperty,h=function(a,b){function d(){this.constructor=a}for(var c in b)g.call(b,c)&&(a[c]=b[c]);return d.prototype=b.prototype,a.prototype=new d,a.__super__=b.prototype,a};d=b("activityapi"),e=b("views/templates/loading_bar"),c.exports=a=function(a){function b(){this.error=f(this.error,this),this.minusMinus=f(this.minusMinus,this),this.plusPlus=f(this.plusPlus,this),this.percent=f(this.percent,this),this.initialize=f(this.initialize,this),b.__super__.constructor.apply(this,arguments)}return h(b,a),b.prototype.highWaterMark=0,b.prototype.current=0,b.prototype.gotError=!1,b.prototype.dom=function(){return $("#loading")},b.prototype.initialize=function(){return d.bind("ajaxPlusPlus",this.plusPlus),d.bind("ajaxMinusMinus",this.minusMinus),d.bind("ajaxError",this.error)},b.prototype.percent=function(){var a,b;return b=this.highWaterMark-this.current,this.highWaterMark>0?3+Math.ceil(b*97/this.highWaterMark)+"%":a="100%"},b.prototype.plusPlus=function(){var a;return this.current++,this.highWaterMark=Math.max(this.highWaterMark,this.current),a=this.dom(),a.stop().show().css({opacity:1}),a.html(e({percent:this.percent()}))},b.prototype.minusMinus=function(){var a;return this.current--,a=this.dom(),this.current===0&&(this.highWaterMark=0,this.gotError?this.gotError=!1:a.fadeOut(1e3)),a.find(".bar").css({width:this.percent()})},b.prototype.error=function(){var a;return this.gotError=!0,a=this.dom(),a.stop().show().css({opacity:1}),a.find(".bar").css({"background-color":"#c00"})},b}(Backbone.View)})).call(this)}}),window.require.define({"views/page_project":function(a,b,c){((function(){var a,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u=function(a,b){return function(){return a.apply(b,arguments)}},v=Object.prototype.hasOwnProperty,w=function(a,b){function d(){this.constructor=a}for(var c in b)v.call(b,c)&&(a[c]=b[c]);return d.prototype=b.prototype,a.prototype=new d,a.__super__=b.prototype,a};i=b("views/templates/page_project"),j=b("views/templates/pane"),l=b("views/templates/pane_mailchimp"),m=b("views/templates/pane_mailman"),n=b("views/templates/pane_twitter"),k=b("views/templates/pane_github"),o=b("views/templates/rickshaw_graph"),d=b("activityapi"),h=b("projects"),g={};for(p=0,r=h.length;p<r;p++){f=h[p];if("item"in f)g[f.item.name]=f.item,f.item.bigTitle=f.item.title,f.item.smallTitle="";else{if(!("items"in f))throw console.log(f),"No item or items in here";t=f.items;for(q=0,s=t.length;q<s;q++)e=t[q],g[e.name]=e,g[e.name].bigTitle=f.header,g[e.name].smallTitle=g[e.name].title}}c.exports=a=function(a){function b(){this.renderPaneTwitter=u(this.renderPaneTwitter,this),this.renderPaneMailchimp=u(this.renderPaneMailchimp,this),this.renderPaneMailman=u(this.renderPaneMailman,this),this.renderPaneGithub=u(this.renderPaneGithub,this),this.renderPaneBuddypressHistory=u(this.renderPaneBuddypressHistory,this),this.setPaneWidth=u(this.setPaneWidth,this),this.addPane=u(this.addPane,this),this.renderPage=u(this.renderPage,this),b.__super__.constructor.apply(this,arguments)}return w(b,a),b.prototype.renderPage=function(a,b){var c=this;return b==null&&(b="ckan"),this.project=g[b],this.$el.html(i(this.project)),a.html(this.$el),this.container=this.$el.find("#project-container"),d.ajaxHistoryTwitter(this.project.twitter,function(a){var b,d,e;c.resultTwitter=a;if(c.resultTwitter&&c.resultTwitter.ok){e=c.resultTwitter.data;for(b in e)d=e[b],d.data.reverse();return c.addPane("Twitter",c.renderPaneTwitter)}}),d.ajaxHistoryGithub(this.project.github,function(a){var b,d,e;c.resultGithub=a;if(c.resultGithub&&c.resultGithub.ok){e=c.resultGithub.data;for(b in e)d=e[b],d.data.reverse();if(c.project.headline_github)return c.addPane("Github",c.renderPaneGithub)}}),d.ajaxHistoryMailman(this.project.mailman,function(a){var b,d,e;c.resultMailman=a;if(c.resultMailman&&c.resultMailman.ok){e=c.resultMailman.data;for(b in e)d=e[b],d.data.reverse();return c.addPane("Mailman",c.renderPaneMailman)}}),d.ajaxHistoryMailchimp(this.project.mailchimp,function(a){var b,d,e;c.resultMailchimp=a;if(c.resultMailchimp&&c.resultMailchimp.ok){e=c.resultMailchimp.data;for(b in e)d=e[b],d.data.reverse();return c.addPane("Mailchimp",c.renderPaneMailchimp)}})},b.prototype.addPane=function(a,b){var c,d;d=this.container.find("#project-container-"+a);if(d.length===0)throw'Could not find a DOM element for pane "'+a+'"';return c=$(j({title:a})).appendTo(d),b(c.find(".inner")),c.css({display:"none"}),c.fadeIn(500)},b.prototype.setPaneWidth=function(a,b){var c,d;return d=b*380-30,c=$(a.parents(".pane")[0]),c.css("width",d)},b.prototype.renderPaneBuddypressHistory=function(a){var b,c,d,e,f,g,h,i;return f=[{name:"Members",color:"blue",data:function(){var a,c,d,e;d=this.resultBuddypress.data,e=[];for(a=0,c=d.length;a<c;a++)b=d[a],e.push({x:(new Date(b.timestamp)).toUnixTimestamp(),y:b.num_users});return e}.call(this)}],c=$(o()).appendTo(a),d=new Rickshaw.Graph({element:c.find(".chart")[0],renderer:"line",width:c.width()-50,height:180,series:f}),g=new Rickshaw.Fixtures.Time,h=new Rickshaw.Graph.Axis.Time({graph:d,timeUnit:g.unit("month")}),i=new Rickshaw.Graph.Axis.Y({graph:d,orientation:"left",tickFormat:Rickshaw.Fixtures.Number.formatKMBT,element:c.find(".y-axis")[0]}),e=new Rickshaw.Graph.HoverDetail({graph:d}),d.render()},b.prototype.renderPaneGithub=function(a){var b,c,d,e,f,g,h,i,j,l,m,n,p,q,r,s,t,u,v,w;n=this.resultGithub.data[this.project.headline_github],a.append(k({repo:n.repo,data:n.data[n.data.length-1]})),t=["watchers","issues","forks"],w=[];for(r=0,s=t.length;r<s;r++){b=t[r],$("<h4>History: "+b+"</h4>").appendTo(a),l=[],h=new Rickshaw.Color.Palette({scheme:"colorwheel"}),u=this.resultGithub.data;for(j in u)i=u[j],d=function(){var a,d,e,f;e=i.data,f=[];for(a=0,d=e.length;a<d;a++)c=e[a],f.push({x:(new Date(c.timestamp)).toUnixTimestamp(),y:c[b]});return f}(),l.push({name:j,color:h.color(),data:d});l.sort(function(a,b){return b.data.length-a.data.length});for(n=1,v=l.length;1<=v?n<v:n>v;1<=v?n++:n--)while(l[n].data.length<l[0].data.length)l[n].data.unshift({x:l[0].data[l[0].data.length-l[n].data.length-1].x,y:0});e=$(o()).appendTo(a),d=l[0].data,f=new Rickshaw.Graph({element:e.find(".chart")[0],renderer:"line",width:e.width()-50,height:180,series:l}),m=new Rickshaw.Fixtures.Time,p=new Rickshaw.Graph.Axis.Time({graph:f,timeUnit:m.unit("month")}),q=new Rickshaw.Graph.Axis.Y({graph:f,orientation:"left",tickFormat:Rickshaw.Fixtures.Number.formatKMBT,element:e.find(".y-axis")[0]}),g=new Rickshaw.Graph.HoverDetail({graph:f}),w.push(f.render())}return w},b.prototype.renderPaneMailman=function(a){var b,c,d,e,f,g,h,i,j,k,l,n,p,q,r,s,t,u,v,w,x,y,z;v=this.project.mailman;for(r=0,t=v.length;r<t;r++)j=v[r],a.append(m(this.resultMailman.data[j].mailman));w=["subscribers","posts"],z=[];for(s=0,u=w.length;s<u;s++){b=w[s],l=[],k=new Rickshaw.Color.Palette({scheme:"colorwheel"}),x=this.resultMailman.data;for(i in x)h=x[i],d=function(){var a,d,e,f;e=h.data,f=[];for(d=0,a=e.length;d<a;d++)c=e[d],f.push({x:(new Date(c.timestamp)).toUnixTimestamp(),y:c[b]});return f}(),l.push({name:h.mailman.name,color:k.color(),data:d});l.sort(function(a,b){return b.data.length-a.data.length});for(n=1,y=l.length;1<=y?n<y:n>y;1<=y?n++:n--)while(l[n].data.length<l[0].data.length)l[n].data.unshift({x:l[0].data[l[0].data.length-l[n].data.length-1].x,y:0});$("<h4>History: "+b+"</h4>").appendTo(a),e=$(o()).appendTo(a),d=l[0].data,f=new Rickshaw.Graph({element:e.find(".chart")[0],renderer:"bar",width:e.width()-50,height:180,series:l}),p=new Rickshaw.Graph.Axis.Time({graph:f}),q=new Rickshaw.Graph.Axis.Y({graph:f,orientation:"left",tickFormat:Rickshaw.Fixtures.Number.formatKMBT,element:e.find(".y-axis")[0]}),g=new Rickshaw.Graph.HoverDetail({graph:f}),z.push(f.render())}return z},b.prototype.renderPaneMailchimp=function(a){var b,c,d,e,f,g,h,i,j,k,m,n,p,q,r,s;r=this.project.mailchimp;for(p=0,q=r.length;p<q;p++)i=r[p],a.append(l(this.resultMailchimp.data[i]));k=[],j=new Rickshaw.Color.Palette({scheme:"colorwheel"}),s=this.resultMailchimp.data;for(h in s)g=s[h],c=function(){var a,c,d,e;d=g.data,e=[];for(a=0,c=d.length;a<c;a++)b=d[a],e.push({x:(new Date(b.timestamp)).toUnixTimestamp(),y:b.members});return e}(),k.push({name:g.name,color:j.color(),data:c});return d=$(o()).appendTo(a),c=k[0].data,e=new Rickshaw.Graph({element:d.find(".chart")[0],renderer:"line",width:d.width()-50,height:180,series:k}),m=new Rickshaw.Graph.Axis.Time({graph:e}),n=new Rickshaw.Graph.Axis.Y({graph:e,orientation:"left",tickFormat:Rickshaw.Fixtures.Number.formatKMBT,element:d.find(".y-axis")[0]}),f=new Rickshaw.Graph.HoverDetail({graph:e}),e.render()},b.prototype.renderPaneTwitter=function(a){var b,c,d,e,f,g,h,i,j;return a.append(n(this.resultTwitter.data[this.project.twitter].account)),$("<h4>History: Twitter</h4>").appendTo(a),h=this.resultTwitter.data[this.project.twitter].data,f=[{name:"Followers",color:"orange",data:function(){var a,c,d;d=[];for(a=0,c=h.length;a<c;a++)b=h[a],d.push({x:(new Date(b.timestamp)).toUnixTimestamp(),y:b.followers});return d}()},{name:"Tweets",color:"green",data:function(){var a,c,d;d=[];for(a=0,c=h.length;a<c;a++)b=h[a],d.push({x:(new Date(b.timestamp)).toUnixTimestamp(),y:b.tweets});return d}()},{name:"Following",color:"red",data:function(){var a,c,d;d=[];for(a=0,c=h.length;a<c;a++)b=h[a],d.push({x:(new Date(b.timestamp)).toUnixTimestamp(),y:b.following});return d}()}],c=$(o()).appendTo(a),d=new Rickshaw.Graph({element:c.find(".chart")[0],renderer:"line",width:c.width()-50,height:180,series:f}),g=new Rickshaw.Fixtures.Time,i=new Rickshaw.Graph.Axis.Time({graph:d,timeUnit:g.unit("month")}),j=new Rickshaw.Graph.Axis.Y({graph:d,orientation:"left",tickFormat:Rickshaw.Fixtures.Number.formatKMBT,element:c.find(".y-axis")[0]}),e=new Rickshaw.Graph.HoverDetail({graph:d}),d.render()},b}(Backbone.View)})).call(this)}}),window.require.define({"views/templates/loading_bar":function(a,b,c){c.exports=Handlebars.template(function(a,b,c,d,e){c=c||a.helpers;var f="",g,h,i=this,j="function",k=c.helperMissing,l=void 0,m=this.escapeExpression;return f+='<div class="progress progress-striped active"><div class="bar" style="width: ',h=c.percent,g=h||b.percent,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"percent",{hash:{}})),f+=m(g)+';"></div><div class="text">',h=c.text,g=h||b.text,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"text",{hash:{}})),f+=m(g)+"</div></div>\n",f})}}),window.require.define({"views/templates/page_project":function(a,b,c){c.exports=Handlebars.template(function(a,b,c,d,e){c=c||a.helpers;var f="",g,h,i=this,j="function",k=c.helperMissing,l=void 0,m=this.escapeExpression;return f+="<h1>",h=c.bigTitle,g=h||b.bigTitle,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"bigTitle",{hash:{}})),f+=m(g)+" <small>",h=c.smallTitle,g=h||b.smallTitle,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"smallTitle",{hash:{}})),f+=m(g)+'</small></h1>\n<table>\n  <tr id="project-container">\n    <td id="project-container-Mailchimp"></td>\n    <td id="project-container-Mailman"></td>\n    <td id="project-container-Twitter"></td>\n    <td id="project-container-Github"></td>\n  </tr>\n</table>\n\n\n',f})}}),window.require.define({"views/templates/pane":function(a,b,c){c.exports=Handlebars.template(function(a,b,c,d,e){c=c||a.helpers;var f="",g,h,i=this,j="function",k=c.helperMissing,l=void 0,m=this.escapeExpression;return f+='<div class="pane label-pane">\n    <label>',h=c.title,g=h||b.title,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"title",{hash:{}})),f+=m(g)+'</label>\n    <div class="inner">',h=c.content,g=h||b.content,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"content",{hash:{}})),f+=m(g)+"</div>\n</div>\n",f})}}),window.require.define({"views/templates/pane_github":function(a,b,c){c.exports=Handlebars.template(function(a,b,c,d,e){function p(a,b){var d="",e;return d+='\n        <div class="statistic-container">\n            <div class="statistic"><div class="top">',i=c.watchers,e=i||a.watchers,typeof e===l?e=e.call(a,{hash:{}}):e===n&&(e=m.call(a,"watchers",{hash:{}})),d+=o(e)+'</div><div class="bottom">watchers</div></div>\n            <div class="statistic"><div class="top">',i=c.issues,e=i||a.issues,typeof e===l?e=e.call(a,{hash:{}}):e===n&&(e=m.call(a,"issues",{hash:{}})),d+=o(e)+'</div><div class="bottom">issues</div></div>\n            <div class="statistic"><div class="top">',i=c.forks,e=i||a.forks,typeof e===l?e=e.call(a,{hash:{}}):e===n&&(e=m.call(a,"forks",{hash:{}})),d+=o(e)+'</div><div class="bottom">forks</div></div>\n        </div>\n    ',d}function q(a,b){var d="",e,f;d+='\n    <div class="clearfix"> </div>\n    <div class="description">\n        ',i=c.language,e=i||a.language,f=c["if"],j=k.program(4,r,b),j.hash={},j.fn=j,j.inverse=k.noop,e=f.call(a,e,j);if(e||e===0)d+=e;return d+='\n        <span class="sub-name">(<a href="',i=c.html_url,e=i||a.html_url,typeof e===l?e=e.call(a,{hash:{}}):e===n&&(e=m.call(a,"html_url",{hash:{}})),d+=o(e)+'">',i=c.full_name,e=i||a.full_name,typeof e===l?e=e.call(a,{hash:{}}):e===n&&(e=m.call(a,"full_name",{hash:{}})),d+=o(e)+'</a>)</span>:\n        <span class="content">"',i=c.description,e=i||a.description,typeof e===l?e=e.call(a,{hash:{}}):e===n&&(e=m.call(a,"description",{hash:{}})),d+=o(e)+'"</span>\n    </div>\n    ',d}function r(a,b){var d="",e;return d+='<span class="label label-info">',i=c.language,e=i||a.language,typeof e===l?e=e.call(a,{hash:{}}):e===n&&(e=m.call(a,"language",{hash:{}})),d+=o(e)+"</span>",d}c=c||a.helpers;var f="",g,h,i,j,k=this,l="function",m=c.helperMissing,n=void 0,o=this.escapeExpression;f+='<div class="statistics-pane github">\n    ',i=c.data,g=i||b.data,h=c["with"],j=k.program(1,p,e),j.hash={},j.fn=j,j.inverse=k.noop,g=h.call(b,g,j);if(g||g===0)f+=g;f+="\n    ",i=c.repo,g=i||b.repo,h=c["with"],j=k.program(3,q,e),j.hash={},j.fn=j,j.inverse=k.noop,g=h.call(b,g,j);if(g||g===0)f+=g;return f+="\n</div>\n",f})}}),window.require.define({"views/templates/pane_mailchimp":function(a,b,c){c.exports=Handlebars.template(function(a,b,c,d,e){c=c||a.helpers;var f="",g,h,i=this,j="function",k=c.helperMissing,l=void 0,m=this.escapeExpression;return f+='<strong style="margin-bottom:10px;">',h=c.name,g=h||b.name,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"name",{hash:{}})),f+=m(g)+':</strong>\n<div class="statistics-pane twitter">\n    <div class="statistic-container">\n        <div class="statistic"><div class="top">',h=c.members,g=h||b.members,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"members",{hash:{}})),f+=m(g)+'</div><div class="bottom">members</div></div>\n    </div>\n    <div class="clearfix"> </div>\n    </div>\n</div>\n',f})}}),window.require.define({"views/templates/pane_mailman":function(a,b,c){c.exports=Handlebars.template(function(a,b,c,d,e){c=c||a.helpers;var f="",g,h,i=this,j="function",k=c.helperMissing,l=void 0,m=this.escapeExpression;return f+='<div style="margin-bottom: 4px;">\n  <strong><a href="',h=c.link,g=h||b.link,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"link",{hash:{}})),f+=m(g)+'">',h=c.name,g=h||b.name,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"name",{hash:{}})),f+=m(g)+"</a></strong>:\n  ",h=c.description,g=h||b.description,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"description",{hash:{}})),f+=m(g)+"\n</div>\n",f})}}),window.require.define({"views/templates/pane_twitter":function(a,b,c){c.exports=Handlebars.template(function(a,b,c,d,e){c=c||a.helpers;var f="",g,h,i=this,j="function",k=c.helperMissing,l=void 0,m=this.escapeExpression;return f+='<div class="statistics-pane twitter">\n    <div class="statistic-container">\n        <div class="statistic"><div class="top">',h=c.followers,g=h||b.followers,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"followers",{hash:{}})),f+=m(g)+'</div><div class="bottom">followers</div></div>\n        <div class="statistic"><div class="top">',h=c.following,g=h||b.following,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"following",{hash:{}})),f+=m(g)+'</div><div class="bottom">following</div></div>\n        <div class="statistic"><div class="top">',h=c.tweets,g=h||b.tweets,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"tweets",{hash:{}})),f+=m(g)+'</div><div class="bottom">tweets</div></div>\n    </div>\n    <div class="clearfix"> </div>\n    <div class="description">\n    <span class="name">',h=c.name,g=h||b.name,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"name",{hash:{}})),f+=m(g)+'</span>\n    <span class="sub-name">(<a href="http://twitter.com/',h=c.screen_name,g=h||b.screen_name,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"screen_name",{hash:{}})),f+=m(g)+'">@',h=c.screen_name,g=h||b.screen_name,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"screen_name",{hash:{}})),f+=m(g)+'</a>)</span>:\n    <span class="content">"',h=c.description,g=h||b.description,typeof g===j?g=g.call(b,{hash:{}}):g===l&&(g=k.call(b,"description",{hash:{}})),f+=m(g)+'"</span>\n    </div>\n</div>\n',f})}}),window.require.define({"views/templates/rickshaw_graph":function(a,b,c){c.exports=Handlebars.template(function(a,b,c,d,e){c=c||a.helpers;var f,g=this;return'<div class="rickshaw">\n  <div class="y-axis"></div>\n  <div class="chart"></div>\n</div>\n'})}})
+(function(/*! Brunch !*/) {
+  'use strict';
+
+  var globals = typeof window !== 'undefined' ? window : global;
+  if (typeof globals.require === 'function') return;
+
+  var modules = {};
+  var cache = {};
+
+  var has = function(object, name) {
+    return ({}).hasOwnProperty.call(object, name);
+  };
+
+  var expand = function(root, name) {
+    var results = [], parts, part;
+    if (/^\.\.?(\/|$)/.test(name)) {
+      parts = [root, name].join('/').split('/');
+    } else {
+      parts = name.split('/');
+    }
+    for (var i = 0, length = parts.length; i < length; i++) {
+      part = parts[i];
+      if (part === '..') {
+        results.pop();
+      } else if (part !== '.' && part !== '') {
+        results.push(part);
+      }
+    }
+    return results.join('/');
+  };
+
+  var dirname = function(path) {
+    return path.split('/').slice(0, -1).join('/');
+  };
+
+  var localRequire = function(path) {
+    return function(name) {
+      var dir = dirname(path);
+      var absolute = expand(dir, name);
+      return globals.require(absolute);
+    };
+  };
+
+  var initModule = function(name, definition) {
+    var module = {id: name, exports: {}};
+    definition(module.exports, localRequire(name), module);
+    var exports = cache[name] = module.exports;
+    return exports;
+  };
+
+  var require = function(name) {
+    var path = expand(name, '.');
+
+    if (has(cache, path)) return cache[path];
+    if (has(modules, path)) return initModule(path, modules[path]);
+
+    var dirIndex = expand(path, './index');
+    if (has(cache, dirIndex)) return cache[dirIndex];
+    if (has(modules, dirIndex)) return initModule(dirIndex, modules[dirIndex]);
+
+    throw new Error('Cannot find module "' + name + '"');
+  };
+
+  var define = function(bundle) {
+    for (var key in bundle) {
+      if (has(bundle, key)) {
+        modules[key] = bundle[key];
+      }
+    }
+  }
+
+  globals.require = require;
+  globals.require.define = define;
+  globals.require.brunch = true;
+})();
+
+window.require.define({"activityapi": function(exports, require, module) {
+  (function() {
+    var ActivityApi,
+      __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+      __hasProp = Object.prototype.hasOwnProperty,
+      __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+    ActivityApi = (function(_super) {
+
+      __extends(ActivityApi, _super);
+
+      function ActivityApi() {
+        this._error = __bind(this._error, this);
+        this._wrapCallback = __bind(this._wrapCallback, this);
+        ActivityApi.__super__.constructor.apply(this, arguments);
+      }
+
+      ActivityApi.prototype.url = 'http://activityapi.herokuapp.com/api/1';
+
+      ActivityApi.prototype.ajaxHistoryGithub = function(repos, callback) {
+        var url;
+        if (!repos.length) {
+          return callback(null);
+        } else {
+          url = this.url + '/history/github?repo=' + this._join(repos) + '&per_page=90';
+          return this._fetch(url, callback);
+        }
+      };
+
+      ActivityApi.prototype.ajaxHistoryMailchimp = function(lists, callback) {
+        var url;
+        if (lists === void 0 || !lists.length) {
+          return callback(null);
+        } else {
+          url = this.url + '/history/mailchimp?list=' + this._join(lists) + '&per_page=26&grain=week';
+          return this._fetch(url, callback);
+        }
+      };
+
+      ActivityApi.prototype.ajaxHistoryMailman = function(lists, callback) {
+        var url;
+        if (!lists.length) {
+          return callback(null);
+        } else {
+          url = this.url + '/history/mailman?list=' + this._join(lists) + '&per_page=26&grain=week';
+          return this._fetch(url, callback);
+        }
+      };
+
+      ActivityApi.prototype.ajaxHistoryTwitter = function(account, callback) {
+        var url;
+        if (!account) {
+          return callback(null);
+        } else {
+          url = this.url + '/history/twitter/account?name=' + account + '&per_page=26&grain=week';
+          return this._fetch(url, callback);
+        }
+      };
+
+      ActivityApi.prototype._wrapCallback = function(url, callback) {
+        var _this = this;
+        return function(data) {
+          _this.trigger('ajaxMinusMinus');
+          if (data.ok === true) {
+            return callback(data);
+          } else {
+            return console.error('Could not load', url, data);
+          }
+        };
+      };
+
+      ActivityApi.prototype._join = function(strings) {
+        var comma, out, s, _i, _len;
+        out = '';
+        comma = false;
+        for (_i = 0, _len = strings.length; _i < _len; _i++) {
+          s = strings[_i];
+          if (comma) out += ',';
+          comma = true;
+          out += s;
+        }
+        return out;
+      };
+
+      ActivityApi.prototype._error = function(a, b) {
+        this.trigger('ajaxMinusMinus');
+        this.trigger('ajaxError');
+        return console.error('AJAX error', a, b);
+      };
+
+      ActivityApi.prototype._fetch = function(url, callback) {
+        if (!callback) throw 'I require a callback function';
+        this.trigger('ajaxPlusPlus');
+        return $.ajax({
+          url: url,
+          success: this._wrapCallback(url, callback),
+          dataType: 'jsonp',
+          error: this._error
+        });
+      };
+
+      return ActivityApi;
+
+    })(Backbone.Model);
+
+    module.exports = new ActivityApi();
+
+  }).call(this);
+  
+}});
+
+window.require.define({"initialize": function(exports, require, module) {
+  (function() {
+    var LoadingView, Router, projects;
+
+    Router = require('router');
+
+    LoadingView = require('views/loading_view');
+
+    projects = require('projects');
+
+    $(function() {
+      var headerLink, item, loadingView, nav, project, projectCategory, projectList, singleLink, _i, _j, _len, _len2, _ref;
+      nav = $('ul.nav').empty();
+      for (_i = 0, _len = projects.length; _i < _len; _i++) {
+        projectCategory = projects[_i];
+        if ('item' in projectCategory) {
+          item = projectCategory.item;
+          singleLink = $('<li action="project/' + item.name + '"><a href="#project/' + item.name + '">' + item.title + '</li>');
+          singleLink.appendTo(nav);
+        } else {
+          headerLink = $('<li class="dropdown" action="project"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' + projectCategory.header + '<b class="caret"></b></a></li>');
+          headerLink.appendTo(nav);
+          projectList = $('<ul class="dropdown-menu" />').appendTo(headerLink);
+          _ref = projectCategory.items;
+          for (_j = 0, _len2 = _ref.length; _j < _len2; _j++) {
+            project = _ref[_j];
+            projectList.append($('<li action="project/' + project.name + '"><a href="#project/' + project.name + '">' + project.title + '</a></li>'));
+          }
+        }
+      }
+      this.router = new Router();
+      loadingView = new LoadingView();
+      return Backbone.history.start();
+    });
+
+  }).call(this);
+  
+}});
+
+window.require.define({"models/person": function(exports, require, module) {
+  (function() {
+    var PersonModel,
+      __hasProp = Object.prototype.hasOwnProperty,
+      __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+    module.exports = PersonModel = (function(_super) {
+
+      __extends(PersonModel, _super);
+
+      function PersonModel() {
+        PersonModel.__super__.constructor.apply(this, arguments);
+      }
+
+      PersonModel.prototype.defaults = {
+        'name': 'John Doe',
+        'location': 'Nowhere',
+        'geolocation': {
+          adminCode1: '07',
+          adminName1: 'North Rhine-Westphalia',
+          countryCode: 'DE',
+          countryName: 'Germany',
+          fcl: 'P',
+          fclName: 'city, village,...',
+          fcode: 'PPLA2',
+          fcodeName: 'seat of a second-order administrative division',
+          geonameId: 2886242,
+          lat: 50.9333333,
+          lng: 6.95,
+          name: 'Cologne',
+          population: 963395,
+          toponymName: 'Köl'
+        }
+      };
+
+      return PersonModel;
+
+    })(Backbone.Model);
+
+  }).call(this);
+  
+}});
+
+window.require.define({"models/person_collection": function(exports, require, module) {
+  (function() {
+    var PersonCollection,
+      __hasProp = Object.prototype.hasOwnProperty,
+      __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+    module.exports = PersonCollection = (function(_super) {
+
+      __extends(PersonCollection, _super);
+
+      function PersonCollection() {
+        PersonCollection.__super__.constructor.apply(this, arguments);
+      }
+
+      PersonCollection.prototype.model = Dashboard.Member;
+
+      PersonCollection.prototype.parse = function(data) {
+        var key, members, value;
+        members = [];
+        for (key in data) {
+          value = data[key];
+          members.push({
+            key: key,
+            name: value.name,
+            location: value.location,
+            geolocation: value.spatial
+          });
+        }
+        return members;
+      };
+
+      return PersonCollection;
+
+    })(Backbone.Collection);
+
+  }).call(this);
+  
+}});
+
+window.require.define({"projects": function(exports, require, module) {
+  (function() {
+
+    module.exports = [
+      {
+        header: 'Network',
+        item: {
+          name: 'okfn',
+          title: 'Network',
+          twitter: 'okfn',
+          link: ['http://okfn.org', 'http://blog.okfn.org'],
+          mailman: ['okfn-discuss', 'okfn-announce'],
+          github: [],
+          mailchimp: ['Open Knowledge Foundation Announce Mailing List']
+        }
+      }, {
+        header: 'Projects',
+        items: [
+          {
+            name: 'ckan',
+            twitter: 'ckanproject',
+            title: 'CKAN',
+            description: 'CKAN is an open-source data hub. CKAN makes it easy to publish, share and find data. It provides a powerful and extensible system for cataloging and storing datasets, with an intuitive web front-end and API.',
+            link: ['http://ckan.org', 'http://wiki.okfn.org/Projects/CKAN'],
+            mailman: ['ckan-dev', 'ckan-discuss'],
+            github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols', 'okfn/buildkit', 'okfn/webstore', 'okfn/dpm', 'okfn/datahub'],
+            headline_github: 'okfn/ckan'
+          }, {
+            name: 'openspending',
+            title: 'OpenSpending',
+            twitter: 'openspending',
+            link: ['http://openspending.org', 'http://blog.openspending.org/', 'http://twitter.com/openspending', 'http://wiki.openspending.org/Main_Page', 'http://wheredoesmymoneygo.org/blog/'],
+            mailman: ['openspending', 'openspending-dev', 'wdmmg-announce'],
+            github: ['okfn/dpkg-israel-state-budget', 'okfn/openspending.plugins.datatables', 'okfn/openspending.plugins.treemap']
+          }, {
+            name: 'schoolofdata',
+            title: 'School Of Data',
+            twitter: 'schoolofdata',
+            link: ['http://schoolofdata.org', 'http://handbook.schoolofdata.org', 'http://opendatahandbook.org', 'http://wiki.okfn.org/Projects/Open_Data_Handbook'],
+            mailman: ['School-of-data', 'Scoda-dev', 'open-data-handbook'],
+            github: ['okfn/datawrangling', 'okfn/schoolofdata', 'okfn/opendatahandbook'],
+            headline_github: 'okfn/schoolofdata'
+          }, {
+            name: 'lod2',
+            title: 'LOD (Linked Open Data)',
+            twitter: 'lod2project',
+            description: 'LOD2 is an EU-funded project involving a consortium of groups across Europe working to develop linked open data availability and to enable the creation of knowledge from interlinked data.',
+            link: ['http://lod2.eu/'],
+            mailman: ['lod2'],
+            github: []
+          }, {
+            name: 'recline',
+            title: 'Recline.js',
+            twitter: 'reclinejs',
+            link: ['http://reclinejs.org'],
+            mailman: [],
+            github: ['okfn/recline'],
+            headline_github: 'okfn/recline'
+          }, {
+            name: 'annotator',
+            title: 'Annotator',
+            twitter: 'okfnlabs',
+            link: ['http://annotateit.org'],
+            mailman: ['annotator-dev'],
+            github: ['okfn/annotator', 'okfn/annotateit', 'okfn/annotator-store', 'okfn/annotator-wordpress', 'okfn/texts.annotateit.org'],
+            headline_github: 'okfn/annotator'
+          }, {
+            name: 'labs',
+            title: 'OKFN Labs',
+            twitter: 'okfnlabs',
+            link: ['http://annotateit.org', 'http://okfnlabs.org/dashboard', 'http://activityapi.herokuapp.com', 'http://yourtopia.net', 'http://italia.yourtopia.net/'],
+            mailman: ['Yourtopia', 'okfn-labs', 'open-history'],
+            github: ['okfn/timeliner', 'okfn/activityapi', 'okfn/dashboard', 'okfn/yourtopia', 'okfn/bubbletree', 'okfn/hypernotes', 'okfn/okfn.github.com', 'okfn/sprints.okfnlabs.org', 'okfn/facetview']
+          }
+        ]
+      }, {
+        header: 'OKFestival',
+        item: {
+          name: 'okfestival',
+          title: 'OKFestival',
+          twitter: 'okfestival',
+          link: ['http://okfestival.org'],
+          mailman: ['OKFestival-Coord', 'Okfest-opendev'],
+          github: []
+        }
+      }
+    ];
+
+  }).call(this);
+  
+}});
+
+window.require.define({"router": function(exports, require, module) {
+  (function() {
+    var ProjectPage, Router, content, singletons,
+      __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+      __hasProp = Object.prototype.hasOwnProperty,
+      __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+    ProjectPage = require('views/page_project');
+
+    content = function() {
+      return $('#content');
+    };
+
+    singletons = {
+      projectPage: function() {
+        return this._project = this._project || new ProjectPage();
+      }
+    };
+
+    module.exports = Router = (function(_super) {
+
+      __extends(Router, _super);
+
+      function Router() {
+        this.setCurrent = __bind(this.setCurrent, this);
+        Router.__super__.constructor.apply(this, arguments);
+      }
+
+      Router.prototype.routes = {
+        '': 'project',
+        'project': 'project',
+        'project/:projectName': 'project'
+      };
+
+      Router.prototype.initialize = function() {
+        var _this = this;
+        return this.on('all', function(trigger) {
+          var active, location;
+          location = (window.location.hash.slice(1)) || 'project/okfn';
+          trigger = trigger.split(':');
+          if (trigger[0] === 'route') {
+            $('.navbar .nav li').removeClass('active');
+            active = $('.navbar .nav li[action="' + location + '"]');
+            return active.add(active.parents('.dropdown')).addClass('active');
+          }
+        });
+      };
+
+      Router.prototype.setCurrent = function(view) {
+        if (!(view === this.currentView)) {
+          this.currentView = view;
+          return view.renderPage(content());
+        }
+      };
+
+      Router.prototype.project = function(projectName) {
+        var view;
+        if (projectName == null) projectName = 'okfn';
+        view = singletons.projectPage();
+        if (!view === this.currentView) this.currentView = view;
+        return view.renderPage(content(), projectName);
+      };
+
+      return Router;
+
+    })(Backbone.Router);
+
+  }).call(this);
+  
+}});
+
+window.require.define({"views/loading_view": function(exports, require, module) {
+  (function() {
+    var LoadingView, api, template,
+      __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+      __hasProp = Object.prototype.hasOwnProperty,
+      __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+    api = require('activityapi');
+
+    template = require('views/templates/loading_bar');
+
+    module.exports = LoadingView = (function(_super) {
+
+      __extends(LoadingView, _super);
+
+      function LoadingView() {
+        this.error = __bind(this.error, this);
+        this.minusMinus = __bind(this.minusMinus, this);
+        this.plusPlus = __bind(this.plusPlus, this);
+        this.percent = __bind(this.percent, this);
+        this.initialize = __bind(this.initialize, this);
+        LoadingView.__super__.constructor.apply(this, arguments);
+      }
+
+      LoadingView.prototype.highWaterMark = 0;
+
+      LoadingView.prototype.current = 0;
+
+      LoadingView.prototype.gotError = false;
+
+      LoadingView.prototype.dom = function() {
+        return $('#loading');
+      };
+
+      LoadingView.prototype.initialize = function() {
+        api.bind('ajaxPlusPlus', this.plusPlus);
+        api.bind('ajaxMinusMinus', this.minusMinus);
+        return api.bind('ajaxError', this.error);
+      };
+
+      LoadingView.prototype.percent = function() {
+        var percent, remaining;
+        remaining = this.highWaterMark - this.current;
+        if (this.highWaterMark > 0) {
+          return (3 + Math.ceil((remaining * 97) / this.highWaterMark)) + '%';
+        }
+        return percent = '100%';
+      };
+
+      LoadingView.prototype.plusPlus = function() {
+        var dom;
+        this.current++;
+        this.highWaterMark = Math.max(this.highWaterMark, this.current);
+        dom = this.dom();
+        dom.stop().show().css({
+          opacity: 1
+        });
+        return dom.html(template({
+          percent: this.percent()
+        }));
+      };
+
+      LoadingView.prototype.minusMinus = function() {
+        var dom;
+        this.current--;
+        dom = this.dom();
+        if (this.current === 0) {
+          this.highWaterMark = 0;
+          if (this.gotError) {
+            this.gotError = false;
+          } else {
+            dom.fadeOut(1000);
+          }
+        }
+        return dom.find('.bar').css({
+          width: this.percent()
+        });
+      };
+
+      LoadingView.prototype.error = function() {
+        var dom;
+        this.gotError = true;
+        dom = this.dom();
+        dom.stop().show().css({
+          opacity: 1
+        });
+        return dom.find('.bar').css({
+          'background-color': '#c00'
+        });
+      };
+
+      return LoadingView;
+
+    })(Backbone.View);
+
+  }).call(this);
+  
+}});
+
+window.require.define({"views/page_project": function(exports, require, module) {
+  (function() {
+    var ProjectPage, api, project, projectCategory, projectMap, projects, template_page, template_pane, template_pane_github, template_pane_mailchimp, template_pane_mailman, template_pane_twitter, template_rickshaw_graph, _i, _j, _len, _len2, _ref,
+      __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+      __hasProp = Object.prototype.hasOwnProperty,
+      __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+    template_page = require('views/templates/page_project');
+
+    template_pane = require('views/templates/pane');
+
+    template_pane_mailchimp = require('views/templates/pane_mailchimp');
+
+    template_pane_mailman = require('views/templates/pane_mailman');
+
+    template_pane_twitter = require('views/templates/pane_twitter');
+
+    template_pane_github = require('views/templates/pane_github');
+
+    template_rickshaw_graph = require('views/templates/rickshaw_graph');
+
+    api = require('activityapi');
+
+    projects = require('projects');
+
+    projectMap = {};
+
+    for (_i = 0, _len = projects.length; _i < _len; _i++) {
+      projectCategory = projects[_i];
+      if ('item' in projectCategory) {
+        projectMap[projectCategory.item.name] = projectCategory.item;
+        projectCategory.item.bigTitle = projectCategory.item.title;
+        projectCategory.item.smallTitle = '';
+      } else if ('items' in projectCategory) {
+        _ref = projectCategory.items;
+        for (_j = 0, _len2 = _ref.length; _j < _len2; _j++) {
+          project = _ref[_j];
+          projectMap[project.name] = project;
+          projectMap[project.name].bigTitle = projectCategory.header;
+          projectMap[project.name].smallTitle = projectMap[project.name].title;
+        }
+      } else {
+        console.log(projectCategory);
+        throw 'No item or items in here';
+      }
+    }
+
+    module.exports = ProjectPage = (function(_super) {
+
+      __extends(ProjectPage, _super);
+
+      function ProjectPage() {
+        this.renderPaneTwitter = __bind(this.renderPaneTwitter, this);
+        this.renderPaneMailchimp = __bind(this.renderPaneMailchimp, this);
+        this.renderPaneMailman = __bind(this.renderPaneMailman, this);
+        this.renderPaneGithub = __bind(this.renderPaneGithub, this);
+        this.renderPaneBuddypressHistory = __bind(this.renderPaneBuddypressHistory, this);
+        this.setPaneWidth = __bind(this.setPaneWidth, this);
+        this.addPane = __bind(this.addPane, this);
+        this.renderPage = __bind(this.renderPage, this);
+        ProjectPage.__super__.constructor.apply(this, arguments);
+      }
+
+      ProjectPage.prototype.renderPage = function(target, projectName) {
+        var _this = this;
+        if (projectName == null) projectName = 'ckan';
+        this.project = projectMap[projectName];
+        this.$el.html(template_page(this.project));
+        target.html(this.$el);
+        this.container = this.$el.find('#project-container');
+        api.ajaxHistoryTwitter(this.project.twitter, function(resultTwitter) {
+          var key, twitter, _ref2;
+          _this.resultTwitter = resultTwitter;
+          if (_this.resultTwitter && _this.resultTwitter.ok) {
+            _ref2 = _this.resultTwitter.data;
+            for (key in _ref2) {
+              twitter = _ref2[key];
+              twitter.data.reverse();
+            }
+            return _this.addPane('Twitter', _this.renderPaneTwitter);
+          }
+        });
+        api.ajaxHistoryGithub(this.project.github, function(resultGithub) {
+          var key, repo, _ref2;
+          _this.resultGithub = resultGithub;
+          if (_this.resultGithub && _this.resultGithub.ok) {
+            _ref2 = _this.resultGithub.data;
+            for (key in _ref2) {
+              repo = _ref2[key];
+              repo.data.reverse();
+            }
+            if (_this.project.headline_github) {
+              return _this.addPane('Github', _this.renderPaneGithub);
+            }
+          }
+        });
+        api.ajaxHistoryMailman(this.project.mailman, function(resultMailman) {
+          var key, mailman, _ref2;
+          _this.resultMailman = resultMailman;
+          if (_this.resultMailman && _this.resultMailman.ok) {
+            _ref2 = _this.resultMailman.data;
+            for (key in _ref2) {
+              mailman = _ref2[key];
+              mailman.data.reverse();
+            }
+            return _this.addPane('Mailman', _this.renderPaneMailman);
+          }
+        });
+        return api.ajaxHistoryMailchimp(this.project.mailchimp, function(resultMailchimp) {
+          var key, value, _ref2;
+          _this.resultMailchimp = resultMailchimp;
+          if (_this.resultMailchimp && _this.resultMailchimp.ok) {
+            _ref2 = _this.resultMailchimp.data;
+            for (key in _ref2) {
+              value = _ref2[key];
+              value.data.reverse();
+            }
+            return _this.addPane('Mailchimp', _this.renderPaneMailchimp);
+          }
+        });
+      };
+
+      ProjectPage.prototype.addPane = function(title, renderCallback) {
+        var pane, td;
+        td = this.container.find('#project-container-' + title);
+        if (td.length === 0) {
+          throw 'Could not find a DOM element for pane "' + title + '"';
+        }
+        pane = $(template_pane({
+          title: title
+        })).appendTo(td);
+        renderCallback(pane.find('.inner'));
+        pane.css({
+          display: 'none'
+        });
+        return pane.fadeIn(500);
+      };
+
+      ProjectPage.prototype.setPaneWidth = function(pane, columns) {
+        var parent, width;
+        width = columns * 380 - 30;
+        parent = $(pane.parents('.pane')[0]);
+        return parent.css('width', width);
+      };
+
+      ProjectPage.prototype.renderPaneBuddypressHistory = function(pane) {
+        var d, domGraph, graph, hoverDetail, series, time, x_axis, y_axis;
+        series = [
+          {
+            name: 'Members',
+            color: 'blue',
+            data: (function() {
+              var _k, _len3, _ref2, _results;
+              _ref2 = this.resultBuddypress.data;
+              _results = [];
+              for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
+                d = _ref2[_k];
+                _results.push({
+                  x: new Date(d.timestamp).toUnixTimestamp(),
+                  y: d.num_users
+                });
+              }
+              return _results;
+            }).call(this)
+          }
+        ];
+        domGraph = $(template_rickshaw_graph()).appendTo(pane);
+        graph = new Rickshaw.Graph({
+          element: domGraph.find('.chart')[0],
+          renderer: 'line',
+          width: domGraph.width() - 50,
+          height: 180,
+          series: series
+        });
+        time = new Rickshaw.Fixtures.Time();
+        x_axis = new Rickshaw.Graph.Axis.Time({
+          graph: graph,
+          timeUnit: time.unit('month')
+        });
+        y_axis = new Rickshaw.Graph.Axis.Y({
+          graph: graph,
+          orientation: 'left',
+          tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+          element: domGraph.find('.y-axis')[0]
+        });
+        hoverDetail = new Rickshaw.Graph.HoverDetail({
+          graph: graph
+        });
+        return graph.render();
+      };
+
+      ProjectPage.prototype.renderPaneGithub = function(pane) {
+        var action, d, data, domGraph, graph, hoverDetail, palette, repodata, reponame, series, time, x, x_axis, y_axis, _k, _len3, _ref2, _ref3, _ref4, _results;
+        x = this.resultGithub.data[this.project.headline_github];
+        pane.append(template_pane_github({
+          'repo': x.repo,
+          'data': x.data[x.data.length - 1]
+        }));
+        _ref2 = ['watchers', 'issues', 'forks'];
+        _results = [];
+        for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
+          action = _ref2[_k];
+          $('<h4>History: ' + action + '</h4>').appendTo(pane);
+          series = [];
+          palette = new Rickshaw.Color.Palette({
+            scheme: 'colorwheel'
+          });
+          _ref3 = this.resultGithub.data;
+          for (reponame in _ref3) {
+            repodata = _ref3[reponame];
+            data = (function() {
+              var _l, _len4, _ref4, _results2;
+              _ref4 = repodata.data;
+              _results2 = [];
+              for (_l = 0, _len4 = _ref4.length; _l < _len4; _l++) {
+                d = _ref4[_l];
+                _results2.push({
+                  x: new Date(d.timestamp).toUnixTimestamp(),
+                  y: d[action]
+                });
+              }
+              return _results2;
+            })();
+            series.push({
+              name: reponame,
+              color: palette.color(),
+              data: data
+            });
+          }
+          series.sort(function(x, y) {
+            return y.data.length - x.data.length;
+          });
+          for (x = 1, _ref4 = series.length; 1 <= _ref4 ? x < _ref4 : x > _ref4; 1 <= _ref4 ? x++ : x--) {
+            while (series[x].data.length < series[0].data.length) {
+              series[x].data.unshift({
+                x: series[0].data[series[0].data.length - series[x].data.length - 1].x,
+                y: 0
+              });
+            }
+          }
+          domGraph = $(template_rickshaw_graph()).appendTo(pane);
+          data = series[0].data;
+          graph = new Rickshaw.Graph({
+            element: domGraph.find('.chart')[0],
+            renderer: 'line',
+            width: domGraph.width() - 50,
+            height: 180,
+            series: series
+          });
+          time = new Rickshaw.Fixtures.Time();
+          x_axis = new Rickshaw.Graph.Axis.Time({
+            graph: graph,
+            timeUnit: time.unit('month')
+          });
+          y_axis = new Rickshaw.Graph.Axis.Y({
+            graph: graph,
+            orientation: 'left',
+            tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+            element: domGraph.find('.y-axis')[0]
+          });
+          hoverDetail = new Rickshaw.Graph.HoverDetail({
+            graph: graph
+          });
+          _results.push(graph.render());
+        }
+        return _results;
+      };
+
+      ProjectPage.prototype.renderPaneMailman = function(pane) {
+        var action, d, data, domGraph, graph, hoverDetail, listData, listName, m, palette, series, x, x_axis, y_axis, _k, _l, _len3, _len4, _ref2, _ref3, _ref4, _ref5, _results;
+        _ref2 = this.project.mailman;
+        for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
+          m = _ref2[_k];
+          pane.append(template_pane_mailman(this.resultMailman.data[m].mailman));
+        }
+        _ref3 = ['subscribers', 'posts'];
+        _results = [];
+        for (_l = 0, _len4 = _ref3.length; _l < _len4; _l++) {
+          action = _ref3[_l];
+          series = [];
+          palette = new Rickshaw.Color.Palette({
+            scheme: 'colorwheel'
+          });
+          _ref4 = this.resultMailman.data;
+          for (listName in _ref4) {
+            listData = _ref4[listName];
+            data = (function() {
+              var _len5, _m, _ref5, _results2;
+              _ref5 = listData.data;
+              _results2 = [];
+              for (_m = 0, _len5 = _ref5.length; _m < _len5; _m++) {
+                d = _ref5[_m];
+                _results2.push({
+                  x: new Date(d.timestamp).toUnixTimestamp(),
+                  y: d[action]
+                });
+              }
+              return _results2;
+            })();
+            series.push({
+              name: listData.mailman.name,
+              color: palette.color(),
+              data: data
+            });
+          }
+          series.sort(function(x, y) {
+            return y.data.length - x.data.length;
+          });
+          for (x = 1, _ref5 = series.length; 1 <= _ref5 ? x < _ref5 : x > _ref5; 1 <= _ref5 ? x++ : x--) {
+            while (series[x].data.length < series[0].data.length) {
+              series[x].data.unshift({
+                x: series[0].data[series[0].data.length - series[x].data.length - 1].x,
+                y: 0
+              });
+            }
+          }
+          $('<h4>History: ' + action + '</h4>').appendTo(pane);
+          domGraph = $(template_rickshaw_graph()).appendTo(pane);
+          data = series[0].data;
+          graph = new Rickshaw.Graph({
+            element: domGraph.find('.chart')[0],
+            renderer: 'bar',
+            width: domGraph.width() - 50,
+            height: 180,
+            series: series
+          });
+          x_axis = new Rickshaw.Graph.Axis.Time({
+            graph: graph
+          });
+          y_axis = new Rickshaw.Graph.Axis.Y({
+            graph: graph,
+            orientation: 'left',
+            tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+            element: domGraph.find('.y-axis')[0]
+          });
+          hoverDetail = new Rickshaw.Graph.HoverDetail({
+            graph: graph
+          });
+          _results.push(graph.render());
+        }
+        return _results;
+      };
+
+      ProjectPage.prototype.renderPaneMailchimp = function(pane) {
+        var d, data, domGraph, graph, hoverDetail, listData, listName, m, palette, series, x_axis, y_axis, _k, _len3, _ref2, _ref3;
+        _ref2 = this.project.mailchimp;
+        for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
+          m = _ref2[_k];
+          pane.append(template_pane_mailchimp(this.resultMailchimp.data[m]));
+        }
+        series = [];
+        palette = new Rickshaw.Color.Palette({
+          scheme: 'colorwheel'
+        });
+        _ref3 = this.resultMailchimp.data;
+        for (listName in _ref3) {
+          listData = _ref3[listName];
+          data = (function() {
+            var _l, _len4, _ref4, _results;
+            _ref4 = listData.data;
+            _results = [];
+            for (_l = 0, _len4 = _ref4.length; _l < _len4; _l++) {
+              d = _ref4[_l];
+              _results.push({
+                x: new Date(d.timestamp).toUnixTimestamp(),
+                y: d['members']
+              });
+            }
+            return _results;
+          })();
+          series.push({
+            name: listData.name,
+            color: palette.color(),
+            data: data
+          });
+        }
+        domGraph = $(template_rickshaw_graph()).appendTo(pane);
+        data = series[0].data;
+        graph = new Rickshaw.Graph({
+          element: domGraph.find('.chart')[0],
+          renderer: 'line',
+          width: domGraph.width() - 50,
+          height: 180,
+          series: series
+        });
+        x_axis = new Rickshaw.Graph.Axis.Time({
+          graph: graph
+        });
+        y_axis = new Rickshaw.Graph.Axis.Y({
+          graph: graph,
+          orientation: 'left',
+          tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+          element: domGraph.find('.y-axis')[0]
+        });
+        hoverDetail = new Rickshaw.Graph.HoverDetail({
+          graph: graph
+        });
+        return graph.render();
+      };
+
+      ProjectPage.prototype.renderPaneTwitter = function(pane) {
+        var d, domGraph, graph, hoverDetail, series, time, twitterdata, x_axis, y_axis;
+        pane.append(template_pane_twitter(this.resultTwitter.data[this.project.twitter].account));
+        $('<h4>History: Twitter</h4>').appendTo(pane);
+        twitterdata = this.resultTwitter.data[this.project.twitter].data;
+        series = [
+          {
+            name: 'Followers',
+            color: 'orange',
+            data: (function() {
+              var _k, _len3, _results;
+              _results = [];
+              for (_k = 0, _len3 = twitterdata.length; _k < _len3; _k++) {
+                d = twitterdata[_k];
+                _results.push({
+                  x: new Date(d.timestamp).toUnixTimestamp(),
+                  y: d.followers
+                });
+              }
+              return _results;
+            })()
+          }, {
+            name: 'Tweets',
+            color: 'green',
+            data: (function() {
+              var _k, _len3, _results;
+              _results = [];
+              for (_k = 0, _len3 = twitterdata.length; _k < _len3; _k++) {
+                d = twitterdata[_k];
+                _results.push({
+                  x: new Date(d.timestamp).toUnixTimestamp(),
+                  y: d.tweets
+                });
+              }
+              return _results;
+            })()
+          }, {
+            name: 'Following',
+            color: 'red',
+            data: (function() {
+              var _k, _len3, _results;
+              _results = [];
+              for (_k = 0, _len3 = twitterdata.length; _k < _len3; _k++) {
+                d = twitterdata[_k];
+                _results.push({
+                  x: new Date(d.timestamp).toUnixTimestamp(),
+                  y: d.following
+                });
+              }
+              return _results;
+            })()
+          }
+        ];
+        domGraph = $(template_rickshaw_graph()).appendTo(pane);
+        graph = new Rickshaw.Graph({
+          element: domGraph.find('.chart')[0],
+          renderer: 'line',
+          width: domGraph.width() - 50,
+          height: 180,
+          series: series
+        });
+        time = new Rickshaw.Fixtures.Time();
+        x_axis = new Rickshaw.Graph.Axis.Time({
+          graph: graph,
+          timeUnit: time.unit('month')
+        });
+        y_axis = new Rickshaw.Graph.Axis.Y({
+          graph: graph,
+          orientation: 'left',
+          tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+          element: domGraph.find('.y-axis')[0]
+        });
+        hoverDetail = new Rickshaw.Graph.HoverDetail({
+          graph: graph
+        });
+        return graph.render();
+      };
+
+      return ProjectPage;
+
+    })(Backbone.View);
+
+  }).call(this);
+  
+}});
+
+window.require.define({"views/templates/loading_bar": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+
+    buffer += "<div class=\"progress progress-striped active\"><div class=\"bar\" style=\"width: ";
+    foundHelper = helpers.percent;
+    stack1 = foundHelper || depth0.percent;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "percent", { hash: {} }); }
+    buffer += escapeExpression(stack1) + ";\"></div><div class=\"text\">";
+    foundHelper = helpers.text;
+    stack1 = foundHelper || depth0.text;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "text", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div></div>\n";
+    return buffer;});
+}});
+
+window.require.define({"views/templates/page_project": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+
+    buffer += "<h1>";
+    foundHelper = helpers.bigTitle;
+    stack1 = foundHelper || depth0.bigTitle;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "bigTitle", { hash: {} }); }
+    buffer += escapeExpression(stack1) + " <small>";
+    foundHelper = helpers.smallTitle;
+    stack1 = foundHelper || depth0.smallTitle;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "smallTitle", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</small></h1>\n<table>\n  <tr id=\"project-container\">\n    <td id=\"project-container-Mailchimp\"></td>\n    <td id=\"project-container-Mailman\"></td>\n    <td id=\"project-container-Twitter\"></td>\n    <td id=\"project-container-Github\"></td>\n  </tr>\n</table>\n\n\n";
+    return buffer;});
+}});
+
+window.require.define({"views/templates/pane": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+
+    buffer += "<div class=\"pane label-pane\">\n    <label>";
+    foundHelper = helpers.title;
+    stack1 = foundHelper || depth0.title;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "title", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</label>\n    <div class=\"inner\">";
+    foundHelper = helpers.content;
+    stack1 = foundHelper || depth0.content;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "content", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div>\n</div>\n";
+    return buffer;});
+}});
+
+window.require.define({"views/templates/pane_github": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+  function program1(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n        <div class=\"statistic-container\">\n            <div class=\"statistic\"><div class=\"top\">";
+    foundHelper = helpers.watchers;
+    stack1 = foundHelper || depth0.watchers;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "watchers", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">watchers</div></div>\n            <div class=\"statistic\"><div class=\"top\">";
+    foundHelper = helpers.issues;
+    stack1 = foundHelper || depth0.issues;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "issues", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">issues</div></div>\n            <div class=\"statistic\"><div class=\"top\">";
+    foundHelper = helpers.forks;
+    stack1 = foundHelper || depth0.forks;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "forks", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">forks</div></div>\n        </div>\n    ";
+    return buffer;}
+
+  function program3(depth0,data) {
+    
+    var buffer = "", stack1, stack2;
+    buffer += "\n    <div class=\"clearfix\"> </div>\n    <div class=\"description\">\n        ";
+    foundHelper = helpers.language;
+    stack1 = foundHelper || depth0.language;
+    stack2 = helpers['if'];
+    tmp1 = self.program(4, program4, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n        <span class=\"sub-name\">(<a href=\"";
+    foundHelper = helpers.html_url;
+    stack1 = foundHelper || depth0.html_url;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "html_url", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\">";
+    foundHelper = helpers.full_name;
+    stack1 = foundHelper || depth0.full_name;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "full_name", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</a>)</span>:\n        <span class=\"content\">\"";
+    foundHelper = helpers.description;
+    stack1 = foundHelper || depth0.description;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\"</span>\n    </div>\n    ";
+    return buffer;}
+  function program4(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "<span class=\"label label-info\">";
+    foundHelper = helpers.language;
+    stack1 = foundHelper || depth0.language;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "language", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</span>";
+    return buffer;}
+
+    buffer += "<div class=\"statistics-pane github\">\n    ";
+    foundHelper = helpers.data;
+    stack1 = foundHelper || depth0.data;
+    stack2 = helpers['with'];
+    tmp1 = self.program(1, program1, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n    ";
+    foundHelper = helpers.repo;
+    stack1 = foundHelper || depth0.repo;
+    stack2 = helpers['with'];
+    tmp1 = self.program(3, program3, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n</div>\n";
+    return buffer;});
+}});
+
+window.require.define({"views/templates/pane_mailchimp": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+
+    buffer += "<strong style=\"margin-bottom:10px;\">";
+    foundHelper = helpers.name;
+    stack1 = foundHelper || depth0.name;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
+    buffer += escapeExpression(stack1) + ":</strong>\n<div class=\"statistics-pane twitter\">\n    <div class=\"statistic-container\">\n        <div class=\"statistic\"><div class=\"top\">";
+    foundHelper = helpers.members;
+    stack1 = foundHelper || depth0.members;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "members", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">members</div></div>\n    </div>\n    <div class=\"clearfix\"> </div>\n    </div>\n</div>\n";
+    return buffer;});
+}});
+
+window.require.define({"views/templates/pane_mailman": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+
+    buffer += "<div style=\"margin-bottom: 4px;\">\n  <strong><a href=\"";
+    foundHelper = helpers.link;
+    stack1 = foundHelper || depth0.link;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "link", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\">";
+    foundHelper = helpers.name;
+    stack1 = foundHelper || depth0.name;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</a></strong>:\n  ";
+    foundHelper = helpers.description;
+    stack1 = foundHelper || depth0.description;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\n</div>\n";
+    return buffer;});
+}});
+
+window.require.define({"views/templates/pane_twitter": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+
+    buffer += "<div class=\"statistics-pane twitter\">\n    <div class=\"statistic-container\">\n        <div class=\"statistic\"><div class=\"top\">";
+    foundHelper = helpers.followers;
+    stack1 = foundHelper || depth0.followers;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "followers", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">followers</div></div>\n        <div class=\"statistic\"><div class=\"top\">";
+    foundHelper = helpers.following;
+    stack1 = foundHelper || depth0.following;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "following", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">following</div></div>\n        <div class=\"statistic\"><div class=\"top\">";
+    foundHelper = helpers.tweets;
+    stack1 = foundHelper || depth0.tweets;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "tweets", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">tweets</div></div>\n    </div>\n    <div class=\"clearfix\"> </div>\n    <div class=\"description\">\n    <span class=\"name\">";
+    foundHelper = helpers.name;
+    stack1 = foundHelper || depth0.name;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</span>\n    <span class=\"sub-name\">(<a href=\"http://twitter.com/";
+    foundHelper = helpers.screen_name;
+    stack1 = foundHelper || depth0.screen_name;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "screen_name", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\">@";
+    foundHelper = helpers.screen_name;
+    stack1 = foundHelper || depth0.screen_name;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "screen_name", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</a>)</span>:\n    <span class=\"content\">\"";
+    foundHelper = helpers.description;
+    stack1 = foundHelper || depth0.description;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\"</span>\n    </div>\n</div>\n";
+    return buffer;});
+}});
+
+window.require.define({"views/templates/rickshaw_graph": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var foundHelper, self=this;
+
+
+    return "<div class=\"rickshaw\">\n  <div class=\"y-axis\"></div>\n  <div class=\"chart\"></div>\n</div>\n";});
+}});
+
