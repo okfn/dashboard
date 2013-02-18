@@ -1,12 +1,10 @@
 template_page = require 'views/templates/page_project'
 template_pane = require 'views/templates/pane'
+template_pane_mailchimp = require 'views/templates/pane_mailchimp'
+template_pane_mailman = require 'views/templates/pane_mailman'
 template_pane_twitter = require 'views/templates/pane_twitter'
 template_pane_github = require 'views/templates/pane_github'
 template_rickshaw_graph = require 'views/templates/rickshaw_graph'
-template_details = 
-    mailchimp: require 'views/templates/details_mailchimp'
-    mailman: require 'views/templates/details_mailman'
-    github: require 'views/templates/details_github'
 
 # Data api
 api = require 'activityapi'
@@ -36,12 +34,7 @@ module.exports = class ProjectPage extends Backbone.View
         @$el.html template_page @project
         target.html @$el
         @container = @$el.find('#project-container')
-        @container.masonry
-          itemSelector: '.pane'
-          columnWidth: 380
         # Fly, my AJAX pretties!
-        if @project.description
-            @addPane 'Description', (pane)=> pane.html(@project.description)
         api.ajaxHistoryTwitter @project.twitter, (@resultTwitter) => 
             if @resultTwitter && @resultTwitter.ok
                 # API serves descending order data
@@ -55,9 +48,6 @@ module.exports = class ProjectPage extends Backbone.View
                     repo.data.reverse()
                 if @project.headline_github
                     @addPane 'Github', @renderPaneGithub
-                @addPane 'Github: Watchers', @renderPaneGithubGraph('watchers')
-                @addPane 'Github: Issues', @renderPaneGithubGraph('issues')
-                @addPane 'Github: Forks', @renderPaneGithubGraph('forks')
         api.ajaxHistoryMailman @project.mailman, (@resultMailman) => 
             if @resultMailman && @resultMailman.ok
                 # API serves descending order data
@@ -69,21 +59,18 @@ module.exports = class ProjectPage extends Backbone.View
                 # API serves descending order data
                 for key,value of @resultMailchimp.data
                     value.data.reverse()
-                    # TODO temp
-                    value.members = 9999
                 @addPane 'Mailchimp', @renderPaneMailchimp
 
     
     addPane: (title, renderCallback) =>
-        if @container.width()==0
-            # AJAX came too late. DOM was destroyed.
-            return
-        pane = $(template_pane {title:title}).appendTo @container
+        td = @container.find('#project-container-'+title)
+        if td.length==0
+            throw 'Could not find a DOM element for pane "'+title+'"'
+        pane = $(template_pane {title:title}).appendTo td
         # Initial render
         renderCallback(pane.find '.inner')
         pane.css {display:'none'}
         pane.fadeIn(500)
-        @container.masonry 'reload'
 
     setPaneWidth: (pane, columns) =>
         # Resize the width of this pane to span multiple columns
@@ -125,8 +112,11 @@ module.exports = class ProjectPage extends Backbone.View
         graph.render()
 
 
-    renderPaneGithubGraph: (action) =>
-        return (pane) =>
+    renderPaneGithub: (pane) =>
+        x = @resultGithub.data[ @project.headline_github ]
+        pane.append template_pane_github { 'repo':x.repo,'data':x.data[x.data.length-1] }
+        for action in ['watchers','issues','forks']
+            $('<h4>History: '+action+'</h4>').appendTo pane
             series = []
             palette = new Rickshaw.Color.Palette {scheme:'colorwheel'}
             for reponame,repodata of @resultGithub.data
@@ -167,16 +157,13 @@ module.exports = class ProjectPage extends Backbone.View
             graph.render()
 
 
-    renderPaneRepositories: (pane) =>
-        for m in @project.github
-            pane.append template_details.github @resultGithub.data[m].repo
 
 
     renderPaneMailman: (pane) =>
         # Header: Broad statistics
         for m in @project.mailman
-            pane.append template_details.mailman @resultMailman.data[m].mailman
-        for action in ['posts','subscribers']
+            pane.append template_pane_mailman @resultMailman.data[m].mailman
+        for action in ['subscribers','posts']
             series = []
             palette = new Rickshaw.Color.Palette {scheme:'colorwheel'}
             for listName, listData of @resultMailman.data
@@ -220,7 +207,7 @@ module.exports = class ProjectPage extends Backbone.View
     renderPaneMailchimp: (pane) =>
         # Header: Broad statistics
         for m in @project.mailchimp
-            pane.append template_details.mailchimp @resultMailchimp.data[m]
+            pane.append template_pane_mailchimp @resultMailchimp.data[m]
         series = []
         palette = new Rickshaw.Color.Palette {scheme:'colorwheel'}
         for listName, listData of @resultMailchimp.data
@@ -301,8 +288,4 @@ module.exports = class ProjectPage extends Backbone.View
         hoverDetail = new Rickshaw.Graph.HoverDetail
               graph: graph
         graph.render()
-
-    renderPaneGithub: (pane) =>
-        x = @resultGithub.data[ @project.headline_github ]
-        pane.html template_pane_github { 'repo':x.repo,'data':x.data[x.data.length-1] }
 

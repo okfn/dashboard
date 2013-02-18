@@ -1,3 +1,6 @@
+body {
+  background: #f0f0f0;
+}
 #content {
   margin-top: 60px;
   min-height: 300px;
@@ -44,14 +47,19 @@
 }
 
 /* TODO export to project.css? */
-
+#project-container {
+  td {
+    vertical-align: top;
+  }
+}
 .pane {
-  border: 1px solid #ccc;
+  background: #fff;
+  margin-right: 10px;
+  border: 1px solid #bbb;
   border-radius: 5px;
   padding: 8px;
   margin-bottom: 15px;
   width: 350px;
-  float: left;
 }
 .label-pane {
   position: relative;
@@ -65,7 +73,7 @@
   font-size: 12px;
   font-weight: bold;
   background-color: #f5f5f5;
-  border: 1px solid #ddd;
+  border: 1px solid #bbb;
   color: #9da0a4;
   -webkit-border-radius: 4px 0 4px 0;
      -moz-border-radius: 4px 0 4px 0;

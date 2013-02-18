@@ -15,7 +15,7 @@ module.exports = class Router extends Backbone.Router
     initialize: ->
         # Trigger nav updates
         @on 'all', (trigger) =>
-            location = (window.location.hash.slice(1))
+            location = (window.location.hash.slice(1)) or 'project/okfn'
             trigger = trigger.split(':')
             if trigger[0]=='route'
               $('.navbar .nav li').removeClass 'active'
