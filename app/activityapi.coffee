@@ -12,10 +12,6 @@ class ActivityApi extends Backbone.Model
             url = @url + '/history/github?repo=' + @_join(repos) + '&per_page=90'
             return @_fetch url, callback
 
-    ajaxHistoryBuddypress: (callback) ->
-        url = @url + '/history/buddypress?per_page=52&grain=week'
-        return @_fetch url, callback
-
     ajaxHistoryMailman: (lists, callback) ->
         if not lists.length
             callback null
@@ -27,14 +23,7 @@ class ActivityApi extends Backbone.Model
         if not account
             callback null
         else 
-            url = @url + '/history/twitter/account?name=' + account + '&per_page=30&grain=day'
-            return @_fetch url, callback
-
-    ajaxDataPerson: (logins, callback) ->
-        if not logins.length
-            callback null
-        else
-            url = @url + '/data/person?per_page=' + logins.length + '&login=' + @_join(logins)
+            url = @url + '/history/twitter/account?name=' + account + '&per_page=26&grain=week'
             return @_fetch url, callback
 
 
