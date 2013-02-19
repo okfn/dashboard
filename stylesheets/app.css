@@ -564,26 +564,16 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 .twitter .statistic {
   width: 33%;
 }
+.mailchimp .statistic,
+.facebook .statistic {
+  width: 100%;
+}
 .twitter .name {
   font-weight: bold;
 }
-.statistics-pane .sub-name {
+.sub-name {
+  margin-bottom: 20px;
   color: #999;
-}
-.pane-people {
-  display: none;
-}
-.pane-people .pagination li a {
-  padding: 2px 2px;
-  height: 25px;
-  line-height: 14px;
-  font-size: 11px;
-  min-width: 40px;
-  text-align: center;
-}
-.paginate-person {
-  background: #fcf;
-  border: 1px solid #000;
 }
 #legendholder {
   position: absolute;

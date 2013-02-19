@@ -128,7 +128,7 @@ window.require.define({"activityapi": function(exports, require, module) {
         if (!account) {
           return callback(null);
         } else {
-          url = this.url + '/history/twitter/account?name=' + account + '&per_page=26&grain=week';
+          url = this.url + '/history/twitter?name=' + account + '&per_page=26&grain=week';
           return this._fetch(url, callback);
         }
       };
@@ -1039,7 +1039,6 @@ window.require.define({"views/page_project": function(exports, require, module) 
       ProjectPage.prototype.renderPaneTwitter = function(pane) {
         var d, domGraph, graph, hoverDetail, series, time, twitterdata, x_axis, y_axis;
         pane.append(template_pane_twitter(this.resultTwitter.data[this.project.twitter].account));
-        $('<h4>History: Twitter</h4>').appendTo(pane);
         twitterdata = this.resultTwitter.data[this.project.twitter].data;
         series = [
           {
@@ -1188,12 +1187,12 @@ window.require.define({"views/templates/pane_facebook": function(exports, requir
     var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
 
-    buffer += "<div class=\"statistics-pane twitter\">\n    <div class=\"statistic-container\">\n        <div class=\"statistic\"><div class=\"top\">";
+    buffer += "<div class=\"statistics-pane facebook\">\n    <div class=\"statistic-container\">\n        <div class=\"statistic\"><div class=\"top\">";
     foundHelper = helpers.likes;
     stack1 = foundHelper || depth0.likes;
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "likes", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">likes</div></div>\n    </div>\n    <div class=\"clearfix\"> </div>\n    <div style=\"margin-bottom:10px;\">\n      <a href=\"www.facebook.com/OKFNetwork\">http://www.facebook.com/OKFNetwork</a>\n    </div>\n  </div>\n</div>\n";
+    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">likes</div></div>\n    </div>\n    <div class=\"clearfix\"> </div>\n  </div>\n</div>\n<div class=\"sub-name\">\n  Group: <a href=\"www.facebook.com/OKFNetwork\">http://www.facebook.com/OKFNetwork</a>\n</div>\n";
     return buffer;});
 }});
 
@@ -1225,18 +1224,13 @@ window.require.define({"views/templates/pane_github": function(exports, require,
 
   function program3(depth0,data) {
     
-    var buffer = "", stack1, stack2;
-    buffer += "\n    <div class=\"clearfix\"> </div>\n    <div class=\"description\">\n        ";
-    foundHelper = helpers.language;
-    stack1 = foundHelper || depth0.language;
-    stack2 = helpers['if'];
-    tmp1 = self.program(4, program4, data);
-    tmp1.hash = {};
-    tmp1.fn = tmp1;
-    tmp1.inverse = self.noop;
-    stack1 = stack2.call(depth0, stack1, tmp1);
-    if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n        <span class=\"sub-name\">(<a href=\"";
+    
+    return "\n    <div class=\"clearfix\"> </div>\n    ";}
+
+  function program5(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n<div class=\"description\">\n  <div class=\"sub-name\">Repo: <a href=\"";
     foundHelper = helpers.html_url;
     stack1 = foundHelper || depth0.html_url;
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -1246,22 +1240,7 @@ window.require.define({"views/templates/pane_github": function(exports, require,
     stack1 = foundHelper || depth0.full_name;
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "full_name", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</a>)</span>:\n        <span class=\"content\">\"";
-    foundHelper = helpers.description;
-    stack1 = foundHelper || depth0.description;
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "\"</span>\n    </div>\n    ";
-    return buffer;}
-  function program4(depth0,data) {
-    
-    var buffer = "", stack1;
-    buffer += "<span class=\"label label-info\">";
-    foundHelper = helpers.language;
-    stack1 = foundHelper || depth0.language;
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "language", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</span>";
+    buffer += escapeExpression(stack1) + "</a></div>\n</div>\n";
     return buffer;}
 
     buffer += "<div class=\"statistics-pane github\">\n    ";
@@ -1285,6 +1264,16 @@ window.require.define({"views/templates/pane_github": function(exports, require,
     stack1 = stack2.call(depth0, stack1, tmp1);
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n</div>\n";
+    foundHelper = helpers.repo;
+    stack1 = foundHelper || depth0.repo;
+    stack2 = helpers['with'];
+    tmp1 = self.program(5, program5, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n";
     return buffer;});
 }});
 
@@ -1294,17 +1283,17 @@ window.require.define({"views/templates/pane_mailchimp": function(exports, requi
     var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
 
-    buffer += "<strong style=\"margin-bottom:10px;\">";
-    foundHelper = helpers.name;
-    stack1 = foundHelper || depth0.name;
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ":</strong>\n<div class=\"statistics-pane twitter\">\n    <div class=\"statistic-container\">\n        <div class=\"statistic\"><div class=\"top\">";
+    buffer += "<div class=\"statistics-pane mailchimp\">\n    <div class=\"statistic-container\">\n        <div class=\"statistic\"><div class=\"top\">";
     foundHelper = helpers.members;
     stack1 = foundHelper || depth0.members;
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "members", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">members</div></div>\n    </div>\n    <div class=\"clearfix\"> </div>\n    </div>\n</div>\n";
+    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">members</div></div>\n    </div>\n    <div class=\"clearfix\"></div>\n</div>\n<div class=\"sub-name\">List: <span style=\"color:#000; font-size: 12px;\">\"";
+    foundHelper = helpers.name;
+    stack1 = foundHelper || depth0.name;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\"</span></div>\n";
     return buffer;});
 }});
 
@@ -1354,12 +1343,7 @@ window.require.define({"views/templates/pane_twitter": function(exports, require
     stack1 = foundHelper || depth0.tweets;
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "tweets", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">tweets</div></div>\n    </div>\n    <div class=\"clearfix\"> </div>\n    <div class=\"description\">\n    <span class=\"name\">";
-    foundHelper = helpers.name;
-    stack1 = foundHelper || depth0.name;
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</span>\n    <span class=\"sub-name\">(<a href=\"http://twitter.com/";
+    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">tweets</div></div>\n    </div>\n    <div class=\"clearfix\"> </div>\n</div>\n<div class=\"sub-name\">\n  Screen name: <a href=\"http://twitter.com/";
     foundHelper = helpers.screen_name;
     stack1 = foundHelper || depth0.screen_name;
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -1369,12 +1353,7 @@ window.require.define({"views/templates/pane_twitter": function(exports, require
     stack1 = foundHelper || depth0.screen_name;
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "screen_name", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</a>)</span>:\n    <span class=\"content\">\"";
-    foundHelper = helpers.description;
-    stack1 = foundHelper || depth0.description;
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "\"</span>\n    </div>\n</div>\n";
+    buffer += escapeExpression(stack1) + "</a>\n</div>\n";
     return buffer;});
 }});
 
