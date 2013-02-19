@@ -133,6 +133,16 @@ window.require.define({"activityapi": function(exports, require, module) {
         }
       };
 
+      ActivityApi.prototype.ajaxHistoryFacebook = function(boolean, callback) {
+        var url;
+        if (!boolean) {
+          return callback(null);
+        } else {
+          url = this.url + '/history/facebook?per_page=26&grain=week';
+          return this._fetch(url, callback);
+        }
+      };
+
       ActivityApi.prototype._wrapCallback = function(url, callback) {
         var _this = this;
         return function(data) {
@@ -317,9 +327,10 @@ window.require.define({"projects": function(exports, require, module) {
           title: 'Network',
           twitter: 'okfn',
           link: ['http://okfn.org', 'http://blog.okfn.org'],
-          mailman: ['okfn-discuss', 'okfn-announce'],
+          mailman: [],
           github: [],
-          mailchimp: ['Open Knowledge Foundation Announce Mailing List']
+          mailchimp: ['Open Knowledge Foundation Announce Mailing List'],
+          facebook: true
         }
       }, {
         header: 'Projects',
@@ -570,7 +581,7 @@ window.require.define({"views/loading_view": function(exports, require, module) 
 
 window.require.define({"views/page_project": function(exports, require, module) {
   (function() {
-    var ProjectPage, api, project, projectCategory, projectMap, projects, template_page, template_pane, template_pane_github, template_pane_mailchimp, template_pane_mailman, template_pane_twitter, template_rickshaw_graph, _i, _j, _len, _len2, _ref,
+    var ProjectPage, api, project, projectCategory, projectMap, projects, template_page, template_pane, template_pane_facebook, template_pane_github, template_pane_mailchimp, template_pane_mailman, template_pane_twitter, template_rickshaw_graph, _i, _j, _len, _len2, _ref,
       __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
       __hasProp = Object.prototype.hasOwnProperty,
       __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
@@ -586,6 +597,8 @@ window.require.define({"views/page_project": function(exports, require, module) 
     template_pane_twitter = require('views/templates/pane_twitter');
 
     template_pane_github = require('views/templates/pane_github');
+
+    template_pane_facebook = require('views/templates/pane_facebook');
 
     template_rickshaw_graph = require('views/templates/rickshaw_graph');
 
@@ -621,6 +634,7 @@ window.require.define({"views/page_project": function(exports, require, module) 
 
       function ProjectPage() {
         this.renderPaneTwitter = __bind(this.renderPaneTwitter, this);
+        this.renderPaneFacebook = __bind(this.renderPaneFacebook, this);
         this.renderPaneMailchimp = __bind(this.renderPaneMailchimp, this);
         this.renderPaneMailman = __bind(this.renderPaneMailman, this);
         this.renderPaneGithub = __bind(this.renderPaneGithub, this);
@@ -676,7 +690,7 @@ window.require.define({"views/page_project": function(exports, require, module) 
             return _this.addPane('Mailman', _this.renderPaneMailman);
           }
         });
-        return api.ajaxHistoryMailchimp(this.project.mailchimp, function(resultMailchimp) {
+        api.ajaxHistoryMailchimp(this.project.mailchimp, function(resultMailchimp) {
           var key, value, _ref2;
           _this.resultMailchimp = resultMailchimp;
           if (_this.resultMailchimp && _this.resultMailchimp.ok) {
@@ -686,6 +700,13 @@ window.require.define({"views/page_project": function(exports, require, module) 
               value.data.reverse();
             }
             return _this.addPane('Mailchimp', _this.renderPaneMailchimp);
+          }
+        });
+        return api.ajaxHistoryFacebook(this.project.facebook, function(resultFacebook) {
+          _this.resultFacebook = resultFacebook;
+          if (_this.resultFacebook && _this.resultFacebook.ok) {
+            _this.resultFacebook.data.history.reverse();
+            return _this.addPane('Facebook', _this.renderPaneFacebook);
           }
         });
       };
@@ -968,6 +989,53 @@ window.require.define({"views/page_project": function(exports, require, module) 
         return graph.render();
       };
 
+      ProjectPage.prototype.renderPaneFacebook = function(pane) {
+        var d, domGraph, fbdata, graph, hoverDetail, series, time, x_axis, y_axis;
+        pane.append(template_pane_facebook(this.resultFacebook.data));
+        fbdata = this.resultFacebook.data.history;
+        series = [
+          {
+            name: 'Likes',
+            color: 'blue',
+            data: (function() {
+              var _k, _len3, _results;
+              _results = [];
+              for (_k = 0, _len3 = fbdata.length; _k < _len3; _k++) {
+                d = fbdata[_k];
+                _results.push({
+                  x: new Date(d.timestamp).toUnixTimestamp(),
+                  y: d.likes
+                });
+              }
+              return _results;
+            })()
+          }
+        ];
+        domGraph = $(template_rickshaw_graph()).appendTo(pane);
+        graph = new Rickshaw.Graph({
+          element: domGraph.find('.chart')[0],
+          renderer: 'line',
+          width: domGraph.width() - 50,
+          height: 180,
+          series: series
+        });
+        time = new Rickshaw.Fixtures.Time();
+        x_axis = new Rickshaw.Graph.Axis.Time({
+          graph: graph,
+          timeUnit: time.unit('month')
+        });
+        y_axis = new Rickshaw.Graph.Axis.Y({
+          graph: graph,
+          orientation: 'left',
+          tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+          element: domGraph.find('.y-axis')[0]
+        });
+        hoverDetail = new Rickshaw.Graph.HoverDetail({
+          graph: graph
+        });
+        return graph.render();
+      };
+
       ProjectPage.prototype.renderPaneTwitter = function(pane) {
         var d, domGraph, graph, hoverDetail, series, time, twitterdata, x_axis, y_axis;
         pane.append(template_pane_twitter(this.resultTwitter.data[this.project.twitter].account));
@@ -1090,7 +1158,7 @@ window.require.define({"views/templates/page_project": function(exports, require
     stack1 = foundHelper || depth0.smallTitle;
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "smallTitle", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</small></h1>\n<table>\n  <tr id=\"project-container\">\n    <td id=\"project-container-Mailchimp\"></td>\n    <td id=\"project-container-Mailman\"></td>\n    <td id=\"project-container-Twitter\"></td>\n    <td id=\"project-container-Github\"></td>\n  </tr>\n</table>\n\n\n";
+    buffer += escapeExpression(stack1) + "</small></h1>\n<table>\n  <tr id=\"project-container\">\n    <td id=\"project-container-Mailchimp\"></td>\n    <td id=\"project-container-Mailman\"></td>\n    <td id=\"project-container-Facebook\"></td>\n    <td id=\"project-container-Twitter\"></td>\n    <td id=\"project-container-Github\"></td>\n  </tr>\n</table>\n\n\n";
     return buffer;});
 }});
 
@@ -1111,6 +1179,21 @@ window.require.define({"views/templates/pane": function(exports, require, module
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "content", { hash: {} }); }
     buffer += escapeExpression(stack1) + "</div>\n</div>\n";
+    return buffer;});
+}});
+
+window.require.define({"views/templates/pane_facebook": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+
+    buffer += "<div class=\"statistics-pane twitter\">\n    <div class=\"statistic-container\">\n        <div class=\"statistic\"><div class=\"top\">";
+    foundHelper = helpers.likes;
+    stack1 = foundHelper || depth0.likes;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "likes", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">likes</div></div>\n    </div>\n    <div class=\"clearfix\"> </div>\n    <div style=\"margin-bottom:10px;\">\n      <a href=\"www.facebook.com/OKFNetwork\">http://www.facebook.com/OKFNetwork</a>\n    </div>\n  </div>\n</div>\n";
     return buffer;});
 }});
 
