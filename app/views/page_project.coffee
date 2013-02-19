@@ -282,7 +282,6 @@ module.exports = class ProjectPage extends Backbone.View
 
     renderPaneTwitter: (pane) =>
         pane.append template_pane_twitter @resultTwitter.data[@project.twitter].account
-        $('<h4>History: Twitter</h4>').appendTo pane
         twitterdata = @resultTwitter.data[@project.twitter].data
         series = [
             {

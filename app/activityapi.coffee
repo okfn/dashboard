@@ -30,7 +30,7 @@ class ActivityApi extends Backbone.Model
         if not account
             callback null
         else 
-            url = @url + '/history/twitter/account?name=' + account + '&per_page=26&grain=week'
+            url = @url + '/history/twitter?name=' + account + '&per_page=26&grain=week'
             return @_fetch url, callback
 
     ajaxHistoryFacebook: (boolean, callback) ->

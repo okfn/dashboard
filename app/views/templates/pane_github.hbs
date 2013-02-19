@@ -8,10 +8,10 @@
     {{/with}}
     {{#with repo}}
     <div class="clearfix"> </div>
-    <div class="description">
-        {{#if language}}<span class="label label-info">{{language}}</span>{{/if}}
-        <span class="sub-name">(<a href="{{html_url}}">{{full_name}}</a>)</span>:
-        <span class="content">"{{description}}"</span>
-    </div>
     {{/with}}
 </div>
+{{#with repo}}
+<div class="description">
+  <div class="sub-name">Repo: <a href="{{html_url}}">{{full_name}}</a></div>
+</div>
+{{/with}}
