@@ -6,9 +6,10 @@ module.exports = [
           title: 'Network'
           twitter: 'okfn'
           link: ['http://okfn.org','http://blog.okfn.org']
-          mailman: ['okfn-discuss','okfn-announce']
+          mailman: []
           github: []
           mailchimp: ['Open Knowledge Foundation Announce Mailing List']
+          facebook: true
       }
   }
   { 

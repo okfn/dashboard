@@ -4,6 +4,7 @@ template_pane_mailchimp = require 'views/templates/pane_mailchimp'
 template_pane_mailman = require 'views/templates/pane_mailman'
 template_pane_twitter = require 'views/templates/pane_twitter'
 template_pane_github = require 'views/templates/pane_github'
+template_pane_facebook = require 'views/templates/pane_facebook'
 template_rickshaw_graph = require 'views/templates/rickshaw_graph'
 
 # Data api
@@ -60,6 +61,10 @@ module.exports = class ProjectPage extends Backbone.View
                 for key,value of @resultMailchimp.data
                     value.data.reverse()
                 @addPane 'Mailchimp', @renderPaneMailchimp
+        api.ajaxHistoryFacebook @project.facebook, (@resultFacebook) => 
+            if @resultFacebook && @resultFacebook.ok
+                @resultFacebook.data.history.reverse()
+                @addPane 'Facebook', @renderPaneFacebook
 
     
     addPane: (title, renderCallback) =>
@@ -238,6 +243,41 @@ module.exports = class ProjectPage extends Backbone.View
         hoverDetail = new Rickshaw.Graph.HoverDetail {
           graph: graph
         }
+        graph.render()
+
+
+    renderPaneFacebook: (pane) =>
+        pane.append template_pane_facebook @resultFacebook.data
+        fbdata = @resultFacebook.data.history
+        series = [
+            {
+                name: 'Likes'
+                color: 'blue'
+                data: (
+                    { x : new Date(d.timestamp).toUnixTimestamp(), y : d.likes } for d in fbdata
+                )
+            }
+        ]
+        # Build DOM using Rickshaw graphing library
+        domGraph = $(template_rickshaw_graph()).appendTo pane
+        graph = new Rickshaw.Graph {
+                element: domGraph.find('.chart')[0]
+                renderer: 'line'
+                width: domGraph.width() - 50
+                height: 180
+                series: series
+        }
+        time = new Rickshaw.Fixtures.Time()
+        x_axis = new Rickshaw.Graph.Axis.Time 
+            graph: graph
+            timeUnit: time.unit('month')
+        y_axis = new Rickshaw.Graph.Axis.Y 
+            graph: graph
+            orientation: 'left'
+            tickFormat: Rickshaw.Fixtures.Number.formatKMBT
+            element: domGraph.find('.y-axis')[0]
+        hoverDetail = new Rickshaw.Graph.HoverDetail
+              graph: graph
         graph.render()
 
     renderPaneTwitter: (pane) =>
