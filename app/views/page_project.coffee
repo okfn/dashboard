@@ -10,7 +10,6 @@ template_rickshaw_graph = require 'views/templates/rickshaw_graph'
 # Data api
 api = require 'activityapi'
 
-
 # Project data
 projects = require 'projects'
 projectMap = {}
@@ -167,7 +166,7 @@ module.exports = class ProjectPage extends Backbone.View
     renderPaneMailman: (pane) =>
         # Header: Broad statistics
         for m in @project.mailman
-            pane.append template_pane_mailman @resultMailman.data[m].mailman
+            pane.append template_pane_mailman @resultMailman.data[m]
         for action in ['subscribers','posts']
             series = []
             palette = new Rickshaw.Color.Palette {scheme:'colorwheel'}
@@ -176,7 +175,7 @@ module.exports = class ProjectPage extends Backbone.View
                     { x : new Date(d.timestamp).toUnixTimestamp(), y : d[action] } for d in listData.data
                 )
                 series.push 
-                    name: listData.mailman.name
+                    name: listData.list_name
                     color: palette.color()
                     data: data
             # Ensure all series are the same length

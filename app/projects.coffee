@@ -39,7 +39,7 @@ module.exports = [
           title: 'School Of Data'
           twitter: 'schoolofdata'
           link: ['http://schoolofdata.org','http://handbook.schoolofdata.org','http://opendatahandbook.org','http://wiki.okfn.org/Projects/Open_Data_Handbook']
-          mailman: ['School-of-data','Scoda-dev','open-data-handbook']
+          mailman: ['School-of-data']
           github: ['okfn/datawrangling','okfn/schoolofdata','okfn/opendatahandbook']
           headline_github: 'okfn/schoolofdata'
       }
@@ -64,7 +64,7 @@ module.exports = [
       {
           name: 'annotator'
           title: 'Annotator'
-          twitter: 'okfnlabs'
+          twitter: 'TheAnnotator'
           link: ['http://annotateit.org']
           mailman: ['annotator-dev']
           github: ['okfn/annotator','okfn/annotateit','okfn/annotator-store','okfn/annotator-wordpress','okfn/texts.annotateit.org']
@@ -87,7 +87,7 @@ module.exports = [
           title: 'OKFestival'
           twitter: 'okfestival'
           link: ['http://okfestival.org']
-          mailman: ['OKFestival-Coord','Okfest-opendev']
+          mailman: []
           github: []
       }
   }
