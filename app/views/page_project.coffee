@@ -33,41 +33,44 @@ module.exports = class ProjectPage extends Backbone.View
         @project = projectMap[projectName]
         @$el.html template_page @project
         target.html @$el
-        @container = @$el.find('#project-container')
+        container = @$el.find('#project-container')
         # Fly, my AJAX pretties!
         api.ajaxHistoryTwitter @project.twitter, (@resultTwitter) => 
             if @resultTwitter && @resultTwitter.ok
                 # API serves descending order data
                 for key, twitter of @resultTwitter.data
                     twitter.data.reverse()
-                @addPane 'Twitter', @renderPaneTwitter
+                @addPane container, 'Twitter', @renderPaneTwitter
         api.ajaxHistoryGithub @project.github, (@resultGithub) => 
             if @resultGithub && @resultGithub.ok
                 # API serves descending order data
                 for key,repo of @resultGithub.data
                     repo.data.reverse()
                 if @project.headline_github
-                    @addPane 'Github', @renderPaneGithub
+                    @addPane container, 'Github', @renderPaneGithub
         api.ajaxHistoryMailman @project.mailman, (@resultMailman) => 
             if @resultMailman && @resultMailman.ok
                 # API serves descending order data
                 for key,mailman of @resultMailman.data
                     mailman.data.reverse()
-                @addPane 'Mailman', @renderPaneMailman
+                @addPane container, 'Mailman', @renderPaneMailman
         api.ajaxHistoryMailchimp @project.mailchimp, (@resultMailchimp) => 
             if @resultMailchimp && @resultMailchimp.ok
                 # API serves descending order data
                 for key,value of @resultMailchimp.data
                     value.data.reverse()
-                @addPane 'Mailchimp', @renderPaneMailchimp
+                @addPane container, 'Mailchimp', @renderPaneMailchimp
         api.ajaxHistoryFacebook @project.facebook, (@resultFacebook) => 
             if @resultFacebook && @resultFacebook.ok
                 @resultFacebook.data.history.reverse()
-                @addPane 'Facebook', @renderPaneFacebook
+                @addPane container, 'Facebook', @renderPaneFacebook
 
     
-    addPane: (title, renderCallback) =>
-        td = @container.find('#project-container-'+title)
+    addPane: (container, title, renderCallback) =>
+        dom_destroyed = container.width()==0
+        if dom_destroyed
+            return
+        td = container.find('#project-container-'+title)
         if td.length==0
             throw 'Could not find a DOM element for pane "'+title+'"'
         pane = $(template_pane {title:title}).appendTo td
