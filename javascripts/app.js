@@ -356,7 +356,7 @@ window.require.define({"projects": function(exports, require, module) {
             title: 'School Of Data',
             twitter: 'schoolofdata',
             link: ['http://schoolofdata.org', 'http://handbook.schoolofdata.org', 'http://opendatahandbook.org', 'http://wiki.okfn.org/Projects/Open_Data_Handbook'],
-            mailman: ['School-of-data', 'Scoda-dev', 'open-data-handbook'],
+            mailman: ['School-of-data'],
             github: ['okfn/datawrangling', 'okfn/schoolofdata', 'okfn/opendatahandbook'],
             headline_github: 'okfn/schoolofdata'
           }, {
@@ -378,7 +378,7 @@ window.require.define({"projects": function(exports, require, module) {
           }, {
             name: 'annotator',
             title: 'Annotator',
-            twitter: 'okfnlabs',
+            twitter: 'TheAnnotator',
             link: ['http://annotateit.org'],
             mailman: ['annotator-dev'],
             github: ['okfn/annotator', 'okfn/annotateit', 'okfn/annotator-store', 'okfn/annotator-wordpress', 'okfn/texts.annotateit.org'],
@@ -399,7 +399,7 @@ window.require.define({"projects": function(exports, require, module) {
           title: 'OKFestival',
           twitter: 'okfestival',
           link: ['http://okfestival.org'],
-          mailman: ['OKFestival-Coord', 'Okfest-opendev'],
+          mailman: [],
           github: []
         }
       }
@@ -862,7 +862,7 @@ window.require.define({"views/page_project": function(exports, require, module) 
         _ref2 = this.project.mailman;
         for (_k = 0, _len3 = _ref2.length; _k < _len3; _k++) {
           m = _ref2[_k];
-          pane.append(template_pane_mailman(this.resultMailman.data[m].mailman));
+          pane.append(template_pane_mailman(this.resultMailman.data[m]));
         }
         _ref3 = ['subscribers', 'posts'];
         _results = [];
@@ -889,7 +889,7 @@ window.require.define({"views/page_project": function(exports, require, module) 
               return _results2;
             })();
             series.push({
-              name: listData.mailman.name,
+              name: listData.list_name,
               color: palette.color(),
               data: data
             });
@@ -1222,27 +1222,6 @@ window.require.define({"views/templates/pane_github": function(exports, require,
     buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">forks</div></div>\n        </div>\n    ";
     return buffer;}
 
-  function program3(depth0,data) {
-    
-    
-    return "\n    <div class=\"clearfix\"> </div>\n    ";}
-
-  function program5(depth0,data) {
-    
-    var buffer = "", stack1;
-    buffer += "\n<div class=\"description\">\n  <div class=\"sub-name\">Repo: <a href=\"";
-    foundHelper = helpers.html_url;
-    stack1 = foundHelper || depth0.html_url;
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "html_url", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "\">";
-    foundHelper = helpers.full_name;
-    stack1 = foundHelper || depth0.full_name;
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "full_name", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</a></div>\n</div>\n";
-    return buffer;}
-
     buffer += "<div class=\"statistics-pane github\">\n    ";
     foundHelper = helpers.data;
     stack1 = foundHelper || depth0.data;
@@ -1253,27 +1232,17 @@ window.require.define({"views/templates/pane_github": function(exports, require,
     tmp1.inverse = self.noop;
     stack1 = stack2.call(depth0, stack1, tmp1);
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n    ";
+    buffer += "\n    <div class=\"clearfix\"> </div>\n</div>\n<div class=\"description\">\n  <div class=\"sub-name\">Repo: <a href=\"http://github.com/okfn/";
     foundHelper = helpers.repo;
     stack1 = foundHelper || depth0.repo;
-    stack2 = helpers['with'];
-    tmp1 = self.program(3, program3, data);
-    tmp1.hash = {};
-    tmp1.fn = tmp1;
-    tmp1.inverse = self.noop;
-    stack1 = stack2.call(depth0, stack1, tmp1);
-    if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n</div>\n";
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "repo", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\">";
     foundHelper = helpers.repo;
     stack1 = foundHelper || depth0.repo;
-    stack2 = helpers['with'];
-    tmp1 = self.program(5, program5, data);
-    tmp1.hash = {};
-    tmp1.fn = tmp1;
-    tmp1.inverse = self.noop;
-    stack1 = stack2.call(depth0, stack1, tmp1);
-    if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n";
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "repo", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</a></div>\n</div>\n";
     return buffer;});
 }});
 
@@ -1303,22 +1272,17 @@ window.require.define({"views/templates/pane_mailman": function(exports, require
     var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
 
-    buffer += "<div style=\"margin-bottom: 4px;\">\n  <strong><a href=\"";
-    foundHelper = helpers.link;
-    stack1 = foundHelper || depth0.link;
+    buffer += "<div style=\"margin-bottom: 4px;\">\n  <strong><a href=\"http://lists.okfn.org/mailman/listinfo/";
+    foundHelper = helpers.list_name;
+    stack1 = foundHelper || depth0.list_name;
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "link", { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "list_name", { hash: {} }); }
     buffer += escapeExpression(stack1) + "\">";
-    foundHelper = helpers.name;
-    stack1 = foundHelper || depth0.name;
+    foundHelper = helpers.list_name;
+    stack1 = foundHelper || depth0.list_name;
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</a></strong>:\n  ";
-    foundHelper = helpers.description;
-    stack1 = foundHelper || depth0.description;
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "\n</div>\n";
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "list_name", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</a></strong>\n</div>\n";
     return buffer;});
 }});
 
