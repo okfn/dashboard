@@ -646,12 +646,13 @@ window.require.define({"views/page_project": function(exports, require, module) 
       }
 
       ProjectPage.prototype.renderPage = function(target, projectName) {
-        var _this = this;
+        var container,
+          _this = this;
         if (projectName == null) projectName = 'ckan';
         this.project = projectMap[projectName];
         this.$el.html(template_page(this.project));
         target.html(this.$el);
-        this.container = this.$el.find('#project-container');
+        container = this.$el.find('#project-container');
         api.ajaxHistoryTwitter(this.project.twitter, function(resultTwitter) {
           var key, twitter, _ref2;
           _this.resultTwitter = resultTwitter;
@@ -661,7 +662,7 @@ window.require.define({"views/page_project": function(exports, require, module) 
               twitter = _ref2[key];
               twitter.data.reverse();
             }
-            return _this.addPane('Twitter', _this.renderPaneTwitter);
+            return _this.addPane(container, 'Twitter', _this.renderPaneTwitter);
           }
         });
         api.ajaxHistoryGithub(this.project.github, function(resultGithub) {
@@ -674,7 +675,7 @@ window.require.define({"views/page_project": function(exports, require, module) 
               repo.data.reverse();
             }
             if (_this.project.headline_github) {
-              return _this.addPane('Github', _this.renderPaneGithub);
+              return _this.addPane(container, 'Github', _this.renderPaneGithub);
             }
           }
         });
@@ -687,7 +688,7 @@ window.require.define({"views/page_project": function(exports, require, module) 
               mailman = _ref2[key];
               mailman.data.reverse();
             }
-            return _this.addPane('Mailman', _this.renderPaneMailman);
+            return _this.addPane(container, 'Mailman', _this.renderPaneMailman);
           }
         });
         api.ajaxHistoryMailchimp(this.project.mailchimp, function(resultMailchimp) {
@@ -699,21 +700,23 @@ window.require.define({"views/page_project": function(exports, require, module) 
               value = _ref2[key];
               value.data.reverse();
             }
-            return _this.addPane('Mailchimp', _this.renderPaneMailchimp);
+            return _this.addPane(container, 'Mailchimp', _this.renderPaneMailchimp);
           }
         });
         return api.ajaxHistoryFacebook(this.project.facebook, function(resultFacebook) {
           _this.resultFacebook = resultFacebook;
           if (_this.resultFacebook && _this.resultFacebook.ok) {
             _this.resultFacebook.data.history.reverse();
-            return _this.addPane('Facebook', _this.renderPaneFacebook);
+            return _this.addPane(container, 'Facebook', _this.renderPaneFacebook);
           }
         });
       };
 
-      ProjectPage.prototype.addPane = function(title, renderCallback) {
-        var pane, td;
-        td = this.container.find('#project-container-' + title);
+      ProjectPage.prototype.addPane = function(container, title, renderCallback) {
+        var dom_destroyed, pane, td;
+        dom_destroyed = container.width() === 0;
+        if (dom_destroyed) return;
+        td = container.find('#project-container-' + title);
         if (td.length === 0) {
           throw 'Could not find a DOM element for pane "' + title + '"';
         }
@@ -1157,7 +1160,7 @@ window.require.define({"views/templates/page_project": function(exports, require
     stack1 = foundHelper || depth0.smallTitle;
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "smallTitle", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</small></h1>\n<table>\n  <tr id=\"project-container\">\n    <td id=\"project-container-Mailchimp\"></td>\n    <td id=\"project-container-Mailman\"></td>\n    <td id=\"project-container-Facebook\"></td>\n    <td id=\"project-container-Twitter\"></td>\n    <td id=\"project-container-Github\"></td>\n  </tr>\n</table>\n\n\n";
+    buffer += escapeExpression(stack1) + "</small></h1>\n<table>\n  <tr id=\"project-container\">\n    <td id=\"project-container-Mailchimp\"></td>\n    <td id=\"project-container-Mailman\"></td>\n    <td id=\"project-container-Facebook\"></td>\n    <td id=\"project-container-Twitter\"></td>\n    <td id=\"project-container-Github\"></td>\n  </tr>\n</table>\n\n";
     return buffer;});
 }});
 
