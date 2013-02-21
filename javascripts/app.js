@@ -123,6 +123,16 @@ window.require.define({"activityapi": function(exports, require, module) {
         }
       };
 
+      ActivityApi.prototype.ajaxHistoryAnalytics = function(websites, callback) {
+        var url;
+        if (!websites.length) {
+          return callback(null);
+        } else {
+          url = this.url + '/history/analytics?website=' + this._join(websites) + '&per_page=26&grain=week';
+          return this._fetch(url, callback);
+        }
+      };
+
       ActivityApi.prototype.ajaxHistoryTwitter = function(account, callback) {
         var url;
         if (!account) {
@@ -330,7 +340,8 @@ window.require.define({"projects": function(exports, require, module) {
           mailman: [],
           github: [],
           mailchimp: ['Open Knowledge Foundation Announce Mailing List'],
-          facebook: true
+          facebook: true,
+          google_analytics: ['blog.okfn.org', 'okfn.org']
         }
       }, {
         header: 'Projects',
@@ -343,14 +354,16 @@ window.require.define({"projects": function(exports, require, module) {
             link: ['http://ckan.org', 'http://wiki.okfn.org/Projects/CKAN'],
             mailman: ['ckan-dev', 'ckan-discuss'],
             github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols', 'okfn/buildkit', 'okfn/webstore', 'okfn/dpm', 'okfn/datahub'],
-            headline_github: 'okfn/ckan'
+            headline_github: 'okfn/ckan',
+            google_analytics: ['ckan.org', 'thedatahub.org']
           }, {
             name: 'openspending',
             title: 'OpenSpending',
             twitter: 'openspending',
             link: ['http://openspending.org', 'http://blog.openspending.org/', 'http://twitter.com/openspending', 'http://wiki.openspending.org/Main_Page', 'http://wheredoesmymoneygo.org/blog/'],
             mailman: ['openspending', 'openspending-dev', 'wdmmg-announce'],
-            github: ['okfn/dpkg-israel-state-budget', 'okfn/openspending.plugins.datatables', 'okfn/openspending.plugins.treemap']
+            github: ['okfn/dpkg-israel-state-budget', 'okfn/openspending.plugins.datatables', 'okfn/openspending.plugins.treemap'],
+            google_analytics: []
           }, {
             name: 'schoolofdata',
             title: 'School Of Data',
@@ -358,7 +371,8 @@ window.require.define({"projects": function(exports, require, module) {
             link: ['http://schoolofdata.org', 'http://handbook.schoolofdata.org', 'http://opendatahandbook.org', 'http://wiki.okfn.org/Projects/Open_Data_Handbook'],
             mailman: ['School-of-data'],
             github: ['okfn/datawrangling', 'okfn/schoolofdata', 'okfn/opendatahandbook'],
-            headline_github: 'okfn/schoolofdata'
+            headline_github: 'okfn/schoolofdata',
+            google_analytics: ['School Of Data']
           }, {
             name: 'lod2',
             title: 'LOD (Linked Open Data)',
@@ -366,7 +380,8 @@ window.require.define({"projects": function(exports, require, module) {
             description: 'LOD2 is an EU-funded project involving a consortium of groups across Europe working to develop linked open data availability and to enable the creation of knowledge from interlinked data.',
             link: ['http://lod2.eu/'],
             mailman: ['lod2'],
-            github: []
+            github: [],
+            google_analytics: []
           }, {
             name: 'recline',
             title: 'Recline.js',
@@ -374,7 +389,8 @@ window.require.define({"projects": function(exports, require, module) {
             link: ['http://reclinejs.org'],
             mailman: [],
             github: ['okfn/recline'],
-            headline_github: 'okfn/recline'
+            headline_github: 'okfn/recline',
+            google_analytics: ['ReclineJS']
           }, {
             name: 'annotator',
             title: 'Annotator',
@@ -382,26 +398,18 @@ window.require.define({"projects": function(exports, require, module) {
             link: ['http://annotateit.org'],
             mailman: ['annotator-dev'],
             github: ['okfn/annotator', 'okfn/annotateit', 'okfn/annotator-store', 'okfn/annotator-wordpress', 'okfn/texts.annotateit.org'],
-            headline_github: 'okfn/annotator'
+            headline_github: 'okfn/annotator',
+            google_analytics: ['annotateit.org']
           }, {
             name: 'labs',
             title: 'OKFN Labs',
             twitter: 'okfnlabs',
             link: ['http://annotateit.org', 'http://okfnlabs.org/dashboard', 'http://activityapi.herokuapp.com', 'http://yourtopia.net', 'http://italia.yourtopia.net/'],
             mailman: ['Yourtopia', 'okfn-labs', 'open-history'],
-            github: ['okfn/timeliner', 'okfn/activityapi', 'okfn/dashboard', 'okfn/yourtopia', 'okfn/bubbletree', 'okfn/hypernotes', 'okfn/okfn.github.com', 'okfn/sprints.okfnlabs.org', 'okfn/facetview']
+            github: ['okfn/timeliner', 'okfn/activityapi', 'okfn/dashboard', 'okfn/yourtopia', 'okfn/bubbletree', 'okfn/hypernotes', 'okfn/okfn.github.com', 'okfn/sprints.okfnlabs.org', 'okfn/facetview'],
+            google_analytics: []
           }
         ]
-      }, {
-        header: 'OKFestival',
-        item: {
-          name: 'okfestival',
-          title: 'OKFestival',
-          twitter: 'okfestival',
-          link: ['http://okfestival.org'],
-          mailman: [],
-          github: []
-        }
       }
     ];
 
@@ -637,6 +645,7 @@ window.require.define({"views/page_project": function(exports, require, module) 
         this.renderPaneFacebook = __bind(this.renderPaneFacebook, this);
         this.renderPaneMailchimp = __bind(this.renderPaneMailchimp, this);
         this.renderPaneMailman = __bind(this.renderPaneMailman, this);
+        this.renderPaneGoogleAnalytics = __bind(this.renderPaneGoogleAnalytics, this);
         this.renderPaneGithub = __bind(this.renderPaneGithub, this);
         this.renderPaneBuddypressHistory = __bind(this.renderPaneBuddypressHistory, this);
         this.setPaneWidth = __bind(this.setPaneWidth, this);
@@ -703,11 +712,23 @@ window.require.define({"views/page_project": function(exports, require, module) 
             return _this.addPane(container, 'Mailchimp', _this.renderPaneMailchimp);
           }
         });
-        return api.ajaxHistoryFacebook(this.project.facebook, function(resultFacebook) {
+        api.ajaxHistoryFacebook(this.project.facebook, function(resultFacebook) {
           _this.resultFacebook = resultFacebook;
           if (_this.resultFacebook && _this.resultFacebook.ok) {
             _this.resultFacebook.data.history.reverse();
             return _this.addPane(container, 'Facebook', _this.renderPaneFacebook);
+          }
+        });
+        return api.ajaxHistoryAnalytics(this.project.google_analytics, function(resultAnalytics) {
+          var key, value, _ref2;
+          _this.resultAnalytics = resultAnalytics;
+          if (_this.resultAnalytics && _this.resultAnalytics.ok) {
+            _ref2 = _this.resultAnalytics.data;
+            for (key in _ref2) {
+              value = _ref2[key];
+              value.data.reverse();
+            }
+            return _this.addPane(container, 'GoogleAnalytics', _this.renderPaneGoogleAnalytics);
           }
         });
       };
@@ -858,6 +879,70 @@ window.require.define({"views/page_project": function(exports, require, module) 
           _results.push(graph.render());
         }
         return _results;
+      };
+
+      ProjectPage.prototype.renderPaneGoogleAnalytics = function(pane) {
+        var d, data, domGraph, graph, hoverDetail, palette, series, sitedata, sitename, x, x_axis, y_axis, _ref2, _ref3;
+        pane.append($('<h4>Weekly hits:</h4>'));
+        series = [];
+        palette = new Rickshaw.Color.Palette({
+          scheme: 'spectrum14'
+        });
+        _ref2 = this.resultAnalytics.data;
+        for (sitename in _ref2) {
+          sitedata = _ref2[sitename];
+          data = (function() {
+            var _k, _len3, _ref3, _results;
+            _ref3 = sitedata.data;
+            _results = [];
+            for (_k = 0, _len3 = _ref3.length; _k < _len3; _k++) {
+              d = _ref3[_k];
+              _results.push({
+                x: new Date(d.timestamp).toUnixTimestamp(),
+                y: d['hits']
+              });
+            }
+            return _results;
+          })();
+          series.push({
+            name: sitename,
+            color: palette.color(),
+            data: data
+          });
+        }
+        series.sort(function(x, y) {
+          return y.data.length - x.data.length;
+        });
+        for (x = 1, _ref3 = series.length; 1 <= _ref3 ? x < _ref3 : x > _ref3; 1 <= _ref3 ? x++ : x--) {
+          while (series[x].data.length < series[0].data.length) {
+            series[x].data.unshift({
+              x: series[0].data[series[0].data.length - series[x].data.length - 1].x,
+              y: 0
+            });
+          }
+        }
+        domGraph = $(template_rickshaw_graph()).appendTo(pane);
+        data = series[0].data;
+        graph = new Rickshaw.Graph({
+          element: domGraph.find('.chart')[0],
+          renderer: 'bar',
+          width: domGraph.width() - 50,
+          height: 180,
+          series: series
+        });
+        x_axis = new Rickshaw.Graph.Axis.Time({
+          graph: graph
+        });
+        y_axis = new Rickshaw.Graph.Axis.Y({
+          graph: graph,
+          orientation: 'left',
+          tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+          element: domGraph.find('.y-axis')[0]
+        });
+        hoverDetail = new Rickshaw.Graph.HoverDetail({
+          graph: graph
+        });
+        return graph.render();
       };
 
       ProjectPage.prototype.renderPaneMailman = function(pane) {
@@ -1160,7 +1245,7 @@ window.require.define({"views/templates/page_project": function(exports, require
     stack1 = foundHelper || depth0.smallTitle;
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "smallTitle", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</small></h1>\n<table>\n  <tr id=\"project-container\">\n    <td id=\"project-container-Mailchimp\"></td>\n    <td id=\"project-container-Mailman\"></td>\n    <td id=\"project-container-Facebook\"></td>\n    <td id=\"project-container-Twitter\"></td>\n    <td id=\"project-container-Github\"></td>\n  </tr>\n</table>\n\n";
+    buffer += escapeExpression(stack1) + "</small></h1>\n<table>\n  <tr id=\"project-container\">\n    <td id=\"project-container-GoogleAnalytics\"></td>\n    <td id=\"project-container-Mailchimp\"></td>\n    <td id=\"project-container-Mailman\"></td>\n    <td id=\"project-container-Facebook\"></td>\n    <td id=\"project-container-Twitter\"></td>\n    <td id=\"project-container-Github\"></td>\n  </tr>\n</table>\n\n";
     return buffer;});
 }});
 
