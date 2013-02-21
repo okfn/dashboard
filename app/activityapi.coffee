@@ -26,6 +26,13 @@ class ActivityApi extends Backbone.Model
             url = @url + '/history/mailman?list=' + @_join(lists) + '&per_page=26&grain=week'
             return @_fetch url, callback
 
+    ajaxHistoryAnalytics: (websites, callback) ->
+        if not websites.length
+            callback null
+        else 
+            url = @url + '/history/analytics?website=' + @_join(websites) + '&per_page=26&grain=week'
+            return @_fetch url, callback
+
     ajaxHistoryTwitter: (account, callback) ->
         if not account
             callback null

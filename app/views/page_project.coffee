@@ -64,6 +64,11 @@ module.exports = class ProjectPage extends Backbone.View
             if @resultFacebook && @resultFacebook.ok
                 @resultFacebook.data.history.reverse()
                 @addPane container, 'Facebook', @renderPaneFacebook
+        api.ajaxHistoryAnalytics @project.google_analytics, (@resultAnalytics) => 
+            if @resultAnalytics && @resultAnalytics.ok
+                for key,value of @resultAnalytics.data
+                    value.data.reverse()
+                @addPane container, 'GoogleAnalytics', @renderPaneGoogleAnalytics
 
     
     addPane: (container, title, renderCallback) =>
@@ -162,6 +167,50 @@ module.exports = class ProjectPage extends Backbone.View
             hoverDetail = new Rickshaw.Graph.HoverDetail
                 graph: graph
             graph.render()
+
+
+
+
+    renderPaneGoogleAnalytics: (pane) =>
+        # Header: Broad statistics
+        pane.append( $('<h4>Weekly hits:</h4>') )
+        series = []
+        palette = new Rickshaw.Color.Palette {scheme:'spectrum14'}
+        for sitename, sitedata of @resultAnalytics.data
+            data = (
+                { x : new Date(d.timestamp).toUnixTimestamp(), y : d['hits'] } for d in sitedata.data
+            )
+            series.push 
+                name: sitename
+                color: palette.color()
+                data: data
+        # Ensure all series are the same length
+        series.sort (x,y)->y.data.length-x.data.length
+        for x in [1...series.length]
+            while series[x].data.length<series[0].data.length
+                # Pad it with 0s, cloning the x axis values from the longer series
+                series[x].data.unshift {x:series[0].data[series[0].data.length-series[x].data.length-1].x,y:0}
+        # Build DOM using Rickshaw graphing library
+        domGraph = $(template_rickshaw_graph()).appendTo pane
+        data = series[0].data
+        graph = new Rickshaw.Graph {
+                element: domGraph.find('.chart')[0]
+                renderer: 'bar'
+                width: domGraph.width() - 50
+                height: 180
+                series: series
+        }
+        x_axis = new Rickshaw.Graph.Axis.Time { graph: graph } 
+        y_axis = new Rickshaw.Graph.Axis.Y {
+          graph: graph
+          orientation: 'left'
+          tickFormat: Rickshaw.Fixtures.Number.formatKMBT
+          element: domGraph.find('.y-axis')[0]
+        }
+        hoverDetail = new Rickshaw.Graph.HoverDetail {
+          graph: graph
+        }
+        graph.render()
 
 
 

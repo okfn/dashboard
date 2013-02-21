@@ -10,6 +10,7 @@ module.exports = [
           github: []
           mailchimp: ['Open Knowledge Foundation Announce Mailing List']
           facebook: true
+          google_analytics: [ 'blog.okfn.org', 'okfn.org' ]
       }
   }
   { 
@@ -24,6 +25,7 @@ module.exports = [
           mailman: ['ckan-dev','ckan-discuss']
           github: ['okfn/ckan', 'okfn/ckanclient', 'okfn/dataprotocols', 'okfn/buildkit', 'okfn/webstore', 'okfn/dpm','okfn/datahub']
           headline_github: 'okfn/ckan'
+          google_analytics: [ 'ckan.org', 'thedatahub.org', ]
       }
       {
           name: 'openspending'
@@ -33,6 +35,7 @@ module.exports = [
           mailman: ['openspending','openspending-dev','wdmmg-announce']
           github: ['okfn/dpkg-israel-state-budget','okfn/openspending.plugins.datatables','okfn/openspending.plugins.treemap']
           #github: ['okfn/dpkg-israel-state-budget','okfn/openspending.plugins.datatables','okfn/openspending.plugins.treemap','openspending/openspending','openspending/openspendingjs','openspending/dotorg','openspending/openspending-etl','openspending/cameroon.openspending.org','openspending/wheredoesmymoneygo.org']
+          google_analytics: []
       }
       {
           name: 'schoolofdata'
@@ -42,6 +45,7 @@ module.exports = [
           mailman: ['School-of-data']
           github: ['okfn/datawrangling','okfn/schoolofdata','okfn/opendatahandbook']
           headline_github: 'okfn/schoolofdata'
+          google_analytics: [ 'School Of Data' ] 
       }
       {
           name: 'lod2'
@@ -51,6 +55,7 @@ module.exports = [
           link: ['http://lod2.eu/']
           mailman: ['lod2']
           github: []
+          google_analytics: []
       }
       {
           name: 'recline'
@@ -60,6 +65,7 @@ module.exports = [
           mailman: []
           github: ['okfn/recline']
           headline_github: 'okfn/recline'
+          google_analytics: [ 'ReclineJS' ]
       }
       {
           name: 'annotator'
@@ -69,6 +75,7 @@ module.exports = [
           mailman: ['annotator-dev']
           github: ['okfn/annotator','okfn/annotateit','okfn/annotator-store','okfn/annotator-wordpress','okfn/texts.annotateit.org']
           headline_github: 'okfn/annotator'
+          google_analytics: [ 'annotateit.org' ]
       }
       {
           name: 'labs'
@@ -77,18 +84,8 @@ module.exports = [
           link: ['http://annotateit.org','http://okfnlabs.org/dashboard','http://activityapi.herokuapp.com','http://yourtopia.net','http://italia.yourtopia.net/']
           mailman: ['Yourtopia','okfn-labs','open-history']
           github: ['okfn/timeliner','okfn/activityapi','okfn/dashboard','okfn/yourtopia','okfn/bubbletree','okfn/hypernotes','okfn/okfn.github.com','okfn/sprints.okfnlabs.org','okfn/facetview']
+          google_analytics: []
       }
   ]
-  }
-  {
-      header: 'OKFestival'
-      item: {
-          name: 'okfestival'
-          title: 'OKFestival'
-          twitter: 'okfestival'
-          link: ['http://okfestival.org']
-          mailman: []
-          github: []
-      }
   }
 ]
