@@ -61,20 +61,25 @@
     throw new Error('Cannot find module "' + name + '"');
   };
 
-  var define = function(bundle) {
-    for (var key in bundle) {
-      if (has(bundle, key)) {
-        modules[key] = bundle[key];
+  var define = function(bundle, fn) {
+    if (typeof bundle === 'object') {
+      for (var key in bundle) {
+        if (has(bundle, key)) {
+          modules[key] = bundle[key];
+        }
       }
+    } else {
+      modules[bundle] = fn;
     }
-  }
+  };
 
   globals.require = require;
   globals.require.define = define;
+  globals.require.register = define;
   globals.require.brunch = true;
 })();
 
-window.require.define({"activityapi": function(exports, require, module) {
+window.require.register("activityapi", function(exports, require, module) {
   (function() {
     var ActivityApi,
       __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -203,9 +208,8 @@ window.require.define({"activityapi": function(exports, require, module) {
 
   }).call(this);
   
-}});
-
-window.require.define({"initialize": function(exports, require, module) {
+});
+window.require.register("initialize", function(exports, require, module) {
   (function() {
     var LoadingView, Router, projects;
 
@@ -242,9 +246,8 @@ window.require.define({"initialize": function(exports, require, module) {
 
   }).call(this);
   
-}});
-
-window.require.define({"models/person": function(exports, require, module) {
+});
+window.require.register("models/person", function(exports, require, module) {
   (function() {
     var PersonModel,
       __hasProp = Object.prototype.hasOwnProperty,
@@ -285,9 +288,8 @@ window.require.define({"models/person": function(exports, require, module) {
 
   }).call(this);
   
-}});
-
-window.require.define({"models/person_collection": function(exports, require, module) {
+});
+window.require.register("models/person_collection", function(exports, require, module) {
   (function() {
     var PersonCollection,
       __hasProp = Object.prototype.hasOwnProperty,
@@ -324,9 +326,8 @@ window.require.define({"models/person_collection": function(exports, require, mo
 
   }).call(this);
   
-}});
-
-window.require.define({"projects": function(exports, require, module) {
+});
+window.require.register("projects", function(exports, require, module) {
   (function() {
 
     module.exports = [
@@ -369,7 +370,7 @@ window.require.define({"projects": function(exports, require, module) {
             title: 'School Of Data',
             twitter: 'schoolofdata',
             link: ['http://schoolofdata.org', 'http://handbook.schoolofdata.org', 'http://opendatahandbook.org', 'http://wiki.okfn.org/Projects/Open_Data_Handbook'],
-            mailman: ['School-of-data'],
+            mailman: ['School-of-data', 'school-of-data-announce'],
             github: ['okfn/datawrangling', 'okfn/schoolofdata', 'okfn/opendatahandbook'],
             headline_github: 'okfn/schoolofdata',
             google_analytics: ['School Of Data']
@@ -415,9 +416,8 @@ window.require.define({"projects": function(exports, require, module) {
 
   }).call(this);
   
-}});
-
-window.require.define({"router": function(exports, require, module) {
+});
+window.require.register("router", function(exports, require, module) {
   (function() {
     var ProjectPage, Router, content, singletons,
       __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -486,9 +486,8 @@ window.require.define({"router": function(exports, require, module) {
 
   }).call(this);
   
-}});
-
-window.require.define({"views/loading_view": function(exports, require, module) {
+});
+window.require.register("views/loading_view", function(exports, require, module) {
   (function() {
     var LoadingView, api, template,
       __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -585,9 +584,8 @@ window.require.define({"views/loading_view": function(exports, require, module) 
 
   }).call(this);
   
-}});
-
-window.require.define({"views/page_project": function(exports, require, module) {
+});
+window.require.register("views/page_project", function(exports, require, module) {
   (function() {
     var ProjectPage, api, project, projectCategory, projectMap, projects, template_page, template_pane, template_pane_facebook, template_pane_github, template_pane_mailchimp, template_pane_mailman, template_pane_twitter, template_rickshaw_graph, _i, _j, _len, _len2, _ref,
       __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -1207,9 +1205,8 @@ window.require.define({"views/page_project": function(exports, require, module) 
 
   }).call(this);
   
-}});
-
-window.require.define({"views/templates/loading_bar": function(exports, require, module) {
+});
+window.require.register("views/templates/loading_bar", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
     var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
@@ -1227,9 +1224,8 @@ window.require.define({"views/templates/loading_bar": function(exports, require,
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "text", { hash: {} }); }
     buffer += escapeExpression(stack1) + "</div></div>\n";
     return buffer;});
-}});
-
-window.require.define({"views/templates/page_project": function(exports, require, module) {
+});
+window.require.register("views/templates/page_project", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
     var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
@@ -1247,9 +1243,8 @@ window.require.define({"views/templates/page_project": function(exports, require
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "smallTitle", { hash: {} }); }
     buffer += escapeExpression(stack1) + "</small></h1>\n<table>\n  <tr id=\"project-container\">\n    <td id=\"project-container-GoogleAnalytics\"></td>\n    <td id=\"project-container-Mailchimp\"></td>\n    <td id=\"project-container-Mailman\"></td>\n    <td id=\"project-container-Facebook\"></td>\n    <td id=\"project-container-Twitter\"></td>\n    <td id=\"project-container-Github\"></td>\n  </tr>\n</table>\n\n";
     return buffer;});
-}});
-
-window.require.define({"views/templates/pane": function(exports, require, module) {
+});
+window.require.register("views/templates/pane", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
     var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
@@ -1267,9 +1262,8 @@ window.require.define({"views/templates/pane": function(exports, require, module
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "content", { hash: {} }); }
     buffer += escapeExpression(stack1) + "</div>\n</div>\n";
     return buffer;});
-}});
-
-window.require.define({"views/templates/pane_facebook": function(exports, require, module) {
+});
+window.require.register("views/templates/pane_facebook", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
     var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
@@ -1282,9 +1276,8 @@ window.require.define({"views/templates/pane_facebook": function(exports, requir
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "likes", { hash: {} }); }
     buffer += escapeExpression(stack1) + "</div><div class=\"bottom\">likes</div></div>\n    </div>\n    <div class=\"clearfix\"> </div>\n  </div>\n</div>\n<div class=\"sub-name\">\n  Group: <a href=\"www.facebook.com/OKFNetwork\">http://www.facebook.com/OKFNetwork</a>\n</div>\n";
     return buffer;});
-}});
-
-window.require.define({"views/templates/pane_github": function(exports, require, module) {
+});
+window.require.register("views/templates/pane_github", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
     var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
@@ -1332,9 +1325,8 @@ window.require.define({"views/templates/pane_github": function(exports, require,
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "repo", { hash: {} }); }
     buffer += escapeExpression(stack1) + "</a></div>\n</div>\n";
     return buffer;});
-}});
-
-window.require.define({"views/templates/pane_mailchimp": function(exports, require, module) {
+});
+window.require.register("views/templates/pane_mailchimp", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
     var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
@@ -1352,9 +1344,8 @@ window.require.define({"views/templates/pane_mailchimp": function(exports, requi
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
     buffer += escapeExpression(stack1) + "\"</span></div>\n";
     return buffer;});
-}});
-
-window.require.define({"views/templates/pane_mailman": function(exports, require, module) {
+});
+window.require.register("views/templates/pane_mailman", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
     var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
@@ -1372,9 +1363,8 @@ window.require.define({"views/templates/pane_mailman": function(exports, require
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "list_name", { hash: {} }); }
     buffer += escapeExpression(stack1) + "</a></strong>\n</div>\n";
     return buffer;});
-}});
-
-window.require.define({"views/templates/pane_twitter": function(exports, require, module) {
+});
+window.require.register("views/templates/pane_twitter", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
     var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
@@ -1407,14 +1397,12 @@ window.require.define({"views/templates/pane_twitter": function(exports, require
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "screen_name", { hash: {} }); }
     buffer += escapeExpression(stack1) + "</a>\n</div>\n";
     return buffer;});
-}});
-
-window.require.define({"views/templates/rickshaw_graph": function(exports, require, module) {
+});
+window.require.register("views/templates/rickshaw_graph", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
     var foundHelper, self=this;
 
 
     return "<div class=\"rickshaw\">\n  <div class=\"y-axis\"></div>\n  <div class=\"chart\"></div>\n</div>\n";});
-}});
-
+});
