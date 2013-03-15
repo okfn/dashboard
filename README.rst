@@ -14,8 +14,8 @@ Deployment is via gh-pages but you need to have "built" the app using brunch
 first. To make changes and deploy you do:
 
 1. Edit stuff in master branch and commit
-2. Check out gh-pages
-3. Run `brunch build`
+2. Run `brunch build` this will create a public directory
+3. Switch to gh-pages
 4. Copy contents of new public folder to root directory
-5. Commit and deploy ...
+5. Commit and deploy gh-pages branch
 
