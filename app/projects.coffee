@@ -42,7 +42,7 @@ module.exports = [
           title: 'School Of Data'
           twitter: 'schoolofdata'
           link: ['http://schoolofdata.org','http://handbook.schoolofdata.org','http://opendatahandbook.org','http://wiki.okfn.org/Projects/Open_Data_Handbook']
-          mailman: ['School-of-data']
+          mailman: ['School-of-data', 'school-of-data-announce']
           github: ['okfn/datawrangling','okfn/schoolofdata','okfn/opendatahandbook']
           headline_github: 'okfn/schoolofdata'
           google_analytics: [ 'School Of Data' ] 
