@@ -217,8 +217,8 @@ module.exports = class ProjectPage extends Backbone.View
 
     renderPaneMailman: (pane) =>
         # Header: Broad statistics
-        for m in @project.mailman
-            pane.append template_pane_mailman @resultMailman.data[m]
+        for data in @resultMailman.data
+            pane.append template_pane_mailman data
         for action in ['subscribers','posts']
             series = []
             palette = new Rickshaw.Color.Palette {scheme:'colorwheel'}
